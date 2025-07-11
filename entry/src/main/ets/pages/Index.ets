@@ -1,7 +1,12 @@
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  @State private message: string = 'Hello World';
+  private text = 'HOS';
+  private n1 = 2;
+  private n2 = 3.141592;
+  private n3 = .5;
+  private n4 = 1e2;
 
   build() {
     RelativeContainer() {
@@ -14,10 +19,24 @@ struct Index {
           middle: { anchor: '__container__', align: HorizontalAlign.Center }
         })
         .onClick(() => {
-          this.message = 'Welcome';
+          this.message = this.text;
+          let z = f();
+          z();
+          this.text = z().toString();
+
         })
     }
     .height('100%')
     .width('100%')
   }
+}
+
+
+function f(): () => number {
+  let count = 0;
+  let g = (): number => {
+    count++;
+    return count;
+  };
+  return g;
 }
