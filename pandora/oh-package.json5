@@ -1,12 +1,11 @@
 {
-  "name": "entry",
+  "name": "pandora",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
-  "main": "",
+  "main": "Index.ets",
   "author": "",
-  "license": "",
+  "license": "Apache-2.0",
   "dependencies": {
-    "pandora": "file:../pandora"
+    "core": "file:../core"
   }
 }
-

@@ -1,19 +1,7 @@
 {
   "app": {
     "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "C:\\Users\\zhouL\\.ohos\\config\\default_AgileDevHOS_1Vzf-_sKQcYplt3DB_WDMrN8sOGEj66HEZvWIUf7lcI=.cer",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001AD68AD4B863A7F24FC12447E8F1A2BF47EF3D4D0315189A1C216603C0127CC81107191122B826",
-          "profile": "C:\\Users\\zhouL\\.ohos\\config\\default_AgileDevHOS_1Vzf-_sKQcYplt3DB_WDMrN8sOGEj66HEZvWIUf7lcI=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\zhouL\\.ohos\\config\\default_AgileDevHOS_1Vzf-_sKQcYplt3DB_WDMrN8sOGEj66HEZvWIUf7lcI=.p12",
-          "storePassword": "0000001A2D9FF85E3C1CE01D2AC456C9C8CFFF2E64655DDB497BDB00488EDE2375F5AE08B0FCDF881D05"
-        }
-      }
+
     ],
     "products": [
       {
@@ -51,6 +39,14 @@
           ]
         }
       ]
+    },
+    {
+      "name": "core",
+      "srcPath": "./core",
+    },
+    {
+      "name": "pandora",
+      "srcPath": "./pandora",
     }
   ]
 }
