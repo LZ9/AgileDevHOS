@@ -15,8 +15,8 @@
     "abilities": [
       {
         "name": "EntryAbility",
-        "srcEntry": "./ets/entryability/EntryAbility.ets",
-        "description": "$string:EntryAbility_desc",
+        "srcEntry": "./ets/ability/entryability/EntryAbility.ets",
+        "description": "$string:ability_desc",
         "startWindowIcon": "$media:bg_splash",
         "startWindowBackground": "$color:color_00a0e9",
         "exported": true,
@@ -35,7 +35,7 @@
     "extensionAbilities": [
       {
         "name": "EntryBackupAbility",
-        "srcEntry": "./ets/entrybackupability/EntryBackupAbility.ets",
+        "srcEntry": "./ets/ability/entrybackupability/EntryBackupAbility.ets",
         "type": "backup",
         "exported": false,
         "metadata": [
@@ -43,7 +43,7 @@
             "name": "ohos.extension.backup",
             "resource": "$profile:backup_config"
           }
-        ],
+        ]
       }
     ]
   }

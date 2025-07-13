@@ -1,7 +1,7 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
-import { PrintLog } from 'pandora'
-import { Constants } from '../config/Constants';
+import { PrintLog, ResourceUtils } from 'pandora'
+import { Constants } from '../../config/Constants';
 
 
 export default class EntryAbility extends UIAbility {
@@ -18,7 +18,7 @@ export default class EntryAbility extends UIAbility {
     // Main window is created, set main page for this ability
     PrintLog.i(Constants.Log.TAG, 'Ability onWindowStageCreate');
 
-    windowStage.loadContent('pages/Index', (err) => {
+    windowStage.loadContent(ResourceUtils.toString(this.context, $r('app.string.splash_page_path')), (err) => {
       if (err.code) {
         PrintLog.e(Constants.Log.TAG, `Failed to load the content. Cause: ${JSON.stringify(err)}`);
         return;

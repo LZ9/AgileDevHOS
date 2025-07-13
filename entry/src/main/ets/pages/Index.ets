@@ -1,5 +1,6 @@
 @Entry
 @Component
+@Preview({ deviceType: "phone" })
 struct Index {
   @State private message: string = 'Hello World';
   private text = 'HOS';

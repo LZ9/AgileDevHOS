@@ -2,15 +2,20 @@
   "string": [
     {
       "name": "module_desc",
-      "value": "module description"
+      "value": "AgileDevHOS主工程"
     },
     {
-      "name": "EntryAbility_desc",
-      "value": "description"
+      "name": "ability_desc",
+      "value": "AgileDevHOS主Ability"
     },
     {
-      "name": "EntryAbility_label",
-      "value": "label"
+      "name": "splash_title",
+      "value": "AgileDevHOS测试工程"
+    },
+    {
+      "name": "splash_page_path",
+      "value": "pages/splash/SplashPage",
+      "description": "启动页路径"
     }
   ]
 }

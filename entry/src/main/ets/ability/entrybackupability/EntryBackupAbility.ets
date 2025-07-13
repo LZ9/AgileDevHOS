@@ -1,7 +1,7 @@
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BackupExtensionAbility, BundleVersion } from '@kit.CoreFileKit';
 import { PrintLog } from 'pandora'
-import { Constants } from '../config/Constants';
+import { Constants } from '../../config/Constants';
 
 //从HarmonyOS 4.x升级到HarmonyOS NEXT后，应用数据的转换和迁移
 export default class EntryBackupAbility extends BackupExtensionAbility {
