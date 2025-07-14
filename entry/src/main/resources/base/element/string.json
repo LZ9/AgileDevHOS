@@ -16,6 +16,11 @@
       "name": "splash_page_path",
       "value": "pages/splash/SplashPage",
       "description": "启动页路径"
+    },
+    {
+      "name": "main_page_path",
+      "value": "pages/main/MainPage",
+      "description": "主页路径"
     }
   ]
 }
