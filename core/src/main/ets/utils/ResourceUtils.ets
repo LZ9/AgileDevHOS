@@ -8,13 +8,11 @@ export class ResourceUtils {
    * @param context 上下文
    * @param res 资源对象
    */
-  public static toString(context: Context, res: Resource): string {
-    try {
+  public static toString(context: Context | undefined | null, res: Resource): string {
+    if (context !== undefined && context !== null) {
       return context.resourceManager.getStringSync(res);
-    } catch (e) {
-      e.printStack();
-      return "null";
     }
+    return "null";
   }
 }
 
