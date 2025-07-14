@@ -8,3 +8,6 @@ export { ResourceUtils } from './src/main/ets/utils/ResourceUtils';
 
 // 字符串工具
 export { StringUtils } from './src/main/ets/utils/StringUtils';
+
+// Preferences工具
+export { PreferencesUtil } from './src/main/ets/utils/PreferencesUtil';
