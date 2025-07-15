@@ -1,4 +1,4 @@
-import { RouterUtil } from 'pandora'
+import { RouterUtils } from 'pandora'
 
 /**
  * 启动页
@@ -28,7 +28,7 @@ struct SplashPage {
 
   aboutToAppear(): void {
     setTimeout(() => {
-      RouterUtil.replaceUrl(this.getUIContext(), $r('app.string.main_page_path'))
+      RouterUtils.replaceUrl(this.getUIContext(), $r('app.string.main_page_path'))
     }, 2000) // 2秒后跳转
   }
 }
