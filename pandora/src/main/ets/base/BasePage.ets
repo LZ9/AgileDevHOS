@@ -4,8 +4,8 @@
  */
 @Component
 export struct BasePage {
-  // 定义插槽用于子组件注入UI逻辑
-  @BuilderParam builderPage: () => void
+  // 内容布局
+  @BuilderParam contentLayout: () => void
 
   // 公共UI部分
   build() {
@@ -16,7 +16,7 @@ export struct BasePage {
         .width(`100%`)
         .padding(10)
 
-      this.builderPage()
+      this.contentLayout()
     }
   }
 

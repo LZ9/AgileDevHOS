@@ -10,5 +10,13 @@ export class StringUtils {
   public static isEmpty(str: string | undefined | null): boolean {
     return str === undefined || str === null || str.length === 0
   }
+
+  /**
+   * 字符串转数字
+   * @param str 字符串
+   */
+  public static toNumber(str: string | undefined | null): number {
+    return parseInt(str ?? '-1')
+  }
 }
 

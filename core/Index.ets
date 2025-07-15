@@ -9,3 +9,6 @@ export { StringUtils } from './src/main/ets/utils/StringUtils';
 
 // Preferences工具
 export { PreferencesUtil } from './src/main/ets/utils/PreferencesUtil';
+
+// 路由工具
+export { RouterUtil } from './src/main/ets/utils/RouterUtil';

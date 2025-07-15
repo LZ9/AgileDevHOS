@@ -1,19 +1,20 @@
+import { BasePage } from '../base/BasePage'
+
 @Component
+@Preview({ deviceType: "phone" })
 export struct MainPage {
-  @State message: string = 'Hello World';
+  // 定义子组件专属的构建函数
+  @Builder
+  customContent() {
+    Text('子页面内容')
+      .fontSize(20)
+  }
 
   build() {
-    Row() {
-      Column() {
-        Text(this.message)
-          .fontSize($r('app.float.page_text_font_size'))
-          .fontWeight(FontWeight.Bold)
-          .onClick(() => {
-            this.message = 'Welcome';
-          })
-      }
-      .width('100%')
+    Column() {
+      BasePage({
+        contentLayout: this.customContent
+      })
     }
-    .height('100%')
   }
 }
