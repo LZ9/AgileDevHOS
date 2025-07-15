@@ -40,8 +40,7 @@ export class PreferencesUtil {
    * @param context 上下文
    * @param preferenceName 存储文件名
    */
-  public async deletePreferences(context: Context | undefined | null,
-    preferenceName: string = PreferencesUtil.PREFERENCE_NAME) {
+  public async deletePreferences(context: Context | undefined | null, preferenceName: string = PreferencesUtil.PREFERENCE_NAME) {
     if (this.preferences !== null) {
       await preferences.deletePreferences(context, { name: preferenceName })
     }
@@ -147,7 +146,7 @@ export class PreferencesUtil {
   }
 
   /**
-   * 清除数据
+   * 异步清除数据
    */
   public async clear(): Promise<void> {
     return this.preferences?.clear() ?? new Promise<void>((resolve) => {
@@ -157,6 +156,7 @@ export class PreferencesUtil {
 
   /**
    * 订阅数据变更
+   * @param observer 回调函数
    */
   public onChange(observer: (key: string) => void) {
     this.preferences?.on('change', observer);
@@ -164,6 +164,7 @@ export class PreferencesUtil {
 
   /**
    * 取消订阅数据变更
+   * @param observer 回调函数
    */
   public offChange(observer: (key: string) => void) {
     this.preferences?.off('change', observer);
@@ -171,6 +172,8 @@ export class PreferencesUtil {
 
   /**
    * 精确订阅数据变更
+   * @param keys 键数组
+   * @param observer 回调函数
    */
   public onDataChange(keys: string | Array<string>, observer: (data: Record<string, preferences.ValueType>) => void) {
     if (typeof keys === 'string') {
@@ -181,6 +184,8 @@ export class PreferencesUtil {
 
   /**
    * 取消精确订阅数据变更
+   * @param keys 键数组
+   * @param observer 回调函数
    */
   public offDataChange(keys: string | Array<string>, observer: (data: Record<string, preferences.ValueType>) => void) {
     if (typeof keys === 'string') {
