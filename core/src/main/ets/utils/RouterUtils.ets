@@ -1,11 +1,19 @@
 import { ResourceUtils } from "./ResourceUtils"
-import { router } from "@kit.ArkUI"
+import { Router, router } from "@kit.ArkUI"
 
 /**
  * 路由工具类
  * Created by Admin on 2025/7/15.
  */
 export class RouterUtils {
+
+  /**
+   * 获取路由实例
+   * @param context 上下文
+   */
+  public static getRouter(context: UIContext): Router {
+    return context.getRouter()
+  }
 
   /**
    * 路由替换
@@ -25,6 +33,19 @@ export class RouterUtils {
   }
 
   /**
+   * 路由替换
+   * @param context 上下文
+   * @param options 路由参数
+   * @param mode 路由模式
+   */
+  public static replaceUrlOpt(context: UIContext, options: router.RouterOptions, mode?: router.RouterMode): Promise<void> {
+    if (mode !== undefined) {
+      return context.getRouter().replaceUrl(options, mode)
+    }
+    return context.getRouter().replaceUrl(options)
+  }
+
+  /**
    * 路由跳转
    * @param context 上下文
    * @param path 路由路径
@@ -39,6 +60,19 @@ export class RouterUtils {
       return context.getRouter().pushUrl({ url: path, params: params }, mode)
     }
     return context.getRouter().pushUrl({ url: path, params: params })
+  }
+
+  /**
+   * 路由跳转
+   * @param context 上下文
+   * @param options 路由参数
+   * @param mode 路由模式
+   */
+  public static pushUrlOpt(context: UIContext, options: router.RouterOptions, mode?: router.RouterMode): Promise<void> {
+    if (mode !== undefined) {
+      return context.getRouter().pushUrl(options, mode)
+    }
+    return context.getRouter().pushUrl(options)
   }
 
   /**
