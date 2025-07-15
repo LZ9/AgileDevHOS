@@ -4,21 +4,21 @@ import { preferences } from "@kit.ArkData";
  * Preferences工具类
  * Created by Admin on 2025/7/14.
  */
-export class PreferencesUtil {
+export class PreferencesUtils {
   /** 存储文件名 */
   static readonly PREFERENCE_NAME: string = 'sp_data'
   /** 单例对象 */
-  private static instance: PreferencesUtil | null = null
+  private static instance: PreferencesUtils | null = null
 
   private constructor() {
   }
 
   /** 获取单例 */
-  public static getInstance(): PreferencesUtil {
-    if (!PreferencesUtil.instance) {
-      PreferencesUtil.instance = new PreferencesUtil();
+  public static getInstance(): PreferencesUtils {
+    if (!PreferencesUtils.instance) {
+      PreferencesUtils.instance = new PreferencesUtils();
     }
-    return PreferencesUtil.instance;
+    return PreferencesUtils.instance;
   }
 
   /** Preferences对象 */
@@ -29,7 +29,7 @@ export class PreferencesUtil {
    * @param context 上下文
    * @param preferenceName 存储文件名
    */
-  public init(context: Context | undefined | null, preferenceName: string = PreferencesUtil.PREFERENCE_NAME) {
+  public init(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME) {
     if (this.preferences === null) {
       this.preferences = preferences.getPreferencesSync(context, { name: preferenceName });
     }
@@ -40,7 +40,7 @@ export class PreferencesUtil {
    * @param context 上下文
    * @param preferenceName 存储文件名
    */
-  public async deletePreferences(context: Context | undefined | null, preferenceName: string = PreferencesUtil.PREFERENCE_NAME) {
+  public async deletePreferences(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME) {
     if (this.preferences !== null) {
       await preferences.deletePreferences(context, { name: preferenceName })
     }

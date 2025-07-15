@@ -8,7 +8,10 @@ export { ResourceUtils } from './src/main/ets/utils/ResourceUtils';
 export { StringUtils } from './src/main/ets/utils/StringUtils';
 
 // Preferences工具
-export { PreferencesUtil } from './src/main/ets/utils/PreferencesUtil';
+export { PreferencesUtils } from './src/main/ets/utils/PreferencesUtils';
 
 // 路由工具
-export { RouterUtil } from './src/main/ets/utils/RouterUtil';
+export { RouterUtils } from './src/main/ets/utils/RouterUtils';
+
+// 路由工具
+export { PromptUtils } from './src/main/ets/utils/PromptUtils';
