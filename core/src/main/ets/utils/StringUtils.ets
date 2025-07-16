@@ -1,3 +1,5 @@
+import { buffer, util } from "@kit.ArkTS";
+
 /**
  * 字符串工具类
  * Created by zhouL on 2025/7/13.
@@ -17,6 +19,15 @@ export class StringUtils {
    */
   public static toNumber(str: string | undefined | null): number {
     return parseInt(str ?? '-1')
+  }
+
+  /**
+   * Uint8Array转字符串
+   * @param src 数据源
+   * @param encoding 编码，默认utf-8
+   */
+  public static unit8ArrayToStr(src: Uint8Array, encoding: buffer.BufferEncoding = 'utf-8'): string {
+    return util.TextDecoder.create(encoding, { ignoreBOM: true }).decodeToString(src, { stream: true });
   }
 }
 

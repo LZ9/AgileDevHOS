@@ -1,3 +1,5 @@
+import { StringUtils } from "./StringUtils";
+
 /**
  * 资源工具类
  * Created by zhouL on 2025/7/13.
@@ -13,6 +15,30 @@ export class ResourceUtils {
       return context.resourceManager.getStringSync(res);
     }
     return "null";
+  }
+
+  /**
+   * 获取rawfile目录下的文件内容（Uint8Array）
+   * @param context 上下文
+   * @param path 路径
+   */
+  public static getRawFileContentSync(context: Context | undefined | null, path: string): Uint8Array {
+    if (context !== undefined && context !== null) {
+      return context.resourceManager.getRawFileContentSync(path)
+    }
+    return new Uint8Array()
+  }
+
+  /**
+   * 获取rawfile目录下的文件内容（string）
+   * @param context 上下文
+   * @param path 路径
+   */
+  public static getRawFileContentStrSync(context: Context | undefined | null, path: string): string {
+    if (context !== undefined && context !== null) {
+      return StringUtils.unit8ArrayToStr(ResourceUtils.getRawFileContentSync(context, path))
+    }
+    return "null"
   }
 }
 
