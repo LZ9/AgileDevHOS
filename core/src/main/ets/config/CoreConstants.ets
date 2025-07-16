@@ -2,7 +2,7 @@ import { promptAction } from "@kit.ArkUI";
 
 /**
  * Core常量配置
- * Created by Admin on 2025/7/15.
+ * Created by zhouL on 2025/7/15.
  */
 export namespace CoreConstants {
 

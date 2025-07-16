@@ -2,7 +2,7 @@ import { preferences } from "@kit.ArkData";
 
 /**
  * Preferences工具类
- * Created by Admin on 2025/7/14.
+ * Created by zhouL on 2025/7/14.
  */
 export class PreferencesUtils {
   /** 存储文件名 */

@@ -3,7 +3,7 @@ import { CoreConstants } from "../config/CoreConstants";
 
 /**
  * 提示工具类
- * Created by Admin on 2025/7/15.
+ * Created by zhouL on 2025/7/15.
  */
 export class PromptUtils {
 

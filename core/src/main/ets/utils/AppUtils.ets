@@ -1,6 +1,6 @@
 /**
  * app工具类
- * Created by Admin on 2025/7/14.
+ * Created by zhouL on 2025/7/14.
  */
 export class AppUtils {
   /**
