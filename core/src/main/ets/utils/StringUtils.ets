@@ -1,4 +1,4 @@
-import { buffer, util } from "@kit.ArkTS";
+import { buffer, util } from "@kit.ArkTS"
 
 /**
  * 字符串工具类
@@ -27,7 +27,16 @@ export class StringUtils {
    * @param encoding 编码，默认utf-8
    */
   public static unit8ArrayToStr(src: Uint8Array, encoding: buffer.BufferEncoding = 'utf-8'): string {
-    return util.TextDecoder.create(encoding, { ignoreBOM: true }).decodeToString(src, { stream: true });
+    return util.TextDecoder.create(encoding, { ignoreBOM: true }).decodeToString(src, { stream: true })
+  }
+
+  /**
+   * 字符串转Uint8Array
+   * @param src 数据源
+   * @param encoding 编码，默认utf-8
+   */
+  public static strToUint8Array(src: string, encoding: buffer.BufferEncoding = 'utf-8'): Uint8Array {
+    return new util.TextEncoder(encoding).encodeInto(src)
   }
 }
 
