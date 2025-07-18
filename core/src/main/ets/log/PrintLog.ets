@@ -7,8 +7,8 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 export class PrintLog {
   /** 日志开关 */
   private static isPrint: boolean = true;
-  /** 日志开关 */
-  private static domain = 0x0000;
+  /** 日志域 */
+  private static domain = 0x0007;
 
   /**
    * 是否打印日志
