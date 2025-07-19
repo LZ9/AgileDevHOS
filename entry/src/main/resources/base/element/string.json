@@ -21,6 +21,11 @@
       "name": "main_page_path",
       "value": "pages/main/MainPage",
       "description": "主页路径"
+    },
+    {
+      "name": "json_page_path",
+      "value": "pages/json/JsonPage",
+      "description": "Json转换测试路径"
     }
   ]
 }

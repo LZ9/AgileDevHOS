@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/splash/SplashPage",
-    "pages/main/MainPage"
+    "pages/main/MainPage",
+    "pages/json/JsonPage"
   ]
 }
