@@ -1,3 +1,5 @@
+import { ResourceUtils } from "pandora"
+
 /**
  * 主页数据
  * Created by zhouL on 2025/7/19.
@@ -13,11 +15,16 @@ export class MainBean {
     this.pageRes = pageRes
   }
 
+  /** 获取标题名称 */
   public getTitleName(): string {
     return this.titleName
   }
 
-  public getPageRes(): Resource {
-    return this.pageRes
+  /**
+   * 获取页面路径
+   * @param context 上下文
+   */
+  public getPagePath(context: UIContext): string {
+    return ResourceUtils.toString(context.getHostContext(), this.pageRes)
   }
 }

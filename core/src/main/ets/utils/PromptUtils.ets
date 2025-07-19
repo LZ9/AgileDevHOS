@@ -1,5 +1,6 @@
 import { PromptAction, promptAction } from "@kit.ArkUI";
 import { CoreConstants } from "../config/CoreConstants";
+import { deviceInfo } from "@kit.BasicServicesKit";
 
 /**
  * 提示工具类
@@ -30,7 +31,10 @@ export class PromptUtils {
    * @param options 提示参数
    */
   public static openToast(context: UIContext, options: promptAction.ShowToastOptions): Promise<number> {
-    return context.getPromptAction().openToast(options)
+    if (deviceInfo.sdkApiVersion >= CoreConstants.SdkApiVersion.VERSION_18) {
+      return context.getPromptAction().openToast(options)
+    }
+    return Promise.resolve(-1)
   }
 
   /**
@@ -39,7 +43,9 @@ export class PromptUtils {
    * @param toastId 编号
    */
   public static closeToast(context: UIContext, toastId: number) {
-    context.getPromptAction().closeToast(toastId)
+    if (deviceInfo.sdkApiVersion >= CoreConstants.SdkApiVersion.VERSION_18) {
+      context.getPromptAction().closeToast(toastId)
+    }
   }
 
   /**

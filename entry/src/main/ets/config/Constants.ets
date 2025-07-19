@@ -12,4 +12,10 @@ export namespace Constants {
     /** 接口日志标签 */
     export const TAG_API = 'resultValue';
   }
+
+  /** 缓存 */
+  export namespace Preferences {
+    /** 用户输入 */
+    export const USER_INPUT = 'user_input';
+  }
 }

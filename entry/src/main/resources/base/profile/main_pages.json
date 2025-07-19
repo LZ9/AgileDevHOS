@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/splash/SplashPage",
     "pages/main/MainPage",
-    "pages/json/JsonPage"
+    "pages/json/JsonPage",
+    "pages/preferences/PreferencesPage"
   ]
 }

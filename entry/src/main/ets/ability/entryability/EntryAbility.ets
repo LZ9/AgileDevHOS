@@ -1,6 +1,6 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
-import { PrintLog, ResourceUtils } from 'pandora'
+import { PreferencesUtils, PrintLog, ResourceUtils } from 'pandora'
 import { Constants } from '../../config/Constants';
 
 
@@ -8,6 +8,7 @@ export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     PrintLog.i(Constants.Log.TAG, 'Ability onCreate');
+    PreferencesUtils.getInstance().init(this.context)
   }
 
   onDestroy(): void {

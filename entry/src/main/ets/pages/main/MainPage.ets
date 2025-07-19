@@ -1,4 +1,4 @@
-import { ResourceUtils, RouterUtils } from 'pandora'
+import { RouterUtils } from 'pandora'
 import { MainBean } from '../../bea/main/MainBean'
 
 /**
@@ -13,7 +13,8 @@ export struct MainPage {
 
   aboutToAppear(): void {
     this.mList = [
-      new MainBean("Json转换测试", $r('app.string.json_page_path'))
+      new MainBean("Json转换测试", $r('app.string.json_page_path')),
+      new MainBean("Preferences测试类", $r('app.string.preferences_page_path'))
     ]
   }
 
@@ -24,11 +25,13 @@ export struct MainPage {
           Text(item.getTitleName())
             .fontSize(24)
             .onClick(() => {
-              RouterUtils.pushUrl(this.getUIContext(), ResourceUtils.toString(this.getUIContext().getHostContext(), item.getPageRes()))
+              RouterUtils.pushUrl(this.getUIContext(), item.getPagePath(this.getUIContext()))
             })
         }
       })
     }
+    .height('100%')
+    .width('100%')
     .backgroundColor('#FFF1F3F5')
     .alignListItem(ListItemAlign.Center)
   }

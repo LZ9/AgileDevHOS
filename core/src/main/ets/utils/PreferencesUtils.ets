@@ -1,4 +1,6 @@
 import { preferences } from "@kit.ArkData";
+import { deviceInfo } from "@kit.BasicServicesKit";
+import { CoreConstants } from "../config/CoreConstants";
 
 /**
  * Preferences工具类
@@ -6,7 +8,7 @@ import { preferences } from "@kit.ArkData";
  */
 export class PreferencesUtils {
   /** 存储文件名 */
-  static readonly PREFERENCE_NAME: string = 'sp_data'
+  static readonly PREFERENCE_NAME: string = 'pr_data'
   /** 单例对象 */
   private static instance: PreferencesUtils | null = null
 
@@ -53,7 +55,11 @@ export class PreferencesUtils {
    */
   public putSync(key: string, value: preferences.ValueType) {
     this.preferences?.putSync(key, value)
-    this.preferences?.flushSync()
+    if (deviceInfo.sdkApiVersion >= CoreConstants.SdkApiVersion.VERSION_14) {
+      this.preferences?.flushSync()
+    } else {
+      this.preferences?.flush()
+    }
   }
 
   /**
@@ -71,8 +77,8 @@ export class PreferencesUtils {
    * @param key 键
    * @param defValue 默认值
    */
-  public getSync(key: string, defValue: preferences.ValueType): preferences.ValueType {
-    return this.preferences?.getSync(key, defValue) ?? defValue
+  public getSync<T extends preferences.ValueType>(key: string, defValue: T): T {
+    return (this.preferences?.getSync(key, defValue) ?? defValue).valueOf() as T
   }
 
   /**
@@ -80,10 +86,14 @@ export class PreferencesUtils {
    * @param key 键
    * @param value 默认值
    */
-  public async get(key: string, defValue: preferences.ValueType): Promise<preferences.ValueType> {
-    return this.preferences?.get(key, defValue) ?? new Promise<preferences.ValueType>((resolve) => {
-      resolve(defValue)
-    })
+  public async get<T extends preferences.ValueType>(key: string, defValue: T): Promise<T> {
+    if (this.preferences === null) {
+      return Promise.resolve(defValue)
+    }
+    return this.preferences.get(key, defValue)
+      .then(value => {
+        return value as T
+      })
   }
 
   /**
