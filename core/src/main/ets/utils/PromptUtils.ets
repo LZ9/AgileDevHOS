@@ -1,6 +1,6 @@
-import { PromptAction, promptAction } from "@kit.ArkUI";
-import { CoreConstants } from "../config/CoreConstants";
-import { deviceInfo } from "@kit.BasicServicesKit";
+import { PromptAction, promptAction } from "@kit.ArkUI"
+import { CoreConstants } from "../config/CoreConstants"
+import { deviceInfo } from "@kit.BasicServicesKit"
 
 /**
  * 提示工具类

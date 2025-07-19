@@ -1,4 +1,4 @@
-import { hilog } from '@kit.PerformanceAnalysisKit';
+import { hilog } from '@kit.PerformanceAnalysisKit'
 
 /**
  * 日志打印工具
@@ -6,16 +6,16 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
  */
 export class PrintLog {
   /** 日志开关 */
-  private static isPrint: boolean = true;
+  private static isPrint: boolean = true
   /** 日志域 */
-  private static domain = 0x0007;
+  private static domain = 0x0007
 
   /**
    * 是否打印日志
    * @param isPrint 日志开关
    */
   public static setPrint(isPrint: boolean) {
-    PrintLog.isPrint = isPrint;
+    PrintLog.isPrint = isPrint
   }
 
   /**
@@ -23,7 +23,7 @@ export class PrintLog {
    * @param domain 服务域，范围为 0x0 到 0xFFFF 的十六进制整数
    */
   public static setDomain(domain: number) {
-    PrintLog.domain = domain;
+    PrintLog.domain = domain
   }
 
   /**
@@ -33,7 +33,7 @@ export class PrintLog {
    */
   public static d(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.DEBUG, tag, log);
+      PrintLog.logByType(hilog.LogLevel.DEBUG, tag, log)
     }
   }
 
@@ -44,7 +44,7 @@ export class PrintLog {
    */
   public static i(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.INFO, tag, log);
+      PrintLog.logByType(hilog.LogLevel.INFO, tag, log)
     }
   }
 
@@ -55,7 +55,7 @@ export class PrintLog {
    */
   public static w(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.WARN, tag, log);
+      PrintLog.logByType(hilog.LogLevel.WARN, tag, log)
     }
   }
 
@@ -66,7 +66,7 @@ export class PrintLog {
    */
   public static e(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.ERROR, tag, log);
+      PrintLog.logByType(hilog.LogLevel.ERROR, tag, log)
     }
   }
 
@@ -77,7 +77,7 @@ export class PrintLog {
    */
   public static f(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.FATAL, tag, log);
+      PrintLog.logByType(hilog.LogLevel.FATAL, tag, log)
     }
   }
 
@@ -90,20 +90,20 @@ export class PrintLog {
   private static logByType(type: hilog.LogLevel, tag: string, log: string | null | undefined) {
     switch (type) {
       case hilog.LogLevel.DEBUG:
-        hilog.debug(PrintLog.domain, tag, '%{public}s', log ?? "null");
-        break;
+        hilog.debug(PrintLog.domain, tag, '%{public}s', log ?? "null")
+        break
       case hilog.LogLevel.INFO:
-        hilog.info(PrintLog.domain, tag, '%{public}s', log ?? "null");
-        break;
+        hilog.info(PrintLog.domain, tag, '%{public}s', log ?? "null")
+        break
       case hilog.LogLevel.WARN:
-        hilog.warn(PrintLog.domain, tag, '%{public}s', log ?? "null");
-        break;
+        hilog.warn(PrintLog.domain, tag, '%{public}s', log ?? "null")
+        break
       case hilog.LogLevel.ERROR:
-        hilog.error(PrintLog.domain, tag, '%{public}s', log ?? "null");
-        break;
+        hilog.error(PrintLog.domain, tag, '%{public}s', log ?? "null")
+        break
       case hilog.LogLevel.FATAL:
-        hilog.fatal(PrintLog.domain, tag, '%{public}s', log ?? "null");
-        break;
+        hilog.fatal(PrintLog.domain, tag, '%{public}s', log ?? "null")
+        break
     }
   }
 }

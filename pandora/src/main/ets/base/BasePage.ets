@@ -21,7 +21,7 @@ export struct BasePage {
   }
 
   private getContext(): Context | undefined {
-    return this.getUIContext().getHostContext();
+    return this.getUIContext().getHostContext()
   }
 }
 

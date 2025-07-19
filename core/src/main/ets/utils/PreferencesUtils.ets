@@ -1,6 +1,6 @@
-import { preferences } from "@kit.ArkData";
-import { deviceInfo } from "@kit.BasicServicesKit";
-import { CoreConstants } from "../config/CoreConstants";
+import { preferences } from "@kit.ArkData"
+import { deviceInfo } from "@kit.BasicServicesKit"
+import { CoreConstants } from "../config/CoreConstants"
 
 /**
  * Preferences工具类
@@ -18,9 +18,9 @@ export class PreferencesUtils {
   /** 获取单例 */
   public static getInstance(): PreferencesUtils {
     if (!PreferencesUtils.instance) {
-      PreferencesUtils.instance = new PreferencesUtils();
+      PreferencesUtils.instance = new PreferencesUtils()
     }
-    return PreferencesUtils.instance;
+    return PreferencesUtils.instance
   }
 
   /** Preferences对象 */
@@ -33,7 +33,7 @@ export class PreferencesUtils {
    */
   public init(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME) {
     if (this.preferences === null) {
-      this.preferences = preferences.getPreferencesSync(context, { name: preferenceName });
+      this.preferences = preferences.getPreferencesSync(context, { name: preferenceName })
     }
   }
 
@@ -169,7 +169,7 @@ export class PreferencesUtils {
    * @param observer 回调函数
    */
   public onChange(observer: (key: string) => void) {
-    this.preferences?.on('change', observer);
+    this.preferences?.on('change', observer)
   }
 
   /**
@@ -177,7 +177,7 @@ export class PreferencesUtils {
    * @param observer 回调函数
    */
   public offChange(observer: (key: string) => void) {
-    this.preferences?.off('change', observer);
+    this.preferences?.off('change', observer)
   }
 
   /**
@@ -189,7 +189,7 @@ export class PreferencesUtils {
     if (typeof keys === 'string') {
       keys = [keys]
     }
-    this.preferences?.on('dataChange', keys, observer);
+    this.preferences?.on('dataChange', keys, observer)
   }
 
   /**
@@ -201,7 +201,7 @@ export class PreferencesUtils {
     if (typeof keys === 'string') {
       keys = [keys]
     }
-    this.preferences?.off('dataChange', keys, observer);
+    this.preferences?.off('dataChange', keys, observer)
   }
 }
 

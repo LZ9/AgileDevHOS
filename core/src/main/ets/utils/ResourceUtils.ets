@@ -1,4 +1,4 @@
-import { StringUtils } from "./StringUtils";
+import { StringUtils } from "./StringUtils"
 
 /**
  * 资源工具类
@@ -12,9 +12,9 @@ export class ResourceUtils {
    */
   public static toString(context: Context | undefined | null, res: Resource): string {
     if (context !== undefined && context !== null) {
-      return context.resourceManager.getStringSync(res);
+      return context.resourceManager.getStringSync(res)
     }
-    return "null";
+    return "null"
   }
 
   /**
