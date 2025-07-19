@@ -1,5 +1,5 @@
 import { RouterUtils } from 'pandora'
-import { MainBean } from '../../bea/main/MainBean'
+import { MainBean } from '../../bean/main/MainBean'
 
 /**
  * 主页
