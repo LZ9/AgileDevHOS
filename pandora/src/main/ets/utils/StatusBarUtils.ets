@@ -1,5 +1,6 @@
 import { PandoraConstants } from "../config/PandoraConstants"
 import { window } from "@kit.ArkUI"
+import { ResourceUtils } from "core"
 
 /**
  * 状态栏工具类
@@ -35,14 +36,14 @@ export class StatusBarUtils {
    * @param bgColor 背景颜色
    * @param contentColor 文字颜色
    */
-  public setColor(bgColor: string, contentColor: string) {
+  public setColor(context: Context | undefined, bgColor: ResourceColor, contentColor: ResourceColor) {
     const win = AppStorage.get<window.Window>(PandoraConstants.Prop.WINDOW_CLASS)
     if (win === undefined) {
       return
     }
     win.setWindowSystemBarProperties({
-      statusBarColor: bgColor,
-      statusBarContentColor: contentColor,
+      statusBarColor: ResourceUtils.toColorString(context, bgColor),
+      statusBarContentColor: ResourceUtils.toColorString(context, contentColor),
     })
   }
 }

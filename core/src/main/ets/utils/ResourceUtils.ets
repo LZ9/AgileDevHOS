@@ -18,6 +18,33 @@ export class ResourceUtils {
   }
 
   /**
+   * 颜色转字符串
+   * @param colorInt 颜色转字符串
+   */
+  public static colorIntToString(colorInt: number): string {
+    const rgb = colorInt & 0xFFFFFF
+    return '#' + rgb.toString(16).padStart(6, '0').toUpperCase()
+  }
+
+  /**
+   * 颜色转字符串
+   * @param context 上下文
+   * @param resColor 颜色
+   */
+  public static toColorString(context: Context | undefined | null, resColor: ResourceColor): string {
+    if (context !== undefined && context !== null) {
+      if (typeof resColor === 'string') {
+        return resColor
+      }
+      if (typeof resColor === 'number') {
+        return ResourceUtils.colorIntToString(resColor)
+      }
+      return ResourceUtils.colorIntToString(context.resourceManager.getColorSync(resColor.id))
+    }
+    return "#ffffff"
+  }
+
+  /**
    * 获取rawfile目录下的文件内容（Uint8Array）
    * @param context 上下文
    * @param path 路径

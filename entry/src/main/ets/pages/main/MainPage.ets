@@ -17,7 +17,7 @@ export struct MainPage {
       new MainBean("Preferences测试类", $r('app.string.preferences_page_path'))
     ]
     //设置状态栏颜色
-    StatusBarUtils.getInstance().setColor('#0A59F7', '#fff00f')
+    StatusBarUtils.getInstance().setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
   }
 
   build() {
