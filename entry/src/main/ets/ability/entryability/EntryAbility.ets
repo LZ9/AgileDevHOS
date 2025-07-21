@@ -1,10 +1,10 @@
-import { BaseAbility, ResourceUtils } from 'pandora'
-import AbilityConstant from '@ohos.app.ability.AbilityConstant'
-import Want from '@ohos.app.ability.Want'
+import { BaseAbility, PreferencesUtils, ResourceUtils } from 'pandora'
+import { Constants } from '../../config/Constants'
 
 export default class EntryAbility extends BaseAbility {
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    super.onCreate(want, launchParam)
+  protected startCreate(): void {
+    PreferencesUtils.getInstance().init(this.context)
+    PreferencesUtils.getInstance().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
   }
 
   protected getLayoutPath(): string {

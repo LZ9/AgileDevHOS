@@ -15,7 +15,9 @@ export namespace Constants {
 
   /** 缓存 */
   export namespace Preferences {
-    /** 用户输入 */
-    export const USER_INPUT = 'user_input'
+    /** 姓名 */
+    export const GITHUB_KEY = 'github_key'
+    /** 用户 */
+    export const USER_KEY = 'user_key'
   }
 }

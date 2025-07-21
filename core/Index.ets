@@ -1,3 +1,6 @@
+// 常量
+export { CoreConstants } from './src/main/ets/config/CoreConstants';
+
 // 日志打印工具
 export { PrintLog } from './src/main/ets/log/PrintLog';
 
@@ -15,3 +18,7 @@ export { RouterUtils } from './src/main/ets/utils/RouterUtils';
 
 // 路由工具
 export { PromptUtils } from './src/main/ets/utils/PromptUtils';
+
+// 日期工具类
+export { DateUtils } from './src/main/ets/utils/DateUtils';
+

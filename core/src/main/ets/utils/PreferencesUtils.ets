@@ -42,10 +42,8 @@ export class PreferencesUtils {
    * @param context 上下文
    * @param preferenceName 存储文件名
    */
-  public async deletePreferences(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME) {
-    if (this.preferences !== null) {
-      await preferences.deletePreferences(context, { name: preferenceName })
-    }
+  public deletePreferences(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME): Promise<void> {
+    return preferences.deletePreferences(context, { name: preferenceName })
   }
 
   /**
@@ -67,9 +65,12 @@ export class PreferencesUtils {
    * @param key 键
    * @param value 值
    */
-  public async put(key: string, value: preferences.ValueType): Promise<void> {
-    await this.preferences?.put(key, value)
-    await this.preferences?.flush()
+  public put(key: string, value: preferences.ValueType): Promise<void> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.put(key, value).then(() => p.flush())
   }
 
   /**
@@ -86,11 +87,12 @@ export class PreferencesUtils {
    * @param key 键
    * @param value 默认值
    */
-  public async get<T extends preferences.ValueType>(key: string, defValue: T): Promise<T> {
-    if (this.preferences === null) {
-      return Promise.resolve(defValue)
+  public get<T extends preferences.ValueType>(key: string, defValue: T): Promise<T> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
     }
-    return this.preferences.get(key, defValue)
+    return p.get(key, defValue)
       .then(value => {
         return value as T
       })
@@ -99,17 +101,19 @@ export class PreferencesUtils {
   /**
    * 获取全部数据
    */
-  public getAllSync(): preferences.ValueType {
+  public getAllSync(): Object {
     return this.preferences?.getAllSync() ?? new Object()
   }
 
   /**
    * 异步获取全部数据
    */
-  public async getAll(): Promise<preferences.ValueType> {
-    return this.preferences?.getAll() ?? new Promise<preferences.ValueType>((resolve) => {
-      resolve(new Object())
-    })
+  public getAll(): Promise<Object> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.getAll()
   }
 
   /**
@@ -124,10 +128,12 @@ export class PreferencesUtils {
    * 异步判断key是否存在
    * @param key 键
    */
-  public async has(key: string): Promise<boolean> {
-    return this.preferences?.has(key) ?? new Promise<boolean>((resolve) => {
-      resolve(false)
-    })
+  public has(key: string): Promise<boolean> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.has(key)
   }
 
   /**
@@ -142,10 +148,12 @@ export class PreferencesUtils {
    * 异步删除key对应的值
    * @param key 键
    */
-  public async delete(key: string): Promise<void> {
-    return this.preferences?.delete(key) ?? new Promise<void>((resolve) => {
-      resolve()
-    })
+  public delete(key: string): Promise<void> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.delete(key)
   }
 
   /**
@@ -158,10 +166,12 @@ export class PreferencesUtils {
   /**
    * 异步清除数据
    */
-  public async clear(): Promise<void> {
-    return this.preferences?.clear() ?? new Promise<void>((resolve) => {
-      resolve()
-    })
+  public clear(): Promise<void> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.clear()
   }
 
   /**

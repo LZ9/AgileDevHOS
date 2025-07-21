@@ -57,4 +57,54 @@ export namespace CoreConstants {
     /** 版本18 */
     export const VERSION_18 = 18
   }
+
+  /** 日期格式 */
+  export namespace DateFormat {
+
+    export const TYPE_1 = "yyyy-MM-dd HH:mm:ss"
+
+    export const TYPE_2 = "HH:mm"
+
+    export const TYPE_3 = "yyyyMMddHHmmssSSS"
+
+    export const TYPE_4 = "yyyyMMddHHmmss"
+
+    export const TYPE_5 = "yyyyMMdd"
+
+    export const TYPE_6 = "yyyy-MM-dd"
+
+    export const TYPE_7 = "yyyy-MM-dd-HH-mm-ss"
+
+    export const TYPE_8 = "HH:mm:ss"
+
+    export const TYPE_9 = "yyyy-MM-dd HH-mm-ss"
+
+    export const TYPE_10 = "yyyy-MM-dd HH:mm:ss:SSS"
+
+    export const TYPE_11 = "yyyy-MM-dd HH:mm"
+
+    export const TYPE_12 = "yyyyMM"
+
+    export const TYPE_13 = "yyyy-MM"
+
+    export const TYPE_14 = "yyyy"
+
+    export const TYPE_15 = "yyyy年MM月dd日"
+
+    export const TYPE_16 = "yyyy年MM月dd日 HH:mm"
+
+    export const TYPE_17 = "yyyy年MM月dd日 HH:mm:ss"
+
+    export const TYPE_18 = "yyyy年MM月"
+
+    export const TYPE_19 = "MM月dd日"
+
+    export const TYPE_20 = "HH点mm分"
+
+    export const TYPE_21 = "HH点mm分ss秒"
+
+    export const TYPE_22 = "yyyy年MM月dd日 HH点mm分"
+
+    export const TYPE_23 = "yyyy年MM月dd日 HH点mm分ss秒"
+  }
 }
