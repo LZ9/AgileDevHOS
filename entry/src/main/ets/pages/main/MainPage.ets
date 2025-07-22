@@ -1,4 +1,4 @@
-import { RouterUtils, StatusBarUtils } from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils } from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -24,21 +24,75 @@ export struct MainPage {
     Column() {
       //标题栏
       Column() {
-        Row() {
-          Text('Pandora Demo')
-            .fontSize(32)
-            .fontColor('#000000')
+        RelativeContainer() {
+
+          //返回按钮
+          Image($r('sys.media.ohos_ic_compnent_titlebar_back'))
+            .width(40)
+            .height(`100%`)
+            .objectFit(ImageFit.Auto)
+            .alignRules({
+              left: { anchor: "__container__", align: HorizontalAlign.Start },
+              center: { anchor: "__container__", align: VerticalAlign.Center },
+            })
+            .id("back_btn")
+            .onClick(() => {
+              PromptUtils.toastShort(this.getUIContext(), '返回')
+            })
+
+          //标题
+          Text('Pandora DemoDem')
+            .fontSize(24)
+            .textAlign(TextAlign.Center)
+            .fontColor(Color.Black)
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .id("title")
+            .alignRules({
+              left: { anchor: "back_btn", align: HorizontalAlign.End },
+              right: { anchor: "expand", align: HorizontalAlign.Start },
+              center: { anchor: "__container__", align: VerticalAlign.Center },
+              // bias: { horizontal: 0 }
+            })
+
+          //拓展区域
+          Row(){
+            Image($r('sys.media.ic_grid_pdf'))
+              .objectFit(ImageFit.Auto)
+              .height(`100%`)
+              .onClick(() => {
+                PromptUtils.toastShort(this.getUIContext(), '返回')
+              })
+          }
+          .width(40)
+          .height('100%')
+          .id("expand")
+          .alignRules({
+            right: { anchor: "__container__", align: HorizontalAlign.End },
+            center: { anchor: "__container__", align: VerticalAlign.Center }
+          })
         }
         .width('100%')
         .height(56)
-        .backgroundColor(Color.Pink)
 
         // 分割线
         Line()
           .width('100%')
           .height(1)
           .backgroundColor(Color.Black)
-      }.width('100%')
+      }
+      .width('100%')
+      .backgroundColor($r('app.color.color_00a0e9'))
+
+
+
+
+
+
+
+
+
+
 
       // 列表
       List() {
