@@ -1,5 +1,8 @@
-import { CoreConstants, DateUtils, PreferencesUtils, PromptUtils, ResourceUtils, StringUtils } from 'pandora'
+import { CoreConstants, DateUtils,
+  DeviceUtils,
+  PreferencesUtils, PromptUtils, ResourceUtils, StringUtils } from 'pandora'
 import { Constants } from '../../config/Constants'
+import { preferences } from '@kit.ArkData';
 
 /**
  * Preferences测试类
@@ -11,11 +14,12 @@ import { Constants } from '../../config/Constants'
 struct PreferencesPage {
   @State private mLogList: Array<string> = []
   private mText: string = ""
+  private mScroller: ListScroller = new ListScroller();
 
   build() {
     Column() {
 
-      List() {
+      List({ scroller: this.mScroller }) {
         ForEach(this.mLogList, (item: string) => {
           ListItem() {
             Text(item)
@@ -256,17 +260,67 @@ struct PreferencesPage {
           })
       }
 
+      Text($r('app.string.preferences_subscribe'))
+        .width('100%')
+        .fontSize(14)
+        .textAlign(TextAlign.Start)
+        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
 
+      Row() {
+        //开启全量订阅
+        Button($r('app.string.preferences_change_on'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left:5,right: 5 })
+          .onClick(() => {
+            PreferencesUtils.getInstance().onChange(this.mCallback)
+          })
 
+        //关闭全量订阅
+        Button($r('app.string.preferences_change_off'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left:5,right: 5 })
+          .onClick(() => {
+            PreferencesUtils.getInstance().offChange(this.mCallback)
+          })
+      }
 
+      Row() {
+        //开启精确订阅
+        Button($r('app.string.preferences_data_change_on'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left:5,right: 5 })
+          .onClick(() => {
+            PreferencesUtils.getInstance().onDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+          })
 
-
-
-
+        //关闭精确订阅
+        Button($r('app.string.preferences_data_change_off'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left:5,right: 5 })
+          .onClick(() => {
+            PreferencesUtils.getInstance().offDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+          })
+      }
+      .margin({ top: 10 })
 
     }
     .width('100%')
     .height('100%')
+  }
+
+  /** 数据变动key值回调 */
+  private mCallback: Callback<string> = (key: string) => {
+    this.addLog(key + " 数据变动")
+  }
+
+  /** 数据变动回调 */
+  private mDataCallback: Callback<Record<string, preferences.ValueType>> = (data: Record<string, preferences.ValueType>) => {
+    const key = Object.keys(data)
+    this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
   }
 
   /**
@@ -275,5 +329,6 @@ struct PreferencesPage {
    */
   private addLog(text: string) {
     this.mLogList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
+    this.mScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
   }
 }

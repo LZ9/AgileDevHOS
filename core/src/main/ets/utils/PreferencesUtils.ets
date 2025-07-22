@@ -202,16 +202,16 @@ export class PreferencesUtils {
    * 订阅数据变更
    * @param observer 回调函数
    */
-  public onChange(observer: (key: string) => void) {
-    this.preferences?.on('change', observer)
+  public onChange(callback: Callback<string>) {
+    this.preferences?.on('change', callback)
   }
 
   /**
    * 取消订阅数据变更
    * @param observer 回调函数
    */
-  public offChange(observer: (key: string) => void) {
-    this.preferences?.off('change', observer)
+  public offChange(callback: Callback<string>) {
+    this.preferences?.off('change', callback)
   }
 
   /**
@@ -219,11 +219,11 @@ export class PreferencesUtils {
    * @param keys 键数组
    * @param observer 回调函数
    */
-  public onDataChange(keys: string | Array<string>, observer: (data: Record<string, preferences.ValueType>) => void) {
+  public onDataChange(keys: string | Array<string>, callback: Callback<Record<string, preferences.ValueType>>) {
     if (typeof keys === 'string') {
       keys = [keys]
     }
-    this.preferences?.on('dataChange', keys, observer)
+    this.preferences?.on('dataChange', keys, callback)
   }
 
   /**
@@ -231,11 +231,11 @@ export class PreferencesUtils {
    * @param keys 键数组
    * @param observer 回调函数
    */
-  public offDataChange(keys: string | Array<string>, observer: (data: Record<string, preferences.ValueType>) => void) {
+  public offDataChange(keys: string | Array<string>, callback?: Callback<Record<string, preferences.ValueType>>) {
     if (typeof keys === 'string') {
       keys = [keys]
     }
-    this.preferences?.off('dataChange', keys, observer)
+    this.preferences?.off('dataChange', keys, callback)
   }
 }
 

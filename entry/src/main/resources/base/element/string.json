@@ -69,6 +69,22 @@
       "value": "是否有数据"
     },
     {
+      "name": "preferences_change_on",
+      "value": "开启全量订阅"
+    },
+    {
+      "name": "preferences_change_off",
+      "value": "关闭全量订阅"
+    },
+    {
+      "name": "preferences_data_change_on",
+      "value": "开启精确订阅"
+    },
+    {
+      "name": "preferences_data_change_off",
+      "value": "关闭精确订阅"
+    },
+    {
       "name": "preferences_text_def",
       "value": "你未保存文字，我是默认值"
     },
