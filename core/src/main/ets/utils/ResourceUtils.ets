@@ -10,8 +10,11 @@ export class ResourceUtils {
    * @param context 上下文
    * @param res 资源对象
    */
-  public static toString(context: Context | undefined | null, res: Resource): string {
+  public static toString(context: Context | undefined | null, res: string | Resource): string {
     if (context !== undefined && context !== null) {
+      if (typeof res === 'string') {
+        return res
+      }
       return context.resourceManager.getStringSync(res)
     }
     return "null"

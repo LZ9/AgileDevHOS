@@ -117,6 +117,30 @@ export class PreferencesUtils {
   }
 
   /**
+   * 获取全部数据的Key
+   */
+  public getAllKeysSync(): string[] {
+    const p = this.preferences
+    if (p === null) {
+      return []
+    }
+    return Object.keys(p.getAllSync())
+  }
+
+  /**
+   * 异步获取全部数据的Key
+   */
+  public getAllKeys(): Promise<string[]> {
+    const p = this.preferences
+    if (p === null) {
+      return Promise.reject(new Error("未初始化"))
+    }
+    return p.getAll().then(value => {
+      return Object.keys(value)
+    })
+  }
+
+  /**
    * key是否存在
    * @param key 键
    */
