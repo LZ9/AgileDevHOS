@@ -38,5 +38,14 @@ export class StringUtils {
   public static strToUint8Array(src: string, encoding: buffer.BufferEncoding = 'utf-8'): Uint8Array {
     return new util.TextEncoder(encoding).encodeInto(src)
   }
+
+  /**
+   * 字符串忽略大小写比较
+   * @param first 字符串
+   * @param second 字符串
+   */
+  public static equalsIgnoreCase(first: string, second: string): boolean {
+    return first.toLowerCase() === second.toLowerCase();
+  }
 }
 
