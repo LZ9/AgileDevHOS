@@ -1,4 +1,4 @@
-import { BasePage } from '../base/BasePage'
+import { BasePage } from '../base/pages/BasePage'
 
 @Component
 @Preview({ deviceType: "phone" })

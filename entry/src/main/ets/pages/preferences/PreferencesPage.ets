@@ -1,6 +1,4 @@
-import { CoreConstants, DateUtils,
-  DeviceUtils,
-  PreferencesUtils, PromptUtils, ResourceUtils, StringUtils } from 'pandora'
+import { CoreConstants, DateUtils, DeviceUtils, PreferencesUtils, PromptUtils, ResourceUtils, RouterUtils, StringUtils, TitleBarView } from 'pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 
@@ -12,15 +10,26 @@ import { preferences } from '@kit.ArkData';
 @Component
 @Preview({ deviceType: "phone" })
 struct PreferencesPage {
-  @State private mLogList: Array<string> = []
-  private mText: string = ""
-  private mScroller: ListScroller = new ListScroller();
+  @State private logList: Array<string> = []
+  private text: string = ""
+  private listScroller: ListScroller = new ListScroller();
 
   build() {
     Column() {
+      TitleBarView({
+        backImgOptions: {
+          onClick: (event: ClickEvent) => {
+            RouterUtils.back(this.getUIContext())
+          }
+        },
+        titleOptions: {
+          title: $r('app.string.preferences_title'),
+          backgroundColor: $r('app.color.color_00a0e9')
+        }
+      })
 
-      List({ scroller: this.mScroller }) {
-        ForEach(this.mLogList, (item: string) => {
+      List({ scroller: this.listScroller }) {
+        ForEach(this.logList, (item: string) => {
           ListItem() {
             Text(item)
               .fontSize(14)
@@ -29,6 +38,7 @@ struct PreferencesPage {
         })
       }
       .width('100%')
+      .height('100%')
       .layoutWeight(1)
       .alignListItem(ListItemAlign.Start)
 
@@ -49,7 +59,7 @@ struct PreferencesPage {
           .margin({ left: 10, right: 10 })
           .layoutWeight(1)
           .onChange((value) => {
-            this.mText = value
+            this.text = value
           })
 
         //清空日志
@@ -57,7 +67,7 @@ struct PreferencesPage {
           .padding({ left: 10, right: 10 })
           .fontSize(14)
           .onClick(() => {
-            this.mLogList = []
+            this.logList = []
           })
       }
       .margin({ top: 10 })
@@ -75,12 +85,12 @@ struct PreferencesPage {
           .fontSize(14)
           .margin({ left:5,right: 5 })
           .onClick(() => {
-            if (StringUtils.isEmpty(this.mText)) {
+            if (StringUtils.isEmpty(this.text)) {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
               return
             }
-            PreferencesUtils.getInstance().putSync(Constants.Preferences.USER_KEY, this.mText)
-            this.addLog("同步保存字符：" + this.mText)
+            PreferencesUtils.getInstance().putSync(Constants.Preferences.USER_KEY, this.text)
+            this.addLog("同步保存字符：" + this.text)
           })
 
         //同步读取
@@ -117,13 +127,13 @@ struct PreferencesPage {
           .fontSize(14)
           .margin({ left:5,right: 5 })
           .onClick(() => {
-            if (StringUtils.isEmpty(this.mText)) {
+            if (StringUtils.isEmpty(this.text)) {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
               return
             }
-            PreferencesUtils.getInstance().put(Constants.Preferences.USER_KEY, this.mText)
+            PreferencesUtils.getInstance().put(Constants.Preferences.USER_KEY, this.text)
               .then(() => {
-                this.addLog("异步保存字符成功：" + this.mText)
+                this.addLog("异步保存字符成功：" + this.text)
               })
               .catch((e: Error) => {
                 this.addLog("异步保存字符失败：" + e.message)
@@ -328,7 +338,7 @@ struct PreferencesPage {
    * @param text 日志
    */
   private addLog(text: string) {
-    this.mLogList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
-    this.mScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
+    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
+    this.listScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
   }
 }

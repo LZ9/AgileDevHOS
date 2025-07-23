@@ -9,12 +9,24 @@
       "value": "AgileDevHOS主Ability"
     },
     {
+      "name": "internet_permission_reason",
+      "value": "用于网络访问"
+    },
+    {
       "name": "splash_title",
       "value": "AgileDevHOS测试工程"
     },
     {
-      "name": "internet_permission_reason",
-      "value": "用于网络访问"
+      "name": "main_title",
+      "value": "功能模块"
+    },
+    {
+      "name": "main_change_mood",
+      "value": "换个心情"
+    },
+    {
+      "name": "preferences_title",
+      "value": "Preferences测试类"
     },
     {
       "name": "preferences_input_hint",
