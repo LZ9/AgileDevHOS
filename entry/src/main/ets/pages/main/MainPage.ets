@@ -24,10 +24,10 @@ export struct MainPage {
   expandLayout() {
     Text($r('app.string.main_change_mood'))
       .height(`100%`)
-      .fontSize(14)
+      .fontSize(12)
       .fontColor(Color.White)
       .textAlign(TextAlign.Center)
-      .padding({ left: 10, right: 10 })
+      .padding({ right: 10 })
       .onClick(() => {
         PromptUtils.toastShort(this.getUIContext(), "刷新")
       })
@@ -37,9 +37,7 @@ export struct MainPage {
     Column() {
       TitleBarView({
         backImgOptions: {
-          onClick: (event: ClickEvent) => {
-            PromptUtils.toastShort(this.getUIContext(), "返回")
-          }
+          visibility: Visibility.Hidden
         },
         titleOptions: {
           title: $r('app.string.main_title'),
@@ -48,13 +46,15 @@ export struct MainPage {
         expandLayout: this.expandLayout
       })
 
-
       // 列表
       List() {
         ForEach(this.list, (item: MainBean) => {
           ListItem() {
             Text(item.getTitleName())
-              .fontSize(24)
+              .width('100%')
+              .fontSize(20)
+              .textAlign(TextAlign.Start)
+              .padding(10)
               .onClick(() => {
                 RouterUtils.pushUrl(this.getUIContext(), item.getPagePath(this.getUIContext()))
               })

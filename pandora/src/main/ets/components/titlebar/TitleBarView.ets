@@ -8,7 +8,7 @@ export struct TitleBarView {
   @State public titleOptions: TitleOptions = {}
   @State public dividingOptions: DividingOptions = {}
 
-  // 内容布局
+  // 拓展区域布局
   @BuilderParam expandLayout?: () => void
 
   build() {
