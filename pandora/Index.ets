@@ -9,3 +9,5 @@ export { PandoraConstants } from './src/main/ets/config/PandoraConstants';
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';
 
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
+
+export { LoadingView } from './src/main/ets/components/state/LoadingView';

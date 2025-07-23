@@ -3,6 +3,22 @@
     {
       "name": "page_show",
       "value": "page from package"
+    },
+    {
+      "name": "pandora_loading",
+      "value": "加载中…"
+    },
+    {
+      "name": "pandora_no_data",
+      "value": "暂无数据…"
+    },
+    {
+      "name": "pandora_load_fail",
+      "value": "加载失败，请点击重试…"
+    },
+    {
+      "name": "pandora_load_fail_net",
+      "value": "网络异常，请点击重试…"
     }
   ]
 }

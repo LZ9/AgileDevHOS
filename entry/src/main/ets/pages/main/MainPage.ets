@@ -20,6 +20,10 @@ export struct MainPage {
     StatusBarUtils.getInstance().setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
   }
 
+  onDidBuild(): void {
+    RouterUtils.pushUrl(this.getUIContext(), this.list[0].getPagePath(this.getUIContext()))
+  }
+
   @Builder
   expandLayout() {
     Text($r('app.string.main_change_mood'))
