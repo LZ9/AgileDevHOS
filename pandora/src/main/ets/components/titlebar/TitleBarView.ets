@@ -4,10 +4,12 @@
  */
 @Component
 export struct TitleBarView {
+  /** 返回按钮参数 */
   @State public backImgOptions: BackImgOptions = {}
+  /** 标题参数 */
   @State public titleOptions: TitleOptions = {}
+  /** 分割线参数 */
   @State public dividingOptions: DividingOptions = {}
-
   // 拓展区域布局
   @BuilderParam expandLayout?: () => void
 

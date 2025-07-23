@@ -5,7 +5,9 @@
 @Component
 @Preview({ deviceType: "phone" })
 export struct LoadingView {
+  /** 进度条参数 */
   @State public progressOptions: ProgressOptions = {}
+  /** 文字参数 */
   @State public textOptions: TextOptions = {}
 
   build() {
@@ -33,7 +35,7 @@ export struct LoadingView {
   }
 }
 
-/** 返回按钮参数 */
+/** 进度条参数 */
 export interface ProgressOptions {
   /** 宽度 */
   width?: Length
@@ -53,7 +55,7 @@ export interface TextOptions {
   fontColor?: ResourceColor
   /** 文字位置 */
   textAlign?: TextAlign
-  /** 标题栏背景色 */
+  /** 背景色 */
   backgroundColor?: ResourceColor
   /** 控件显隐 */
   visibility?: Visibility
