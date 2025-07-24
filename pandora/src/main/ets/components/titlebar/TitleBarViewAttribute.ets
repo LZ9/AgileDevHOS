@@ -9,6 +9,17 @@ export class TitleBarViewAttribute {
   public titleOptions: TitleOptions = {}
   /** 分割线参数 */
   public dividingOptions: DividingOptions = {}
+
+  /** 隐藏返回按钮 */
+  public goneBackImg() {
+    this.backImgOptions.visibility = Visibility.Hidden
+  }
+
+  /** 显示分割线 */
+  public showDividingLine() {
+    this.dividingOptions.visibility = Visibility.Visible
+  }
+
 }
 
 /** 返回按钮参数 */

@@ -7,6 +7,11 @@ export class LoadingViewAttribute {
   public progressOptions: ProgressOptions = {}
   /** 文字参数 */
   public textOptions: TextOptions = {}
+
+  /** 隐藏提示语 */
+  public goneTips() {
+    this.textOptions.visibility = Visibility.None
+  }
 }
 
 /** 进度条参数 */

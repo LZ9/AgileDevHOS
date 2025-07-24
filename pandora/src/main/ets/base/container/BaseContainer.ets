@@ -10,15 +10,16 @@ import { BaseContainerAttribute } from "./BaseContainerAttribute"
  */
 @Component
 export struct BaseContainer {
+  // 属性
   @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   // 内容布局
   @BuilderParam public contentLayout?: () => void
 
-  // 公共UI部分
   build() {
     Column() {
       TitleBarView({ attribute: this.attribute.titleBarAttribute })
+        .visibility(this.attribute.isShowTitleBar ? Visibility.Visible : Visibility.None)
 
       LoadingView({ attribute: this.attribute.loadingAttribute })
         .width(`100%`)

@@ -7,9 +7,9 @@ import { TitleBarViewAttribute } from "./TitleBarViewAttribute"
 @Component
 export struct TitleBarView {
 
-  /** 标题栏属性 */
+  /** 属性 */
   @State public attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
-  // 拓展区域布局
+  /** 拓展区域布局 */
   @BuilderParam public expandLayout?: () => void
 
   build() {
