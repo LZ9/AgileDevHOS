@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, TitleBarView } from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, TitleBarAttribute, TitleBarView } from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -9,19 +9,34 @@ import { MainBean } from '../../bean/main/MainBean'
 @Component
 @Preview({ deviceType: "phone" })
 export struct MainPage {
+  /** 列表数据 */
   private list: Array<MainBean> = []
+  /** 标题栏属性 */
+  @State attribute: TitleBarAttribute = new TitleBarAttribute()
 
   aboutToAppear(): void {
+    //设置状态栏颜色
+    StatusBarUtils.getInstance().setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
+    this.attribute = this.configTitleBarAttribute()
+
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
       new MainBean("Preferences测试类", $r('app.string.preferences_page_path'))
     ]
-    //设置状态栏颜色
-    StatusBarUtils.getInstance().setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
   }
 
+  /** 配置标题栏熟悉 */
+  private configTitleBarAttribute(): TitleBarAttribute {
+    const attribute = new TitleBarAttribute()
+    attribute.backImgOptions.visibility = Visibility.Hidden
+    attribute.titleOptions.title = $r('app.string.main_title')
+    attribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    return attribute
+  }
+
+
   onDidBuild(): void {
-    RouterUtils.pushUrl(this.getUIContext(), this.list[0].getPagePath(this.getUIContext()))
+    // RouterUtils.pushUrl(this.getUIContext(), this.list[0].getPagePath(this.getUIContext()))
   }
 
   @Builder
@@ -39,16 +54,7 @@ export struct MainPage {
 
   build() {
     Column() {
-      TitleBarView({
-        backImgOptions: {
-          visibility: Visibility.Hidden
-        },
-        titleOptions: {
-          title: $r('app.string.main_title'),
-          backgroundColor: $r('app.color.color_00a0e9')
-        },
-        expandLayout: this.expandLayout
-      })
+      TitleBarView({ attribute: this.attribute, expandLayout: this.expandLayout })
 
       // 列表
       List() {

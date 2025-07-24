@@ -101,6 +101,10 @@
       "value": "你未保存文字，我是默认值"
     },
     {
+      "name": "json_title",
+      "value": "Json转换测试"
+    },
+    {
       "name": "splash_page_path",
       "value": "pages/splash/SplashPage",
       "description": "启动页路径"

@@ -1,4 +1,15 @@
-import { CoreConstants, DateUtils, DeviceUtils, PreferencesUtils, PromptUtils, ResourceUtils, RouterUtils, StringUtils, TitleBarView } from 'pandora'
+import {
+  CoreConstants,
+  DateUtils,
+  DeviceUtils,
+  PreferencesUtils,
+  PromptUtils,
+  ResourceUtils,
+  RouterUtils,
+  StringUtils,
+  TitleBarAttribute,
+  TitleBarView
+} from 'pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 
@@ -10,23 +21,33 @@ import { preferences } from '@kit.ArkData';
 @Component
 @Preview({ deviceType: "phone" })
 struct PreferencesPage {
+  /** 日志列表 */
   @State private logList: Array<string> = []
+  /** 缓存内容 */
   private text: string = ""
+  /** 列表滚动栏 */
   private listScroller: ListScroller = new ListScroller();
+  /** 标题栏属性 */
+  @State attribute: TitleBarAttribute = new TitleBarAttribute()
+
+  aboutToAppear(): void {
+    this.attribute = this.configTitleBarAttribute()
+  }
+
+  /** 配置标题栏熟悉 */
+  private configTitleBarAttribute(): TitleBarAttribute {
+    const attribute = new TitleBarAttribute()
+    attribute.backImgOptions.onClick = (event: ClickEvent) => {
+      RouterUtils.back(this.getUIContext())
+    }
+    attribute.titleOptions.title = $r('app.string.preferences_title')
+    attribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    return attribute
+  }
 
   build() {
     Column() {
-      TitleBarView({
-        backImgOptions: {
-          onClick: (event: ClickEvent) => {
-            RouterUtils.back(this.getUIContext())
-          }
-        },
-        titleOptions: {
-          title: $r('app.string.preferences_title'),
-          backgroundColor: $r('app.color.color_00a0e9')
-        }
-      })
+      TitleBarView({ attribute: this.attribute })
 
       List({ scroller: this.listScroller }) {
         ForEach(this.logList, (item: string) => {
@@ -76,14 +97,19 @@ struct PreferencesPage {
         .width('100%')
         .fontSize(14)
         .textAlign(TextAlign.Start)
-        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+        .padding({
+          left: 10,
+          right: 10,
+          top: 5,
+          bottom: 5
+        })
 
       Row() {
         //同步保存
         Button($r('app.string.preferences_save'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             if (StringUtils.isEmpty(this.text)) {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
@@ -97,7 +123,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_read'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             const def = ResourceUtils.toString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
             const value = PreferencesUtils.getInstance().getSync(Constants.Preferences.USER_KEY, def)
@@ -108,7 +134,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_get_all'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             this.addLog("同步获取全部数据：" + JSON.stringify(PreferencesUtils.getInstance().getAllSync()))
           })
@@ -118,14 +144,19 @@ struct PreferencesPage {
         .width('100%')
         .fontSize(14)
         .textAlign(TextAlign.Start)
-        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+        .padding({
+          left: 10,
+          right: 10,
+          top: 5,
+          bottom: 5
+        })
 
       Row() {
         //异步保存
         Button($r('app.string.preferences_save'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             if (StringUtils.isEmpty(this.text)) {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
@@ -144,7 +175,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_read'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             const def = ResourceUtils.toString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
             PreferencesUtils.getInstance().get(Constants.Preferences.USER_KEY, def)
@@ -160,7 +191,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_get_all'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().getAll()
               .then((data) => {
@@ -176,14 +207,19 @@ struct PreferencesPage {
         .width('100%')
         .fontSize(14)
         .textAlign(TextAlign.Start)
-        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+        .padding({
+          left: 10,
+          right: 10,
+          top: 5,
+          bottom: 5
+        })
 
       Row() {
         //是否有数据
         Button($r('app.string.preferences_has'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             const keys = PreferencesUtils.getInstance().getAllKeysSync()
             if (keys.length === 0) {
@@ -220,7 +256,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_delete'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             const keys = PreferencesUtils.getInstance().getAllKeysSync()
             if (keys.length === 0) {
@@ -258,7 +294,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_clean'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().clear()
               .then(() => {
@@ -274,14 +310,19 @@ struct PreferencesPage {
         .width('100%')
         .fontSize(14)
         .textAlign(TextAlign.Start)
-        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+        .padding({
+          left: 10,
+          right: 10,
+          top: 5,
+          bottom: 5
+        })
 
       Row() {
         //开启全量订阅
         Button($r('app.string.preferences_change_on'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().onChange(this.mCallback)
           })
@@ -290,7 +331,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_change_off'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().offChange(this.mCallback)
           })
@@ -301,7 +342,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_data_change_on'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().onDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
           })
@@ -310,7 +351,7 @@ struct PreferencesPage {
         Button($r('app.string.preferences_data_change_off'))
           .layoutWeight(1)
           .fontSize(14)
-          .margin({ left:5,right: 5 })
+          .margin({ left: 5, right: 5 })
           .onClick(() => {
             PreferencesUtils.getInstance().offDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
           })
@@ -326,12 +367,12 @@ struct PreferencesPage {
   private mCallback: Callback<string> = (key: string) => {
     this.addLog(key + " 数据变动")
   }
-
   /** 数据变动回调 */
-  private mDataCallback: Callback<Record<string, preferences.ValueType>> = (data: Record<string, preferences.ValueType>) => {
-    const key = Object.keys(data)
-    this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
-  }
+  private mDataCallback: Callback<Record<string, preferences.ValueType>> =
+    (data: Record<string, preferences.ValueType>) => {
+      const key = Object.keys(data)
+      this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
+    }
 
   /**
    * 打印日志
