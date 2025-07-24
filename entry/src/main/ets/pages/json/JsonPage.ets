@@ -1,4 +1,4 @@
-import { LoadingView, NoDataView } from 'pandora'
+import { ErrorView, LoadingView, NoDataView } from 'pandora'
 
 /**
  * Json转换测试
