@@ -1,5 +1,6 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit'
 import { window } from '@kit.ArkUI'
+import { PandoraConstants } from '../../config/PandoraConstants'
 import { StatusBarUtils } from '../../utils/StatusBarUtils'
 
 /**
@@ -17,7 +18,8 @@ export abstract class BaseAbility extends UIAbility {
       if (err.code) {
         return
       }
-      StatusBarUtils.getInstance().saveLastWindow(this.context)
+      StatusBarUtils.saveLastWindow(this.context)
+      AppStorage.setOrCreate(PandoraConstants.Prop.BASE_VIEW_CONFIG, "")
       this.endCreate()
     })
   }

@@ -42,6 +42,11 @@ export struct BaseContainer {
         .width(`100%`)
         .height(`100%`)
         .visibility(this.attribute.isShowError ? Visibility.Visible : Visibility.None)
+        .onClick((event) => {
+          if (this.attribute.onReloadClick) {
+            this.attribute.onReloadClick(event)
+          }
+        })
 
       Stack() {
         if (this.contentLayout) {

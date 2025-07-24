@@ -14,6 +14,8 @@ export class BaseContainerAttribute {
   public noDataAttribute: NoDataAttribute = new NoDataAttribute()
   public errorAttribute: ErrorAttribute = new ErrorAttribute()
 
+  /** 点击错误页面重试监听器 */
+  public onReloadClick?: (event: ClickEvent) => void
 
   // 是否显示加载页
   public isShowLoading: boolean = true

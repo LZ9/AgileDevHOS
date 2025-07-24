@@ -16,7 +16,7 @@ export struct MainPage {
 
   aboutToAppear(): void {
     //设置状态栏颜色
-    StatusBarUtils.getInstance().setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
+    StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
     this.attribute = this.configTitleBarAttribute()
 
     this.list = [

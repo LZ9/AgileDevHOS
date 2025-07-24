@@ -25,7 +25,7 @@ export class StatusBarUtils {
    * 保存当前窗口
    * @param context 上下文
    */
-  public saveLastWindow(context: Context) {
+  public static saveLastWindow(context: Context) {
     window.getLastWindow(context, (err, data) => {
       AppStorage.setOrCreate(PandoraConstants.Prop.WINDOW_CLASS, data)
     })
@@ -36,7 +36,7 @@ export class StatusBarUtils {
    * @param bgColor 背景颜色
    * @param contentColor 文字颜色
    */
-  public setColor(context: Context | undefined, bgColor: ResourceColor, contentColor: ResourceColor) {
+  public static setColor(context: Context | undefined, bgColor: ResourceColor, contentColor: ResourceColor) {
     const win = AppStorage.get<window.Window>(PandoraConstants.Prop.WINDOW_CLASS)
     if (win === undefined) {
       return
