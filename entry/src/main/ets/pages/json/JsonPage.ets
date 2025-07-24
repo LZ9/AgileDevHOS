@@ -1,4 +1,4 @@
-import { LoadingView } from 'pandora'
+import { LoadingView, NoDataView } from 'pandora'
 
 /**
  * Json转换测试
@@ -9,7 +9,7 @@ import { LoadingView } from 'pandora'
 struct JsonPage {
   build() {
     Column() {
-      LoadingView()
+      NoDataView()
     }
   }
 }

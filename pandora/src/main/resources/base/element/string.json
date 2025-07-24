@@ -10,15 +10,15 @@
     },
     {
       "name": "pandora_no_data",
-      "value": "暂无数据…"
+      "value": "暂无数据"
     },
     {
       "name": "pandora_load_fail",
-      "value": "加载失败，请点击重试…"
+      "value": "加载失败，请点击重试"
     },
     {
       "name": "pandora_load_fail_net",
-      "value": "网络异常，请点击重试…"
+      "value": "网络异常，请点击重试"
     }
   ]
 }
