@@ -8,7 +8,7 @@ import { ErrorViewAttribute } from "./ErrorViewAttribute"
 export struct ErrorView {
 
   /** 属性 */
-  @Link public attribute: ErrorViewAttribute
+  @State public attribute: ErrorViewAttribute = new ErrorViewAttribute()
 
   build() {
     Column() {

@@ -1,12 +1,8 @@
 import { ErrorView } from "../../components/state/ErrorView"
-import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
 import { LoadingView } from "../../components/state/LoadingView"
 import { NoDataView } from "../../components/state/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
 import { BaseContainerAttribute } from "./BaseContainerAttribute"
-import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
-import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
-import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
 
 /**
  * 页面基类
@@ -14,31 +10,28 @@ import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
  */
 @Component
 export struct BaseContainer {
-  @Link public attribute: BaseContainerAttribute
-  @State public titleBarAttribute: TitleBarViewAttribute = this.attribute.titleBarAttribute
-  @State public loadingAttribute: LoadingViewAttribute = this.attribute.loadingAttribute
-  @State public noDataAttribute: NoDataViewAttribute = this.attribute.noDataAttribute
-  @State public errorAttribute: ErrorViewAttribute = this.attribute.errorAttribute
+  @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
+
   // 内容布局
   @BuilderParam public contentLayout?: () => void
 
   // 公共UI部分
   build() {
     Column() {
-      TitleBarView({ attribute: this.titleBarAttribute })
+      TitleBarView({ attribute: this.attribute.titleBarAttribute })
 
-      LoadingView({ attribute: this.loadingAttribute })
+      LoadingView({ attribute: this.attribute.loadingAttribute })
         .width(`100%`)
         .height(`100%`)
         .visibility(this.attribute.isShowLoading ? Visibility.Visible : Visibility.None)
 
 
-      NoDataView({ attribute: this.noDataAttribute })
+      NoDataView({ attribute: this.attribute.noDataAttribute })
         .width(`100%`)
         .height(`100%`)
         .visibility(this.attribute.isShowNoData ? Visibility.Visible : Visibility.None)
 
-      ErrorView({ attribute: this.errorAttribute })
+      ErrorView({ attribute: this.attribute.errorAttribute })
         .width(`100%`)
         .height(`100%`)
         .visibility(this.attribute.isShowError ? Visibility.Visible : Visibility.None)

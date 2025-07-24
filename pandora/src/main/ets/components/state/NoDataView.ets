@@ -8,7 +8,7 @@ import { NoDataViewAttribute } from "./NoDataViewAttribute"
 export struct NoDataView {
 
   /** 属性 */
-  @Link public attribute: NoDataViewAttribute
+  @State public attribute: NoDataViewAttribute = new NoDataViewAttribute()
 
   build() {
     Column() {

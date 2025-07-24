@@ -8,7 +8,7 @@ import { LoadingViewAttribute } from "./LoadingViewAttribute"
 @Preview({ deviceType: "phone" })
 export struct LoadingView {
   /** 属性 */
-  @Link public attribute: LoadingViewAttribute
+  @State public attribute: LoadingViewAttribute = new LoadingViewAttribute()
 
   build() {
     Column() {
