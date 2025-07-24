@@ -2,7 +2,7 @@
  * 加载失败控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class ErrorAttribute {
+export class ErrorViewAttribute {
   /** 图片参数 */
   public imgOptions: ImgOptions = {}
   /** 文字参数 */

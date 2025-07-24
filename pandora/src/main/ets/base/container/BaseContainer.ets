@@ -1,12 +1,12 @@
-import { ErrorAttribute } from "../../components/state/ErrorAttribute"
 import { ErrorView } from "../../components/state/ErrorView"
-import { LoadingAttribute } from "../../components/state/LoadingAttribute"
+import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
 import { LoadingView } from "../../components/state/LoadingView"
-import { NoDataAttribute } from "../../components/state/NoDataAttribute"
 import { NoDataView } from "../../components/state/NoDataView"
-import { TitleBarAttribute } from "../../components/titlebar/TitleBarAttribute"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
 import { BaseContainerAttribute } from "./BaseContainerAttribute"
+import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
+import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
+import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
 
 /**
  * 页面基类
@@ -15,10 +15,10 @@ import { BaseContainerAttribute } from "./BaseContainerAttribute"
 @Component
 export struct BaseContainer {
   @Link public attribute: BaseContainerAttribute
-  @State public titleBarAttribute: TitleBarAttribute = this.attribute.titleBarAttribute
-  @State public loadingAttribute: LoadingAttribute = this.attribute.loadingAttribute
-  @State public noDataAttribute: NoDataAttribute = this.attribute.noDataAttribute
-  @State public errorAttribute: ErrorAttribute = this.attribute.errorAttribute
+  @State public titleBarAttribute: TitleBarViewAttribute = this.attribute.titleBarAttribute
+  @State public loadingAttribute: LoadingViewAttribute = this.attribute.loadingAttribute
+  @State public noDataAttribute: NoDataViewAttribute = this.attribute.noDataAttribute
+  @State public errorAttribute: ErrorViewAttribute = this.attribute.errorAttribute
   // 内容布局
   @BuilderParam public contentLayout?: () => void
 

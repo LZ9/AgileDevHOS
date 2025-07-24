@@ -7,8 +7,8 @@ import {
   ResourceUtils,
   RouterUtils,
   StringUtils,
-  TitleBarAttribute,
-  TitleBarView
+  TitleBarView,
+  TitleBarViewAttribute
 } from 'pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
@@ -28,15 +28,15 @@ struct PreferencesPage {
   /** 列表滚动栏 */
   private listScroller: ListScroller = new ListScroller();
   /** 标题栏属性 */
-  @State attribute: TitleBarAttribute = new TitleBarAttribute()
+  @State attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
 
   aboutToAppear(): void {
-    this.attribute = this.configTitleBarAttribute()
+    this.attribute = this.configTitleBarViewAttribute()
   }
 
   /** 配置标题栏熟悉 */
-  private configTitleBarAttribute(): TitleBarAttribute {
-    const attribute = new TitleBarAttribute()
+  private configTitleBarViewAttribute(): TitleBarViewAttribute {
+    const attribute = new TitleBarViewAttribute()
     attribute.backImgOptions.onClick = (event: ClickEvent) => {
       RouterUtils.back(this.getUIContext())
     }

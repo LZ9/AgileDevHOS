@@ -1,26 +1,22 @@
 /**
- * 无数据控件属性
+ * 加载控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class NoDataAttribute {
-  /** 图片参数 */
-  public imgOptions: ImgOptions = {}
+export class LoadingViewAttribute {
+  /** 进度条参数 */
+  public progressOptions: ProgressOptions = {}
   /** 文字参数 */
   public textOptions: TextOptions = {}
 }
 
-/** 图片参数 */
-export interface ImgOptions {
-  /** 图片 */
-  src ?: PixelMap | ResourceStr | DrawableDescriptor | ImageContent
+/** 进度条参数 */
+export interface ProgressOptions {
   /** 宽度 */
   width?: Length
-  /** 高度 */
-  height?: Length
-  /** 图片填充效果 */
-  objectFit?: ImageFit
-  /** 控件显隐 */
-  visibility?: Visibility
+  /** 颜色 */
+  color?: ResourceColor | LinearGradient
+  /** 描边宽度 */
+  strokeWidth?: Length
 }
 
 /** 文字参数 */

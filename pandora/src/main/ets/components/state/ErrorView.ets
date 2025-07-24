@@ -1,4 +1,4 @@
-import { ErrorAttribute } from "./ErrorAttribute"
+import { ErrorViewAttribute } from "./ErrorViewAttribute"
 
 /**
  * 加载失败控件
@@ -8,7 +8,7 @@ import { ErrorAttribute } from "./ErrorAttribute"
 export struct ErrorView {
 
   /** 属性 */
-  @Link public attribute: ErrorAttribute
+  @Link public attribute: ErrorViewAttribute
 
   build() {
     Column() {

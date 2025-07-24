@@ -1,4 +1,4 @@
-import { NoDataAttribute } from "./NoDataAttribute"
+import { NoDataViewAttribute } from "./NoDataViewAttribute"
 
 /**
  * 无数据控件
@@ -8,7 +8,7 @@ import { NoDataAttribute } from "./NoDataAttribute"
 export struct NoDataView {
 
   /** 属性 */
-  @Link public attribute: NoDataAttribute
+  @Link public attribute: NoDataViewAttribute
 
   build() {
     Column() {

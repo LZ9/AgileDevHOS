@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, TitleBarAttribute, TitleBarView } from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, TitleBarViewAttribute, TitleBarView } from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -12,12 +12,12 @@ export struct MainPage {
   /** 列表数据 */
   private list: Array<MainBean> = []
   /** 标题栏属性 */
-  @State attribute: TitleBarAttribute = new TitleBarAttribute()
+  @State attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
-    this.attribute = this.configTitleBarAttribute()
+    this.attribute = this.configTitleBarViewAttribute()
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
@@ -26,8 +26,8 @@ export struct MainPage {
   }
 
   /** 配置标题栏熟悉 */
-  private configTitleBarAttribute(): TitleBarAttribute {
-    const attribute = new TitleBarAttribute()
+  private configTitleBarViewAttribute(): TitleBarViewAttribute {
+    const attribute = new TitleBarViewAttribute()
     attribute.backImgOptions.visibility = Visibility.Hidden
     attribute.titleOptions.title = $r('app.string.main_title')
     attribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')

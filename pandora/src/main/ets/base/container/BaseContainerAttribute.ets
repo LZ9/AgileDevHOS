@@ -1,7 +1,7 @@
-import { ErrorAttribute } from "../../components/state/ErrorAttribute"
-import { LoadingAttribute } from "../../components/state/LoadingAttribute"
-import { NoDataAttribute } from "../../components/state/NoDataAttribute"
-import { TitleBarAttribute } from "../../components/titlebar/TitleBarAttribute"
+import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
+import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
+import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
+import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
 
 /**
  * 页面基类属性
@@ -9,10 +9,10 @@ import { TitleBarAttribute } from "../../components/titlebar/TitleBarAttribute"
  */
 export class BaseContainerAttribute {
 
-  public titleBarAttribute: TitleBarAttribute = new TitleBarAttribute()
-  public loadingAttribute: LoadingAttribute = new LoadingAttribute()
-  public noDataAttribute: NoDataAttribute = new NoDataAttribute()
-  public errorAttribute: ErrorAttribute = new ErrorAttribute()
+  public titleBarAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  public loadingAttribute: LoadingViewAttribute = new LoadingViewAttribute()
+  public noDataAttribute: NoDataViewAttribute = new NoDataViewAttribute()
+  public errorAttribute: ErrorViewAttribute = new ErrorViewAttribute()
 
   /** 点击错误页面重试监听器 */
   public onReloadClick?: (event: ClickEvent) => void

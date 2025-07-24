@@ -2,7 +2,7 @@
  * 标题栏控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class TitleBarAttribute {
+export class TitleBarViewAttribute {
   /** 返回按钮参数 */
   public backImgOptions: BackImgOptions = {}
   /** 标题参数 */

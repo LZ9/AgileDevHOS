@@ -1,4 +1,4 @@
-import { TitleBarAttribute } from "./TitleBarAttribute"
+import { TitleBarViewAttribute } from "./TitleBarViewAttribute"
 
 /**
  * 标题栏控件
@@ -8,7 +8,7 @@ import { TitleBarAttribute } from "./TitleBarAttribute"
 export struct TitleBarView {
 
   /** 标题栏属性 */
-  @Link public attribute: TitleBarAttribute
+  @Link public attribute: TitleBarViewAttribute
   // 拓展区域布局
   @BuilderParam public expandLayout?: () => void
 

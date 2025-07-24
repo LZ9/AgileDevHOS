@@ -13,19 +13,19 @@ export { BaseContainerAttribute } from './src/main/ets/base/container/BaseContai
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 
-export { TitleBarAttribute } from './src/main/ets/components/titlebar/TitleBarAttribute';
+export { TitleBarViewAttribute } from './src/main/ets/components/titlebar/TitleBarViewAttribute';
 
 export { LoadingView } from './src/main/ets/components/state/LoadingView';
 
-export { LoadingAttribute } from './src/main/ets/components/state/LoadingAttribute';
+export { LoadingViewAttribute } from './src/main/ets/components/state/LoadingViewAttribute';
 
 export { NoDataView } from './src/main/ets/components/state/NoDataView';
 
-export { NoDataAttribute } from './src/main/ets/components/state/NoDataAttribute';
+export { NoDataViewAttribute } from './src/main/ets/components/state/NoDataViewAttribute';
 
 export { ErrorView } from './src/main/ets/components/state/ErrorView';
 
-export { ErrorAttribute } from './src/main/ets/components/state/ErrorAttribute';
+export { ErrorViewAttribute } from './src/main/ets/components/state/ErrorViewAttribute';
 
 //---------------- 工具 -----------------
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';

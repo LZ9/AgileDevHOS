@@ -1,4 +1,4 @@
-import { LoadingAttribute } from "./LoadingAttribute"
+import { LoadingViewAttribute } from "./LoadingViewAttribute"
 
 /**
  * 加载控件
@@ -8,7 +8,7 @@ import { LoadingAttribute } from "./LoadingAttribute"
 @Preview({ deviceType: "phone" })
 export struct LoadingView {
   /** 属性 */
-  @Link public attribute: LoadingAttribute
+  @Link public attribute: LoadingViewAttribute
 
   build() {
     Column() {
