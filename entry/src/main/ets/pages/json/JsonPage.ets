@@ -10,11 +10,14 @@ struct JsonPage {
   @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
+    const scope = this.attribute.getScopeConfig()
+    if (scope !== undefined){
+      this.attribute = scope
+    }
     this.attribute.titleBarAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
     this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.json_title')
-    this.attribute.titleBarAttribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
   }
 
   onDidBuild(): void {

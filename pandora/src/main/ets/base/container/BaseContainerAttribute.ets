@@ -2,6 +2,7 @@ import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
 import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
 import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
 import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
+import { PandoraConstants } from "../../config/PandoraConstants"
 
 /**
  * 页面基类属性
@@ -64,5 +65,10 @@ export class BaseContainerAttribute {
   /** 隐藏标题栏 */
   public goneTitleBar() {
     this.isShowTitleBar = false
+  }
+
+  /** 获取全局属性配置 */
+  public getScopeConfig(): BaseContainerAttribute | undefined {
+    return AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)
   }
 }

@@ -17,13 +17,6 @@ export struct BaseContainer {
   /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
 
-  aboutToAppear(): void {
-   const scope = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)
-    if (scope !== undefined) {
-      this.attribute = scope
-    }
-  }
-
   build() {
     Column() {
       TitleBarView({ attribute: this.attribute.titleBarAttribute })

@@ -1,3 +1,6 @@
+import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
+import { PandoraConstants } from "../../config/PandoraConstants"
+
 /**
  * 加载控件属性
  * Created by zhouL on 2025/7/24.
@@ -11,6 +14,11 @@ export class LoadingViewAttribute {
   /** 隐藏提示语 */
   public goneTips() {
     this.textOptions.visibility = Visibility.None
+  }
+
+  /** 获取全局属性配置 */
+  public getScopeConfig(): LoadingViewAttribute | undefined {
+    return AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)?.loadingAttribute
   }
 }
 

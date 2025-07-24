@@ -1,3 +1,6 @@
+import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
+import { PandoraConstants } from "../../config/PandoraConstants"
+
 /**
  * 标题栏控件属性
  * Created by zhouL on 2025/7/24.
@@ -20,6 +23,10 @@ export class TitleBarViewAttribute {
     this.dividingOptions.visibility = Visibility.Visible
   }
 
+  /** 获取全局属性配置 */
+  public getScopeConfig(): TitleBarViewAttribute | undefined {
+    return AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)?.titleBarAttribute
+  }
 }
 
 /** 返回按钮参数 */
