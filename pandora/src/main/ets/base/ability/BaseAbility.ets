@@ -2,6 +2,7 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { window } from '@kit.ArkUI'
 import { PandoraConstants } from '../../config/PandoraConstants'
 import { StatusBarUtils } from '../../utils/StatusBarUtils'
+import { BaseContainerAttribute } from '../container/BaseContainerAttribute'
 
 /**
  * Ability基类
@@ -19,9 +20,13 @@ export abstract class BaseAbility extends UIAbility {
         return
       }
       StatusBarUtils.saveLastWindow(this.context)
-      AppStorage.setOrCreate(PandoraConstants.Prop.BASE_VIEW_CONFIG, "")
+      AppStorage.setOrCreate(PandoraConstants.Storage.BASE_VIEW_CONFIG, this.configBaseContainerAttribute())
       this.endCreate()
     })
+  }
+
+  protected configBaseContainerAttribute(): BaseContainerAttribute | undefined {
+    return undefined
   }
 
   /** 开始创建 */

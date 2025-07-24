@@ -8,18 +8,18 @@ import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAtt
  * Created by zhouL on 2025/7/24.
  */
 export class BaseContainerAttribute {
-
+  /** 标题栏属性 */
   public titleBarAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  /** 加载页属性 */
   public loadingAttribute: LoadingViewAttribute = new LoadingViewAttribute()
+  /** 无数据页属性 */
   public noDataAttribute: NoDataViewAttribute = new NoDataViewAttribute()
+  /** 错误页属性 */
   public errorAttribute: ErrorViewAttribute = new ErrorViewAttribute()
-
   /** 点击错误页面重试监听器 */
   public onReloadClick?: (event: ClickEvent) => void
-
   // 是否显示标题栏
   public isShowTitleBar: boolean = true
-
   // 是否显示加载页
   public isShowLoading: boolean = true
   // 是否显示无数据页

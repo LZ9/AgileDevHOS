@@ -2,6 +2,7 @@ import { ErrorView } from "../../components/state/ErrorView"
 import { LoadingView } from "../../components/state/LoadingView"
 import { NoDataView } from "../../components/state/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
+import { PandoraConstants } from "../../config/PandoraConstants"
 import { BaseContainerAttribute } from "./BaseContainerAttribute"
 
 /**
@@ -10,11 +11,18 @@ import { BaseContainerAttribute } from "./BaseContainerAttribute"
  */
 @Component
 export struct BaseContainer {
-  // 属性
-  @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
-  // 内容布局
+  /** 属性 */
+  @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
+
+  aboutToAppear(): void {
+   const scope = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)
+    if (scope !== undefined) {
+      this.attribute = scope
+    }
+  }
 
   build() {
     Column() {

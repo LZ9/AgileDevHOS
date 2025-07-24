@@ -5,7 +5,7 @@
 export namespace PandoraConstants {
 
   /** 缓存标签 */
-  export namespace Prop {
+  export namespace Storage {
     /** 窗口 */
     export const WINDOW_CLASS = 'window_class'
     /** 基类页面配置 */
