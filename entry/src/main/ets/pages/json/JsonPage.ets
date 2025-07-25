@@ -11,7 +11,7 @@ struct JsonPage {
 
   aboutToAppear(): void {
     const scope = this.attribute.getScopeConfig()
-    if (scope !== undefined){
+    if (scope !== undefined) {
       this.attribute = scope
     }
     this.attribute.titleBarAttribute.backImgOptions.onClick = () => {
@@ -20,17 +20,9 @@ struct JsonPage {
     this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.json_title')
   }
 
-  onDidBuild(): void {
-    this.attribute.showStatusCompleted()
-  }
-
   build() {
     Stack() {
-      BaseContainer({
-        attribute: this.attribute,
-        contentLayout: this.contentLayout
-      })
-
+      BaseContainer({ attribute: this.attribute, contentLayout: this.contentLayout })
     }
   }
 

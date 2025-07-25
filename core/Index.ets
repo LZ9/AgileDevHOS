@@ -24,3 +24,6 @@ export { DateUtils } from './src/main/ets/utils/DateUtils';
 
 // 设备工具类
 export { DeviceUtils } from './src/main/ets/utils/DeviceUtils';
+
+// Json解析工具类
+export { JsonUtils } from './src/main/ets/utils/JsonUtils';

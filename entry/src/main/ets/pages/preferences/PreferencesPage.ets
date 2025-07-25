@@ -1,7 +1,6 @@
 import {
   CoreConstants,
   DateUtils,
-  DeviceUtils,
   PreferencesUtils,
   PromptUtils,
   ResourceUtils,
@@ -12,6 +11,7 @@ import {
 } from 'pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
+import { LogListView } from '../../view/LogListView';
 
 /**
  * Preferences测试类
@@ -22,11 +22,9 @@ import { preferences } from '@kit.ArkData';
 @Preview({ deviceType: "phone" })
 struct PreferencesPage {
   /** 日志列表 */
-  @State private logList: Array<string> = []
+  @State public logList: Array<string> = []
   /** 缓存内容 */
   private text: string = ""
-  /** 列表滚动栏 */
-  private listScroller: ListScroller = new ListScroller();
   /** 标题栏属性 */
   @State attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
 
@@ -37,7 +35,7 @@ struct PreferencesPage {
   /** 配置标题栏熟悉 */
   private configTitleBarViewAttribute(): TitleBarViewAttribute {
     const attribute = new TitleBarViewAttribute()
-    attribute.backImgOptions.onClick = (event: ClickEvent) => {
+    attribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
     attribute.titleOptions.title = $r('app.string.preferences_title')
@@ -49,19 +47,8 @@ struct PreferencesPage {
     Column() {
       TitleBarView({ attribute: this.attribute })
 
-      List({ scroller: this.listScroller }) {
-        ForEach(this.logList, (item: string) => {
-          ListItem() {
-            Text(item)
-              .fontSize(14)
-              .padding(5)
-          }
-        })
-      }
-      .width('100%')
-      .height('100%')
-      .layoutWeight(1)
-      .alignListItem(ListItemAlign.Start)
+      LogListView({ logList: this.logList })
+        .layoutWeight(1)
 
       Line()
         .width('100%')
@@ -374,12 +361,11 @@ struct PreferencesPage {
       this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
     }
 
-  /**
-   * 打印日志
-   * @param text 日志
-   */
-  private addLog(text: string) {
+    /**
+     * 打印日志
+     * @param text 日志
+     */
+  public addLog(text: string) {
     this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
-    this.listScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
   }
 }

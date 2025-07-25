@@ -34,11 +34,6 @@ export struct MainPage {
     return attribute
   }
 
-
-  onDidBuild(): void {
-    // RouterUtils.pushUrl(this.getUIContext(), this.list[0].getPagePath(this.getUIContext()))
-  }
-
   @Builder
   expandLayout() {
     Text($r('app.string.main_change_mood'))

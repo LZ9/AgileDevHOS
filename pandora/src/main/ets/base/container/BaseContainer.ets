@@ -2,7 +2,6 @@ import { ErrorView } from "../../components/state/ErrorView"
 import { LoadingView } from "../../components/state/LoadingView"
 import { NoDataView } from "../../components/state/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
-import { PandoraConstants } from "../../config/PandoraConstants"
 import { BaseContainerAttribute } from "./BaseContainerAttribute"
 
 /**
