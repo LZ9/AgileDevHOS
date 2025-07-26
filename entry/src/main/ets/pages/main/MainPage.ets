@@ -1,4 +1,10 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, TitleBarViewAttribute, TitleBarView } from 'pandora'
+import {
+  PromptUtils,
+  RouterUtils,
+  StatusBarUtils,
+  BaseContainer,
+  BaseContainerAttribute
+} from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -8,16 +14,21 @@ import { MainBean } from '../../bean/main/MainBean'
 @Entry
 @Component
 @Preview({ deviceType: "phone" })
-export struct MainPage {
+struct MainPage {
   /** 列表数据 */
   private list: Array<MainBean> = []
-  /** 标题栏属性 */
-  @State attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
-    this.attribute = this.configTitleBarViewAttribute()
+
+    const scope = this.attribute.getScopeConfig()
+    if (scope !== undefined) {
+      this.attribute = scope
+    }
+    this.attribute.titleBarAttribute.backImgOptions.visibility = Visibility.Hidden
+    this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.main_title')
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
@@ -25,13 +36,20 @@ export struct MainPage {
     ]
   }
 
-  /** 配置标题栏熟悉 */
-  private configTitleBarViewAttribute(): TitleBarViewAttribute {
-    const attribute = new TitleBarViewAttribute()
-    attribute.backImgOptions.visibility = Visibility.Hidden
-    attribute.titleOptions.title = $r('app.string.main_title')
-    attribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
-    return attribute
+  onDidBuild(): void {
+    this.attribute.showStatusCompleted()
+  }
+
+  build() {
+    Stack() {
+      BaseContainer({
+        attribute: this.attribute,
+        contentLayout: () => {
+          this.contentLayout(this.list)
+        },
+        titleBarExpandLayout: this.expandLayout
+      })
+    }
   }
 
   @Builder
@@ -47,30 +65,27 @@ export struct MainPage {
       })
   }
 
-  build() {
-    Column() {
-      TitleBarView({ attribute: this.attribute, expandLayout: this.expandLayout })
-
-      // 列表
-      List() {
-        ForEach(this.list, (item: MainBean) => {
-          ListItem() {
-            Text(item.getTitleName())
-              .width('100%')
-              .fontSize(20)
-              .textAlign(TextAlign.Start)
-              .padding(10)
-              .onClick(() => {
-                RouterUtils.pushUrl(this.getUIContext(), item.getPagePath(this.getUIContext()))
-              })
-          }
-        })
-      }
-      .height('100%')
-      .width('100%')
-      .backgroundColor('#FFF1F3F5')
-      .alignListItem(ListItemAlign.Center)
+  @Builder
+  contentLayout(list: Array<MainBean>) {
+    // 列表
+    List() {
+      ForEach(list, (item: MainBean) => {
+        ListItem() {
+          Text(item.getTitleName())
+            .width('100%')
+            .fontSize(20)
+            .textAlign(TextAlign.Start)
+            .padding(10)
+            .onClick(() => {
+              RouterUtils.pushUrl(this.getUIContext(), item.getPagePath(this.getUIContext()))
+            })
+        }
+      })
     }
+    .height('100%')
+    .width('100%')
+    .backgroundColor('#FFF1F3F5')
+    .alignListItem(ListItemAlign.Center)
   }
 }
 
