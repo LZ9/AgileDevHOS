@@ -45,7 +45,7 @@ struct MainPage {
       BaseContainer({
         attribute: this.attribute,
         contentLayout: () => {
-          this.contentLayout(this.list)
+          this.contentLayout()
         },
         titleBarExpandLayout: this.expandLayout
       })
@@ -66,10 +66,10 @@ struct MainPage {
   }
 
   @Builder
-  contentLayout(list: Array<MainBean>) {
+  contentLayout() {
     // 列表
     List() {
-      ForEach(list, (item: MainBean) => {
+      ForEach(this.list, (item: MainBean) => {
         ListItem() {
           Text(item.getTitleName())
             .width('100%')

@@ -1,4 +1,6 @@
 import {
+  BaseContainer,
+  BaseContainerAttribute,
   CoreConstants,
   DateUtils,
   PreferencesUtils,
@@ -6,8 +8,6 @@ import {
   ResourceUtils,
   RouterUtils,
   StringUtils,
-  TitleBarView,
-  TitleBarViewAttribute
 } from 'pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
@@ -25,28 +25,38 @@ struct PreferencesPage {
   @State public logList: Array<string> = []
   /** 缓存内容 */
   private text: string = ""
-  /** 标题栏属性 */
-  @State attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  /** 基类属性 */
+  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
-    this.attribute = this.configTitleBarViewAttribute()
-  }
-
-  /** 配置标题栏熟悉 */
-  private configTitleBarViewAttribute(): TitleBarViewAttribute {
-    const attribute = new TitleBarViewAttribute()
-    attribute.backImgOptions.onClick = () => {
+    const scope = this.attribute.getScopeConfig()
+    if (scope !== undefined) {
+      this.attribute = scope
+    }
+    this.attribute.titleBarAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    attribute.titleOptions.title = $r('app.string.preferences_title')
-    attribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
-    return attribute
+    this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.preferences_title')
+  }
+
+  onDidBuild(): void {
+    this.attribute.showStatusCompleted()
   }
 
   build() {
-    Column() {
-      TitleBarView({ attribute: this.attribute })
+    Stack() {
+      BaseContainer({
+        attribute: this.attribute,
+        contentLayout: () => {
+          this.contentLayout()
+        }
+      })
+    }
+  }
 
+  @Builder
+  contentLayout() {
+    Column() {
       LogListView({ logList: this.logList })
         .layoutWeight(1)
 
@@ -349,6 +359,7 @@ struct PreferencesPage {
     .width('100%')
     .height('100%')
   }
+
 
   /** 数据变动key值回调 */
   private mCallback: Callback<string> = (key: string) => {
