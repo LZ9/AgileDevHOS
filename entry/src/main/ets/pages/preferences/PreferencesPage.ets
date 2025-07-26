@@ -360,7 +360,6 @@ struct PreferencesPage {
     .height('100%')
   }
 
-
   /** 数据变动key值回调 */
   private mCallback: Callback<string> = (key: string) => {
     this.addLog(key + " 数据变动")
@@ -372,11 +371,11 @@ struct PreferencesPage {
       this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
     }
 
-    /**
-     * 打印日志
-     * @param text 日志
-     */
+  /**
+   * 打印日志
+   * @param text 日志
+   */
   public addLog(text: string) {
-    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
+    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " ---> " + text)
   }
 }

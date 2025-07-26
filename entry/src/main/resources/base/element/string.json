@@ -105,6 +105,54 @@
       "value": "Json转换测试"
     },
     {
+      "name": "json_json_to_bean",
+      "value": "json转bean"
+    },
+    {
+      "name": "json_to_bean",
+      "value": "转bean对象"
+    },
+    {
+      "name": "json_to_bean_transformer",
+      "value": "转bean时数据转换"
+    },
+    {
+      "name": "json_bean_to_json",
+      "value": "bean转json"
+    },
+    {
+      "name": "json_to_json",
+      "value": "转json字符串"
+    },
+    {
+      "name": "json_to_json_filter",
+      "value": "转json并过滤"
+    },
+    {
+      "name": "json_to_json_transformer",
+      "value": "转json时数据转换"
+    },
+    {
+      "name": "json_to_json_form",
+      "value": "转json时格式化"
+    },
+    {
+      "name": "json_other",
+      "value": "其他"
+    },
+    {
+      "name": "json_has",
+      "value": "包含某字段"
+    },
+    {
+      "name": "json_remove",
+      "value": "删除某字段"
+    },
+    {
+      "name": "json_clean",
+      "value": "清空日志"
+    },
+    {
       "name": "splash_page_path",
       "value": "pages/splash/SplashPage",
       "description": "启动页路径"

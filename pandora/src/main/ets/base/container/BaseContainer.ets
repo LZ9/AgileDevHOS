@@ -24,18 +24,18 @@ export struct BaseContainer {
 
       LoadingView({ attribute: this.attribute.loadingAttribute })
         .width(`100%`)
-        .height(`100%`)
+        .layoutWeight(1)
         .visibility(this.attribute.isShowLoading ? Visibility.Visible : Visibility.None)
 
 
       NoDataView({ attribute: this.attribute.noDataAttribute })
         .width(`100%`)
-        .height(`100%`)
+        .layoutWeight(1)
         .visibility(this.attribute.isShowNoData ? Visibility.Visible : Visibility.None)
 
       ErrorView({ attribute: this.attribute.errorAttribute })
         .width(`100%`)
-        .height(`100%`)
+        .layoutWeight(1)
         .visibility(this.attribute.isShowError ? Visibility.Visible : Visibility.None)
         .onClick((event) => {
           if (this.attribute.onReloadClick) {
@@ -49,7 +49,7 @@ export struct BaseContainer {
         }
       }
       .width(`100%`)
-      .height(`100%`)
+      .layoutWeight(1)
       .visibility(this.attribute.isShowContent ? Visibility.Visible : Visibility.None)
     }
     .width(`100%`)

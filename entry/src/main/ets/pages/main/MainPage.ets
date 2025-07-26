@@ -1,10 +1,4 @@
-import {
-  PromptUtils,
-  RouterUtils,
-  StatusBarUtils,
-  BaseContainer,
-  BaseContainerAttribute
-} from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute } from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -47,7 +41,9 @@ struct MainPage {
         contentLayout: () => {
           this.contentLayout()
         },
-        titleBarExpandLayout: this.expandLayout
+        titleBarExpandLayout: () => {
+          this.expandLayout()
+        }
       })
     }
   }
