@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute } from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute, JsonUtils } from 'pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -11,18 +11,15 @@ import { MainBean } from '../../bean/main/MainBean'
 struct MainPage {
   /** 列表数据 */
   private list: Array<MainBean> = []
-  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State private attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
 
-    const scope = this.attribute.getScopeConfig()
-    if (scope !== undefined) {
-      this.attribute = scope
-    }
-    this.attribute.titleBarAttribute.backImgOptions.visibility = Visibility.Hidden
-    this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.main_title')
+    this.attribute.getScopeConfig()
+    this.attribute.titleBarViewAttribute.backImgOptions.visibility = Visibility.Hidden
+    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.main_title')
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),

@@ -14,10 +14,7 @@ export class JsonUtils {
    */
   public static jsonToBean<T>(json: string, reviver?: JSON.Transformer, options?: JSON.ParseOptions): T | null {
     const bean = JSON.parse(json, reviver, options)
-    if (bean !== null) {
-      return bean as T
-    }
-    return null
+    return bean !== null ? bean as T : null
   }
 
   /**

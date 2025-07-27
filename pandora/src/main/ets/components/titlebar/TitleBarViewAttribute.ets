@@ -1,3 +1,4 @@
+import { JsonUtils } from "core"
 import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
@@ -24,8 +25,14 @@ export class TitleBarViewAttribute {
   }
 
   /** 获取全局属性配置 */
-  public getScopeConfig(): TitleBarViewAttribute | undefined {
-    return AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)?.titleBarAttribute
+  public getScopeConfig() {
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
+    const attribute = JsonUtils.jsonToBean<BaseContainerAttribute>(json) ?? undefined
+    if (attribute !== undefined) {
+      this.backImgOptions = attribute.titleBarViewAttribute.backImgOptions
+      this.titleOptions = attribute.titleBarViewAttribute.titleOptions
+      this.dividingOptions = attribute.titleBarViewAttribute.dividingOptions
+    }
   }
 }
 

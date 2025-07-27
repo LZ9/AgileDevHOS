@@ -1,3 +1,4 @@
+import { JsonUtils } from "core"
 import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
@@ -17,8 +18,13 @@ export class LoadingViewAttribute {
   }
 
   /** 获取全局属性配置 */
-  public getScopeConfig(): LoadingViewAttribute | undefined {
-    return AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG)?.loadingAttribute
+  public getScopeConfig() {
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
+    const attribute = JsonUtils.jsonToBean<BaseContainerAttribute>(json) ?? undefined
+    if (attribute !== undefined) {
+      this.progressOptions = attribute.loadingViewAttribute.progressOptions
+      this.textOptions = attribute.loadingViewAttribute.textOptions
+    }
   }
 }
 

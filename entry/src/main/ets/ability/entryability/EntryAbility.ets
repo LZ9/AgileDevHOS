@@ -13,7 +13,7 @@ export default class EntryAbility extends BaseAbility {
 
   protected configBaseContainerAttribute(): BaseContainerAttribute | undefined {
     const attribute: BaseContainerAttribute = new BaseContainerAttribute()
-    attribute.titleBarAttribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    attribute.titleBarViewAttribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
     return attribute
   }
 }

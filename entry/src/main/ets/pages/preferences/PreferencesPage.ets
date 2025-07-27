@@ -29,14 +29,11 @@ struct PreferencesPage {
   @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
-    const scope = this.attribute.getScopeConfig()
-    if (scope !== undefined) {
-      this.attribute = scope
-    }
-    this.attribute.titleBarAttribute.backImgOptions.onClick = () => {
+    this.attribute.getScopeConfig()
+    this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.attribute.titleBarAttribute.titleOptions.title = $r('app.string.preferences_title')
+    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.preferences_title')
   }
 
   onDidBuild(): void {

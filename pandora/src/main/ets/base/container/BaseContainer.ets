@@ -19,21 +19,21 @@ export struct BaseContainer {
 
   build() {
     Column() {
-      TitleBarView({ attribute: this.attribute.titleBarAttribute, expandLayout: this.titleBarExpandLayout })
+      TitleBarView({ attribute: this.attribute.titleBarViewAttribute, expandLayout: this.titleBarExpandLayout })
         .visibility(this.attribute.isShowTitleBar ? Visibility.Visible : Visibility.None)
 
-      LoadingView({ attribute: this.attribute.loadingAttribute })
+      LoadingView({ attribute: this.attribute.loadingViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.attribute.isShowLoading ? Visibility.Visible : Visibility.None)
 
 
-      NoDataView({ attribute: this.attribute.noDataAttribute })
+      NoDataView({ attribute: this.attribute.noDataViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.attribute.isShowNoData ? Visibility.Visible : Visibility.None)
 
-      ErrorView({ attribute: this.attribute.errorAttribute })
+      ErrorView({ attribute: this.attribute.errorViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.attribute.isShowError ? Visibility.Visible : Visibility.None)
