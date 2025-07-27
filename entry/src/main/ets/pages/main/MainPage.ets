@@ -23,7 +23,8 @@ struct MainPage {
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
-      new MainBean("Preferences测试类", $r('app.string.preferences_page_path'))
+      new MainBean("Preferences测试类", $r('app.string.preferences_page_path')),
+      new MainBean("Mvvm测试类", $r('app.string.mvvm_page_path'))
     ]
   }
 

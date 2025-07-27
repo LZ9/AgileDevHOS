@@ -171,6 +171,11 @@
       "name": "preferences_page_path",
       "value": "pages/preferences/PreferencesPage",
       "description": "Preferences测试类"
+    },
+    {
+      "name": "mvvm_page_path",
+      "value": "pages/mvvm/MvvmPage",
+      "description": "Mvvm测试类"
     }
   ]
 }
