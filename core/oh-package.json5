@@ -1,9 +1,12 @@
 {
   "name": "core",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
+  "version": "1.0.1",
+  "description": "鸿蒙开发核心工具包",
   "main": "Index.ets",
-  "author": "",
+  "author": "zhouL",
   "license": "Apache-2.0",
+  "compatibleSdkVersion": "12",
+  "compatibleSdkType": "HarmonyOS",
+  "obfuscated": false,
   "dependencies": {}
 }

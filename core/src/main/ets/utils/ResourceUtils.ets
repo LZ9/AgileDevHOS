@@ -6,7 +6,7 @@ import { StringUtils } from "./StringUtils"
  */
 export class ResourceUtils {
   /**
-   * 获取字符串
+   * 获取string资源的字符串
    * @param context 上下文
    * @param res 资源对象
    */

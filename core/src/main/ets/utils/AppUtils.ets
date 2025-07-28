@@ -6,19 +6,11 @@ import { bundleManager } from "@kit.AbilityKit"
  */
 export class AppUtils {
   /**
-   * 获取page里的上下文
+   * 获取UIContext里的上下文
    * @param com page对象
    */
   public static getContext(com: UIContext): Context | undefined {
     return com.getHostContext()
-  }
-
-  /**
-   * 是否定义
-   * @param obj 对象
-   */
-  public static isDefined(obj: object | undefined | null): boolean {
-    return obj !== undefined && obj !== null
   }
 
   /** 获取当前应用信息 */
