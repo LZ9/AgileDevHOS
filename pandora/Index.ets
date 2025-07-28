@@ -1,4 +1,4 @@
-export * from 'core';
+export * from '@lodz/core_hos';
 
 export { PandoraConstants } from './src/main/ets/config/PandoraConstants';
 

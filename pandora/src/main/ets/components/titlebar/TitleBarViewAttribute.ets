@@ -1,4 +1,4 @@
-import { JsonUtils } from "core"
+import { JsonUtils } from "@lodz/core_hos"
 import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
 import { PandoraConstants } from "../../config/PandoraConstants"
 

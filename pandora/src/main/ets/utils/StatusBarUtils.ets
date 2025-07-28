@@ -1,6 +1,6 @@
 import { PandoraConstants } from "../config/PandoraConstants"
 import { window } from "@kit.ArkUI"
-import { ResourceUtils } from "core"
+import { ResourceUtils } from "@lodz/core_hos"
 
 /**
  * 状态栏工具类

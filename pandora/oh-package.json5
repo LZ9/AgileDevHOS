@@ -9,6 +9,6 @@
   "compatibleSdkType": "HarmonyOS",
   "obfuscated": false,
   "dependencies": {
-    "core": "file:../core"
+    "@lodz/core_hos": "file:../core"
   }
 }

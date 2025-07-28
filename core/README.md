@@ -1,15 +1,15 @@
-# core库
+# core_hos库
 鸿蒙开发核心工具包依赖库，包含常用的开发工具类
 
-# 项目地址
+## 项目地址
 Github：[源码](https://github.com/LZ9/AgileDevHOS)
 
-# 下载安装
+## 下载安装
 ```
-ohpm install @lodz/core
+ohpm install @lodz/core_hos
 ```
 
-# 工具清单
+## 工具清单
 |        工具        | 描述                                      |
 |:----------------:|:----------------------------------------|
 |     PrintLog     | 主要对hilog进行了封装，简化了hilog的调用方式，支持日志开关，分段打印 |

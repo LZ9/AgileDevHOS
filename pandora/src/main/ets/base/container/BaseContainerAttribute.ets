@@ -1,4 +1,4 @@
-import { JsonUtils } from "core"
+import { JsonUtils } from "@lodz/core_hos"
 import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
 import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
 import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"

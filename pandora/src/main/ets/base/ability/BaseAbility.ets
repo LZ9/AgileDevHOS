@@ -1,6 +1,6 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit'
 import { window } from '@kit.ArkUI'
-import { JsonUtils } from 'core'
+import { JsonUtils } from '@lodz/core_hos'
 import { PandoraConstants } from '../../config/PandoraConstants'
 import { StatusBarUtils } from '../../utils/StatusBarUtils'
 import { BaseContainerAttribute } from '../container/BaseContainerAttribute'
