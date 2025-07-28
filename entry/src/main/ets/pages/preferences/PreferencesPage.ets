@@ -8,7 +8,7 @@ import {
   ResourceUtils,
   RouterUtils,
   StringUtils,
-} from 'pandora'
+} from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';

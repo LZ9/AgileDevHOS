@@ -1,4 +1,4 @@
-import { BaseAbility, BaseContainerAttribute, PreferencesUtils, ResourceUtils } from 'pandora'
+import { BaseAbility, BaseContainerAttribute, PreferencesUtils, ResourceUtils } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 
 export default class EntryAbility extends BaseAbility {

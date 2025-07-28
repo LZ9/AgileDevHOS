@@ -1,4 +1,4 @@
-import { CoreConstants, DateUtils, DeviceUtils } from "pandora";
+import { CoreConstants, DateUtils, DeviceUtils } from "@lodz/pandora";
 
 /**
  * 日志列表控件

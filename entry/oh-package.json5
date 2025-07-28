@@ -6,7 +6,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "pandora": "file:../pandora"
+    "@lodz/pandora": "file:../pandora"
   }
 }
 

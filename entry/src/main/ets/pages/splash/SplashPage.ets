@@ -1,4 +1,4 @@
-import { RouterUtils } from 'pandora'
+import { RouterUtils } from '@lodz/pandora'
 
 /**
  * 启动页

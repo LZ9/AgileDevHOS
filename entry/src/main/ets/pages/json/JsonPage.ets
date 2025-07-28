@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerAttribute, CoreConstants, DateUtils, JsonUtils, RouterUtils } from 'pandora'
+import { BaseContainer, BaseContainerAttribute, CoreConstants, DateUtils, JsonUtils, RouterUtils } from '@lodz/pandora'
 import { StudentBean } from '../../bean/json/StudentBean'
 import { LogListView } from '../../view/LogListView'
 import { ResponseBean } from '../../bean/base/ResponseBean'

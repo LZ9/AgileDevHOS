@@ -1,10 +1,6 @@
 {
   "string": [
     {
-      "name": "page_show",
-      "value": "page from package"
-    },
-    {
       "name": "pandora_loading",
       "value": "加载中…"
     },

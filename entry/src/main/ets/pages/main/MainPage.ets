@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute, JsonUtils } from 'pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**

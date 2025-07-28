@@ -1,4 +1,4 @@
-import { ResourceUtils } from "pandora"
+import { ResourceUtils } from "@lodz/pandora"
 
 /**
  * 主页数据
