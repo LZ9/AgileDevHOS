@@ -1,24 +1,38 @@
-import { PageBean } from "./PageBean";
+import { ResponseStatus } from "@lodz/pandora"
+import { PageBean } from "./PageBean"
 
 /**
  * 数据包裹层
  * Created by zhouL on 2025/7/16.
  */
-export class ResponseBean<T> {
+export class ResponseBean<T> implements ResponseStatus{
+
   /** 失败 */
   public static readonly Fail = 500
   /** 成功 */
   public static readonly SUCCESS = 200
   /** 返回提示信息 */
-  public msg: string = "数据接口异常，请稍后再试";
+  public msg: string = "数据接口异常，请稍后再试"
   /** 本次接口请求返回的状态 */
-  public code: number = ResponseBean.Fail;
+  public code: number = ResponseBean.Fail
   /** 数据对象 */
-  public data?: T | null | undefined;
+  public data?: T | null | undefined
   /** 分页数据对象 */
   public page?: PageBean | null | undefined
 
-  public static createSuccess<T>(msg: string = "成功", data?: T | null | undefined): ResponseBean<T> {
+  isSuccess(): boolean {
+    return this.code === ResponseBean.SUCCESS
+  }
+
+  valueMsg(): String {
+    return this.msg
+  }
+
+  valueStatus(): String {
+    return this.code.toString()
+  }
+  
+  public static createSuccess<T>(data?: T, msg: string = "成功"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
     responseBean.code = ResponseBean.SUCCESS
     responseBean.msg = msg
@@ -28,7 +42,7 @@ export class ResponseBean<T> {
 
   public static createFail<T>(msg: string = "失败"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
-    responseBean.code = ResponseBean.SUCCESS
+    responseBean.code = ResponseBean.Fail
     responseBean.msg = msg
     return responseBean
   }

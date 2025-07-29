@@ -64,11 +64,11 @@ export class ResourceUtils {
    * @param context 上下文
    * @param path 路径
    */
-  public static getRawFileContentStrSync(context: Context | undefined | null, path: string): string {
+  public static getRawFileContentStrSync(context: Context | undefined | null, path: string): string | null {
     if (context !== undefined && context !== null) {
       return StringUtils.unit8ArrayToStr(ResourceUtils.getRawFileContentSync(context, path))
     }
-    return "null"
+    return null
   }
 }
 

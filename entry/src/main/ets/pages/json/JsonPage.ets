@@ -217,7 +217,7 @@ struct JsonPage {
     list.push(new StudentBean(1001, "Jack", 25, "Shanghai"))
     list.push(new StudentBean(1002, "Rose", 28, "Nanjing"))
     list.push(new StudentBean(1003, "Tom", 27, "Chengdu"))
-    return ResponseBean.createSuccess<Array<StudentBean>>(`查询成功`, list)
+    return ResponseBean.createSuccess<Array<StudentBean>>(list, `查询成功`)
   }
 
   /**
