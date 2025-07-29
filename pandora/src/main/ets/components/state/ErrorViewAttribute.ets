@@ -8,9 +8,9 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  */
 export class ErrorViewAttribute {
   /** 图片参数 */
-  public imgOptions: ImgOptions = {}
+  @Track public imgOptions: ImgOptions = {}
   /** 文字参数 */
-  public textOptions: TextOptions = {}
+  @Track public textOptions: TextOptions = {}
 
   /** 隐藏提示语 */
   public goneTips() {

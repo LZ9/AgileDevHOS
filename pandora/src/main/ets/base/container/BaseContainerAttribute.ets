@@ -11,25 +11,25 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  */
 export class BaseContainerAttribute {
   /** 标题栏属性 */
-  public titleBarViewAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  @Track public titleBarViewAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
   /** 加载页属性 */
-  public loadingViewAttribute: LoadingViewAttribute = new LoadingViewAttribute()
+  @Track public loadingViewAttribute: LoadingViewAttribute = new LoadingViewAttribute()
   /** 无数据页属性 */
-  public noDataViewAttribute: NoDataViewAttribute = new NoDataViewAttribute()
+  @Track public noDataViewAttribute: NoDataViewAttribute = new NoDataViewAttribute()
   /** 错误页属性 */
-  public errorViewAttribute: ErrorViewAttribute = new ErrorViewAttribute()
+  @Track public errorViewAttribute: ErrorViewAttribute = new ErrorViewAttribute()
   /** 点击错误页面重试监听器 */
-  public onReloadClick?: (event: ClickEvent) => void
+  @Track public onReloadClick?: (event: ClickEvent) => void
   // 是否显示标题栏
-  public isShowTitleBar: boolean = true
+  @Track public isShowTitleBar: boolean = true
   // 是否显示加载页
-  public isShowLoading: boolean = true
+  @Track public isShowLoading: boolean = true
   // 是否显示无数据页
-  public isShowNoData: boolean = false
+  @Track public isShowNoData: boolean = false
   // 是否显示错误页
-  public isShowError: boolean = false
+  @Track public isShowError: boolean = false
   // 是否显示内容页
-  public isShowContent: boolean = false
+  @Track public isShowContent: boolean = false
 
   /** 显示加载页面 */
   public showStatusLoading() {

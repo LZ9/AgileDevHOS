@@ -8,9 +8,9 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  */
 export class LoadingViewAttribute {
   /** 进度条参数 */
-  public progressOptions: ProgressOptions = {}
+  @Track public progressOptions: ProgressOptions = {}
   /** 文字参数 */
-  public textOptions: TextOptions = {}
+  @Track public textOptions: TextOptions = {}
 
   /** 隐藏提示语 */
   public goneTips() {

@@ -8,11 +8,11 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  */
 export class TitleBarViewAttribute {
   /** 返回按钮参数 */
-  public backImgOptions: BackImgOptions = {}
+  @Track public backImgOptions: BackImgOptions = {}
   /** 标题参数 */
-  public titleOptions: TitleOptions = {}
+  @Track public titleOptions: TitleOptions = {}
   /** 分割线参数 */
-  public dividingOptions: DividingOptions = {}
+  @Track public dividingOptions: DividingOptions = {}
 
   /** 隐藏返回按钮 */
   public goneBackImg() {
