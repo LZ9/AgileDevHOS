@@ -17,7 +17,7 @@ struct MainPage {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
 
-    this.attribute.getScopeConfig()
+    this.attribute.setScopeConfig()
     this.attribute.titleBarViewAttribute.backImgOptions.visibility = Visibility.Hidden
     this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.main_title')
 
@@ -78,7 +78,6 @@ struct MainPage {
     }
     .height('100%')
     .width('100%')
-    .backgroundColor('#FFF1F3F5')
     .alignListItem(ListItemAlign.Center)
   }
 }

@@ -24,8 +24,8 @@ export class TitleBarViewAttribute {
     this.dividingOptions.visibility = Visibility.Visible
   }
 
-  /** 获取全局属性配置 */
-  public getScopeConfig() {
+  /** 获取并设置全局属性配置 */
+  public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
     const attribute = JsonUtils.jsonToBean<BaseContainerAttribute>(json) ?? undefined
     if (attribute !== undefined) {

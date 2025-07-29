@@ -18,7 +18,7 @@ struct JsonPage {
   @State public logList: Array<string> = []
 
   aboutToAppear(): void {
-    this.attribute.getScopeConfig()
+    this.attribute.setScopeConfig()
     this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }

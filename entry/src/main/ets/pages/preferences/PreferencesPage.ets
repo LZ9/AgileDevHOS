@@ -29,7 +29,7 @@ struct PreferencesPage {
   @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
 
   aboutToAppear(): void {
-    this.attribute.getScopeConfig()
+    this.attribute.setScopeConfig()
     this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
