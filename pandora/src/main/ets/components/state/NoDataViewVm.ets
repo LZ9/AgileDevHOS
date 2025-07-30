@@ -6,7 +6,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  * 无数据控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class NoDataViewAttribute {
+export class NoDataViewVm {
   /** 图片参数 */
   @Track public imgOptions: ImgOptions = {}
   /** 文字参数 */
@@ -22,8 +22,8 @@ export class NoDataViewAttribute {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
     const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
-      this.imgOptions = attribute.noDataViewAttribute.imgOptions
-      this.textOptions = attribute.noDataViewAttribute.textOptions
+      this.imgOptions = attribute.noDataViewVm.imgOptions
+      this.textOptions = attribute.noDataViewVm.textOptions
     }
   }
 }

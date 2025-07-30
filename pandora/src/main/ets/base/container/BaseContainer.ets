@@ -28,7 +28,7 @@ export struct BaseContainer {
         .visibility(this.vm.isShowLoading ? Visibility.Visible : Visibility.None)
 
 
-      NoDataView({ attribute: this.vm.noDataViewAttribute })
+      NoDataView({ vm: this.vm.noDataViewVm })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.vm.isShowNoData ? Visibility.Visible : Visibility.None)

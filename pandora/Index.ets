@@ -21,7 +21,7 @@ export { LoadingViewVm } from './src/main/ets/components/state/LoadingViewVm';
 
 export { NoDataView } from './src/main/ets/components/state/NoDataView';
 
-export { NoDataViewAttribute } from './src/main/ets/components/state/NoDataViewAttribute';
+export { NoDataViewVm } from './src/main/ets/components/state/NoDataViewVm';
 
 export { ErrorView } from './src/main/ets/components/state/ErrorView';
 
