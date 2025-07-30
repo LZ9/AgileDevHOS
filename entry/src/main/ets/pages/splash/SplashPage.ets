@@ -5,7 +5,7 @@ import { RouterUtils } from '@lodz/pandora'
  * Created by zhouL on 2025/7/13.
  */
 @Entry
-@Component
+@ComponentV2
 @Preview({ deviceType: "phone" })
 struct SplashPage {
   build() {

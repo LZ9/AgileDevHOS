@@ -4,11 +4,10 @@ import { TitleBarViewVm } from "./TitleBarViewVm"
  * 标题栏控件
  * Created by zhouL on 2025/7/23.
  */
-@Component
+@ComponentV2
 export struct TitleBarView {
-
   /** 属性 */
-  @State public vm: TitleBarViewVm = new TitleBarViewVm()
+  @Event public vm: TitleBarViewVm = new TitleBarViewVm()
   /** 拓展区域布局 */
   @BuilderParam public expandLayout?: () => void
 
@@ -17,30 +16,30 @@ export struct TitleBarView {
       RelativeContainer() {
         Stack() {
           //返回按钮
-          Image(this.vm.backImgOptions.src !== undefined ? this.vm.backImgOptions.src : $r('app.media.pandora_ic_back'))
-            .width(this.vm.backImgOptions.width !== undefined ? this.vm.backImgOptions.width : 20)
-            .height(this.vm.backImgOptions.height !== undefined ? this.vm.backImgOptions.height : 20)
-            .objectFit(this.vm.backImgOptions.objectFit !== undefined ? this.vm.backImgOptions.objectFit : ImageFit.Auto)
+          Image(this.vm.backImgVm.src !== undefined ? this.vm.backImgVm.src : $r('app.media.pandora_ic_back'))
+            .width(this.vm.backImgVm.width !== undefined ? this.vm.backImgVm.width : 20)
+            .height(this.vm.backImgVm.height !== undefined ? this.vm.backImgVm.height : 20)
+            .objectFit(this.vm.backImgVm.objectFit !== undefined ? this.vm.backImgVm.objectFit : ImageFit.Auto)
         }
         .width(50)
         .height('100%')
-        .visibility(this.vm.backImgOptions.visibility !== undefined ? this.vm.backImgOptions.visibility : Visibility.Visible)
+        .visibility(this.vm.backImgVm.visibility !== undefined ? this.vm.backImgVm.visibility : Visibility.Visible)
         .alignRules({
           left: { anchor: "__container__", align: HorizontalAlign.Start },
           center: { anchor: "__container__", align: VerticalAlign.Center },
         })
         .id("back_btn")
         .onClick((event) => {
-          if (this.vm.backImgOptions.onClick) {
-            this.vm.backImgOptions.onClick(event)
+          if (this.vm.backImgVm.onClick) {
+            this.vm.backImgVm.onClick(event)
           }
         })
 
         //标题
-        Text(this.vm.titleOptions.title !== undefined ? this.vm.titleOptions.title : "标题")
-          .fontSize(this.vm.titleOptions.fontSize !== undefined ? this.vm.titleOptions.fontSize : 20)
-          .textAlign(this.vm.titleOptions.textAlign !== undefined ? this.vm.titleOptions.textAlign : TextAlign.Center)
-          .fontColor(this.vm.titleOptions.fontColor !== undefined ? this.vm.titleOptions.fontColor : Color.White)
+        Text(this.vm.titleVm.title !== undefined ? this.vm.titleVm.title : "标题")
+          .fontSize(this.vm.titleVm.fontSize !== undefined ? this.vm.titleVm.fontSize : 20)
+          .textAlign(this.vm.titleVm.textAlign !== undefined ? this.vm.titleVm.textAlign : TextAlign.Center)
+          .fontColor(this.vm.titleVm.fontColor !== undefined ? this.vm.titleVm.fontColor : Color.White)
           .maxLines(1)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
           .id("title")
@@ -66,14 +65,14 @@ export struct TitleBarView {
       }
       .width('100%')
       .height(56)
-      .backgroundColor(this.vm.titleOptions.backgroundColor !== undefined ? this.vm.titleOptions.backgroundColor : Color.Grey)
+      .backgroundColor(this.vm.titleVm.backgroundColor !== undefined ? this.vm.titleVm.backgroundColor : Color.Grey)
 
       // 分割线
       Line()
         .width('100%')
         .height(1)
-        .backgroundColor(this.vm.dividingOptions.color !== undefined ? this.vm.dividingOptions.color :Color.Black)
-        .visibility(this.vm.dividingOptions.visibility !== undefined ? this.vm.dividingOptions.visibility : Visibility.None)
+        .backgroundColor(this.vm.dividingVm.color !== undefined ? this.vm.dividingVm.color :Color.Black)
+        .visibility(this.vm.dividingVm.visibility !== undefined ? this.vm.dividingVm.visibility : Visibility.None)
     }
     .width('100%')
   }

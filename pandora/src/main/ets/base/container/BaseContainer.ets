@@ -1,17 +1,17 @@
-import { ErrorView } from "../../components/state/ErrorView"
-import { LoadingView } from "../../components/state/LoadingView"
-import { NoDataView } from "../../components/state/NoDataView"
+import { ErrorView } from "../../components/state/error/ErrorView"
+import { LoadingView } from "../../components/state/loading/LoadingView"
+import { NoDataView } from "../../components/state/nodata/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
 import { BaseContainerVm } from "./BaseContainerVm"
 
 /**
- * 页面基类
+ * 基类容器控件
  * Created by zhouL on 2025/7/14.
  */
-@Component
+@ComponentV2
 export struct BaseContainer {
   /** 属性 */
-  @State public vm: BaseContainerVm = new BaseContainerVm()
+  @Param public vm: BaseContainerVm = new BaseContainerVm()
   /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
   /** 内容布局 */

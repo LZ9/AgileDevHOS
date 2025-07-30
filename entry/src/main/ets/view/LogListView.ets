@@ -4,12 +4,17 @@ import { CoreConstants, DateUtils, DeviceUtils } from "@lodz/pandora";
  * 日志列表控件
  * Created by zhouL on 2025/7/25.
  */
-@Component
+@ComponentV2
 export struct LogListView {
   /** 日志列表 */
-  @Link
-  @Watch('onListChange')
-  public logList: Array<string>
+  @Event public logList: Array<string>
+
+  /** 列表数据变化 */
+  @Monitor('logList')
+  onListChange(monitor: IMonitor) {
+    this.listScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
+  }
+
   /** 列表滚动栏 */
   private listScroller: ListScroller = new ListScroller();
 
@@ -28,11 +33,6 @@ export struct LogListView {
       .height('100%')
       .alignListItem(ListItemAlign.Start)
     }
-  }
-
-  /** 列表数据变化 */
-  onListChange() {
-    this.listScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
   }
 
   /**

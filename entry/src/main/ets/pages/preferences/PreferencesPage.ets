@@ -18,22 +18,22 @@ import { LogListView } from '../../view/LogListView';
  * Created by zhouL on 2025/7/20.
  */
 @Entry
-@Component
+@ComponentV2
 @Preview({ deviceType: "phone" })
 struct PreferencesPage {
   /** 日志列表 */
-  @State public logList: Array<string> = []
+  @Local public logList: Array<string> = []
   /** 缓存内容 */
   private text: string = ""
   /** 基类属性 */
-  @State vm: BaseContainerVm = new BaseContainerVm()
+  @Local vm: BaseContainerVm = new BaseContainerVm()
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.backImgOptions.onClick = () => {
+    this.vm.titleBarViewVm.backImgVm.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.preferences_title')
+    this.vm.titleBarViewVm.titleVm.title = $r('app.string.preferences_title')
   }
 
   onDidBuild(): void {

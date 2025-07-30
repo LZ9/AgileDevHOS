@@ -6,20 +6,20 @@ import { MainBean } from '../../bean/main/MainBean'
  * Created by zhouL on 2025/7/14.
  */
 @Entry
-@Component
+@ComponentV2
 @Preview({ deviceType: "phone" })
 struct MainPage {
   /** 列表数据 */
   private list: Array<MainBean> = []
-  @State private vm: BaseContainerVm = new BaseContainerVm()
+  @Local private vm: BaseContainerVm = new BaseContainerVm()
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
 
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.backImgOptions.visibility = Visibility.Hidden
-    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.main_title')
+    this.vm.titleBarViewVm.backImgVm.visibility = Visibility.Hidden
+    this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),

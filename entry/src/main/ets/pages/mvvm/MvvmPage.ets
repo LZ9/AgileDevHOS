@@ -9,19 +9,19 @@ import { TodoItemView } from '../../view/mvvm/TodoItemView'
  * Created by zhouL on 2025/7/23.
  */
 @Entry
-@Component
+@ComponentV2
 struct MvvmPage {
   /** 基类属性 */
-  @State public vm: BaseContainerVm = new BaseContainerVm()
+  @Local public vm: BaseContainerVm = new BaseContainerVm()
   /** 代办列表 */
-  @State public todoList: Array<TodoBean> = []
+  @Local public todoList: Array<TodoBean> = []
 
-  @State public isAllFinish: boolean = false
+  @Local public isAllFinish: boolean = false
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.mvvm_title')
-    this.vm.titleBarViewVm.backImgOptions.onClick = () => {
+    this.vm.titleBarViewVm.titleVm.title = $r('app.string.mvvm_title')
+    this.vm.titleBarViewVm.backImgVm.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
     this.vm.onReloadClick = () => {

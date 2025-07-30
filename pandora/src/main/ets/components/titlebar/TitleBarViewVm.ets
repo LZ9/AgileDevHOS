@@ -1,75 +1,87 @@
-import { JsonUtils } from "@lodz/core_hos"
-import { BaseContainerVm } from "../../base/container/BaseContainerVm"
+import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
 /**
- * 标题栏控件属性
+ * 标题栏控件VM
  * Created by zhouL on 2025/7/24.
  */
+@ObservedV2
 export class TitleBarViewVm {
   /** 返回按钮参数 */
-  @Track public backImgOptions: BackImgOptions = {}
+  @Trace public backImgVm: BackImgVm = {}
   /** 标题参数 */
-  @Track public titleOptions: TitleOptions = {}
+  @Trace public titleVm: TitleVm = {}
   /** 分割线参数 */
-  @Track public dividingOptions: DividingOptions = {}
+  @Trace public dividingVm: DividingVm = {}
 
   /** 隐藏返回按钮 */
   public goneBackImg() {
-    this.backImgOptions.visibility = Visibility.Hidden
+    this.backImgVm.visibility = Visibility.Hidden
   }
 
   /** 显示分割线 */
   public showDividingLine() {
-    this.dividingOptions.visibility = Visibility.Visible
+    this.dividingVm.visibility = Visibility.Visible
   }
 
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
-    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const vm = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
-    if (vm !== undefined) {
-      this.backImgOptions = vm.titleBarViewVm.backImgOptions
-      this.titleOptions = vm.titleBarViewVm.titleOptions
-      this.dividingOptions = vm.titleBarViewVm.dividingOptions
+    const attribute = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? undefined
+    if (attribute !== undefined) {
+      this.titleVm.title = attribute.titleBarViewAttribute.titleOptions.title
+      this.titleVm.fontSize = attribute.titleBarViewAttribute.titleOptions.fontSize
+      this.titleVm.textAlign = attribute.titleBarViewAttribute.titleOptions.textAlign
+      this.titleVm.fontColor = attribute.titleBarViewAttribute.titleOptions.fontColor
+      this.titleVm.backgroundColor = attribute.titleBarViewAttribute.titleOptions.backgroundColor
+      this.backImgVm.src = attribute.titleBarViewAttribute.backImgOptions.src
+      this.backImgVm.width = attribute.titleBarViewAttribute.backImgOptions.width
+      this.backImgVm.height = attribute.titleBarViewAttribute.backImgOptions.height
+      this.backImgVm.objectFit = attribute.titleBarViewAttribute.backImgOptions.objectFit
+      this.backImgVm.visibility = attribute.titleBarViewAttribute.backImgOptions.visibility
+      this.backImgVm.onClick = attribute.titleBarViewAttribute.backImgOptions.onClick
+      this.dividingVm.color = attribute.titleBarViewAttribute.dividingOptions.color
+      this.dividingVm.visibility = attribute.titleBarViewAttribute.dividingOptions.visibility
     }
   }
 }
 
 /** 返回按钮参数 */
-export interface BackImgOptions {
+@ObservedV2
+export class BackImgVm {
   /** 图片 */
-  src ?: PixelMap | ResourceStr | DrawableDescriptor | ImageContent
+  @Trace public src ?: PixelMap | ResourceStr | DrawableDescriptor | ImageContent
   /** 宽度 */
-  width?: Length
+  @Trace public width?: Length
   /** 高度 */
-  height?: Length
+  @Trace public height?: Length
   /** 图片填充效果 */
-  objectFit?: ImageFit
+  @Trace public objectFit?: ImageFit
   /** 控件显隐 */
-  visibility?: Visibility
+  @Trace public visibility?: Visibility
   /** 点击监听器 */
-  onClick?: (event: ClickEvent) => void
+  @Trace public onClick?: (event: ClickEvent) => void
 }
 
 /** 标题参数 */
-export interface TitleOptions {
+@ObservedV2
+export class TitleVm {
   /** 标题文字 */
-  title?: string | Resource
+  @Trace public title?: string | Resource
   /** 字体大小 */
-  fontSize?: number | string | Resource
+  @Trace public fontSize?: number | string | Resource
   /** 文字位置 */
-  textAlign?: TextAlign
+  @Trace public textAlign?: TextAlign
   /** 文字颜色 */
-  fontColor?: ResourceColor
+  @Trace public fontColor?: ResourceColor
   /** 标题栏背景色 */
-  backgroundColor?: ResourceColor
+  @Trace public backgroundColor?: ResourceColor
 }
 
 /** 分割线参数 */
-export interface DividingOptions {
+@ObservedV2
+export class DividingVm {
   /** 分割线颜色 */
-  color?: ResourceColor
+  @Trace public color?: ResourceColor
   /** 控件显隐 */
-  visibility?: Visibility
+  @Trace public visibility?: Visibility
 }

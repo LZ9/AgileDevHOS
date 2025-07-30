@@ -3,7 +3,7 @@
  * Created by zhouL on 2025/7/30.
  */
 @Entry
-@Component
+@ComponentV2
 struct ApiPage {
   build() {
 

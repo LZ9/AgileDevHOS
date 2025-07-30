@@ -4,9 +4,9 @@ import { TodoBean } from '../../bean/mvvm/TodoBean'
  * 代办列表项控件.
  * Created by zhouL on 2025/7/30.
  */
-@Component
+@ComponentV2
 export struct TodoItemView {
-  @ObjectLink todoBean: TodoBean
+  @Event todoBean: TodoBean
 
   build() {
     Row() {
