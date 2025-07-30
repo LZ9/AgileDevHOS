@@ -1,4 +1,4 @@
-import { LoadingViewAttribute } from "./LoadingViewAttribute"
+import { LoadingViewVm } from "./LoadingViewVm"
 
 /**
  * 加载控件
@@ -8,28 +8,28 @@ import { LoadingViewAttribute } from "./LoadingViewAttribute"
 @Preview({ deviceType: "phone" })
 export struct LoadingView {
   /** 属性 */
-  @State public attribute: LoadingViewAttribute = new LoadingViewAttribute()
+  @State public vm: LoadingViewVm = new LoadingViewVm()
 
   build() {
     Column() {
       Progress({ value: 0, total: 10, type: ProgressType.Ring })
-        .width(this.attribute.progressOptions.width !== undefined ? this.attribute.progressOptions.width : 50)
-        .color(this.attribute.progressOptions.color !== undefined ? this.attribute.progressOptions.color : Color.Gray)
+        .width(this.vm.progressOptions.width !== undefined ? this.vm.progressOptions.width : 50)
+        .color(this.vm.progressOptions.color !== undefined ? this.vm.progressOptions.color : Color.Gray)
         .style({
-          strokeWidth: this.attribute.progressOptions.strokeWidth !== undefined ? this.attribute.progressOptions.strokeWidth : 5,
+          strokeWidth: this.vm.progressOptions.strokeWidth !== undefined ? this.vm.progressOptions.strokeWidth : 5,
           status: ProgressStatus.LOADING
         })
 
-      Text(this.attribute.textOptions.content !== undefined ? this.attribute.textOptions.content : $r('app.string.pandora_loading'))
-        .fontSize(this.attribute.textOptions.fontSize !== undefined ? this.attribute.textOptions.fontSize : 14)
-        .fontColor(this.attribute.textOptions.fontColor !== undefined ? this.attribute.textOptions.fontColor : Color.Gray)
-        .textAlign(this.attribute.textOptions.textAlign !== undefined ? this.attribute.textOptions.textAlign : TextAlign.Center)
-        .visibility(this.attribute.textOptions.visibility !== undefined ? this.attribute.textOptions.visibility : Visibility.Visible)
+      Text(this.vm.textOptions.content !== undefined ? this.vm.textOptions.content : $r('app.string.pandora_loading'))
+        .fontSize(this.vm.textOptions.fontSize !== undefined ? this.vm.textOptions.fontSize : 14)
+        .fontColor(this.vm.textOptions.fontColor !== undefined ? this.vm.textOptions.fontColor : Color.Gray)
+        .textAlign(this.vm.textOptions.textAlign !== undefined ? this.vm.textOptions.textAlign : TextAlign.Center)
+        .visibility(this.vm.textOptions.visibility !== undefined ? this.vm.textOptions.visibility : Visibility.Visible)
         .margin(10)
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(this.attribute.textOptions.backgroundColor !== undefined ? this.attribute.textOptions.backgroundColor : Color.White)
+    .backgroundColor(this.vm.textOptions.backgroundColor !== undefined ? this.vm.textOptions.backgroundColor : Color.White)
     .justifyContent(FlexAlign.Center) // 垂直居中
     .alignItems(HorizontalAlign.Center) // 水平居中
   }

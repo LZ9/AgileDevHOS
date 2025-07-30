@@ -17,7 +17,7 @@ export { TitleBarViewAttribute } from './src/main/ets/components/titlebar/TitleB
 
 export { LoadingView } from './src/main/ets/components/state/LoadingView';
 
-export { LoadingViewAttribute } from './src/main/ets/components/state/LoadingViewAttribute';
+export { LoadingViewVm } from './src/main/ets/components/state/LoadingViewVm';
 
 export { NoDataView } from './src/main/ets/components/state/NoDataView';
 

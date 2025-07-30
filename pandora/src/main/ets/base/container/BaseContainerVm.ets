@@ -1,6 +1,6 @@
 import { JsonUtils } from "@lodz/core_hos"
 import { ErrorViewVm } from "../../components/state/ErrorViewVm"
-import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
+import { LoadingViewVm } from "../../components/state/LoadingViewVm"
 import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
 import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
 import { PandoraConstants } from "../../config/PandoraConstants"
@@ -13,7 +13,7 @@ export class BaseContainerVm {
   /** 标题栏属性 */
   @Track public titleBarViewAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
   /** 加载页属性 */
-  @Track public loadingViewAttribute: LoadingViewAttribute = new LoadingViewAttribute()
+  @Track public loadingViewVm: LoadingViewVm = new LoadingViewVm()
   /** 无数据页属性 */
   @Track public noDataViewAttribute: NoDataViewAttribute = new NoDataViewAttribute()
   /** 错误页属性 */
@@ -74,7 +74,7 @@ export class BaseContainerVm {
     const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
       this.titleBarViewAttribute = attribute.titleBarViewAttribute
-      this.loadingViewAttribute = attribute.loadingViewAttribute
+      this.loadingViewVm = attribute.loadingViewVm
       this.noDataViewAttribute = attribute.noDataViewAttribute
       this.errorViewVm = attribute.errorViewVm
       this.onReloadClick = attribute.onReloadClick

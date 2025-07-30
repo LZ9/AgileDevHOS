@@ -6,7 +6,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  * 加载控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class LoadingViewAttribute {
+export class LoadingViewVm {
   /** 进度条参数 */
   @Track public progressOptions: ProgressOptions = {}
   /** 文字参数 */
@@ -22,8 +22,8 @@ export class LoadingViewAttribute {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
     const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
-      this.progressOptions = attribute.loadingViewAttribute.progressOptions
-      this.textOptions = attribute.loadingViewAttribute.textOptions
+      this.progressOptions = attribute.loadingViewVm.progressOptions
+      this.textOptions = attribute.loadingViewVm.textOptions
     }
   }
 }

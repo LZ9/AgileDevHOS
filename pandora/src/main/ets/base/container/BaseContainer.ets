@@ -22,7 +22,7 @@ export struct BaseContainer {
       TitleBarView({ attribute: this.vm.titleBarViewAttribute, expandLayout: this.titleBarExpandLayout })
         .visibility(this.vm.isShowTitleBar ? Visibility.Visible : Visibility.None)
 
-      LoadingView({ attribute: this.vm.loadingViewAttribute })
+      LoadingView({ vm: this.vm.loadingViewVm })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.vm.isShowLoading ? Visibility.Visible : Visibility.None)
