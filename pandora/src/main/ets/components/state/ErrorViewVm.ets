@@ -20,10 +20,10 @@ export class ErrorViewVm {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
-    if (attribute !== undefined) {
-      this.imgOptions = attribute.errorViewVm.imgOptions
-      this.textOptions = attribute.errorViewVm.textOptions
+    const vm = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
+    if (vm !== undefined) {
+      this.imgOptions = vm.errorViewVm.imgOptions
+      this.textOptions = vm.errorViewVm.textOptions
     }
   }
 }

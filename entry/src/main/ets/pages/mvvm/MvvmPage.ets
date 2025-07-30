@@ -20,8 +20,8 @@ struct MvvmPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.mvvm_title')
-    this.vm.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.mvvm_title')
+    this.vm.titleBarViewVm.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
     this.vm.onReloadClick = () => {

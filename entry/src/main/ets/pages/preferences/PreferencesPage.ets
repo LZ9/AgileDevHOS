@@ -30,10 +30,10 @@ struct PreferencesPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.titleBarViewVm.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.preferences_title')
+    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.preferences_title')
   }
 
   onDidBuild(): void {

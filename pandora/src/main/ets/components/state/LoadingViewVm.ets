@@ -20,10 +20,10 @@ export class LoadingViewVm {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
-    if (attribute !== undefined) {
-      this.progressOptions = attribute.loadingViewVm.progressOptions
-      this.textOptions = attribute.loadingViewVm.textOptions
+    const vm = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
+    if (vm !== undefined) {
+      this.progressOptions = vm.loadingViewVm.progressOptions
+      this.textOptions = vm.loadingViewVm.textOptions
     }
   }
 }

@@ -6,7 +6,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  * 标题栏控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class TitleBarViewAttribute {
+export class TitleBarViewVm {
   /** 返回按钮参数 */
   @Track public backImgOptions: BackImgOptions = {}
   /** 标题参数 */
@@ -27,11 +27,11 @@ export class TitleBarViewAttribute {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
-    if (attribute !== undefined) {
-      this.backImgOptions = attribute.titleBarViewAttribute.backImgOptions
-      this.titleOptions = attribute.titleBarViewAttribute.titleOptions
-      this.dividingOptions = attribute.titleBarViewAttribute.dividingOptions
+    const vm = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
+    if (vm !== undefined) {
+      this.backImgOptions = vm.titleBarViewVm.backImgOptions
+      this.titleOptions = vm.titleBarViewVm.titleOptions
+      this.dividingOptions = vm.titleBarViewVm.dividingOptions
     }
   }
 }

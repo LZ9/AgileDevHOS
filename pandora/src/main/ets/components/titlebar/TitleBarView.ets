@@ -1,4 +1,4 @@
-import { TitleBarViewAttribute } from "./TitleBarViewAttribute"
+import { TitleBarViewVm } from "./TitleBarViewVm"
 
 /**
  * 标题栏控件
@@ -8,7 +8,7 @@ import { TitleBarViewAttribute } from "./TitleBarViewAttribute"
 export struct TitleBarView {
 
   /** 属性 */
-  @State public attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  @State public vm: TitleBarViewVm = new TitleBarViewVm()
   /** 拓展区域布局 */
   @BuilderParam public expandLayout?: () => void
 
@@ -17,30 +17,30 @@ export struct TitleBarView {
       RelativeContainer() {
         Stack() {
           //返回按钮
-          Image(this.attribute.backImgOptions.src !== undefined ? this.attribute.backImgOptions.src : $r('app.media.pandora_ic_back'))
-            .width(this.attribute.backImgOptions.width !== undefined ? this.attribute.backImgOptions.width : 20)
-            .height(this.attribute.backImgOptions.height !== undefined ? this.attribute.backImgOptions.height : 20)
-            .objectFit(this.attribute.backImgOptions.objectFit !== undefined ? this.attribute.backImgOptions.objectFit : ImageFit.Auto)
+          Image(this.vm.backImgOptions.src !== undefined ? this.vm.backImgOptions.src : $r('app.media.pandora_ic_back'))
+            .width(this.vm.backImgOptions.width !== undefined ? this.vm.backImgOptions.width : 20)
+            .height(this.vm.backImgOptions.height !== undefined ? this.vm.backImgOptions.height : 20)
+            .objectFit(this.vm.backImgOptions.objectFit !== undefined ? this.vm.backImgOptions.objectFit : ImageFit.Auto)
         }
         .width(50)
         .height('100%')
-        .visibility(this.attribute.backImgOptions.visibility !== undefined ? this.attribute.backImgOptions.visibility : Visibility.Visible)
+        .visibility(this.vm.backImgOptions.visibility !== undefined ? this.vm.backImgOptions.visibility : Visibility.Visible)
         .alignRules({
           left: { anchor: "__container__", align: HorizontalAlign.Start },
           center: { anchor: "__container__", align: VerticalAlign.Center },
         })
         .id("back_btn")
         .onClick((event) => {
-          if (this.attribute.backImgOptions.onClick) {
-            this.attribute.backImgOptions.onClick(event)
+          if (this.vm.backImgOptions.onClick) {
+            this.vm.backImgOptions.onClick(event)
           }
         })
 
         //标题
-        Text(this.attribute.titleOptions.title !== undefined ? this.attribute.titleOptions.title : "标题")
-          .fontSize(this.attribute.titleOptions.fontSize !== undefined ? this.attribute.titleOptions.fontSize : 20)
-          .textAlign(this.attribute.titleOptions.textAlign !== undefined ? this.attribute.titleOptions.textAlign : TextAlign.Center)
-          .fontColor(this.attribute.titleOptions.fontColor !== undefined ? this.attribute.titleOptions.fontColor : Color.White)
+        Text(this.vm.titleOptions.title !== undefined ? this.vm.titleOptions.title : "标题")
+          .fontSize(this.vm.titleOptions.fontSize !== undefined ? this.vm.titleOptions.fontSize : 20)
+          .textAlign(this.vm.titleOptions.textAlign !== undefined ? this.vm.titleOptions.textAlign : TextAlign.Center)
+          .fontColor(this.vm.titleOptions.fontColor !== undefined ? this.vm.titleOptions.fontColor : Color.White)
           .maxLines(1)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
           .id("title")
@@ -66,14 +66,14 @@ export struct TitleBarView {
       }
       .width('100%')
       .height(56)
-      .backgroundColor(this.attribute.titleOptions.backgroundColor !== undefined ? this.attribute.titleOptions.backgroundColor : Color.Grey)
+      .backgroundColor(this.vm.titleOptions.backgroundColor !== undefined ? this.vm.titleOptions.backgroundColor : Color.Grey)
 
       // 分割线
       Line()
         .width('100%')
         .height(1)
-        .backgroundColor(this.attribute.dividingOptions.color !== undefined ? this.attribute.dividingOptions.color :Color.Black)
-        .visibility(this.attribute.dividingOptions.visibility !== undefined ? this.attribute.dividingOptions.visibility : Visibility.None)
+        .backgroundColor(this.vm.dividingOptions.color !== undefined ? this.vm.dividingOptions.color :Color.Black)
+        .visibility(this.vm.dividingOptions.visibility !== undefined ? this.vm.dividingOptions.visibility : Visibility.None)
     }
     .width('100%')
   }

@@ -18,8 +18,8 @@ struct MainPage {
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
 
     this.vm.setScopeConfig()
-    this.vm.titleBarViewAttribute.backImgOptions.visibility = Visibility.Hidden
-    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.main_title')
+    this.vm.titleBarViewVm.backImgOptions.visibility = Visibility.Hidden
+    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.main_title')
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),

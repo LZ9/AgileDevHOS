@@ -13,7 +13,7 @@ export { BaseContainerVm } from './src/main/ets/base/container/BaseContainerVm';
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 
-export { TitleBarViewAttribute } from './src/main/ets/components/titlebar/TitleBarViewAttribute';
+export { TitleBarViewVm } from './src/main/ets/components/titlebar/TitleBarViewVm';
 
 export { LoadingView } from './src/main/ets/components/state/LoadingView';
 

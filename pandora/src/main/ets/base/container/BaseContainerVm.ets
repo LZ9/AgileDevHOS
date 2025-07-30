@@ -2,7 +2,7 @@ import { JsonUtils } from "@lodz/core_hos"
 import { ErrorViewVm } from "../../components/state/ErrorViewVm"
 import { LoadingViewVm } from "../../components/state/LoadingViewVm"
 import { NoDataViewVm } from "../../components/state/NoDataViewVm"
-import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
+import { TitleBarViewVm } from "../../components/titlebar/TitleBarViewVm"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
 /**
@@ -11,7 +11,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  */
 export class BaseContainerVm {
   /** 标题栏属性 */
-  @Track public titleBarViewAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  @Track public titleBarViewVm: TitleBarViewVm = new TitleBarViewVm()
   /** 加载页属性 */
   @Track public loadingViewVm: LoadingViewVm = new LoadingViewVm()
   /** 无数据页属性 */
@@ -71,18 +71,18 @@ export class BaseContainerVm {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
-    if (attribute !== undefined) {
-      this.titleBarViewAttribute = attribute.titleBarViewAttribute
-      this.loadingViewVm = attribute.loadingViewVm
-      this.noDataViewVm = attribute.noDataViewVm
-      this.errorViewVm = attribute.errorViewVm
-      this.onReloadClick = attribute.onReloadClick
-      this.isShowTitleBar = attribute.isShowTitleBar
-      this.isShowLoading = attribute.isShowLoading
-      this.isShowNoData = attribute.isShowNoData
-      this.isShowError = attribute.isShowError
-      this.isShowContent = attribute.isShowContent
+    const vm = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
+    if (vm !== undefined) {
+      this.titleBarViewVm = vm.titleBarViewVm
+      this.loadingViewVm = vm.loadingViewVm
+      this.noDataViewVm = vm.noDataViewVm
+      this.errorViewVm = vm.errorViewVm
+      this.onReloadClick = vm.onReloadClick
+      this.isShowTitleBar = vm.isShowTitleBar
+      this.isShowLoading = vm.isShowLoading
+      this.isShowNoData = vm.isShowNoData
+      this.isShowError = vm.isShowError
+      this.isShowContent = vm.isShowContent
     }
   }
 }

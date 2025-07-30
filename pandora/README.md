@@ -38,11 +38,11 @@ protected abstract getLayoutPath(): string
 protected endCreate() {} 
 
 // 支持全局配置基础状态控件的参数
-protected configBaseContainerAttribute(): BaseContainerAttribute | undefined {} 
+protected configBaseContainerVm(): BaseContainerVm | undefined {} 
 ```
 
 ### 页面容器基类：BaseContainer
-BaseContainer是页面基类，通过属性BaseContainerAttribute来进行配置，基类包含状态栏，以及
+BaseContainer是页面基类，通过属性BaseContainerVm来进行配置，基类包含状态栏，以及
 加载页、内容页、错误页、空页面的状态显示切换。
 
 具体使用如下：
@@ -52,24 +52,24 @@ BaseContainer是页面基类，通过属性BaseContainerAttribute来进行配置
 @Component
 struct XxxxPage {
   // 这里定义一个属性遍历，用来配置和控件BaseContainer
-  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State vm: BaseContainerVm = new BaseContainerVm()
  
   aboutToAppear(): void {
     // 调用该方法可以设置在BaseAbility里配置好的通用基础状态控件的参数
-    this.attribute.setScopeConfig()
+    this.vm.setScopeConfig()
     
     //这里可以对当前页面进行个性化参数配置，例如设置返回按钮监听、设置标题文字等等
-    this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.titleBarViewVm.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.xxxx')
+    this.vm.titleBarViewVm.titleOptions.title = $r('app.string.xxxx')
   }
 
   // 在build里使用BaseContainer，并传入配置属性和内容布局
   build() {
     Stack() {
       BaseContainer({
-        attribute: this.attribute,
+        vm: this.vm,
         contentLayout: () => {
           this.contentLayout()
         }
@@ -91,45 +91,45 @@ struct XxxxPage {
 BaseContainer默认显示加载页，需要切换页面状态时，可以调用以下方法：
 ```
     // 显示加载页，当需要等待接口数据请求时，可以调用此方法
-    this.attribute.showStatusLoading()
+    this.vm.showStatusLoading()
     
     // 显示无数据页面，当无数据返回时，可以调用该方法
-    this.attribute.showStatusNoData()
+    this.vm.showStatusNoData()
     
     // 显示错误页面，当请求失败时，可以调用该方法
-    this.attribute.showStatusError()
+    this.vm.showStatusError()
     
     // 显示内容页，当完成数据请求，可以调用该方法
-    this.attribute.showStatusCompleted()
+    this.vm.showStatusCompleted()
 ```
 
 ## 控件
 ### 标题栏：TitleBarView
-封装了基础的标题栏控件，支持通过TitleBarViewAttribute进行参数配置，右侧支持通过
+封装了基础的标题栏控件，支持通过titleBarViewVm进行参数配置，右侧支持通过
 expandLayout来配置菜单按钮，具体使用方式如下：
 ```
 @Entry
 @Component
 struct XxxxPage {
   // 定义一个标题栏属性配置对象
-  @State public attribute: TitleBarViewAttribute = new TitleBarViewAttribute()
+  @State public vm: titleBarViewVm = new titleBarViewVm()
 
   aboutToAppear(): void {
     // 获取在Ability里配置好的标题栏属性并设置
-    this.attribute.setScopeConfig()
+    this.vm.setScopeConfig()
     
     // 根据需要对其他参数进行配置，例如设置返回按钮监听、设置标题文字等等
-    this.attribute.backImgOptions.onClick = () => {
+    this.vm.backImgOptions.onClick = () => {
 
     }
-    this.attribute.titleOptions.title = $r('app.string.xxxx')
+    this.vm.titleOptions.title = $r('app.string.xxxx')
   }
 
   // 右侧支持扩展布局，通过传入expandLayout()来自定义
   build() {
     Column() {
       TitleBarView({ 
-        attribute: this.attribute ,     
+        vm: this.vm ,     
         expandLayout: () => {
           this.expandLayout()
         }

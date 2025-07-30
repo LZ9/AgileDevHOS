@@ -13,7 +13,7 @@ export default class EntryAbility extends BaseAbility {
 
   protected configBaseContainerVm(): BaseContainerVm | undefined {
     const vm: BaseContainerVm = new BaseContainerVm()
-    vm.titleBarViewAttribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    vm.titleBarViewVm.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
     return vm
   }
 }

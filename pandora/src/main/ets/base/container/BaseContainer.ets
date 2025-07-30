@@ -19,7 +19,7 @@ export struct BaseContainer {
 
   build() {
     Column() {
-      TitleBarView({ attribute: this.vm.titleBarViewAttribute, expandLayout: this.titleBarExpandLayout })
+      TitleBarView({ vm: this.vm.titleBarViewVm, expandLayout: this.titleBarExpandLayout })
         .visibility(this.vm.isShowTitleBar ? Visibility.Visible : Visibility.None)
 
       LoadingView({ vm: this.vm.loadingViewVm })
