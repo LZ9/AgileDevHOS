@@ -1,11 +1,11 @@
-import { ResponseStatus } from "@lodz/pandora"
+import { ResponseContract } from "@lodz/pandora"
 import { PageBean } from "./PageBean"
 
 /**
  * 数据包裹层
  * Created by zhouL on 2025/7/16.
  */
-export class ResponseBean<T> implements ResponseStatus{
+export class ResponseBean<T> extends ResponseContract {
 
   /** 失败 */
   public static readonly Fail = 500
@@ -20,15 +20,15 @@ export class ResponseBean<T> implements ResponseStatus{
   /** 分页数据对象 */
   public page?: PageBean | null | undefined
 
-  isSuccess(): boolean {
+  public isSuccess(): boolean {
     return this.code === ResponseBean.SUCCESS
   }
 
-  valueMsg(): String {
+  public valueMsg(): string {
     return this.msg
   }
 
-  valueStatus(): String {
+  public valueStatus(): string {
     return this.code.toString()
   }
   

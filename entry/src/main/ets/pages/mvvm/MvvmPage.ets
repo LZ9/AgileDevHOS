@@ -1,8 +1,3 @@
-import TodoListViewModel from '../../vm/mvvm/TodoListViewModel'
-import { common } from '@kit.AbilityKit'
-import { TodoComponent } from '../../view/mvvm/TodoComponent'
-import { AllChooseComponent } from '../../view/mvvm/AllChooseComponent'
-import { TodoListComponent } from '../../view/mvvm/TodoListComponent'
 import { BaseContainer, BaseContainerAttribute, PromiseAgent, RouterUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ApiService } from '../../api/ApiService'

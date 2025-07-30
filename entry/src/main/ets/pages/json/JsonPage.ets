@@ -1,7 +1,7 @@
 import { BaseContainer, BaseContainerAttribute, CoreConstants, DateUtils, JsonUtils, RouterUtils } from '@lodz/pandora'
+import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
 import { LogListView } from '../../view/LogListView'
-import { ResponseBean } from '../../bean/base/ResponseBean'
 
 /**
  * Json转换测试

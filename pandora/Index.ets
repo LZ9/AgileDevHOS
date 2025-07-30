@@ -30,7 +30,7 @@ export { ErrorViewAttribute } from './src/main/ets/components/state/ErrorViewAtt
 //---------------- 工具 -----------------
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';
 
-export { ResponseStatus } from './src/main/ets/utils/promise/ResponseStatus';
+export { ResponseContract } from './src/main/ets/utils/promise/ResponseContract';
 
 export { PromiseAgent } from './src/main/ets/utils/promise/PromiseAgent';
 
