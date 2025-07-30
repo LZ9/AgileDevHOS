@@ -33,9 +33,7 @@ export interface ProgressOptions {
   /** 宽度 */
   width?: Length
   /** 颜色 */
-  color?: ResourceColor | LinearGradient
-  /** 描边宽度 */
-  strokeWidth?: Length
+  color?: ResourceColor
 }
 
 /** 文字参数 */

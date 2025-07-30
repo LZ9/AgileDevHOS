@@ -12,13 +12,9 @@ export struct LoadingView {
 
   build() {
     Column() {
-      Progress({ value: 0, total: 10, type: ProgressType.Ring })
+      LoadingProgress()
         .width(this.vm.progressOptions.width !== undefined ? this.vm.progressOptions.width : 50)
         .color(this.vm.progressOptions.color !== undefined ? this.vm.progressOptions.color : Color.Gray)
-        .style({
-          strokeWidth: this.vm.progressOptions.strokeWidth !== undefined ? this.vm.progressOptions.strokeWidth : 5,
-          status: ProgressStatus.LOADING
-        })
 
       Text(this.vm.textOptions.content !== undefined ? this.vm.textOptions.content : $r('app.string.pandora_loading'))
         .fontSize(this.vm.textOptions.fontSize !== undefined ? this.vm.textOptions.fontSize : 14)
