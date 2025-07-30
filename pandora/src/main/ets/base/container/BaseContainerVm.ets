@@ -9,7 +9,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  * 页面基类属性
  * Created by zhouL on 2025/7/24.
  */
-export class BaseContainerAttribute {
+export class BaseContainerVm {
   /** 标题栏属性 */
   @Track public titleBarViewAttribute: TitleBarViewAttribute = new TitleBarViewAttribute()
   /** 加载页属性 */
@@ -71,7 +71,7 @@ export class BaseContainerAttribute {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerAttribute>(json) ?? undefined
+    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
       this.titleBarViewAttribute = attribute.titleBarViewAttribute
       this.loadingViewAttribute = attribute.loadingViewAttribute

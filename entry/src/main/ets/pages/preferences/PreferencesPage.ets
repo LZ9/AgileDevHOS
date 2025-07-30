@@ -1,6 +1,6 @@
 import {
   BaseContainer,
-  BaseContainerAttribute,
+  BaseContainerVm,
   CoreConstants,
   DateUtils,
   PreferencesUtils,
@@ -26,24 +26,24 @@ struct PreferencesPage {
   /** 缓存内容 */
   private text: string = ""
   /** 基类属性 */
-  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State vm: BaseContainerVm = new BaseContainerVm()
 
   aboutToAppear(): void {
-    this.attribute.setScopeConfig()
-    this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.setScopeConfig()
+    this.vm.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.preferences_title')
+    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.preferences_title')
   }
 
   onDidBuild(): void {
-    this.attribute.showStatusCompleted()
+    this.vm.showStatusCompleted()
   }
 
   build() {
     Stack() {
       BaseContainer({
-        attribute: this.attribute,
+        vm: this.vm,
         contentLayout: () => {
           this.contentLayout()
         }

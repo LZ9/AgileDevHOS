@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerAttribute, CoreConstants, DateUtils, JsonUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils, RouterUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
 import { LogListView } from '../../view/LogListView'
@@ -10,7 +10,7 @@ import { LogListView } from '../../view/LogListView'
 @Entry
 @Component
 struct JsonPage {
-  @State attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */
   private static readonly JSON_STRING =
     '{"msg":"查询成功","code":200,"data":[{"id":1001,"name":"Jack","age":25,"city":"Shanghai"}]}'
@@ -18,21 +18,21 @@ struct JsonPage {
   @State public logList: Array<string> = []
 
   aboutToAppear(): void {
-    this.attribute.setScopeConfig()
-    this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.setScopeConfig()
+    this.vm.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.json_title')
+    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.json_title')
   }
 
   onDidBuild(): void {
-    this.attribute.showStatusCompleted()
+    this.vm.showStatusCompleted()
   }
 
   build() {
     Stack() {
       BaseContainer({
-        attribute: this.attribute,
+        vm: this.vm,
         contentLayout: () => {
           this.contentLayout()
         }

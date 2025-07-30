@@ -3,7 +3,7 @@ import { window } from '@kit.ArkUI'
 import { JsonUtils } from '@lodz/core_hos'
 import { PandoraConstants } from '../../config/PandoraConstants'
 import { StatusBarUtils } from '../../utils/StatusBarUtils'
-import { BaseContainerAttribute } from '../container/BaseContainerAttribute'
+import { BaseContainerVm } from '../container/BaseContainerVm'
 
 /**
  * Ability基类
@@ -21,12 +21,12 @@ export abstract class BaseAbility extends UIAbility {
         return
       }
       StatusBarUtils.saveLastWindow(this.context)
-      AppStorage.setOrCreate(PandoraConstants.Storage.BASE_VIEW_CONFIG, JsonUtils.beanToJson(this.configBaseContainerAttribute()))
+      AppStorage.setOrCreate(PandoraConstants.Storage.BASE_VIEW_CONFIG, JsonUtils.beanToJson(this.configBaseContainerVm()))
       this.endCreate()
     })
   }
 
-  protected configBaseContainerAttribute(): BaseContainerAttribute | undefined {
+  protected configBaseContainerVm(): BaseContainerVm | undefined {
     return undefined
   }
 

@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerAttribute } from '@lodz/pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerVm } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -11,15 +11,15 @@ import { MainBean } from '../../bean/main/MainBean'
 struct MainPage {
   /** 列表数据 */
   private list: Array<MainBean> = []
-  @State private attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State private vm: BaseContainerVm = new BaseContainerVm()
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
 
-    this.attribute.setScopeConfig()
-    this.attribute.titleBarViewAttribute.backImgOptions.visibility = Visibility.Hidden
-    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.main_title')
+    this.vm.setScopeConfig()
+    this.vm.titleBarViewAttribute.backImgOptions.visibility = Visibility.Hidden
+    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.main_title')
 
     this.list = [
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
@@ -29,13 +29,13 @@ struct MainPage {
   }
 
   onDidBuild(): void {
-    this.attribute.showStatusCompleted()
+    this.vm.showStatusCompleted()
   }
 
   build() {
     Stack() {
       BaseContainer({
-        attribute: this.attribute,
+        vm: this.vm,
         contentLayout: () => {
           this.contentLayout()
         },

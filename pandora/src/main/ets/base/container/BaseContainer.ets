@@ -2,7 +2,7 @@ import { ErrorView } from "../../components/state/ErrorView"
 import { LoadingView } from "../../components/state/LoadingView"
 import { NoDataView } from "../../components/state/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
-import { BaseContainerAttribute } from "./BaseContainerAttribute"
+import { BaseContainerVm } from "./BaseContainerVm"
 
 /**
  * 页面基类
@@ -11,7 +11,7 @@ import { BaseContainerAttribute } from "./BaseContainerAttribute"
 @Component
 export struct BaseContainer {
   /** 属性 */
-  @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State public vm: BaseContainerVm = new BaseContainerVm()
   /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
   /** 内容布局 */
@@ -19,27 +19,27 @@ export struct BaseContainer {
 
   build() {
     Column() {
-      TitleBarView({ attribute: this.attribute.titleBarViewAttribute, expandLayout: this.titleBarExpandLayout })
-        .visibility(this.attribute.isShowTitleBar ? Visibility.Visible : Visibility.None)
+      TitleBarView({ attribute: this.vm.titleBarViewAttribute, expandLayout: this.titleBarExpandLayout })
+        .visibility(this.vm.isShowTitleBar ? Visibility.Visible : Visibility.None)
 
-      LoadingView({ attribute: this.attribute.loadingViewAttribute })
+      LoadingView({ attribute: this.vm.loadingViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
-        .visibility(this.attribute.isShowLoading ? Visibility.Visible : Visibility.None)
+        .visibility(this.vm.isShowLoading ? Visibility.Visible : Visibility.None)
 
 
-      NoDataView({ attribute: this.attribute.noDataViewAttribute })
+      NoDataView({ attribute: this.vm.noDataViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
-        .visibility(this.attribute.isShowNoData ? Visibility.Visible : Visibility.None)
+        .visibility(this.vm.isShowNoData ? Visibility.Visible : Visibility.None)
 
-      ErrorView({ attribute: this.attribute.errorViewAttribute })
+      ErrorView({ attribute: this.vm.errorViewAttribute })
         .width(`100%`)
         .layoutWeight(1)
-        .visibility(this.attribute.isShowError ? Visibility.Visible : Visibility.None)
+        .visibility(this.vm.isShowError ? Visibility.Visible : Visibility.None)
         .onClick((event) => {
-          if (this.attribute.onReloadClick) {
-            this.attribute.onReloadClick(event)
+          if (this.vm.onReloadClick) {
+            this.vm.onReloadClick(event)
           }
         })
 
@@ -50,7 +50,7 @@ export struct BaseContainer {
       }
       .width(`100%`)
       .layoutWeight(1)
-      .visibility(this.attribute.isShowContent ? Visibility.Visible : Visibility.None)
+      .visibility(this.vm.isShowContent ? Visibility.Visible : Visibility.None)
     }
     .width(`100%`)
     .height(`100%`)

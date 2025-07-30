@@ -7,7 +7,7 @@ export { BaseAbility } from './src/main/ets/base/ability/BaseAbility';
 
 export { BaseContainer } from './src/main/ets/base/container/BaseContainer';
 
-export { BaseContainerAttribute } from './src/main/ets/base/container/BaseContainerAttribute';
+export { BaseContainerVm } from './src/main/ets/base/container/BaseContainerVm';
 
 
 //---------------- 控件 -----------------

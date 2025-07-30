@@ -1,5 +1,5 @@
 import { JsonUtils } from "@lodz/core_hos"
-import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
+import { BaseContainerVm } from "../../base/container/BaseContainerVm"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
 /**
@@ -20,7 +20,7 @@ export class ErrorViewAttribute {
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
-    const attribute = JsonUtils.jsonToBean<BaseContainerAttribute>(json) ?? undefined
+    const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
       this.imgOptions = attribute.errorViewAttribute.imgOptions
       this.textOptions = attribute.errorViewAttribute.textOptions

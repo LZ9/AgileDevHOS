@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerAttribute, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
@@ -12,20 +12,20 @@ import { TodoItemView } from '../../view/mvvm/TodoItemView'
 @Component
 struct MvvmPage {
   /** 基类属性 */
-  @State public attribute: BaseContainerAttribute = new BaseContainerAttribute()
+  @State public vm: BaseContainerVm = new BaseContainerVm()
   /** 代办列表 */
   @State public todoList: Array<TodoBean> = []
 
   @State public isAllFinish: boolean = false
 
   aboutToAppear(): void {
-    this.attribute.setScopeConfig()
-    this.attribute.titleBarViewAttribute.titleOptions.title = $r('app.string.mvvm_title')
-    this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
+    this.vm.setScopeConfig()
+    this.vm.titleBarViewAttribute.titleOptions.title = $r('app.string.mvvm_title')
+    this.vm.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
-    this.attribute.onReloadClick = () => {
-      this.attribute.showStatusLoading()
+    this.vm.onReloadClick = () => {
+      this.vm.showStatusLoading()
       this.requestTodoList()
      }
   }
@@ -40,15 +40,15 @@ struct MvvmPage {
       .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext()))
       .subscribe({
         onSubscribe: () => {
-          this.attribute.showStatusLoading()
+          this.vm.showStatusLoading()
         },
         onNext: (t: ResponseBean<Array<TodoBean>>) => {
           this.todoList = t.data?? []
-          this.attribute.showStatusCompleted()
+          this.vm.showStatusCompleted()
         },
         onError: (e: Error) => {
           PromptUtils.toastShort(this.getUIContext(), e.message)
-          this.attribute.showStatusError()
+          this.vm.showStatusError()
         }
       })
   }
@@ -56,7 +56,7 @@ struct MvvmPage {
   build() {
     Stack() {
       BaseContainer({
-        attribute: this.attribute,
+        vm: this.vm,
         contentLayout: () => {
           this.contentLayout()
         },
