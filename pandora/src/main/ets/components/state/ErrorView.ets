@@ -1,4 +1,4 @@
-import { ErrorViewAttribute } from "./ErrorViewAttribute"
+import { ErrorViewVm } from "./ErrorViewVm"
 
 /**
  * 加载失败控件
@@ -8,26 +8,26 @@ import { ErrorViewAttribute } from "./ErrorViewAttribute"
 export struct ErrorView {
 
   /** 属性 */
-  @State public attribute: ErrorViewAttribute = new ErrorViewAttribute()
+  @State public vm: ErrorViewVm = new ErrorViewVm()
 
   build() {
     Column() {
-      Image(this.attribute.imgOptions.src !== undefined ? this.attribute.imgOptions.src : $r('app.media.pandora_ic_data_fail'))
-        .width(this.attribute.imgOptions.width !== undefined ? this.attribute.imgOptions.width : 200)
-        .height(this.attribute.imgOptions.height !== undefined ? this.attribute.imgOptions.height : 200)
-        .objectFit(this.attribute.imgOptions.objectFit !== undefined ? this.attribute.imgOptions.objectFit : ImageFit.Auto)
-        .visibility(this.attribute.imgOptions.visibility !== undefined ? this.attribute.imgOptions.visibility : Visibility.Visible)
+      Image(this.vm.imgOptions.src !== undefined ? this.vm.imgOptions.src : $r('app.media.pandora_ic_data_fail'))
+        .width(this.vm.imgOptions.width !== undefined ? this.vm.imgOptions.width : 200)
+        .height(this.vm.imgOptions.height !== undefined ? this.vm.imgOptions.height : 200)
+        .objectFit(this.vm.imgOptions.objectFit !== undefined ? this.vm.imgOptions.objectFit : ImageFit.Auto)
+        .visibility(this.vm.imgOptions.visibility !== undefined ? this.vm.imgOptions.visibility : Visibility.Visible)
 
-      Text(this.attribute.textOptions.content !== undefined ? this.attribute.textOptions.content : $r('app.string.pandora_load_fail'))
-        .fontSize(this.attribute.textOptions.fontSize !== undefined ? this.attribute.textOptions.fontSize : 14)
-        .fontColor(this.attribute.textOptions.fontColor !== undefined ? this.attribute.textOptions.fontColor : Color.Gray)
-        .textAlign(this.attribute.textOptions.textAlign !== undefined ? this.attribute.textOptions.textAlign : TextAlign.Center)
-        .visibility(this.attribute.textOptions.visibility !== undefined ? this.attribute.textOptions.visibility : Visibility.Visible)
+      Text(this.vm.textOptions.content !== undefined ? this.vm.textOptions.content : $r('app.string.pandora_load_fail'))
+        .fontSize(this.vm.textOptions.fontSize !== undefined ? this.vm.textOptions.fontSize : 14)
+        .fontColor(this.vm.textOptions.fontColor !== undefined ? this.vm.textOptions.fontColor : Color.Gray)
+        .textAlign(this.vm.textOptions.textAlign !== undefined ? this.vm.textOptions.textAlign : TextAlign.Center)
+        .visibility(this.vm.textOptions.visibility !== undefined ? this.vm.textOptions.visibility : Visibility.Visible)
         .margin(10)
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(this.attribute.textOptions.backgroundColor !== undefined ? this.attribute.textOptions.backgroundColor : Color.White)
+    .backgroundColor(this.vm.textOptions.backgroundColor !== undefined ? this.vm.textOptions.backgroundColor : Color.White)
     .justifyContent(FlexAlign.Center) // 垂直居中
     .alignItems(HorizontalAlign.Center) // 水平居中
   }

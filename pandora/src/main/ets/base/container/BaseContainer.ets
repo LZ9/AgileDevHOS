@@ -33,7 +33,7 @@ export struct BaseContainer {
         .layoutWeight(1)
         .visibility(this.vm.isShowNoData ? Visibility.Visible : Visibility.None)
 
-      ErrorView({ attribute: this.vm.errorViewAttribute })
+      ErrorView({ vm: this.vm.errorViewVm })
         .width(`100%`)
         .layoutWeight(1)
         .visibility(this.vm.isShowError ? Visibility.Visible : Visibility.None)

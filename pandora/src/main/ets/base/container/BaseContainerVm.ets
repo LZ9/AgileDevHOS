@@ -1,5 +1,5 @@
 import { JsonUtils } from "@lodz/core_hos"
-import { ErrorViewAttribute } from "../../components/state/ErrorViewAttribute"
+import { ErrorViewVm } from "../../components/state/ErrorViewVm"
 import { LoadingViewAttribute } from "../../components/state/LoadingViewAttribute"
 import { NoDataViewAttribute } from "../../components/state/NoDataViewAttribute"
 import { TitleBarViewAttribute } from "../../components/titlebar/TitleBarViewAttribute"
@@ -17,7 +17,7 @@ export class BaseContainerVm {
   /** 无数据页属性 */
   @Track public noDataViewAttribute: NoDataViewAttribute = new NoDataViewAttribute()
   /** 错误页属性 */
-  @Track public errorViewAttribute: ErrorViewAttribute = new ErrorViewAttribute()
+  @Track public errorViewVm: ErrorViewVm = new ErrorViewVm()
   /** 点击错误页面重试监听器 */
   @Track public onReloadClick?: (event: ClickEvent) => void
   // 是否显示标题栏
@@ -76,7 +76,7 @@ export class BaseContainerVm {
       this.titleBarViewAttribute = attribute.titleBarViewAttribute
       this.loadingViewAttribute = attribute.loadingViewAttribute
       this.noDataViewAttribute = attribute.noDataViewAttribute
-      this.errorViewAttribute = attribute.errorViewAttribute
+      this.errorViewVm = attribute.errorViewVm
       this.onReloadClick = attribute.onReloadClick
       this.isShowTitleBar = attribute.isShowTitleBar
       this.isShowLoading = attribute.isShowLoading

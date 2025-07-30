@@ -6,7 +6,7 @@ import { PandoraConstants } from "../../config/PandoraConstants"
  * 加载失败控件属性
  * Created by zhouL on 2025/7/24.
  */
-export class ErrorViewAttribute {
+export class ErrorViewVm {
   /** 图片参数 */
   @Track public imgOptions: ImgOptions = {}
   /** 文字参数 */
@@ -22,8 +22,8 @@ export class ErrorViewAttribute {
     const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? "{}"
     const attribute = JsonUtils.jsonToBean<BaseContainerVm>(json) ?? undefined
     if (attribute !== undefined) {
-      this.imgOptions = attribute.errorViewAttribute.imgOptions
-      this.textOptions = attribute.errorViewAttribute.textOptions
+      this.imgOptions = attribute.errorViewVm.imgOptions
+      this.textOptions = attribute.errorViewVm.textOptions
     }
   }
 }

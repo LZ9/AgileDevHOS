@@ -25,7 +25,7 @@ export { NoDataViewAttribute } from './src/main/ets/components/state/NoDataViewA
 
 export { ErrorView } from './src/main/ets/components/state/ErrorView';
 
-export { ErrorViewAttribute } from './src/main/ets/components/state/ErrorViewAttribute';
+export { ErrorViewVm } from './src/main/ets/components/state/ErrorViewVm';
 
 //---------------- 工具 -----------------
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';
