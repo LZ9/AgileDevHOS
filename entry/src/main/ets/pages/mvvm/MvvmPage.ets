@@ -1,7 +1,8 @@
-import { BaseContainer, BaseContainerAttribute, PromiseAgent, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerAttribute, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
+import { TodoItemView } from '../../view/mvvm/TodoItemView'
 
 /**
  * mvvm用例页面
@@ -23,12 +24,21 @@ struct MvvmPage {
     this.attribute.titleBarViewAttribute.backImgOptions.onClick = () => {
       RouterUtils.back(this.getUIContext())
     }
+    this.attribute.onReloadClick = () => {
+      this.attribute.showStatusLoading()
+      this.requestTodoList()
+     }
   }
 
   onDidBuild(): void {
+    this.requestTodoList()
+  }
+
+  /** 请求代办列表 */
+  private requestTodoList() {
     PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
       .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext()))
-      .run({
+      .subscribe({
         onSubscribe: () => {
           this.attribute.showStatusLoading()
         },
@@ -37,6 +47,7 @@ struct MvvmPage {
           this.attribute.showStatusCompleted()
         },
         onError: (e: Error) => {
+          PromptUtils.toastShort(this.getUIContext(), e.message)
           this.attribute.showStatusError()
         }
       })
@@ -77,14 +88,7 @@ struct MvvmPage {
     List() {
       ForEach(this.todoList, (item: TodoBean) => {
         ListItem() {
-          Text(item.title)
-            .width('100%')
-            .fontSize(20)
-            .textAlign(TextAlign.Start)
-            .padding(10)
-            .onClick(() => {
-
-            })
+          TodoItemView({ todoBean: item })
         }
       })
     }
@@ -103,32 +107,4 @@ struct MvvmPage {
     }
   }
 
-
-  //https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/arkts-mvvm
-
-  // @State thingsTodo: TodoListViewModel = new TodoListViewModel() // View绑定ViewModel的数据
-  // private context = this.getUIContext().getHostContext() as common.UIAbilityContext
-  //
-  // async aboutToAppear() {
-  //   await this.thingsTodo.loadTasks(this.context)
-  // }
-
-  // build() {
-  //   Column() {
-  //     Row({ space: 40 }) {
-  //       // 全部待办
-  //       TodoComponent()
-  //       // 全选
-  //       AllChooseComponent({ thingsViewModel: this.thingsTodo })
-  //     }
-  //
-  //     Column() {
-  //       TodoListComponent({ thingsViewModelArray: this.thingsTodo.things })
-  //     }
-  //   }
-  //   .height('100%')
-  //   .width('100%')
-  //   .margin({ top: 5, bottom: 5 })
-  //   .backgroundColor('#90f1f3f5')
-  // }
 }

@@ -36,7 +36,7 @@ export { PromiseAgent } from './src/main/ets/utils/promise/PromiseAgent';
 
 export { DataError } from './src/main/ets/utils/promise/DataError';
 
-export { ProObserver } from './src/main/ets/utils/promise/ProObserver';
+export { Observer } from './src/main/ets/utils/promise/Observer';
 
 
 

@@ -17,18 +17,24 @@ export class ApiService {
   public getTodoList(context: Context | undefined): Promise<ResponseBean<Array<TodoBean>>> {
     return new Promise<ResponseBean<Array<TodoBean>>>((resolve, reject) => {
       setTimeout(() => {
-        const json = ResourceUtils.getRawFileContentStrSync(context, 'DefaultTodoTasks.json')
-        if (json === null) {
-          reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("获取本地数据失败")))
-          return
+        try {
+          const json = ResourceUtils.getRawFileContentStrSync(context, 'DefaultTodoTasks.json')
+          if (json === null) {
+            reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("获取本地数据失败")))
+            return
+          }
+          const list = JsonUtils.jsonToBean<Array<TodoBean>>(json)
+          if (list === null) {
+            reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("数据解析错误")))
+            return
+          }
+          resolve(ResponseBean.createSuccess<Array<TodoBean>>(list))
+        } catch (e) {
+          if (e instanceof Error) {
+            reject(e)
+          }
         }
-        const list = JsonUtils.jsonToBean<Array<TodoBean>>(json)
-        if (list === null) {
-          reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("数据解析错误")))
-          return
-        }
-        resolve(ResponseBean.createSuccess<Array<TodoBean>>(list))
-      }, 2000)
+      }, 1000)
     })
   }
 }

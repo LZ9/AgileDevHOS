@@ -1,5 +1,5 @@
 import { DataError } from "./DataError"
-import { ProObserver } from "./ProObserver"
+import { Observer } from "./Observer"
 import { ResponseContract } from "./ResponseContract"
 
 /**
@@ -7,7 +7,7 @@ import { ResponseContract } from "./ResponseContract"
  * Created by zhouL on 2025/7/29.
  */
 export class PromiseAgent<T extends  Object> {
-  private observer?: ProObserver<T> | undefined
+  private observer?: Observer<T> | undefined
   private block?: () => Promise<T> | undefined
 
   private constructor() {
@@ -26,7 +26,7 @@ export class PromiseAgent<T extends  Object> {
     return this
   }
 
-  public run(observer?: ProObserver<T>) {
+  public subscribe(observer?: Observer<T>) {
     this.observer = observer
     PromiseAgent.just<T>()
       .then((t) => {

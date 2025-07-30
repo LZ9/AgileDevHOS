@@ -1,10 +1,10 @@
-import { DataError } from "../../../../../Index"
+import { DataError } from "./DataError"
 
 /**
  * PromiseAgent的观察者
- * Created by zhouL on 2025/7/29.
+ * Created by zhouL on 2025/7/30.
  */
-export interface ProObserver<T> {
+export interface Observer<T> {
   /** 订阅前 */
   onSubscribe?: () => void
   /** 订阅结果回调 */
