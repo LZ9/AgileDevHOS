@@ -4,6 +4,7 @@
     "pages/main/MainPage",
     "pages/json/JsonPage",
     "pages/preferences/PreferencesPage",
-    "pages/mvvm/MvvmPage"
+    "pages/mvvm/MvvmPage",
+    "pages/api/ComponentV2Page"
   ]
 }

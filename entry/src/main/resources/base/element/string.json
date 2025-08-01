@@ -26,6 +26,11 @@
       "description": "Mvvm测试类"
     },
     {
+      "name": "component_v2_page_path",
+      "value": "pages/api/ComponentV2Page",
+      "description": "ComponentV2测试类"
+    },
+    {
       "name": "module_desc",
       "value": "AgileDevHOS主工程"
     },
@@ -180,6 +185,10 @@
     {
       "name": "mvvm_title",
       "value": "Mvvm测试类"
+    },
+    {
+      "name": "component_v2_title",
+      "value": "ComponentV2测试类"
     }
   ]
 }
