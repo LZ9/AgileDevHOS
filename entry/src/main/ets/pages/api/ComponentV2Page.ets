@@ -1,4 +1,6 @@
 import { BaseContainer, BaseContainerVm, JsonUtils, RouterUtils } from '@lodz/pandora'
+import { UserType } from './UserType'
+import { UserTypeObserved } from './UserTypeObserved'
 
 /**
  * 接口测试用例
@@ -34,41 +36,61 @@ struct ComponentV2Page {
 
   @Builder
   contentLayout() {
-    Column() {
-      Child()
+    Scroll(){
+      Column() {
+        ChildLocal()
+        ChildObserved()
+      }
     }
   }
 }
 
-@ObservedV2
-class UserType {
-  @Trace id: number
-  @Trace name: string
-
-  constructor(id: number, name: string) {
-    this.id = id;
-    this.name = name;
-  }
-}
-
 @ComponentV2
-export struct Child {
-  @Local aar: UserType[] = [
-    new UserType(1, "张三"),
-    new UserType(2, "李四")
+export struct ChildLocal {
+  // 不允许外部传入参数
+  @Local aar: Array<UserType> = [
+    new UserType(0, "Beijing"),
+    new UserType(1, "Shanghai")
   ]
 
   build() {
     Column() {
-      Text(JsonUtils.beanToJson(this.aar))
+      Text(`-------------- @Local ---------------`)
+      Text(`json : ${JsonUtils.beanToJson(this.aar)}`)//UI会跟着变化
 
       ForEach(this.aar, (item: UserType) => {
+        Text(`${item.code} --- ${item.city}`)
+      })
+      Button("修改").onClick(() => {
+        this.aar[0].code = -1
+        this.aar[1] = new UserType(5, "Nanjing")
+      })
+      Text(`-------------- @Local ---------------`)
+    }
+    .margin(20)
+  }
+}
+
+@ComponentV2
+export struct ChildObserved {
+  @Local aar: Array<UserTypeObserved> = [
+    new UserTypeObserved(1, "张三"),
+    new UserTypeObserved(2, "李四")
+  ]
+
+  build() {
+    Column() {
+      Text(`------------- @ObservedV2 --------------`)
+      Text(`json : ${JsonUtils.beanToJson(this.aar)}`)
+      ForEach(this.aar, (item: UserTypeObserved) => {
         Text(`${item.id} --- ${item.name}`)
       })
 
       Button("修改").onClick(() => {
-        this.aar[0].id = 500 // UI观测不到变化
+        this.aar[0].id = 500
+        this.aar[1].name = `王五`
       })
+      Text(`------------- @ObservedV2 --------------`)
     }
     .margin(20)
   }
