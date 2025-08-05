@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerVm, JsonUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, JsonUtils, RandomUtils, RouterUtils } from '@lodz/pandora'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
 
@@ -25,8 +25,8 @@ struct ComponentV2Page {
   }
 
   /** 更新计数器事件函数 */
-  private updateCountEvent() {
-    this.count = this.count + 5
+  private updateCountEvent(i: number) {
+    this.count = this.count + i
   }
 
   build() {
@@ -58,8 +58,8 @@ struct ComponentV2Page {
 
         ChildEvent({
           n: this.count,
-          updateCountListener: () => {
-            this.updateCountEvent()
+          updateCountListener: (i: number) => {
+            this.updateCountEvent(i)
           }
         })
         ChildOnce({ n: this.count })
@@ -82,15 +82,17 @@ struct ComponentV2Page {
 export struct ChildEvent {
   @Param n: number = -1
   //定义一个函数来通知外部操作父组件的数据变化，从而使子组件的数据可以被更新
-  @Event
-  updateCountListener: () => void = () => {}
+  @Event updateCountListener: (i: number) => void = () => {}
+
+  // 随机数 1- 9
+  @Local i : number = RandomUtils.getRandomInt(1, 10)
 
   build() {
     Column() {
       Text(`------------- @Event --------------`)
       Text(`子组件n的值 : ${this.n}`)
-      Button("修改").onClick(() => {
-        this.updateCountListener()
+      Button(`增加随机值 ${this.i}`).onClick(() => {
+        this.updateCountListener(this.i)
       })
       Text(`------------- @Event --------------`)
     }

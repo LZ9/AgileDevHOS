@@ -27,3 +27,6 @@ export { DeviceUtils } from './src/main/ets/utils/DeviceUtils';
 
 // Json解析工具类
 export { JsonUtils } from './src/main/ets/utils/JsonUtils';
+
+// 随机数工具类
+export { RandomUtils } from './src/main/ets/utils/RandomUtils';
