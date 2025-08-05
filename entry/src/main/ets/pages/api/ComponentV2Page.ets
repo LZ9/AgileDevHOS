@@ -10,6 +10,8 @@ import { UserTypeObserved } from './UserTypeObserved'
 @ComponentV2
 struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
+  @Local count: number = 0
+
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
@@ -38,8 +40,12 @@ struct ComponentV2Page {
   contentLayout() {
     Scroll(){
       Column() {
+        Button("count增加").onClick(() => {
+          this.count++
+        })
         ChildLocal()
         ChildObserved()
+        ChildParam({ n : this.count})
       }
     }
   }
@@ -96,3 +102,15 @@ export struct ChildObserved {
   }
 }
 
+@ComponentV2
+export struct ChildParam {
+  @Param n: number = -1
+  build() {
+    Column() {
+      Text(`------------- @Param --------------`)
+      Text(`子组件n的值 : ${this.n}`)
+      Text(`------------- @Param --------------`)
+    }
+    .margin(20)
+  }
+}
