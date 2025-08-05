@@ -12,7 +12,6 @@ struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   @Local count: number = 1
 
-
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
@@ -23,6 +22,11 @@ struct ComponentV2Page {
 
   onDidBuild(): void {
     this.vm.showStatusCompleted()
+  }
+
+  /** 更新计数器事件函数 */
+  private updateCountEvent() {
+    this.count = this.count + 5
   }
 
   build() {
@@ -38,15 +42,30 @@ struct ComponentV2Page {
 
   @Builder
   contentLayout() {
-    Scroll(){
+    Scroll() {
       Column() {
-        Button("count增加").onClick(() => {
-          this.count++
+        Row() {
+          Button("count增加")
+            .margin({ left: 10, right: 10 })
+            .onClick(() => {
+              this.count++
+            })
+
+          Text(`父组件count的值 : ${this.count}`)
+            .margin({ left: 10, right: 10 })
+        }
+        .width('100%')
+
+        ChildEvent({
+          n: this.count,
+          updateCountListener: () => {
+            this.updateCountEvent()
+          }
         })
-        ChildLocal()
+        ChildOnce({ n: this.count })
+        ChildParam({ n: this.count })
         ChildObserved()
-        ChildParam({ n : this.count})
-        ChildOnce({ n : this.count})
+        ChildLocal()
       }
     }
   }
@@ -59,7 +78,25 @@ struct ComponentV2Page {
 
 
 
+@ComponentV2
+export struct ChildEvent {
+  @Param n: number = -1
+  //定义一个函数来通知外部操作父组件的数据变化，从而使子组件的数据可以被更新
+  @Event
+  updateCountListener: () => void = () => {}
 
+  build() {
+    Column() {
+      Text(`------------- @Event --------------`)
+      Text(`子组件n的值 : ${this.n}`)
+      Button("修改").onClick(() => {
+        this.updateCountListener()
+      })
+      Text(`------------- @Event --------------`)
+    }
+    .margin(20)
+  }
+}
 
 @ComponentV2
 export struct ChildOnce {
