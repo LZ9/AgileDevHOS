@@ -2,6 +2,7 @@ import { BaseContainer, BaseContainerVm, JsonUtils, PrintLog, RandomUtils, Route
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
+import { UIUtils } from '@kit.ArkUI'
 
 /**
  * 接口测试用例
@@ -60,7 +61,7 @@ struct ComponentV2Page {
         .width('100%')
 
 
-
+        ChildMakeObserved()
         ChildBind({num: this.count!!})//通过双感叹号实现自定义双向绑定
         ChildMonitor()
         ChildComputed()
@@ -82,6 +83,29 @@ struct ComponentV2Page {
 
 
 
+@ComponentV2
+export struct ChildMakeObserved {
+
+  @Local user: UserType = new UserType(1, "张三")
+
+  build() {
+    Column() {
+      Text(`------------- @MakeObserved --------------`)
+      Button("从服务端获取用户数据").onClick(() => {
+        const result = `{"code":123,"city":"Chengdu"}`
+        this.user = UIUtils.makeObserved<UserType>(JsonUtils.jsonToBean(result))//会自动把对象转为可观测，不用再使用@ObservedV2和@Trace
+      })
+      Text(`json : ${JsonUtils.beanToJson(this.user)}`)
+      Text(`user.code : ${this.user.code}`)
+      Text(`user.city : ${this.user.city}`)
+      Button("修改").onClick(() => {
+        this.user.code++
+      })
+      Text(`------------- @MakeObserved --------------`)
+    }
+    .margin(10)
+  }
+}
 
 @ComponentV2
 export struct ChildBind {
