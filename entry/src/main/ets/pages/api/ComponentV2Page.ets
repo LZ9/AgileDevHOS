@@ -59,6 +59,7 @@ struct ComponentV2Page {
         .width('100%')
 
 
+        ChildComputed()
         ChildProvider()
         ChildEvent({
           n: this.count,
@@ -78,7 +79,28 @@ struct ComponentV2Page {
 
 
 
+@ComponentV2
+export struct ChildComputed {
+  @Local list: Array<number> = [100, 200, 300]
 
+  @Computed
+  private get getSum(): number {
+    return this.list.reduce((acc, cur) => acc + cur, 0)
+  }
+
+  build() {
+    Column() {
+      Text(`------------- @Computed --------------`)
+      Text(JsonUtils.beanToJson(this.list))
+      Text(`本次购买的商品总价是 : ${this.getSum}`)
+      Button("添加列表数据").onClick(() => {
+        this.list.push(500)
+      })
+      Text(`------------- @Computed --------------`)
+    }
+    .margin(10)
+  }
+}
 
 @ComponentV2
 export struct ChildProvider {
@@ -86,7 +108,6 @@ export struct ChildProvider {
 
   // 自定义传入子组件的名称（需要和子组件内变量的名称一致）
   @Provider(`index`) num: number = 1
-
 
   build() {
     Column() {
@@ -156,9 +177,7 @@ export struct ChildEvent {
 @ComponentV2
 export struct ChildOnce {
   // 该字段只能被外部赋值1次，并且允许内部修改该字段的值，且修改后的数据不会同步回父组件
-  @Param
-  @Once
-  n: number = -1
+  @Param @Once n: number = -1
   build() {
     Column() {
       Text(`------------- @Once --------------`)
