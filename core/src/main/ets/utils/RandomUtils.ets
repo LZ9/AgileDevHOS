@@ -8,7 +8,7 @@ export class RandomUtils {
    * @param min 最小值（包含）
    * @param max 最大值（不包含）
    */
-  public static getRandomInt(min: number, max: number): number {
+  public static getInt(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min) + min);
   }
 }

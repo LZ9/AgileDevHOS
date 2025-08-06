@@ -1,4 +1,5 @@
-import { BaseContainer, BaseContainerVm, JsonUtils, RandomUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, JsonUtils, PrintLog, RandomUtils, RouterUtils } from '@lodz/pandora'
+import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
 
@@ -59,6 +60,7 @@ struct ComponentV2Page {
         .width('100%')
 
 
+        ChildMonitor()
         ChildComputed()
         ChildProvider()
         ChildEvent({
@@ -78,6 +80,50 @@ struct ComponentV2Page {
 
 
 
+
+
+
+@ComponentV2
+export struct ChildMonitor {
+  @Local count: number = 0
+  @Local foo: boolean = true
+  @Local user: UserTypeObserved = new UserTypeObserved(1, '张三')
+
+  @Monitor(`count`,`foo`,`user.id`,`user.name`)
+  handle(monitor: IMonitor) {
+    //被修改的变量名称
+    PrintLog.d(Constants.Log.TAG, "被修改的变量名称 : " + monitor.value()?.path)
+    PrintLog.d(Constants.Log.TAG, "被修改的变量之前的值 : " + monitor.value()?.before)
+    PrintLog.d(Constants.Log.TAG, "被修改的变量现在的值 : " + monitor.value()?.now)
+  }
+
+  build() {
+    Column() {
+      Text(`------------- @Computed --------------`)
+      Text(`count : ${this.count}`)
+      Text(`foo : ${this.foo}`)
+      Text(`user : ${this.user.id} , ${this.user.name}`)
+      Row(){
+        Button("修改count").onClick(() => {
+          this.count++
+        })
+        Button("修改foo").onClick(() => {
+          this.foo = !this.foo
+        })
+      }
+      Row(){
+        Button("修改user.id").onClick(() => {
+          this.user.id++
+        })
+        Button("修改user.name").onClick(() => {
+          this.user.name = `李四${RandomUtils.getInt(1, 10)}`
+        })
+      }
+      Text(`------------- @Computed --------------`)
+    }
+    .margin(10)
+  }
+}
 
 @ComponentV2
 export struct ChildComputed {
@@ -159,7 +205,7 @@ export struct ChildEvent {
   @Event updateCountListener: (i: number) => void = () => {}
 
   // 随机数 1- 9
-  @Local i : number = RandomUtils.getRandomInt(1, 10)
+  @Local i : number = RandomUtils.getInt(1, 10)
 
   build() {
     Column() {
@@ -222,8 +268,8 @@ export struct ChildObserved {
       })
 
       Button("修改").onClick(() => {
-        this.aar[0].id = 500
-        this.aar[1].name = `王五`
+        this.aar[0].id = RandomUtils.getInt(100, 501)
+        this.aar[1].name = `王五${RandomUtils.getInt(1, 10)}`
       })
       Text(`------------- @ObservedV2 --------------`)
     }
