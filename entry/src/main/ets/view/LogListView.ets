@@ -1,4 +1,4 @@
-import { CoreConstants, DateUtils, DeviceUtils } from "@lodz/pandora";
+import { DeviceUtils } from "@lodz/pandora";
 
 /**
  * 日志列表控件
@@ -7,11 +7,11 @@ import { CoreConstants, DateUtils, DeviceUtils } from "@lodz/pandora";
 @ComponentV2
 export struct LogListView {
   /** 日志列表 */
-  @Event public logList: Array<string>
+  @Param public logList: Array<string> = []
 
-  /** 列表数据变化 */
-  @Monitor('logList')
-  onListChange(monitor: IMonitor) {
+  /** 监听日志数据变化 */
+  @Monitor('logList.length')//由于Array、Map、Date、Set不能被监听，所以通过监听数组长度的变化来曲线救国
+  onLogChange(monitor: IMonitor) {
     this.listScroller.scrollTo({ xOffset: 0, yOffset: DeviceUtils.getScreenHeight(), animation: true })
   }
 
@@ -33,14 +33,5 @@ export struct LogListView {
       .height('100%')
       .alignListItem(ListItemAlign.Start)
     }
-  }
-
-  /**
-   * 打印日志
-   * @param text 日志
-   */
-  public addLog(text: string) {
-    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " : " + text)
-
   }
 }

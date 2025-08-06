@@ -22,7 +22,7 @@ import { LogListView } from '../../view/LogListView';
 @Preview({ deviceType: "phone" })
 struct PreferencesPage {
   /** 日志列表 */
-  @Local public logList: Array<string> = []
+  @Local private logList: Array<string> = []
   /** 缓存内容 */
   private text: string = ""
   /** 基类属性 */
