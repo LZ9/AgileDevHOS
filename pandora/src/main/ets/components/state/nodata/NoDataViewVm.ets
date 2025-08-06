@@ -1,8 +1,9 @@
-import { BaseContainerAttribute } from "../../../base/container/BaseContainerAttribute"
+import { JsonUtils } from "@lodz/core_hos"
+import { BaseContainerScopeConfig } from "../../../base/container/BaseContainerScopeConfig"
 import { PandoraConstants } from "../../../config/PandoraConstants"
 
 /**
- * 无数据控件VM
+ * 无数据控件ViewModel
  * Created by zhouL on 2025/7/24.
  */
 @ObservedV2
@@ -19,21 +20,22 @@ export class NoDataViewVm {
 
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
-    const attribute = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? undefined
-    if (attribute !== undefined) {
-      this.imgVm.src = attribute.noDataViewAttribute.imgOptions.src
-      this.imgVm.width = attribute.noDataViewAttribute.imgOptions.width
-      this.imgVm.height = attribute.noDataViewAttribute.imgOptions.height
-      this.imgVm.objectFit = attribute.noDataViewAttribute.imgOptions.objectFit
-      this.imgVm.visibility = attribute.noDataViewAttribute.imgOptions.visibility
-      this.textVm.content = attribute.noDataViewAttribute.textOptions.content
-      this.textVm.fontSize = attribute.noDataViewAttribute.textOptions.fontSize
-      this.textVm.fontColor = attribute.noDataViewAttribute.textOptions.fontColor
-      this.textVm.textAlign = attribute.noDataViewAttribute.textOptions.textAlign
-      this.textVm.backgroundColor = attribute.noDataViewAttribute.textOptions.backgroundColor
-      this.textVm.visibility = attribute.noDataViewAttribute.textOptions.visibility
-
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? `{}`
+    const config = JsonUtils.jsonToBean<BaseContainerScopeConfig>(json)
+    if (config == null) {
+      return
     }
+    this.imgVm.src = config.noDataImgOptions.src
+    this.imgVm.width = config.noDataImgOptions.width
+    this.imgVm.height = config.noDataImgOptions.height
+    this.imgVm.objectFit = config.noDataImgOptions.objectFit
+    this.imgVm.visibility = config.noDataImgOptions.visibility
+    this.textVm.content = config.noDataTextOptions.content
+    this.textVm.fontSize = config.noDataTextOptions.fontSize
+    this.textVm.fontColor = config.noDataTextOptions.fontColor
+    this.textVm.textAlign = config.noDataTextOptions.textAlign
+    this.textVm.backgroundColor = config.noDataTextOptions.backgroundColor
+    this.textVm.visibility = config.noDataTextOptions.visibility
   }
 }
 

@@ -1,8 +1,9 @@
-import { BaseContainerAttribute } from "../../../base/container/BaseContainerAttribute"
+import { JsonUtils } from "@lodz/core_hos"
+import { BaseContainerScopeConfig } from "../../../base/container/BaseContainerScopeConfig"
 import { PandoraConstants } from "../../../config/PandoraConstants"
 
 /**
- * 加载控件VM
+ * 加载控件ViewModel
  * Created by zhouL on 2025/7/24.
  */
 @ObservedV2
@@ -19,17 +20,19 @@ export class LoadingViewVm {
 
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
-    const attribute = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? undefined
-    if (attribute !== undefined) {
-      this.progressVm.width = attribute.loadingViewAttribute.progressOptions.width
-      this.progressVm.color = attribute.loadingViewAttribute.progressOptions.color
-      this.textVm.content = attribute.loadingViewAttribute.textOptions.content
-      this.textVm.fontSize = attribute.loadingViewAttribute.textOptions.fontSize
-      this.textVm.fontColor = attribute.loadingViewAttribute.textOptions.fontColor
-      this.textVm.textAlign = attribute.loadingViewAttribute.textOptions.textAlign
-      this.textVm.backgroundColor = attribute.loadingViewAttribute.textOptions.backgroundColor
-      this.textVm.visibility = attribute.loadingViewAttribute.textOptions.visibility
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? `{}`
+    const config = JsonUtils.jsonToBean<BaseContainerScopeConfig>(json)
+    if (config == null) {
+      return
     }
+    this.progressVm.width = config.loadingProgressOptions.width
+    this.progressVm.color = config.loadingProgressOptions.color
+    this.textVm.content = config.loadingTextOptions.content
+    this.textVm.fontSize = config.loadingTextOptions.fontSize
+    this.textVm.fontColor = config.loadingTextOptions.fontColor
+    this.textVm.textAlign = config.loadingTextOptions.textAlign
+    this.textVm.backgroundColor = config.loadingTextOptions.backgroundColor
+    this.textVm.visibility = config.loadingTextOptions.visibility
   }
 }
 

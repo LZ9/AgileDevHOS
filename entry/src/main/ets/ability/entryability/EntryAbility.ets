@@ -1,5 +1,5 @@
 import { BaseAbility, PreferencesUtils, ResourceUtils } from '@lodz/pandora'
-import { BaseContainerAttribute } from '@lodz/pandora/src/main/ets/base/container/BaseContainerAttribute'
+import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/container/BaseContainerScopeConfig'
 import { Constants } from '../../config/Constants'
 
 export default class EntryAbility extends BaseAbility {
@@ -12,9 +12,9 @@ export default class EntryAbility extends BaseAbility {
     return ResourceUtils.toString(this.context, $r('app.string.splash_page_path'))
   }
 
-  protected configBaseContainerAttribute(): BaseContainerAttribute | undefined {
-    const attribute: BaseContainerAttribute = new BaseContainerAttribute()
-    attribute.titleBarViewAttribute.titleOptions.backgroundColor = $r('app.color.color_00a0e9')
-    return attribute
+  protected createBaseContainerScopeConfig(): BaseContainerScopeConfig | undefined {
+    const config: BaseContainerScopeConfig = new BaseContainerScopeConfig()
+    config.titleBarTitleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    return config
   }
 }

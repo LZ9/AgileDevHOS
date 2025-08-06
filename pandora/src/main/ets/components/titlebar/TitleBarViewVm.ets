@@ -1,8 +1,9 @@
-import { BaseContainerAttribute } from "../../base/container/BaseContainerAttribute"
+import { JsonUtils } from "@lodz/core_hos"
+import { BaseContainerScopeConfig } from "../../base/container/BaseContainerScopeConfig"
 import { PandoraConstants } from "../../config/PandoraConstants"
 
 /**
- * 标题栏控件VM
+ * 标题栏控件ViewModel
  * Created by zhouL on 2025/7/24.
  */
 @ObservedV2
@@ -26,22 +27,23 @@ export class TitleBarViewVm {
 
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
-    const attribute = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? undefined
-    if (attribute !== undefined) {
-      this.titleVm.title = attribute.titleBarViewAttribute.titleOptions.title
-      this.titleVm.fontSize = attribute.titleBarViewAttribute.titleOptions.fontSize
-      this.titleVm.textAlign = attribute.titleBarViewAttribute.titleOptions.textAlign
-      this.titleVm.fontColor = attribute.titleBarViewAttribute.titleOptions.fontColor
-      this.titleVm.backgroundColor = attribute.titleBarViewAttribute.titleOptions.backgroundColor
-      this.backImgVm.src = attribute.titleBarViewAttribute.backImgOptions.src
-      this.backImgVm.width = attribute.titleBarViewAttribute.backImgOptions.width
-      this.backImgVm.height = attribute.titleBarViewAttribute.backImgOptions.height
-      this.backImgVm.objectFit = attribute.titleBarViewAttribute.backImgOptions.objectFit
-      this.backImgVm.visibility = attribute.titleBarViewAttribute.backImgOptions.visibility
-      this.backImgVm.onClick = attribute.titleBarViewAttribute.backImgOptions.onClick
-      this.dividingVm.color = attribute.titleBarViewAttribute.dividingOptions.color
-      this.dividingVm.visibility = attribute.titleBarViewAttribute.dividingOptions.visibility
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? `{}`
+    const config = JsonUtils.jsonToBean<BaseContainerScopeConfig>(json)
+    if (config == null) {
+      return
     }
+    this.backImgVm.src = config.titleBarBackImgOptions.src
+    this.backImgVm.width = config.titleBarBackImgOptions.width
+    this.backImgVm.height = config.titleBarBackImgOptions.height
+    this.backImgVm.objectFit = config.titleBarBackImgOptions.objectFit
+    this.backImgVm.visibility = config.titleBarBackImgOptions.visibility
+    this.titleVm.title = config.titleBarTitleOptions.title
+    this.titleVm.fontSize = config.titleBarTitleOptions.fontSize
+    this.titleVm.textAlign = config.titleBarTitleOptions.textAlign
+    this.titleVm.fontColor = config.titleBarTitleOptions.fontColor
+    this.titleVm.backgroundColor = config.titleBarTitleOptions.backgroundColor
+    this.dividingVm.color = config.titleBarDividingOptions.color
+    this.dividingVm.visibility = config.titleBarDividingOptions.visibility
   }
 }
 

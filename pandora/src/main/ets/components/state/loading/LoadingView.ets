@@ -13,19 +13,19 @@ export struct LoadingView {
   build() {
     Column() {
       LoadingProgress()
-        .width(this.vm.progressVm.width !== undefined ? this.vm.progressVm.width : 50)
-        .color(this.vm.progressVm.color !== undefined ? this.vm.progressVm.color : Color.Gray)
+        .width(this.vm.progressVm.width ?? 50)
+        .color(this.vm.progressVm.color ?? Color.Gray)
 
-      Text(this.vm.textVm.content !== undefined ? this.vm.textVm.content : $r('app.string.pandora_loading'))
-        .fontSize(this.vm.textVm.fontSize !== undefined ? this.vm.textVm.fontSize : 14)
-        .fontColor(this.vm.textVm.fontColor !== undefined ? this.vm.textVm.fontColor : Color.Gray)
-        .textAlign(this.vm.textVm.textAlign !== undefined ? this.vm.textVm.textAlign : TextAlign.Center)
-        .visibility(this.vm.textVm.visibility !== undefined ? this.vm.textVm.visibility : Visibility.Visible)
+      Text(this.vm.textVm.content ?? $r('app.string.pandora_loading'))
+        .fontSize(this.vm.textVm.fontSize ?? 14)
+        .fontColor(this.vm.textVm.fontColor ?? Color.Gray)
+        .textAlign(this.vm.textVm.textAlign ?? TextAlign.Center)
+        .visibility(this.vm.textVm.visibility ?? Visibility.Visible)
         .margin(10)
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(this.vm.textVm.backgroundColor !== undefined ? this.vm.textVm.backgroundColor : Color.White)
+    .backgroundColor(this.vm.textVm.backgroundColor ?? Color.White)
     .justifyContent(FlexAlign.Center) // 垂直居中
     .alignItems(HorizontalAlign.Center) // 水平居中
   }

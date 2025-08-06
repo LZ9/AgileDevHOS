@@ -1,8 +1,9 @@
-import { BaseContainerAttribute } from "../../../base/container/BaseContainerAttribute"
+import { JsonUtils } from "@lodz/core_hos"
+import { BaseContainerScopeConfig } from "../../../base/container/BaseContainerScopeConfig"
 import { PandoraConstants } from "../../../config/PandoraConstants"
 
 /**
- * 加载失败控件VM
+ * 加载失败控件ViewModel
  * Created by zhouL on 2025/7/24.
  */
 @ObservedV2
@@ -19,20 +20,22 @@ export class ErrorViewVm {
 
   /** 获取并设置全局属性配置 */
   public setScopeConfig() {
-    const attribute = AppStorage.get<BaseContainerAttribute>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? undefined
-    if (attribute !== undefined) {
-      this.imgVm.src = attribute.errorViewAttribute.imgOptions.src
-      this.imgVm.width = attribute.errorViewAttribute.imgOptions.width
-      this.imgVm.height = attribute.errorViewAttribute.imgOptions.height
-      this.imgVm.objectFit = attribute.errorViewAttribute.imgOptions.objectFit
-      this.imgVm.visibility = attribute.errorViewAttribute.imgOptions.visibility
-      this.textVm.content = attribute.errorViewAttribute.textOptions.content
-      this.textVm.fontSize = attribute.errorViewAttribute.textOptions.fontSize
-      this.textVm.fontColor = attribute.errorViewAttribute.textOptions.fontColor
-      this.textVm.textAlign = attribute.errorViewAttribute.textOptions.textAlign
-      this.textVm.backgroundColor = attribute.errorViewAttribute.textOptions.backgroundColor
-      this.textVm.visibility = attribute.errorViewAttribute.textOptions.visibility
+    const json = AppStorage.get<string>(PandoraConstants.Storage.BASE_VIEW_CONFIG) ?? `{}`
+    const config = JsonUtils.jsonToBean<BaseContainerScopeConfig>(json)
+    if (config == null) {
+      return
     }
+    this.imgVm.src = config.errorImgOptions.src
+    this.imgVm.width = config.errorImgOptions.width
+    this.imgVm.height = config.errorImgOptions.height
+    this.imgVm.objectFit = config.errorImgOptions.objectFit
+    this.imgVm.visibility = config.errorImgOptions.visibility
+    this.textVm.content = config.errorTextOptions.content
+    this.textVm.fontSize = config.errorTextOptions.fontSize
+    this.textVm.fontColor = config.errorTextOptions.fontColor
+    this.textVm.textAlign = config.errorTextOptions.textAlign
+    this.textVm.backgroundColor = config.errorTextOptions.backgroundColor
+    this.textVm.visibility = config.errorTextOptions.visibility
   }
 }
 
