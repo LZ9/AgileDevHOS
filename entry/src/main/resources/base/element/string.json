@@ -31,6 +31,11 @@
       "description": "ComponentV2测试类"
     },
     {
+      "name": "promise_page_path",
+      "value": "pages/promise/PromisePage",
+      "description": "Promise测试类"
+    },
+    {
       "name": "module_desc",
       "value": "AgileDevHOS主工程"
     },
@@ -189,6 +194,22 @@
     {
       "name": "component_v2_title",
       "value": "ComponentV2测试类"
+    },
+    {
+      "name": "promise_title",
+      "value": "promise封装测试"
+    },
+    {
+      "name": "promise_success_switch",
+      "value": "请求成功"
+    },
+    {
+      "name": "promise_request_normal",
+      "value": "无加载框请求"
+    },
+    {
+      "name": "promise_request_dialog",
+      "value": "加载框请求"
     }
   ]
 }

@@ -15,7 +15,7 @@ struct MainPage {
 
   aboutToAppear(): void {
     //设置状态栏颜色
-    StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00a0e9'), Color.White)
+    StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00A0E9'), Color.White)
 
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.backImgVm.visibility = Visibility.Hidden
@@ -25,7 +25,8 @@ struct MainPage {
       new MainBean("Json转换测试", $r('app.string.json_page_path')),
       new MainBean("Preferences测试类", $r('app.string.preferences_page_path')),
       new MainBean("Mvvm测试类", $r('app.string.mvvm_page_path')),
-      new MainBean("ComponentV2测试类", $r('app.string.component_v2_page_path'))
+      new MainBean("ComponentV2测试类", $r('app.string.component_v2_page_path')),
+      new MainBean("Promise测试类", $r('app.string.promise_page_path'))
     ]
   }
 

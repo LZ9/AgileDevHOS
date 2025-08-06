@@ -5,6 +5,7 @@
     "pages/json/JsonPage",
     "pages/preferences/PreferencesPage",
     "pages/mvvm/MvvmPage",
-    "pages/api/ComponentV2Page"
+    "pages/api/ComponentV2Page",
+    "pages/promise/PromisePage"
   ]
 }

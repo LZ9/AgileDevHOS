@@ -6,11 +6,11 @@ export class DataError<T> extends Error {
   /** 异常数据 */
   public data: T | null = null
 
-  constructor(data: T | null,name?: string, message?: string, stack?: string) {
+  constructor(data: T | null, message?: string, name?: string, stack?: string) {
     super();
     this.data = data;
-    this.name = name ?? this.name;
     this.message = message ?? "数据异常";
+    this.name = name ?? "DataError";
     this.stack = stack;
   }
 }

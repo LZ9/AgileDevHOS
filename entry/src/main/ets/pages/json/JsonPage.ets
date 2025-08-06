@@ -12,8 +12,7 @@ import { LogListView } from '../../view/LogListView'
 struct JsonPage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */
-  private static readonly JSON_STRING =
-    '{"msg":"查询成功","code":200,"data":[{"id":1001,"name":"Jack","age":25,"city":"Shanghai"}]}'
+  private static readonly JSON_STRING = '{"msg":"查询成功","code":200,"data":[{"id":1001,"name":"Jack","age":25,"city":"Shanghai"}]}'
   /** 日志列表 */
   @Local public logList: Array<string> = []
 

@@ -38,7 +38,7 @@ protected abstract getLayoutPath(): string
 protected endCreate() {} 
 
 // 支持全局配置基础状态控件的参数
-protected configBaseContainerVm(): BaseContainerVm | undefined {} 
+protected createBaseContainerScopeConfig(): BaseContainerScopeConfig | undefined {} 
 ```
 
 ### 页面容器基类：BaseContainer

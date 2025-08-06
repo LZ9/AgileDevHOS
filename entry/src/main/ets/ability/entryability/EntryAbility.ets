@@ -14,7 +14,7 @@ export default class EntryAbility extends BaseAbility {
 
   protected createBaseContainerScopeConfig(): BaseContainerScopeConfig | undefined {
     const config: BaseContainerScopeConfig = new BaseContainerScopeConfig()
-    config.titleBarTitleOptions.backgroundColor = $r('app.color.color_00a0e9')
+    config.titleBarTitleOptions.backgroundColor = $r('app.color.color_00A0E9')
     return config
   }
 }

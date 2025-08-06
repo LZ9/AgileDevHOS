@@ -74,7 +74,7 @@ struct MvvmPage {
       .height(30)
       .fontSize(12)
       .margin({ right: 10 })
-      .fontColor($r(`app.color.color_00a0e9`))
+      .fontColor($r(`app.color.color_00A0E9`))
       .backgroundColor(Color.White)
       .onClick(() => {
         this.setTodoListFinish(!this.isAllFinish)
