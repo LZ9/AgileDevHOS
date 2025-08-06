@@ -10,7 +10,9 @@ import { UserTypeObserved } from './UserTypeObserved'
 @ComponentV2
 struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
-  @Local count: number = 1
+
+  // 该变量要传递到子组件的子组件中（ChildConsumer）
+  @Provider() count: number = 1
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
@@ -56,6 +58,8 @@ struct ComponentV2Page {
         }
         .width('100%')
 
+
+        ChildProvider()
         ChildEvent({
           n: this.count,
           updateCountListener: (i: number) => {
@@ -76,7 +80,56 @@ struct ComponentV2Page {
 
 
 
+@ComponentV2
+export struct ChildProvider {
+  @Local msg: string = "我是ChildProvider组件"
 
+  // 自定义传入子组件的名称（需要和子组件内变量的名称一致）
+  @Provider(`index`) num: number = 1
+
+
+  build() {
+    Column() {
+      Text(`------------- @Provider --------------`)
+      Text(this.msg)
+      ChildConsumer()
+      Button(`修改`).onClick(() => {
+        this.num++
+      })
+      Text(`------------- @Provider --------------`)
+    }
+    .margin(10)
+    .width('100%')
+    .height(400)
+    .backgroundColor(Color.Pink)
+  }
+}
+
+@ComponentV2
+export struct ChildConsumer {
+  @Local msg: string = "我是ChildConsumer组件"
+  @Consumer() count: number = 100
+  @Consumer() index: number = -1
+
+
+  build() {
+    Column() {
+      Text(`---------- @Consumer -----------`)
+      Text(this.msg)
+      Text(`最外层传入的count的值 ->  ${this.count}`)
+      Text(`ChildProvider传入的index的值 ->  ${this.index}`)
+      Button(`修改`).onClick(() => {
+        this.count--
+        this.index--
+      })
+      Text(`---------- @Consumer -----------`)
+    }
+    .margin(10)
+    .width(300)
+    .height(200)
+    .backgroundColor(Color.Green)
+  }
+}
 
 @ComponentV2
 export struct ChildEvent {
@@ -96,7 +149,7 @@ export struct ChildEvent {
       })
       Text(`------------- @Event --------------`)
     }
-    .margin(20)
+    .margin(10)
   }
 }
 
@@ -115,7 +168,7 @@ export struct ChildOnce {
       })
       Text(`------------- @Once --------------`)
     }
-    .margin(20)
+    .margin(10)
   }
 }
 
@@ -129,7 +182,7 @@ export struct ChildParam {
       Text(`子组件n的值 : ${this.n}`)
       Text(`------------- @Param --------------`)
     }
-    .margin(20)
+    .margin(10)
   }
 }
 
@@ -155,7 +208,7 @@ export struct ChildObserved {
       })
       Text(`------------- @ObservedV2 --------------`)
     }
-    .margin(20)
+    .margin(10)
   }
 }
 
@@ -181,6 +234,6 @@ export struct ChildLocal {
       })
       Text(`-------------- @Local ---------------`)
     }
-    .margin(20)
+    .margin(10)
   }
 }
