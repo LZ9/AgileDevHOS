@@ -60,6 +60,8 @@ struct ComponentV2Page {
         .width('100%')
 
 
+
+        ChildBind({num: this.count!!})//通过双感叹号实现自定义双向绑定
         ChildMonitor()
         ChildComputed()
         ChildProvider()
@@ -81,7 +83,29 @@ struct ComponentV2Page {
 
 
 
+@ComponentV2
+export struct ChildBind {
+  @Local msgSys: string = "系统控件双向绑定"
+  @Param num: number = 500
+  @Event $num: (value: number) => void = () => {}
 
+  build() {
+    Column() {
+      Text(`------------- @Bind --------------`)
+      //系统组件自带的双向同步
+      Text(this.msgSys)
+      TextInput({text: $$this.msgSys})
+
+      //实现自定义子组件的数据双向绑定
+      Text(this.num.toString())
+      Button("修改num").onClick(() => {
+        this.$num(this.num + 3)
+      })
+      Text(`------------- @Bind --------------`)
+    }
+    .margin(10)
+  }
+}
 
 @ComponentV2
 export struct ChildMonitor {
@@ -89,6 +113,7 @@ export struct ChildMonitor {
   @Local foo: boolean = true
   @Local user: UserTypeObserved = new UserTypeObserved(1, '张三')
 
+  //支持监听变量值的变化
   @Monitor(`count`,`foo`,`user.id`,`user.name`)
   handle(monitor: IMonitor) {
     //被修改的变量名称
@@ -129,6 +154,7 @@ export struct ChildMonitor {
 export struct ChildComputed {
   @Local list: Array<number> = [100, 200, 300]
 
+  // 支持将计算结果缓存，如果结算结果有变化再更新缓存
   @Computed
   private get getSum(): number {
     return this.list.reduce((acc, cur) => acc + cur, 0)
@@ -175,6 +201,7 @@ export struct ChildProvider {
 @ComponentV2
 export struct ChildConsumer {
   @Local msg: string = "我是ChildConsumer组件"
+  // 接收父组件的数据，并双向同步
   @Consumer() count: number = 100
   @Consumer() index: number = -1
 
