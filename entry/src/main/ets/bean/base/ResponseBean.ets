@@ -28,8 +28,8 @@ export class ResponseBean<T> extends ResponseContract {
     return this.msg
   }
 
-  public valueStatus(): string {
-    return this.code.toString()
+  public valueCode(): number {
+    return this.code
   }
   
   public static createSuccess<T>(data?: T, msg: string = "成功"): ResponseBean<T> {

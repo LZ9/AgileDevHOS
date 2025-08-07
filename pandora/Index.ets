@@ -9,7 +9,6 @@ export { BaseContainer } from './src/main/ets/base/container/BaseContainer';
 
 export { BaseContainerVm } from './src/main/ets/base/container/BaseContainerVm';
 
-
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 
@@ -27,6 +26,12 @@ export { ErrorView } from './src/main/ets/components/state/error/ErrorView';
 
 export { ErrorViewVm } from './src/main/ets/components/state/error/ErrorViewVm';
 
+export { ProgressDialogAgent } from './src/main/ets/components/progress/ProgressDialogAgent';
+
+export { ProgressDialog } from './src/main/ets/components/progress/ProgressDialog';
+
+export { ProgressDialogVm } from './src/main/ets/components/progress/ProgressDialogVm';
+
 //---------------- 工具 -----------------
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';
 
@@ -37,6 +42,3 @@ export { PromiseAgent } from './src/main/ets/utils/promise/PromiseAgent';
 export { DataError } from './src/main/ets/utils/promise/DataError';
 
 export { Observer } from './src/main/ets/utils/promise/Observer';
-
-
-

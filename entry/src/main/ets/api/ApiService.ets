@@ -1,4 +1,4 @@
-import { DataError, JsonUtils, ResourceUtils } from "@lodz/pandora";
+import { JsonUtils, ResourceUtils } from "@lodz/pandora";
 import { ResponseBean } from "../bean/base/ResponseBean";
 import { TodoBean } from "../bean/mvvm/TodoBean";
 
@@ -20,15 +20,15 @@ export class ApiService {
         try {
           const json = ResourceUtils.getRawFileContentStrSync(context, 'DefaultTodoTasks.json')
           if (!isSuccess || json === null) {
-            reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("获取本地数据失败"), "获取本地数据失败"))
+            reject(new Error("获取本地数据失败"))
             return
           }
           const list = JsonUtils.jsonToBean<Array<TodoBean>>(json)
-          if (list === null) {
-            reject(new DataError(ResponseBean.createFail<Array<TodoBean>>("数据解析错误"), "数据解析错误"))
-            return
-          }
-          resolve(ResponseBean.createSuccess<Array<TodoBean>>(list))
+          const responseBean = new ResponseBean<Array<TodoBean>>()
+          responseBean.code = list === null ? ResponseBean.Fail : ResponseBean.SUCCESS
+          responseBean.data = list
+          responseBean.msg = list === null ? "数据解析错误" : "获取成功"
+          resolve(responseBean)
         } catch (e) {
           if (e instanceof Error) {
             reject(e)

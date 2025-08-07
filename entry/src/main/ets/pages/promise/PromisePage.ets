@@ -1,7 +1,15 @@
-import { BaseContainer, BaseContainerVm,
+import {
+  BaseContainer,
+  BaseContainerVm,
   CoreConstants,
   DateUtils,
-  JsonUtils, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
+  JsonUtils,
+  ProgressDialogAgent,
+  ProgressDialogVm,
+  PromiseAgent,
+  PromptUtils,
+  RouterUtils
+} from '@lodz/pandora'
 import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
@@ -19,6 +27,7 @@ struct PromisePage {
   @Local public logList: Array<string> = []
   /** 是否请求成功 */
   @Local public isRequestSuccess: boolean = true
+  private ComponentContent?: ComponentContent<ProgressDialogVm>
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
@@ -53,6 +62,23 @@ struct PromisePage {
           this.vm.showStatusError()
         }
       })
+  }
+
+  /** 显示加载框 */
+  private showProgressDialog(){
+    const vm = new ProgressDialogVm()
+    vm.progressVm.color = Color.Pink
+    this.ComponentContent = ProgressDialogAgent.create()
+      .setViewModel(vm)
+      .setAutoCancel(true)
+      .open(this.getUIContext())
+
+    // 测试关闭
+    setTimeout(() => {
+      if (this.ComponentContent) {
+        ProgressDialogAgent.close(this.getUIContext(), this.ComponentContent)
+      }
+    }, 2000)
   }
 
   /**
@@ -119,7 +145,7 @@ struct PromisePage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-
+            this.showProgressDialog()
           })
       }
       .width('100%')
@@ -129,3 +155,4 @@ struct PromisePage {
     .height('100%')
   }
 }
+

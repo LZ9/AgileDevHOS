@@ -29,6 +29,6 @@ struct SplashPage {
   aboutToAppear(): void {
     setTimeout(() => {
       RouterUtils.replaceUrl(this.getUIContext(), $r('app.string.main_page_path'))
-    }, 2000) // 2秒后跳转
+    }, 1000) // 1秒后跳转
   }
 }

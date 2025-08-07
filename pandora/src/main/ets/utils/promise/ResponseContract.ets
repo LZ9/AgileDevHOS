@@ -9,6 +9,6 @@ export abstract class ResponseContract {
   /** 获取提示语信息 */
   public abstract valueMsg(): string
 
-  /** 获取状态标志 */
-  public abstract valueStatus(): string
+  /** 获取状态码 */
+  public abstract valueCode(): number
 }

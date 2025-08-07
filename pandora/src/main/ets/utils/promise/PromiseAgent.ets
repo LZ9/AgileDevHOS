@@ -57,14 +57,14 @@ export class PromiseAgent<T extends  Object> {
       .then((t) => {
         if (t === undefined) {
           if (this.observer && this.observer.onError) {
-            this.observer.onError(new DataError<T>(null, "返回数据undefined"))
+            this.observer.onError(new DataError<T>(0, t, new Error("返回数据为undefined")))
           }
           return
         }
         if (t instanceof ResponseContract) {
           if (!t.isSuccess()) { // 预判接口请求是否成功
             if (this.observer && this.observer.onError) {
-              this.observer.onError(new DataError<T>(t, t.valueMsg()))
+              this.observer.onError(new DataError<T>(t.valueCode(), t, new Error(t.valueMsg())))
             }
             return
           }
@@ -75,7 +75,7 @@ export class PromiseAgent<T extends  Object> {
       })
       .catch((e: Error) => {
         if (this.observer && this.observer.onError) {
-          let err = new DataError<T>(null, e.message, e.name, e.stack)
+          let err = new DataError<T>(0, undefined, e)
           if (e instanceof DataError) {
             err = e
           }
