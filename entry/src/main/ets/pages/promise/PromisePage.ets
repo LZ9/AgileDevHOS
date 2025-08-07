@@ -3,6 +3,7 @@ import {
   BaseContainerVm,
   CoreConstants,
   DateUtils,
+  Disposable,
   JsonUtils,
   ProgressDialogAgent,
   ProgressDialogVm,
@@ -27,7 +28,10 @@ struct PromisePage {
   @Local public logList: Array<string> = []
   /** 是否请求成功 */
   @Local public isRequestSuccess: boolean = true
-  private ComponentContent?: ComponentContent<ProgressDialogVm>
+  /** 加载框标签 */
+  private progressTag?: ComponentContent<ProgressDialogVm>
+  /** 接口任务 */
+  private disposable?: Disposable
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
@@ -44,10 +48,14 @@ struct PromisePage {
     this.vm.showStatusCompleted()
   }
 
+  aboutToDisappear(): void {
+    this.disposable?.dispose()
+  }
+
   /** 请求代办列表 */
   private requestNormal() {
     this.vm.showStatusLoading()
-    PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
+    this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
       .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
       .subscribe({
         onSubscribe: () => {
@@ -68,15 +76,15 @@ struct PromisePage {
   private showProgressDialog(){
     const vm = new ProgressDialogVm()
     vm.progressVm.color = Color.Pink
-    this.ComponentContent = ProgressDialogAgent.create()
+    this.progressTag = ProgressDialogAgent.create()
       .setViewModel(vm)
       .setAutoCancel(true)
       .open(this.getUIContext())
 
     // 测试关闭
     setTimeout(() => {
-      if (this.ComponentContent) {
-        ProgressDialogAgent.close(this.getUIContext(), this.ComponentContent)
+      if (this.progressTag) {
+        ProgressDialogAgent.close(this.getUIContext(), this.progressTag)
       }
     }, 2000)
   }

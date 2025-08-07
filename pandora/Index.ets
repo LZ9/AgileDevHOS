@@ -42,3 +42,7 @@ export { PromiseAgent } from './src/main/ets/utils/promise/PromiseAgent';
 export { DataError } from './src/main/ets/utils/promise/DataError';
 
 export { Observer } from './src/main/ets/utils/promise/Observer';
+
+export { Disposable } from './src/main/ets/utils/promise/Disposable';
+
+export { ProgressObserver } from './src/main/ets/utils/promise/ProgressObserver';
