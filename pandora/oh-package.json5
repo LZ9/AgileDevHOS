@@ -1,6 +1,6 @@
 {
   "name": "@lodz/pandora",
-  "version": "1.0.2",//未上传
+  "version": "1.0.2",//成功上传
   "description": "鸿蒙开发基础组件和框架封装",
   "main": "Index.ets",
   "author": "zhouL",
@@ -17,6 +17,6 @@
   "obfuscated": false,
   "dependencies": {
     "@lodz/core_hos": "file:../core",
-//    "@lodz/core_hos": "1.0.1"
+//    "@lodz/core_hos": "1.0.2"
   }
 }

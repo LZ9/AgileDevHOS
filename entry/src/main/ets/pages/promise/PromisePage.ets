@@ -6,7 +6,6 @@ import {
   DateUtils,
   Disposable,
   JsonUtils,
-  ProgressDialogVm,
   PromiseAgent,
   PromptUtils,
   RouterUtils
@@ -28,8 +27,6 @@ struct PromisePage {
   @Local public logList: Array<string> = []
   /** 是否请求成功 */
   @Local public isRequestSuccess: boolean = true
-  /** 加载框标签 */
-  private progressTag?: ComponentContent<ProgressDialogVm>
   /** 接口任务 */
   private disposable?: Disposable
 

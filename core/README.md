@@ -12,6 +12,14 @@ Github：[源码](https://github.com/LZ9/AgileDevHOS)
 ohpm i @lodz/core_hos
 ```
 
+## 直接引用
+在entry的oh-package.json5里面可以直接引用
+```
+  "dependencies": {
+    "@lodz/core_hos": "1.0.2"
+  }
+```
+
 ## 工具清单
 
 |        工具        | 描述                                      |
