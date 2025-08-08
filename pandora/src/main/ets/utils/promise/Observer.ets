@@ -10,7 +10,7 @@ export interface Observer<T> {
   /** 订阅结果回调 */
   onNext: (t: T) => void
   /** 订阅失败 */
-  onError?: (e: DataError<T>) => void
+  onError: (e: DataError<T>) => void
   /** 订阅结束 */
   onFinally?: () => void
 }

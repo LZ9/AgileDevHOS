@@ -34,7 +34,7 @@ export class ApiService {
             reject(e)
           }
         }
-      }, 1000)
+      }, 2000)
     })
   }
 }

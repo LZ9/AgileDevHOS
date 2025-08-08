@@ -2,10 +2,10 @@ import {
   BaseContainer,
   BaseContainerVm,
   CoreConstants,
+  DataError,
   DateUtils,
   Disposable,
   JsonUtils,
-  ProgressDialogAgent,
   ProgressDialogVm,
   PromiseAgent,
   PromptUtils,
@@ -65,28 +65,27 @@ struct PromisePage {
           this.addLog(JsonUtils.beanToJson(responseBean))
           this.vm.showStatusCompleted()
         },
-        onError: (e: Error) => {
+        onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
           PromptUtils.toastShort(this.getUIContext(), e.message)
           this.vm.showStatusError()
         }
       })
   }
 
-  /** 显示加载框 */
-  private showProgressDialog(){
-    const vm = new ProgressDialogVm()
-    vm.progressVm.color = Color.Pink
-    this.progressTag = ProgressDialogAgent.create()
-      .setViewModel(vm)
-      .setAutoCancel(true)
-      .open(this.getUIContext())
-
-    // 测试关闭
-    setTimeout(() => {
-      if (this.progressTag) {
-        ProgressDialogAgent.close(this.getUIContext(), this.progressTag)
-      }
-    }, 2000)
+  /** 请求代办列表（加载框） */
+  private requestProgress() {
+    this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
+      .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
+      .subscribePgDef(this.getUIContext(),
+        {
+          onNext: (responseBean: ResponseBean<Array<TodoBean>>) => {
+            this.addLog(JsonUtils.beanToJson(responseBean))
+          },
+          onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
+            PromptUtils.toastShort(this.getUIContext(), e.message)
+          }
+        }
+      )
   }
 
   /**
@@ -153,7 +152,7 @@ struct PromisePage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            this.showProgressDialog()
+            this.requestProgress()
           })
       }
       .width('100%')

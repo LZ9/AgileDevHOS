@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerVm, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
@@ -46,7 +46,7 @@ struct MvvmPage {
           this.todoList = t.data?? []
           this.vm.showStatusCompleted()
         },
-        onError: (e: Error) => {
+        onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
           PromptUtils.toastShort(this.getUIContext(), e.message)
           this.vm.showStatusError()
         }

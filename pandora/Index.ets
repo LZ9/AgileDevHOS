@@ -32,6 +32,8 @@ export { ProgressDialog } from './src/main/ets/components/progress/ProgressDialo
 
 export { ProgressDialogVm } from './src/main/ets/components/progress/ProgressDialogVm';
 
+export { ProgressDialogBean } from './src/main/ets/components/progress/ProgressDialogBean';
+
 //---------------- 工具 -----------------
 export { StatusBarUtils } from './src/main/ets/utils/StatusBarUtils';
 
