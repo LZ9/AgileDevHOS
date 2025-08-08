@@ -26,5 +26,5 @@ ohpm i @lodz/core_hos
 |  ResourceUtils   | 对资源目录常见的获取进行封装，如获取资源的字符串、颜色转换、raw文件读取等  |
 |   RouterUtils    | 路由工具，对常用的路由方法进行封装，便于调用                  |
 |   StringUtils    | 对string常用的方法进行封装，便于调用                   |      
-
+|   RandomUtils    | 支持快速生成随机数                               |      
 
