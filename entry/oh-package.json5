@@ -7,7 +7,7 @@
   "license": "",
   "dependencies": {
     "@lodz/pandora": "file:../pandora",
-//    "@lodz/pandora": "1.0.1"
+//    "@lodz/pandora": "1.0.2"
   }
 }
 
