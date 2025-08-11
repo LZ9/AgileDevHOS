@@ -1,11 +1,13 @@
 import { BaseAbility, PreferencesUtils, ResourceUtils } from '@lodz/pandora'
 import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/container/BaseContainerScopeConfig'
 import { Constants } from '../../config/Constants'
+import { FileManager } from '../../tools/FileManager'
 
 export default class EntryAbility extends BaseAbility {
   protected startCreate(): void {
     PreferencesUtils.getInstance().init(this.context)
     PreferencesUtils.getInstance().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
+    FileManager.getInstance().init(this.context)
   }
 
   protected getLayoutPath(): string {

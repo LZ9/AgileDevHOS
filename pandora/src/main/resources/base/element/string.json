@@ -1,6 +1,10 @@
 {
   "string": [
     {
+      "name": "pandora_internet_permission_reason",
+      "value": "网络访问"
+    },
+    {
       "name": "pandora_loading",
       "value": "加载中…"
     },

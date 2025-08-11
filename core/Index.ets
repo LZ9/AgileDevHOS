@@ -30,3 +30,7 @@ export { JsonUtils } from './src/main/ets/utils/JsonUtils';
 
 // 随机数工具类
 export { RandomUtils } from './src/main/ets/utils/RandomUtils';
+
+// 文件工具类
+export { FileUtils } from './src/main/ets/utils/FileUtils';
+
