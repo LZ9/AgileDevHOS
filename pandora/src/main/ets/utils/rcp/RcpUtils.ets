@@ -19,4 +19,7 @@ export class RcpUtils {
     return this.rcpSession.get(url)
   }
 
+  public post(url: string, content?: rcp.RequestContent): Promise<rcp.Response> {
+    return this.rcpSession.post(url, content)
+  }
 }

@@ -11,8 +11,11 @@ import {
   RouterUtils
 } from '@lodz/pandora'
 import { ApiService } from '../../api/ApiService'
+import { InfoBean } from '../../bean/api/InfoBean'
+import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
+import { Constants } from '../../config/Constants'
 import { LogListView } from '../../view/LogListView'
 
 /**
@@ -25,8 +28,10 @@ struct PromisePage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 日志列表 */
   @Local public logList: Array<string> = []
+  /** 图片路径 */
+  @Local public imgUri?: string
   /** 是否请求成功 */
-  @Local public isRequestSuccess: boolean = true
+  private isRequestSuccess: boolean = true
   /** 接口任务 */
   private disposable?: Disposable
 
@@ -85,6 +90,43 @@ struct PromisePage {
       )
   }
 
+  /** 使用get请求获取图片并保存到手机目录 */
+  private requestImg(){
+    PromiseAgent.create<string>()
+      .then(() => ApiService.create().getImg())
+      .subscribePgDef(this.getUIContext(), {
+        onNext: (data: string) => {
+          this.imgUri = data
+        },
+        onError: (e: DataError<string>) => {
+          PromptUtils.toastShort(this.getUIContext(), e.message)
+        }
+      })
+  }
+
+  /** 使用post请求列表数据 */
+  private requestInfoList(){
+    PromiseAgent.create<ResponseData<InfoBean>>()
+      .then(() => ApiService.create().postData())
+      .subscribePgDef(this.getUIContext(), {
+        onNext: (response: ResponseData<InfoBean>) => {
+          const data = response.value
+          if (data === undefined || data === null) {
+            this.addLog("获取数据结果是空")
+            return
+          }
+          const list = data.list ?? []
+          for (let i = 0; i < list.length; i++) {
+            const item = list[i]
+            this.addLog(JsonUtils.beanToJson(item))
+          }
+        },
+        onError: (e: DataError<ResponseData<InfoBean>>) => {
+          PromptUtils.toastShort(this.getUIContext(), e.message)
+        }
+      })
+  }
+
   /**
    * 打印日志
    * @param text 日志
@@ -130,6 +172,13 @@ struct PromisePage {
       LogListView({ logList: this.logList })
         .layoutWeight(1)
 
+      Image(this.imgUri)
+        .width('100%')
+        .height(150)
+        .objectFit(ImageFit.Contain)
+        .margin({ top: 5, bottom: 5 })
+        .visibility(this.imgUri !== undefined ? Visibility.Visible : Visibility.None)
+
       Line()
         .width('100%')
         .height(1)
@@ -154,9 +203,28 @@ struct PromisePage {
       }
       .width('100%')
       .margin({ top: 5, bottom: 5 })
+
+      Row() {
+        Button($r('app.string.promise_request_get'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left: 5, right: 5 })
+          .onClick(() => {
+            this.requestImg()
+          })
+
+        Button($r('app.string.promise_request_post'))
+          .layoutWeight(1)
+          .fontSize(14)
+          .margin({ left: 5, right: 5 })
+          .onClick(() => {
+            this.requestInfoList()
+          })
+      }
+      .width('100%')
+      .margin({ top: 5, bottom: 5 })
     }
     .width('100%')
     .height('100%')
   }
 }
-

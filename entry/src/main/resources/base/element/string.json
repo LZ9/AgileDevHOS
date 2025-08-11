@@ -210,6 +210,14 @@
     {
       "name": "promise_request_dialog",
       "value": "加载框请求"
+    },
+    {
+      "name": "promise_request_get",
+      "value": "get网络图片"
+    },
+    {
+      "name": "promise_request_post",
+      "value": "post接口数据"
     }
   ]
 }

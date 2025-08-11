@@ -47,5 +47,14 @@ export class StringUtils {
   public static equalsIgnoreCase(first: string, second: string): boolean {
     return first.toLowerCase() === second.toLowerCase();
   }
+
+  /**
+   * 获取文件网址的文件名（取最后一个/之后的名称）
+   * @param url 网址路径
+   */
+  public static getFileNameByUrl(url: string) {
+    const parts = url.split('/')
+    return parts[parts.length - 1]
+  }
 }
 

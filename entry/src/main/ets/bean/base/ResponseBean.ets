@@ -31,7 +31,25 @@ export class ResponseBean<T> extends ResponseContract {
   public valueCode(): number {
     return this.code
   }
-  
+
+  /**
+   * 复制数据
+   * @param response 源数据
+   */
+  public static copy<T>(response: ResponseBean<T>): ResponseBean<T> {
+    const bean = new ResponseBean<T>()
+    bean.code = response.code
+    bean.msg = response.msg
+    bean.data = response.data
+    bean.page = response.page
+    return bean
+  }
+
+  /**
+   * 创建返回成功的数据实体
+   * @param data 数据
+   * @param msg 提示信息
+   */
   public static createSuccess<T>(data?: T, msg: string = "成功"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
     responseBean.code = ResponseBean.SUCCESS
@@ -40,6 +58,10 @@ export class ResponseBean<T> extends ResponseContract {
     return responseBean
   }
 
+  /**
+   * 创建返回失败的数据实体
+   * @param msg 提示信息
+   */
   public static createFail<T>(msg: string = "失败"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
     responseBean.code = ResponseBean.Fail

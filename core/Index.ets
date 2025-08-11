@@ -34,3 +34,5 @@ export { RandomUtils } from './src/main/ets/utils/RandomUtils';
 // 文件工具类
 export { FileUtils } from './src/main/ets/utils/FileUtils';
 
+// 对象工具类
+export { ObjectUtils } from './src/main/ets/utils/ObjectUtils';

@@ -19,6 +19,7 @@ export class FileManager {
     return FileManager.instance
   }
 
+  /** 应用名称 */
   private static readonly ROOT_FOLDER_NAME: string = "AgileDevHOS"
   /** app主文件夹路径 */
   private appFolderPath = ""
@@ -42,7 +43,7 @@ export class FileManager {
 
   /** 初始化路径 */
   private initPath(context: Context) {
-    let rootDir = context.filesDir
+    let rootDir = context.filesDir //通常是：/data/storage/el2/base/haps/entry/files
     if (StringUtils.isEmpty(rootDir)) {
       this.isPathInit = false
       return
