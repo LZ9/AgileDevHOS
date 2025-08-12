@@ -16,7 +16,7 @@ ohpm i @lodz/core_hos
 在entry的oh-package.json5里面可以直接引用
 ```
   "dependencies": {
-    "@lodz/core_hos": "1.0.3"
+    "@lodz/core_hos": "1.0.4"
   }
 ```
 
