@@ -36,3 +36,6 @@ export { FileUtils } from './src/main/ets/utils/FileUtils';
 
 // 对象工具类
 export { ObjectUtils } from './src/main/ets/utils/ObjectUtils';
+
+// APP工具类
+export { AppUtils } from './src/main/ets/utils/AppUtils';
