@@ -24,8 +24,7 @@ export class JsonUtils {
    * @param transformer 转换器
    * @param space 格式化空格，例如：'  '
    */
-  public static beanToJson(bean: Object | undefined | null, filter?: (number | string)[] | null,
-    transformer?: JSON.Transformer, space?: string | number): string {
+  public static beanToJson(bean: Object | undefined | null, filter?: (number | string)[] | null, transformer?: JSON.Transformer, space?: string | number): string {
     if (bean === null || bean === undefined) {
       return "{}"
     }

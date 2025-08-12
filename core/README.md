@@ -16,7 +16,7 @@ ohpm i @lodz/core_hos
 在entry的oh-package.json5里面可以直接引用
 ```
   "dependencies": {
-    "@lodz/core_hos": "1.0.2"
+    "@lodz/core_hos": "1.0.3"
   }
 ```
 
@@ -28,11 +28,13 @@ ohpm i @lodz/core_hos
 |     AppUtils     | 封装了app常用工具类，如获取app版本号、包名、名称等            |
 |    DateUtils     | 日期工具类，支持根据需要对指定日期格式进行转换                 |
 |   DeviceUtils    | 设备信息工具类，支持获取当前设备信息，如分辨率、设备id等           |
+|    FileUtils     | 封装了文件操作的相关方法                            |
 |    JsonUtils     | 对Json字符串和Bean的转换进行封装，支持直接获取Bean对象       |
+|   ObjectUtils    | 封装了对象操作的聚合方法                            |
 | PreferencesUtils | 封装了键值对缓存工具类，便于调用                        |
 |   PromptUtils    | 对常用提示框进行封装，包括toast、dialog、menu等         |
+|   RandomUtils    | 封装了随机数的生成方法                             |
 |  ResourceUtils   | 对资源目录常见的获取进行封装，如获取资源的字符串、颜色转换、raw文件读取等  |
 |   RouterUtils    | 路由工具，对常用的路由方法进行封装，便于调用                  |
 |   StringUtils    | 对string常用的方法进行封装，便于调用                   |      
-|   RandomUtils    | 支持快速生成随机数                               |      
 
