@@ -40,6 +40,16 @@ export class StringUtils {
   }
 
   /**
+   * ArrayBuffer转字符串
+   * @param src 数据源
+   * @param encoding 编码，默认utf-8
+   */
+  public static arrayBufferToStr(src: ArrayBuffer, encoding: buffer.BufferEncoding = 'utf-8'): string {
+    return StringUtils.unit8ArrayToStr(new Uint8Array(src), encoding)
+  }
+
+
+  /**
    * 字符串忽略大小写比较
    * @param first 字符串
    * @param second 字符串

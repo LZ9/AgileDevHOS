@@ -5,6 +5,8 @@ import { hilog } from '@kit.PerformanceAnalysisKit'
  * Created by zhouL on 2025/7/12.
  */
 export class PrintLog {
+  /** 日志分段长度 */
+  private static readonly  LOG_SEGMENTED_LENGTH = 2500
   /** 日志开关 */
   private static isPrint: boolean = true
   /** 日志域 */
@@ -33,7 +35,7 @@ export class PrintLog {
    */
   public static d(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.DEBUG, tag, log)
+      PrintLog.logSegmented(hilog.LogLevel.DEBUG, tag, log)
     }
   }
 
@@ -44,7 +46,7 @@ export class PrintLog {
    */
   public static i(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.INFO, tag, log)
+      PrintLog.logSegmented(hilog.LogLevel.INFO, tag, log)
     }
   }
 
@@ -55,7 +57,7 @@ export class PrintLog {
    */
   public static w(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.WARN, tag, log)
+      PrintLog.logSegmented(hilog.LogLevel.WARN, tag, log)
     }
   }
 
@@ -66,7 +68,7 @@ export class PrintLog {
    */
   public static e(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.ERROR, tag, log)
+      PrintLog.logSegmented(hilog.LogLevel.ERROR, tag, log)
     }
   }
 
@@ -77,7 +79,33 @@ export class PrintLog {
    */
   public static f(tag: string, log: string | null | undefined) {
     if (PrintLog.isPrint) {
-      PrintLog.logByType(hilog.LogLevel.FATAL, tag, log)
+      PrintLog.logSegmented(hilog.LogLevel.FATAL, tag, log)
+    }
+  }
+
+  /**
+   * 打印分段日志
+   * @param type 日志类型
+   * @param tag 日志标签
+   * @param log 日志内容
+   */
+   private static logSegmented(type: hilog.LogLevel, tag: string, log: string | null | undefined) {
+    const content = log ?? "null"
+    if (content.length < PrintLog.LOG_SEGMENTED_LENGTH) {
+      PrintLog.logByType(type, tag, content)
+      return
+    }
+    const count = Math.ceil(content.length / PrintLog.LOG_SEGMENTED_LENGTH)
+    for (let i = 0; i < count; i++) {
+      const start = i * PrintLog.LOG_SEGMENTED_LENGTH
+      let end = PrintLog.LOG_SEGMENTED_LENGTH + start
+      if (end >= content.length) {
+        end = content.length
+      }
+      PrintLog.logByType(type, tag, content.substring(start, end))
+      if (end === content.length) {
+        break
+      }
     }
   }
 
@@ -87,7 +115,7 @@ export class PrintLog {
    * @param tag 日志标签
    * @param log 日志内容
    */
-  private static logByType(type: hilog.LogLevel, tag: string, log: string | null | undefined) {
+  private static logByType(type: hilog.LogLevel, tag: string, log: string) {
     switch (type) {
       case hilog.LogLevel.DEBUG:
         hilog.debug(PrintLog.domain, tag, '%{public}s', log ?? "null")

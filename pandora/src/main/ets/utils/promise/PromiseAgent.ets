@@ -148,14 +148,14 @@ export class PromiseAgent<T extends Object> implements Disposable {
         }
         if (t === undefined) {
           if (observer && observer.onError) {
-            observer.onError(new DataError<T>(0, t, new Error("返回数据为undefined")))
+            observer.onError(new DataError<T>(0, t, "返回数据为undefined"))
           }
           return
         }
         if (t instanceof ResponseContract) {
           if (!t.isSuccess()) { // 预判接口请求是否成功
             if (observer && observer.onError) {
-              observer.onError(new DataError<T>(t.valueCode(), t, new Error(t.valueMsg())))
+              observer.onError(new DataError<T>(t.valueCode(), t, t.valueMsg()))
             }
             return
           }
@@ -169,7 +169,7 @@ export class PromiseAgent<T extends Object> implements Disposable {
           return
         }
         if (observer && observer.onError) {
-          let err = new DataError<T>(0, undefined, e)
+          let err = new DataError<T>(0, undefined, e.message)
           if (e instanceof DataError) {
             err = e
           }

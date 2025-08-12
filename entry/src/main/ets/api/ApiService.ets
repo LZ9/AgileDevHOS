@@ -1,4 +1,4 @@
-import { FileUtils, JsonUtils, RcpUtils, ResourceUtils, StringUtils } from "@lodz/pandora";
+import { FileUtils, JsonUtils, ResourceUtils, StringUtils } from "@lodz/pandora";
 import { ResponseBean } from "../bean/base/ResponseBean";
 import { TodoBean } from "../bean/mvvm/TodoBean";
 import rcp from "@hms.collaboration.rcp";
@@ -6,6 +6,7 @@ import { FileManager } from "../tools/FileManager";
 import { fileIo } from "@kit.CoreFileKit";
 import { InfoBean } from "../bean/api/InfoBean";
 import { ResponseData } from "../bean/api/ResponseData";
+import { RcpUtils } from "../tools/api/RcpUtils";
 
 /**
  * 接口数据服务
@@ -51,10 +52,10 @@ export class ApiService {
   /** 获取图片 */
   public getImg(): Promise<string> {
     const imgUrl = `https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/shouye/2025-07-10/954-kaifazheshequ-0805.jpeg`
-    return RcpUtils.create().get(imgUrl)
+    return RcpUtils.getInstance().get(imgUrl)
       .then((response: rcp.Response) => {
         const body = response.body
-        if (body === undefined || body === null) {
+        if (body === undefined) {
           throw new Error(`接口返回数据为空`)
         }
         const filePath = FileManager.getInstance().getCacheFolderPath() + StringUtils.getFileNameByUrl(imgUrl)
@@ -76,17 +77,9 @@ export class ApiService {
       'pagestart': 1,
       'type': '1,4,5,6'
     }
-    return RcpUtils.create().post(listUrl, requestContent)
-      .then((response: rcp.Response) => {
-        let json = response.toString() ?? ""
-        if (StringUtils.isEmpty(json)) {
-          throw new Error("无数据返回")
-        }
-        const bean = JsonUtils.jsonToBean<ResponseData<InfoBean>>(json)
-        if (bean === null) {
-          throw new Error("数据解析失败")
-        }
-        return ResponseData.copy(bean)
+    return RcpUtils.getInstance().postJsonBean<ResponseData<InfoBean>>(listUrl, requestContent)
+      .then((response: ResponseData<InfoBean>) => {
+        return ResponseData.copy(response)
       })
   }
 

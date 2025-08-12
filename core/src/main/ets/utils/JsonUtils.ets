@@ -24,7 +24,8 @@ export class JsonUtils {
    * @param transformer 转换器
    * @param space 格式化空格，例如：'  '
    */
-  public static beanToJson(bean: Object | undefined | null, filter?: (number | string)[] | null, transformer?: JSON.Transformer, space?: string | number): string {
+  public static beanToJson(bean: Object | undefined | null, filter?: (number | string)[] | null,
+    transformer?: JSON.Transformer, space?: string | number): string {
     if (bean === null || bean === undefined) {
       return "{}"
     }
@@ -53,5 +54,18 @@ export class JsonUtils {
    */
   public static remove(bean: object, property: string) {
     JSON.remove(bean, property)
+  }
+
+  /**
+   * 是否是json字符串
+   * @param str 字符串
+   */
+  public static isJsonStr(str: string): boolean {
+    try {
+      const result = JSON.parse(str)
+      return result !== null && typeof result === 'object'
+    } catch (e) {
+      return false
+    }
   }
 }
