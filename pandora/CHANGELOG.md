@@ -1,5 +1,9 @@
 # Pandora库更新记录
 
+##### 2025/08/12
+1. PromiseAgent异常回调兼容DataError和BusinessError
+2. 发布1.0.3版本
+
 ##### 2025/08/08
 1. 添加Promise的扩展工具PromiseAgent，支持使用RxJava的方式来订阅
 2. 将基类全部替换为@ComponentV2的装饰器

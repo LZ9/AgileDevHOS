@@ -5,7 +5,7 @@
 export namespace Constants {
 
 
-  /** 日志相关 */
+  /** 接口路径 */
   export namespace ApiUrl {
     /** 正式地址 */
     const RELEASE = 'https://svc-drcn.developer.huawei.com/community/servlet/consumer/partnerActivityService/v1/developer/'

@@ -72,8 +72,7 @@ export class PromiseAgent<T extends Object> implements Disposable {
    * @param autoCancel 是否允许用户手动取消加载框（默认不允许）
    * @param tips 加载提示语（默认展示加载中）
    */
-  public subscribePgDef(context: UIContext, observer: ProgressObserver<T>, autoCancel?: boolean,
-    tips?: string | Resource): Disposable {
+  public subscribePgDef(context: UIContext, observer: ProgressObserver<T>, autoCancel?: boolean, tips?: string | Resource): Disposable {
     const vm = new ProgressDialogVm()
     vm.textVm.content = tips
     const bean = ProgressDialogAgent.create().setAutoCancel(autoCancel ?? false).setViewModel(vm).build(context)
@@ -87,8 +86,7 @@ export class PromiseAgent<T extends Object> implements Disposable {
    * @param content 组件内容
    * @param options 参数
    */
-  public subscribePg<E extends object>(context: UIContext, observer: ProgressObserver<T>, content: ComponentContent<E>,
-    options: promptAction.BaseDialogOptions): Disposable {
+  public subscribePg<E extends object>(context: UIContext, observer: ProgressObserver<T>, content: ComponentContent<E>, options: promptAction.BaseDialogOptions): Disposable {
     options.onWillDismiss = (dismissDialogAction: DismissDialogAction) => { // 处理加载框取消交互逻辑
       if (dismissDialogAction.reason == DismissReason.TOUCH_OUTSIDE) { // 点击空白处不响应
         return
