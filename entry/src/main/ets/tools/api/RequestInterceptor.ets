@@ -32,7 +32,12 @@ export class RequestInterceptor implements rcp.Interceptor {
    * @param response 响应对象
    */
   private logResponse(response: rcp.Response) {
-    PrintLog.d(Constants.Log.TAG_API, `[${this.getApiName(response.request.url.toString())}] <--- ${response.toString()}`)
+    let log = "不打印非json的返回信息"
+    const result = response.toString()
+    if (result?.startsWith(`{`) || result?.startsWith(`[`)) {
+      log = result
+    }
+    PrintLog.d(Constants.Log.TAG_API, `[${this.getApiName(response.request.url.toString())}] <--- ${log}`)
   }
 
   /**

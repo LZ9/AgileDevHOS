@@ -66,7 +66,7 @@ export class ApiService {
 
   /** 获取图片 */
   public postData(): Promise<ResponseData<InfoBean>> {
-    const listUrl: string = 'https://svc-drcn.developer.huawei.com/community/servlet/consumer/partnerActivityService/v1/developer/activity/terminalActivities/list';
+    const listUrl: string = 'activity/terminalActivities/list';
     let requestContent: rcp.RequestContent = {
       'status': '1',
       'belong': '1',
