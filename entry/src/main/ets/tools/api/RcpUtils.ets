@@ -61,6 +61,10 @@ export class RcpUtils {
     this.rcpSession = session
   }
 
+  public release() {
+    this.rcpSession.close()
+  }
+
   /**
    * get请求
    * @param url 请求地址

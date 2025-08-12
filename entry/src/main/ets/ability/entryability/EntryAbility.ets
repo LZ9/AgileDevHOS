@@ -1,6 +1,7 @@
 import { BaseAbility, PreferencesUtils, ResourceUtils } from '@lodz/pandora'
 import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/container/BaseContainerScopeConfig'
 import { Constants } from '../../config/Constants'
+import { RcpUtils } from '../../tools/api/RcpUtils'
 import { FileManager } from '../../tools/FileManager'
 
 export default class EntryAbility extends BaseAbility {
@@ -18,5 +19,13 @@ export default class EntryAbility extends BaseAbility {
     const config: BaseContainerScopeConfig = new BaseContainerScopeConfig()
     config.titleBarTitleOptions.backgroundColor = $r('app.color.color_00A0E9')
     return config
+  }
+
+  onBackPressed(): boolean {
+    return false // 销毁Ability
+  }
+
+  onDestroy() {
+    RcpUtils.getInstance().release()
   }
 }

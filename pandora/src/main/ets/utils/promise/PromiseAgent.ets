@@ -6,6 +6,8 @@ import { Observer } from "./Observer"
 import { ProgressObserver } from "./ProgressObserver"
 import { ResponseContract } from "./ResponseContract"
 import { ComponentContent, promptAction } from "@kit.ArkUI"
+import { BusinessError } from '@ohos.base';
+import { StringUtils } from "@lodz/core_hos"
 
 /**
  * Promise扩展
@@ -17,7 +19,8 @@ export class PromiseAgent<T extends Object> implements Disposable {
   /** 是否终止 */
   private isStop: boolean = false
 
-  private constructor() {}
+  private constructor() {
+  }
 
   /** 创建Promise代理 */
   public static create<T extends Object>(t?: T): PromiseAgent<T> {
@@ -69,7 +72,8 @@ export class PromiseAgent<T extends Object> implements Disposable {
    * @param autoCancel 是否允许用户手动取消加载框（默认不允许）
    * @param tips 加载提示语（默认展示加载中）
    */
-  public subscribePgDef(context: UIContext, observer: ProgressObserver<T>, autoCancel?: boolean, tips?: string | Resource): Disposable {
+  public subscribePgDef(context: UIContext, observer: ProgressObserver<T>, autoCancel?: boolean,
+    tips?: string | Resource): Disposable {
     const vm = new ProgressDialogVm()
     vm.textVm.content = tips
     const bean = ProgressDialogAgent.create().setAutoCancel(autoCancel ?? false).setViewModel(vm).build(context)
@@ -83,7 +87,8 @@ export class PromiseAgent<T extends Object> implements Disposable {
    * @param content 组件内容
    * @param options 参数
    */
-  public subscribePg<E extends object>(context: UIContext, observer: ProgressObserver<T>, content: ComponentContent<E>, options: promptAction.BaseDialogOptions): Disposable {
+  public subscribePg<E extends object>(context: UIContext, observer: ProgressObserver<T>, content: ComponentContent<E>,
+    options: promptAction.BaseDialogOptions): Disposable {
     options.onWillDismiss = (dismissDialogAction: DismissDialogAction) => { // 处理加载框取消交互逻辑
       if (dismissDialogAction.reason == DismissReason.TOUCH_OUTSIDE) { // 点击空白处不响应
         return
@@ -169,7 +174,18 @@ export class PromiseAgent<T extends Object> implements Disposable {
           return
         }
         if (observer && observer.onError) {
-          let err = new DataError<T>(0, undefined, e.message)
+          let code = 0
+          let msg = e.message
+          if (StringUtils.isEmpty(msg)) {
+            let be: BusinessError = e as BusinessError
+            code = be.code
+            if (typeof be.data === 'string') {
+              msg = be.data
+            } else {
+              msg = `操作失败`
+            }
+          }
+          let err = new DataError<T>(code, undefined, msg)
           if (e instanceof DataError) {
             err = e
           }

@@ -15,7 +15,6 @@ import { InfoBean } from '../../bean/api/InfoBean'
 import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
-import { Constants } from '../../config/Constants'
 import { LogListView } from '../../view/LogListView'
 
 /**
