@@ -1,5 +1,9 @@
 # Pandora库更新记录
 
+##### 2025/08/14
+1. 更新依赖库引用
+2. 发布1.0.4版本
+
 ##### 2025/08/12
 1. PromiseAgent异常回调兼容DataError和BusinessError
 2. 发布1.0.3版本

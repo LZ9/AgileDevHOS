@@ -16,7 +16,7 @@ ohpm i @lodz/pandora
 在entry的oh-package.json5里面可以直接引用
 ```
   "dependencies": {
-    "@lodz/pandora": "1.0.3"
+    "@lodz/pandora": "1.0.4"
   }
 ```
 
@@ -27,7 +27,7 @@ Pandora内部集成了包括[core_hos](https://github.com/LZ9/AgileDevHOS/blob/m
 ```
 {
   "dependencies": {
-    "@lodz/core_hos": "1.0.3"
+    "@lodz/core_hos": "1.0.4"
   }
 }
 ```
