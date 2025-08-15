@@ -1,8 +1,15 @@
+import { systemDateTime } from "@kit.BasicServicesKit"
+
 /**
  * 日期工具类
  * Created by zhouL on 2025/7/21.
  */
 export class DateUtils {
+
+  /** 当前系统时区是否是东八区 */
+  public static isGMT8() {
+    return systemDateTime.getTimezoneSync() === "Asia/Shanghai"
+  }
 
   /**
    * 获取当前时间指定日期格式的字符串

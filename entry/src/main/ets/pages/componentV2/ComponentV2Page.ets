@@ -5,7 +5,7 @@ import { UserTypeObserved } from './UserTypeObserved'
 import { UIUtils } from '@kit.ArkUI'
 
 /**
- * 接口测试用例
+ * ComponentV2装饰器用例
  * Created by zhouL on 2025/7/30.
  */
 @Entry
