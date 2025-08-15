@@ -39,3 +39,6 @@ export { ObjectUtils } from './src/main/ets/utils/ObjectUtils';
 
 // APP工具类
 export { AppUtils } from './src/main/ets/utils/AppUtils';
+
+// 身份证工具类
+export { IdCardUtils } from './src/main/ets/utils/IdCardUtils';
