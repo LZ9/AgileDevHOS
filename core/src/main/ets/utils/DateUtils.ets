@@ -49,10 +49,10 @@ export class DateUtils {
 
   /**
    * 解析日期字符串
-   * @param date 日期字符串
    * @param format 日期格式，例如 CoreConstants.DateFormat.TYPE_1
+   * @param date 日期字符串
    */
-  public static parse(date: string, format: string): Date {
+  public static parse(format: string, date: string): Date {
     const d = new Date()
     d.setFullYear(DateUtils.getValue(date, DateUtils.getIndex(format, 'yyyy')))
     d.setMonth(DateUtils.getValue(date, DateUtils.getIndex(format, 'MM')) - 1)
@@ -62,6 +62,16 @@ export class DateUtils {
     d.setSeconds(DateUtils.getValue(date, DateUtils.getIndex(format, 'ss')))
     d.setMilliseconds(DateUtils.getValue(date, DateUtils.getIndex(format, 'SSS')))
     return d
+  }
+
+  /**
+   * 将日期字符串从旧格式改为新格式
+   * @param oldFormat 旧格式
+   * @param newFormat 新格式
+   * @param source 日期字符串
+   */
+  public static changeFormatString(oldFormat: string, newFormat: string, source: string): string {
+    return DateUtils.getFormatString(newFormat, DateUtils.parse(oldFormat, source))
   }
 
   /**

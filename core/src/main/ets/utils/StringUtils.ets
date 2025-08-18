@@ -55,7 +55,7 @@ export class StringUtils {
    * @param second 字符串
    */
   public static equalsIgnoreCase(first: string, second: string): boolean {
-    return first.toLowerCase() === second.toLowerCase();
+    return first.toLowerCase() === second.toLowerCase()
   }
 
   /**

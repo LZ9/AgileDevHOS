@@ -1,4 +1,4 @@
-import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerVm, IdCardUtils } from '@lodz/pandora'
+import { PromptUtils, RouterUtils, StatusBarUtils, BaseContainer, BaseContainerVm } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 
 /**
@@ -32,7 +32,6 @@ struct MainPage {
 
   onDidBuild(): void {
     this.vm.showStatusCompleted()
-    IdCardUtils.validateIdCard("990203199107313017")
   }
 
   build() {
