@@ -205,24 +205,6 @@ export class IdCardUtils {
     return IdCardUtils.PROVINCE[idCard.substring(0, 2)] ?? ""
   }
 
-
-
-  //
-  //     /**  */
-  //     @JvmStatic
-  //     fun getProvince(idCard: String): String {
-  //         if (!validateIdCard(idCard)) {
-  //             return ""
-  //         }
-  //         val provinceNum = idCard.substring(0, 2)
-  //         val map = getProvinceMap()
-  //         return map[provinceNum] ?: ""
-  //     }
-
-
-
-
-
   /**
    * 校验文本是否是纯数字
    * @param str 字符串
