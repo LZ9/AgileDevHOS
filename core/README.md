@@ -16,7 +16,7 @@ ohpm i @lodz/core_hos
 在entry的oh-package.json5里面可以直接引用
 ```
   "dependencies": {
-    "@lodz/core_hos": "1.0.4"
+    "@lodz/core_hos": "1.0.5"
   }
 ```
 
@@ -29,6 +29,7 @@ ohpm i @lodz/core_hos
 |    DateUtils     | 日期工具类，支持根据需要对指定日期格式进行转换                 |
 |   DeviceUtils    | 设备信息工具类，支持获取当前设备信息，如分辨率、设备id等           |
 |    FileUtils     | 封装了文件操作的相关方法                            |
+|   IdCardUtils    | 支持对身份找号进行校验和解析                          |      
 |    JsonUtils     | 对Json字符串和Bean的转换进行封装，支持直接获取Bean对象       |
 |   ObjectUtils    | 封装了对象操作的聚合方法                            |
 | PreferencesUtils | 封装了键值对缓存工具类，便于调用                        |
