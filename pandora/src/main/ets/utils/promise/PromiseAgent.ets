@@ -191,9 +191,6 @@ export class PromiseAgent<T extends Object> implements Disposable {
         }
       })
       .finally(() => {
-        if (this.isDisposed()) {
-          return
-        }
         if (observer && observer.onFinally) {
           observer.onFinally() // 订阅结束回调
         }
