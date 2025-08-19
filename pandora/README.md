@@ -44,7 +44,7 @@ protected startCreate() {}
 protected abstract getLayoutPath(): string 
 
 // 在loadContent完成之后调用
-protected endCreate() {} 
+protected endCreate(windowStage: window.WindowStage) {} 
 
 // 支持全局配置基础状态控件的参数
 protected createBaseContainerScopeConfig(): BaseContainerScopeConfig | undefined {} 

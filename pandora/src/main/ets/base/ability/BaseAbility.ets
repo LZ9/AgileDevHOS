@@ -22,7 +22,7 @@ export abstract class BaseAbility extends UIAbility {
       }
       StatusBarUtils.saveLastWindow(this.context)
       AppStorage.setOrCreate(PandoraConstants.Storage.BASE_VIEW_CONFIG, JsonUtils.beanToJson(this.createBaseContainerScopeConfig()))
-      this.endCreate()
+      this.endCreate(windowStage)
     })
   }
 
@@ -38,6 +38,6 @@ export abstract class BaseAbility extends UIAbility {
   protected abstract getLayoutPath(): string
 
   /** 完成创建 */
-  protected endCreate() {}
+  protected endCreate(windowStage: window.WindowStage) {}
 }
 
