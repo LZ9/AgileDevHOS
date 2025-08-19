@@ -16,7 +16,7 @@ ohpm i @lodz/pandora
 在entry的oh-package.json5里面可以直接引用
 ```
   "dependencies": {
-    "@lodz/pandora": "1.0.5"
+    "@lodz/pandora": "1.0.6"
   }
 ```
 
