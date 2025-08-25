@@ -1,4 +1,6 @@
 import { fileIo, fileUri, WriteOptions } from "@kit.CoreFileKit";
+import { image } from "@kit.ImageKit";
+import util from "@ohos.util";
 
 /**
  * 文件工具类
@@ -52,6 +54,30 @@ export class FileUtils {
     let file = FileUtils.openFile(path, mode)
     fileIo.writeSync(file.fd, buffer, options)
     fileIo.closeSync(file.fd)
+  }
+
+  /**
+   * 图片Uri转Base64
+   * @param imageUri 图片uri
+   * @param quality 转换质量，默认60
+   * @param format 图片格式，'image/jpeg'、'image/png'等
+   */
+  public static imageUriToBase64(imageUri: string, quality: number = 60, format: string = 'image/jpeg'): Promise<string> {
+    const file = fileIo.openSync(imageUri, fileIo.OpenMode.READ_ONLY)
+    const imageSource = image.createImageSource(file.fd)
+    return imageSource.createPixelMap({ editable: true })
+      .then((pixelMap) => {
+        const imagePackerApi: image.ImagePacker = image.createImagePacker()
+        const packOpts: image.PackingOption = { format: format, quality: quality }
+        return imagePackerApi.packToData(pixelMap, packOpts)
+      })
+      .then((buffer) => {
+        let helper = new util.Base64Helper()
+        const base64 = helper.encodeToStringSync(new Uint8Array(buffer))
+        fileIo.close(file.fd)
+        imageSource.release()
+        return base64
+      })
   }
 
 }
