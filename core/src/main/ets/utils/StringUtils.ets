@@ -66,5 +66,19 @@ export class StringUtils {
     const parts = url.split('/')
     return parts[parts.length - 1]
   }
+
+  /**
+   * 根据分隔符将字符串转为列表
+   * @param source 字符串
+   * @param separator 分隔符
+   * @param isFilter 是否过滤空字符串
+   */
+  public static getListBySeparator(source: string, separator: string, isFilter: boolean = true): string[] {
+    let list = source.split(separator)
+    if (isFilter) {
+      list.filter(item => item !== '')
+    }
+    return list
+  }
 }
 
