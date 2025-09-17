@@ -1,5 +1,11 @@
 # core_hos库更新记录
 
+##### 2025/09/17
+1. FileUtils添加图片Uri转Base64、PixelMap等方法，添加文件选择方法
+2. StringUtils添加字符串分割方法
+3. 添加权限管理工具类PermissionGrantUtils
+4. 发布1.0.6版本
+
 ##### 2025/08/18
 1. RandomUtils增加获取32位随机UUID方法
 2. DateUtils增加东八区判断和日期格式转换方法
