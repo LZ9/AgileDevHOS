@@ -1,4 +1,4 @@
-import { RouterUtils } from '@lodz/pandora'
+import { PermissionGrantUtils, PermissionResult, PromptUtils, RouterUtils } from '@lodz/pandora'
 
 /**
  * 启动页
@@ -27,6 +27,19 @@ struct SplashPage {
   }
 
   aboutToAppear(): void {
+    PermissionGrantUtils.auto(this.getUIContext().getHostContext(),
+      ["ohos.permission.READ_IMAGEVIDEO", "ohos.permission.CAMERA", "ohos.permission.WRITE_IMAGEVIDEO"],
+      {
+        onAllGranted: () => {
+          this.goMain()
+        },
+        onDenied: (results: PermissionResult[]) => {
+          PromptUtils.toastShort(this.getUIContext(), "授权申请失败，请在设置页面里手动打开权限")
+        }
+      })
+  }
+
+  private goMain() {
     setTimeout(() => {
       RouterUtils.replaceUrl(this.getUIContext(), $r('app.string.main_page_path'))
     }, 1000) // 1秒后跳转

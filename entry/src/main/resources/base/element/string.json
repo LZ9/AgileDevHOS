@@ -48,6 +48,14 @@
       "value": "用于网络访问"
     },
     {
+      "name": "imagevideo_permission_reason",
+      "value": "用于访问媒体库资源"
+    },
+    {
+      "name": "camera_permission_reason",
+      "value": "用于使用相机"
+    },
+    {
       "name": "splash_title",
       "value": "AgileDevHOS测试工程"
     },

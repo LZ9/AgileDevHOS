@@ -50,7 +50,32 @@
       {
         "name": "ohos.permission.INTERNET",
         "reason": "$string:internet_permission_reason"
+      },
+      {
+        "name": "ohos.permission.READ_IMAGEVIDEO",
+        "reason": "$string:imagevideo_permission_reason",
+        "usedScene": {
+          "abilities": ["EntryAbility"],  // 使用权限的Ability名称
+          "when": "always"  // 使用时机（inuse/always）
+        }
+      },
+      {
+        "name": "ohos.permission.WRITE_IMAGEVIDEO",
+        "reason": "$string:imagevideo_permission_reason",
+        "usedScene": {
+          "abilities": ["EntryAbility"],  // 使用权限的Ability名称
+          "when": "always"  // 使用时机（inuse/always）
+        }
+      },
+      {
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:camera_permission_reason",
+        "usedScene": {
+          "abilities": ["EntryAbility"],  // 使用权限的Ability名称
+          "when": "always"  // 使用时机（inuse/always）
+        }
       }
+
     ]
   }
 }

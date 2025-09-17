@@ -1,6 +1,8 @@
 import { fileIo, fileUri, WriteOptions } from "@kit.CoreFileKit";
 import { image } from "@kit.ImageKit";
 import util from "@ohos.util";
+import { photoAccessHelper } from "@kit.MediaLibraryKit";
+import { dataSharePredicates } from "@kit.ArkData";
 
 /**
  * 文件工具类
@@ -78,6 +80,80 @@ export class FileUtils {
         imageSource.release()
         return base64
       })
+  }
+
+  /**
+   * 图片Uri转PixelMap
+   * @param context 上下文
+   * @param imageUri 图片uri
+   */
+  public static imageUriToPixelMap(context: Context | undefined, imageUri: string): Promise<image.PixelMap> {
+    const  phAccessHelper = photoAccessHelper.getPhotoAccessHelper(context)
+    const predicates: dataSharePredicates.DataSharePredicates = new dataSharePredicates.DataSharePredicates()
+    predicates.equalTo('uri', imageUri)
+    return phAccessHelper.getAssets({ fetchColumns: [], predicates: predicates })
+      .then((fetchResult: photoAccessHelper.FetchResult<photoAccessHelper.PhotoAsset>) => {
+        return fetchResult.getFirstObject()
+      })
+      .then((asset: photoAccessHelper.PhotoAsset) => {
+        return asset.getThumbnail()
+      })
+  }
+
+  /**
+   * PixelMap转Buffer
+   * @param pixelMap 对象
+   * @param quality 转换质量，默认100
+   * @param format 图片格式，'image/jpeg'、'image/png'等
+   */
+  public static pixelMapToBuffer(pixelMap: image.PixelMap, quality: number = 100, format: string = 'image/jpeg'): Promise<ArrayBuffer> {
+    const imagePackerApi: image.ImagePacker = image.createImagePacker()
+    const packOpts: image.PackingOption = { format: format, quality: quality }
+    return imagePackerApi.packToData(pixelMap, packOpts)
+  }
+
+  /**
+   * 写入分布式文件
+   * @param context 上下文
+   * @param buffer 数据
+   * @param fileName 文件名
+   */
+  public static writeDistributedFile(context: Context, buffer: ArrayBuffer, fileName: string): boolean {
+    // 将资产写入分布式文件目录。
+    const filePath: string = context.distributedFilesDir + '/' + fileName
+    let isSuccess: boolean = true
+    let file: fileIo.File | null = null
+    try {
+      file = fileIo.openSync(filePath, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE)
+      fileIo.writeSync(file.fd, buffer)
+    } catch (error) {
+      isSuccess = false
+    } finally {
+      if (file !== null) {
+        fileIo.closeSync(file.fd)
+      }
+      return isSuccess
+    }
+  }
+
+  /**
+   * 文件选择
+   * @param count 选择数量
+   * @param MIMEType 文件类型
+   */
+  public static fileSelect(count: number, MIMEType: photoAccessHelper.PhotoViewMIMETypes = photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE): Promise<photoAccessHelper.PhotoSelectResult> {
+    const options = new photoAccessHelper.PhotoSelectOptions()
+    options.MIMEType = MIMEType
+    options.maxSelectNumber = count
+    return FileUtils.fileSelectOpts(options)
+  }
+
+  /**
+   * 文件选择
+   * @param options 参数配置
+   */
+  public static fileSelectOpts(options :photoAccessHelper.PhotoSelectOptions): Promise<photoAccessHelper.PhotoSelectResult> {
+    return new photoAccessHelper.PhotoViewPicker().select(options)
   }
 
 }

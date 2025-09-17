@@ -42,3 +42,13 @@ export { AppUtils } from './src/main/ets/utils/AppUtils';
 
 // 身份证工具类
 export { IdCardUtils } from './src/main/ets/utils/IdCardUtils';
+
+// 授权工具类
+export { PermissionGrantUtils } from './src/main/ets/permission/PermissionGrantUtils';
+
+// 授权结果对象
+export { PermissionResult } from './src/main/ets/permission/PermissionResult';
+
+// 授权监听器
+export { PermissionListener } from './src/main/ets/permission/PermissionListener';
+
