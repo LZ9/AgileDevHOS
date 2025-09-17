@@ -1,5 +1,9 @@
 # Pandora库更新记录
 
+##### 2025/09/17
+1. 更新依赖库版本
+2. 发布1.0.7版本
+
 ##### 2025/08/19
 1. BaseAbility基类的endCreate增加window.WindowStage参数
 2. 修复停止订阅后不会关闭加载框的BUG
