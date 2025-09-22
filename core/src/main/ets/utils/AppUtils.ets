@@ -1,4 +1,4 @@
-import { bundleManager } from "@kit.AbilityKit"
+import { bundleManager, common } from "@kit.AbilityKit"
 
 /**
  * app工具类
@@ -6,11 +6,15 @@ import { bundleManager } from "@kit.AbilityKit"
  */
 export class AppUtils {
   /**
-   * 获取UIContext里的上下文
-   * @param com page对象
+   * 将UIContext转为UIAbilityContext
+   * @param context 上下文
    */
-  public static getContext(com: UIContext): Context | undefined {
-    return com.getHostContext()
+  public static getAbilityContext(context: UIContext): common.UIAbilityContext | undefined {
+    const ctx = context.getHostContext()
+    if (ctx === undefined) {
+      return undefined
+    }
+    return ctx as common.UIAbilityContext
   }
 
   /** 获取当前应用信息 */
