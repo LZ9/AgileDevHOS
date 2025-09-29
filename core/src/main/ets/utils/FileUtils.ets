@@ -29,6 +29,16 @@ export class FileUtils {
   }
 
   /**
+   * 删除文件
+   * @param path 路径
+   */
+  public static deleteFile(path: string) {
+    if (FileUtils.isExists(path)) {
+      fileIo.unlinkSync(path)
+    }
+  }
+
+  /**
    * 打开文件
    * @param path 路径
    * @param mode 打开模式（默认fileIo.OpenMode.READ_ONLY）
@@ -46,6 +56,15 @@ export class FileUtils {
   }
 
   /**
+   * 获取文件后缀
+   * @param name 文件名
+   */
+  public static getSuffix(name: string): string {
+    const parts = name.split('.')
+    return parts.length > 1 ? parts[parts.length - 1] : ""
+  }
+
+  /**
    * 写入文件
    * @param path 路径
    * @param mode 打开模式（默认fileIo.OpenMode.READ_ONLY）
@@ -56,6 +75,30 @@ export class FileUtils {
     let file = FileUtils.openFile(path, mode)
     fileIo.writeSync(file.fd, buffer, options)
     fileIo.closeSync(file.fd)
+  }
+
+  /**
+   * 批量图片Uri转Base64
+   * @param imageUris 图片uri列表
+   * @param quality 转换质量，默认60
+   * @param format 图片格式，'image/jpeg'、'image/png'等
+   */
+  public static imageUrisToBase64(imageUris: string[], quality: number = 60, format: string = 'image/jpeg'): Promise<string[]> {
+    return new Promise<string[]>(async (resolve, reject) => {
+      if (imageUris.length === 0) {
+        resolve([])
+        return
+      }
+      try {
+        const results: string[] = []
+        for (let uri of imageUris) {
+          results.push(await FileUtils.imageUriToBase64(uri, quality, format))
+        }
+        resolve(results)
+      } catch (e) {
+        reject(e)
+      }
+    })
   }
 
   /**
