@@ -15,6 +15,18 @@
     {
       "name": "color_007DFF",
       "value": "#007DFF"
+    },
+    {
+      "name": "color_EEEEEE",
+      "value": "#EEEEEE"
+    },
+    {
+      "name": "color_757575",
+      "value": "#757575"
+    },
+    {
+      "name": "color_999999",
+      "value": "#999999"
     }
   ]
 }
