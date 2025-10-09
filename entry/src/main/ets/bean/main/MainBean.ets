@@ -1,9 +1,10 @@
-import { Groupable, ResourceUtils } from "@lodz/pandora"
+import { Groupable, RandomUtils, ResourceUtils } from "@lodz/pandora"
 
 /**
  * 主页数据
  * Created by zhouL on 2025/7/19.
  */
+@ObservedV2
 export class MainBean implements Groupable {
   /** 标题名称 */
   private titleName: string
@@ -11,8 +12,12 @@ export class MainBean implements Groupable {
   private pageRes: Resource
   /** 索引文字 */
   private indexText: string
+  /** 编号 */
+  @Trace
+  public id: string = ""
 
   constructor(titleName: string, indexText: string, pageRes: Resource) {
+    this.id = RandomUtils.getUUID()
     this.titleName = titleName
     this.indexText = indexText
     this.pageRes = pageRes
