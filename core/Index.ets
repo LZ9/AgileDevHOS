@@ -52,3 +52,14 @@ export { PermissionResult } from './src/main/ets/permission/PermissionResult';
 // 授权监听器
 export { PermissionListener } from './src/main/ets/permission/PermissionListener';
 
+// 分组接口
+export { ArrayUtils } from './src/main/ets/array/ArrayUtils';
+
+// 分组数据
+export { GroupBean } from './src/main/ets/array/GroupBean';
+
+// 分组接口
+export { Groupable } from './src/main/ets/array/Groupable';
+
+
+
