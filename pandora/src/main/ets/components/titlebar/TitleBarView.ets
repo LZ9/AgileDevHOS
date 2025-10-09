@@ -37,7 +37,7 @@ export struct TitleBarView {
 
         //标题
         Text(this.vm.titleVm.title ?? "标题")
-          .fontSize(this.vm.titleVm.fontSize ?? 20)
+          .fontSize(this.vm.titleVm.fontSize ?? 18)
           .textAlign(this.vm.titleVm.textAlign ?? TextAlign.Center)
           .fontColor(this.vm.titleVm.fontColor ?? Color.White)
           .maxLines(1)
