@@ -10,5 +10,7 @@ export namespace PandoraConstants {
     export const WINDOW_CLASS = 'window_class'
     /** 基类页面配置 */
     export const BASE_VIEW_CONFIG = 'base_view_config'
+    /** Ability上下文 */
+    export const UI_ABILITY_CONTEXT = 'ui_ability_context'
   }
 }

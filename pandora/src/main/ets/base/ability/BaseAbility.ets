@@ -11,8 +11,9 @@ import { BaseContainerScopeConfig } from '../container/BaseContainerScopeConfig'
  */
 export abstract class BaseAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    AppStorage.setOrCreate(PandoraConstants.Storage.UI_ABILITY_CONTEXT, this.context)
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET)
-    this.startCreate()
+    this.startCreate(want, launchParam)
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
@@ -32,7 +33,7 @@ export abstract class BaseAbility extends UIAbility {
   }
 
   /** 开始创建 */
-  protected startCreate() {}
+  protected startCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {}
 
   /** 获取布局文件路径 */
   protected abstract getLayoutPath(): string
