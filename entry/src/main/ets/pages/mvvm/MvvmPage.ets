@@ -1,16 +1,17 @@
-import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 
 /**
  * mvvm用例页面
  * Created by zhouL on 2025/7/23.
  */
-@Entry
 @ComponentV2
-struct MvvmPage {
+@HMRouter({ pageUrl: "MvvmPage" })
+export struct MvvmPage {
   /** 基类属性 */
   @Local public vm: BaseContainerVm = new BaseContainerVm()
   /** 代办列表 */
@@ -22,7 +23,7 @@ struct MvvmPage {
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.mvvm_title')
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      RouterUtils.back(this.getUIContext())
+      HMRouterMgr.pop()
     }
     this.vm.onReloadClick = () => {
       this.vm.showStatusLoading()

@@ -1,41 +1,6 @@
 {
   "string": [
     {
-      "name": "splash_page_path",
-      "value": "pages/splash/SplashPage",
-      "description": "启动页路径"
-    },
-    {
-      "name": "main_page_path",
-      "value": "pages/main/MainPage",
-      "description": "主页路径"
-    },
-    {
-      "name": "json_page_path",
-      "value": "pages/json/JsonPage",
-      "description": "Json转换测试路径"
-    },
-    {
-      "name": "preferences_page_path",
-      "value": "pages/preferences/PreferencesPage",
-      "description": "Preferences测试类"
-    },
-    {
-      "name": "mvvm_page_path",
-      "value": "pages/mvvm/MvvmPage",
-      "description": "Mvvm测试类"
-    },
-    {
-      "name": "component_v2_page_path",
-      "value": "pages/api/ComponentV2Page",
-      "description": "ComponentV2测试类"
-    },
-    {
-      "name": "promise_page_path",
-      "value": "pages/promise/PromisePage",
-      "description": "Promise测试类"
-    },
-    {
       "name": "module_desc",
       "value": "AgileDevHOS主工程"
     },

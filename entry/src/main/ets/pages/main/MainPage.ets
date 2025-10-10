@@ -1,5 +1,5 @@
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 import {
-  RouterUtils,
   StatusBarUtils,
   BaseContainer,
   BaseContainerVm,
@@ -13,10 +13,10 @@ import { MainBean } from '../../bean/main/MainBean'
  * 主页
  * Created by zhouL on 2025/7/14.
  */
-@Entry
 @ComponentV2
 @Preview({ deviceType: "phone" })
-struct MainPage {
+@HMRouter({ pageUrl: 'MainPage', lifecycle: 'AppLifecycle' })
+export struct MainPage {
   /** 索引字符数组 */
   private static readonly INDEX_ARRAY: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
     'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#']
@@ -54,11 +54,11 @@ struct MainPage {
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
     const data = [
-      new MainBean("Json转换测试", "J", $r('app.string.json_page_path')),
-      new MainBean("Preferences测试类", "P", $r('app.string.preferences_page_path')),
-      new MainBean("Mvvm测试类", "M", $r('app.string.mvvm_page_path')),
-      new MainBean("ComponentV2测试类", "C", $r('app.string.component_v2_page_path')),
-      new MainBean("Promise测试类", "P", $r('app.string.promise_page_path'))
+      new MainBean("Json转换测试", "J", "JsonPage"),
+      new MainBean("Preferences测试类", "P", "PreferencesPage"),
+      new MainBean("Mvvm测试类", "M", "MvvmPage"),
+      new MainBean("ComponentV2测试类", "C", "ComponentV2Page"),
+      new MainBean("Promise测试类", "P", "PromisePage")
     ]
 
     this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
@@ -126,7 +126,7 @@ struct MainPage {
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    RouterUtils.pushUrl(this.getUIContext(), item.getPagePath(this.getUIContext()))
+                    HMRouterMgr.push({ pageUrl: item.getPage() })
                   })
               }
             }, (bean: MainBean) => bean.id)

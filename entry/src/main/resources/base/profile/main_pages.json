@@ -1,11 +1,5 @@
 {
   "src": [
-    "pages/splash/SplashPage",
-    "pages/main/MainPage",
-    "pages/json/JsonPage",
-    "pages/preferences/PreferencesPage",
-    "pages/mvvm/MvvmPage",
-    "pages/componentV2/ComponentV2Page",
-    "pages/promise/PromisePage"
+    "pages/index/IndexPage"
   ]
 }

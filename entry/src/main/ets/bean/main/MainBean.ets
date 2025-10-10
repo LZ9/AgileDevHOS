@@ -8,19 +8,19 @@ import { Groupable, RandomUtils, ResourceUtils } from "@lodz/pandora"
 export class MainBean implements Groupable {
   /** 标题名称 */
   private titleName: string
-  /** 页面路径资源 */
-  private pageRes: Resource
+  /** 页面路径 */
+  private page: string
   /** 索引文字 */
   private indexText: string
   /** 编号 */
   @Trace
   public id: string = ""
 
-  constructor(titleName: string, indexText: string, pageRes: Resource) {
+  constructor(titleName: string, indexText: string, page: string) {
     this.id = RandomUtils.getUUID()
     this.titleName = titleName
     this.indexText = indexText
-    this.pageRes = pageRes
+    this.page = page
   }
 
   getSortStr(): string {
@@ -37,11 +37,8 @@ export class MainBean implements Groupable {
     return this.indexText
   }
 
-  /**
-   * 获取页面路径
-   * @param context 上下文
-   */
-  public getPagePath(context: UIContext): string {
-    return ResourceUtils.toString(context.getHostContext(), this.pageRes)
+  /** 获取页面路径 */
+  public getPage(): string {
+    return this.page
   }
 }

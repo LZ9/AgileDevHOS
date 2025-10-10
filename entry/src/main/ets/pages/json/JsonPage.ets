@@ -1,4 +1,5 @@
-import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils, RouterUtils } from '@lodz/pandora'
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
+import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
 import { LogListView } from '../../view/LogListView'
@@ -7,9 +8,9 @@ import { LogListView } from '../../view/LogListView'
  * Json转换测试
  * Created by zhouL on 2025/7/19.
  */
-@Entry
 @ComponentV2
-struct JsonPage {
+@HMRouter({ pageUrl: "JsonPage" })
+export struct JsonPage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */
   private static readonly JSON_STRING = '{"msg":"查询成功","code":200,"data":[{"id":1001,"name":"Jack","age":25,"city":"Shanghai"}]}'
@@ -19,7 +20,7 @@ struct JsonPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      RouterUtils.back(this.getUIContext())
+      HMRouterMgr.pop()
     }
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.json_title')
   }

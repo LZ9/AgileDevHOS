@@ -1,13 +1,13 @@
-import { PermissionGrantUtils, PermissionResult, PromptUtils, RouterUtils } from '@lodz/pandora'
-
+import { PermissionGrantUtils, PermissionResult, PromptUtils } from '@lodz/pandora'
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
 /**
  * 启动页
  * Created by zhouL on 2025/7/13.
  */
-@Entry
 @ComponentV2
 @Preview({ deviceType: "phone" })
-struct SplashPage {
+@HMRouter({ pageUrl: "SplashPage" })
+export struct SplashPage {
   build() {
     Stack() {
       Image($r(`app.media.bg_splash`))
@@ -41,7 +41,7 @@ struct SplashPage {
 
   private goMain() {
     setTimeout(() => {
-      RouterUtils.replaceUrl(this.getUIContext(), $r('app.string.main_page_path'))
+      HMRouterMgr.replace({ pageUrl: 'MainPage' })
     }, 1000) // 1秒后跳转
   }
 }

@@ -1,16 +1,17 @@
-import { BaseContainer, BaseContainerVm, JsonUtils, PrintLog, RandomUtils, RouterUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, JsonUtils, PrintLog, RandomUtils } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
 import { UIUtils } from '@kit.ArkUI'
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 
 /**
  * ComponentV2装饰器用例
  * Created by zhouL on 2025/7/30.
  */
-@Entry
 @ComponentV2
-struct ComponentV2Page {
+@HMRouter({ pageUrl: "ComponentV2Page" })
+export struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
 
   // 该变量要传递到子组件的子组件中（ChildConsumer）
@@ -19,7 +20,7 @@ struct ComponentV2Page {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      RouterUtils.back(this.getUIContext())
+      HMRouterMgr.pop()
     }
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.component_v2_title')
   }

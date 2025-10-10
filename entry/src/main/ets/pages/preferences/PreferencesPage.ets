@@ -6,21 +6,21 @@ import {
   PreferencesUtils,
   PromptUtils,
   ResourceUtils,
-  RouterUtils,
   StringUtils,
 } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';
+import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
 
 /**
  * Preferences测试类
  * Created by zhouL on 2025/7/20.
  */
-@Entry
 @ComponentV2
 @Preview({ deviceType: "phone" })
-struct PreferencesPage {
+@HMRouter({ pageUrl: "PreferencesPage" })
+export struct PreferencesPage {
   /** 日志列表 */
   @Local private logList: Array<string> = []
   /** 缓存内容 */
@@ -31,7 +31,7 @@ struct PreferencesPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      RouterUtils.back(this.getUIContext())
+      HMRouterMgr.pop()
     }
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.preferences_title')
   }
