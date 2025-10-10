@@ -7,6 +7,8 @@
   "license": "",
   "dependencies": {
     "@lodz/pandora": "file:../pandora",
+    "@hadss/hmrouter": "1.2.0-rc.0",
+    "@hadss/hmrouter-transitions": "1.2.0-rc.0"
 //    "@lodz/pandora": "1.0.2"
   }
 }
