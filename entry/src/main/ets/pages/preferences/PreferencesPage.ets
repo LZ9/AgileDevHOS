@@ -12,6 +12,7 @@ import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
+import { RouterGuide } from '../../config/RouterGuide';
 
 /**
  * Preferences测试类
@@ -19,7 +20,7 @@ import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: "PreferencesPage" })
+@HMRouter({ pageUrl: RouterGuide.PreferencesPage })
 export struct PreferencesPage {
   /** 日志列表 */
   @Local private logList: Array<string> = []

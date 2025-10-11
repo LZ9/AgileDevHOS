@@ -2,6 +2,7 @@ import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
+import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
 
 /**
@@ -9,7 +10,7 @@ import { LogListView } from '../../view/LogListView'
  * Created by zhouL on 2025/7/19.
  */
 @ComponentV2
-@HMRouter({ pageUrl: "JsonPage" })
+@HMRouter({ pageUrl: RouterGuide.JsonPage })
 export struct JsonPage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */

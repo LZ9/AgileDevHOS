@@ -4,13 +4,14 @@ import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
 import { UIUtils } from '@kit.ArkUI'
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
+import { RouterGuide } from '../../config/RouterGuide'
 
 /**
  * ComponentV2装饰器用例
  * Created by zhouL on 2025/7/30.
  */
 @ComponentV2
-@HMRouter({ pageUrl: "ComponentV2Page" })
+@HMRouter({ pageUrl: RouterGuide.ComponentV2Page })
 export struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
 

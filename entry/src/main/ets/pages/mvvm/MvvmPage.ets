@@ -4,13 +4,14 @@ import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
+import { RouterGuide } from '../../config/RouterGuide'
 
 /**
  * mvvm用例页面
  * Created by zhouL on 2025/7/23.
  */
 @ComponentV2
-@HMRouter({ pageUrl: "MvvmPage" })
+@HMRouter({ pageUrl: RouterGuide.MvvmPage })
 export struct MvvmPage {
   /** 基类属性 */
   @Local public vm: BaseContainerVm = new BaseContainerVm()

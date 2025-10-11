@@ -8,6 +8,7 @@ import {
   RandomUtils
 } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
+import { RouterGuide } from '../../config/RouterGuide'
 
 /**
  * 主页
@@ -15,7 +16,7 @@ import { MainBean } from '../../bean/main/MainBean'
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: 'MainPage', lifecycle: 'AppLifecycle' })
+@HMRouter({ pageUrl: RouterGuide.MainPage, lifecycle: 'AppLifecycle' })
 export struct MainPage {
   /** 索引字符数组 */
   private static readonly INDEX_ARRAY: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
@@ -54,11 +55,11 @@ export struct MainPage {
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
     const data = [
-      new MainBean("Json转换测试", "J", "JsonPage"),
-      new MainBean("Preferences测试类", "P", "PreferencesPage"),
-      new MainBean("Mvvm测试类", "M", "MvvmPage"),
-      new MainBean("ComponentV2测试类", "C", "ComponentV2Page"),
-      new MainBean("Promise测试类", "P", "PromisePage")
+      new MainBean("Json转换测试", "J", RouterGuide.JsonPage),
+      new MainBean("Preferences测试类", "P", RouterGuide.PreferencesPage),
+      new MainBean("Mvvm测试类", "M", RouterGuide.MvvmPage),
+      new MainBean("ComponentV2测试类", "C", RouterGuide.ComponentV2Page),
+      new MainBean("Promise测试类", "P", RouterGuide.PromisePage)
     ]
 
     this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)

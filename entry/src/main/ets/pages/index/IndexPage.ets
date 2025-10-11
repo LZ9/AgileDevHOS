@@ -1,5 +1,7 @@
 import { HMDefaultGlobalAnimator, HMNavigation } from "@hadss/hmrouter"
 import { AttributeUpdater } from "@kit.ArkUI"
+import { Constants } from "../../config/Constants"
+import { RouterGuide } from "../../config/RouterGuide"
 
 /**
  * 根页面
@@ -14,7 +16,7 @@ struct IndexPage {
     Column() {
       HMNavigation({
         navigationId: 'mainNavigationId',
-        homePageUrl: 'SplashPage',
+        homePageUrl: RouterGuide.SplashPage,
         options: {
           standardAnimator: HMDefaultGlobalAnimator.STANDARD_ANIMATOR,
           dialogAnimator: HMDefaultGlobalAnimator.DIALOG_ANIMATOR,

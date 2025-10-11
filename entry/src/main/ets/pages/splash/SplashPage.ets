@@ -1,12 +1,14 @@
 import { PermissionGrantUtils, PermissionResult, PromptUtils } from '@lodz/pandora'
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
+import { RouterGuide } from '../../config/RouterGuide';
+
 /**
  * 启动页
  * Created by zhouL on 2025/7/13.
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: "SplashPage" })
+@HMRouter({ pageUrl: RouterGuide.SplashPage })
 export struct SplashPage {
   build() {
     Stack() {
@@ -41,7 +43,7 @@ export struct SplashPage {
 
   private goMain() {
     setTimeout(() => {
-      HMRouterMgr.replace({ pageUrl: 'MainPage' })
+      HMRouterMgr.replace({ pageUrl: RouterGuide.MainPage, animator : false })
     }, 1000) // 1秒后跳转
   }
 }

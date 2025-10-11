@@ -15,6 +15,7 @@ import { InfoBean } from '../../bean/api/InfoBean'
 import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
+import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
 
 /**
@@ -22,7 +23,7 @@ import { LogListView } from '../../view/LogListView'
  * Created by zhouL on 2025/8/6.
  */
 @ComponentV2
-@HMRouter({ pageUrl: "PromisePage" })
+@HMRouter({ pageUrl: RouterGuide.PromisePage })
 export struct PromisePage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 日志列表 */
