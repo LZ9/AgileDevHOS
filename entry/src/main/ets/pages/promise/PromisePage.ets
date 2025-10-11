@@ -37,10 +37,10 @@ export struct PromisePage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
+    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
       HMRouterMgr.pop()
     }
-    this.vm.titleBarViewVm.titleVm.title = $r('app.string.promise_title')
     this.vm.onReloadClick = () => {
       this.requestNormal()
     }

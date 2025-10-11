@@ -48,3 +48,5 @@ export { Observer } from './src/main/ets/utils/promise/Observer';
 export { Disposable } from './src/main/ets/utils/promise/Disposable';
 
 export { ProgressObserver } from './src/main/ets/utils/promise/ProgressObserver';
+
+export { KVBean } from './src/main/ets/bean/KVBean';

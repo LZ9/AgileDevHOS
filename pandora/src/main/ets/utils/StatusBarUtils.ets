@@ -42,8 +42,8 @@ export class StatusBarUtils {
       return
     }
     win.setWindowSystemBarProperties({
-      statusBarColor: ResourceUtils.toColorString(context, bgColor),
-      statusBarContentColor: ResourceUtils.toColorString(context, contentColor),
+      statusBarColor: ResourceUtils.getColorString(context, bgColor),
+      statusBarContentColor: ResourceUtils.getColorString(context, contentColor),
     })
   }
 }

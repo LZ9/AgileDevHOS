@@ -5,7 +5,9 @@ import {
   BaseContainerVm,
   GroupBean,
   ArrayUtils,
-  RandomUtils
+  RandomUtils,
+  KVBean,
+  ResourceUtils
 } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 import { RouterGuide } from '../../config/RouterGuide'
@@ -35,7 +37,6 @@ export struct MainPage {
     0x1F637, 0x1F638, 0x1F639, 0x1F63A, 0x1F63B, 0x1F63C, 0x1F63D, 0x1F63E, 0x1F63F
   ]
 
-
   @Local private vm: BaseContainerVm = new BaseContainerVm()
   /** 列表数据 */
   @Local private list: GroupBean<MainBean>[] = []
@@ -55,7 +56,7 @@ export struct MainPage {
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
     const data = [
-      new MainBean("Json转换测试", "J", RouterGuide.JsonPage),
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.json_title')), "J", RouterGuide.JsonPage),
       new MainBean("Preferences测试类", "P", RouterGuide.PreferencesPage),
       new MainBean("Mvvm测试类", "M", RouterGuide.MvvmPage),
       new MainBean("ComponentV2测试类", "C", RouterGuide.ComponentV2Page),
@@ -127,7 +128,7 @@ export struct MainPage {
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    HMRouterMgr.push({ pageUrl: item.getPage() })
+                    HMRouterMgr.push({ pageUrl: item.getPage(), param: item.getTitleName() })
                   })
               }
             }, (bean: MainBean) => bean.id)

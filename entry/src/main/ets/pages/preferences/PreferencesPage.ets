@@ -31,10 +31,11 @@ export struct PreferencesPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
+    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
       HMRouterMgr.pop()
     }
-    this.vm.titleBarViewVm.titleVm.title = $r('app.string.preferences_title')
+
   }
 
   onDidBuild(): void {
@@ -120,7 +121,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const def = ResourceUtils.toString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
+            const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
             const value = PreferencesUtils.getInstance().getSync(Constants.Preferences.USER_KEY, def)
             this.addLog("同步读取字符：" + value)
           })
@@ -172,7 +173,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const def = ResourceUtils.toString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
+            const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
             PreferencesUtils.getInstance().get(Constants.Preferences.USER_KEY, def)
               .then((value) => {
                 this.addLog("异步读取字符成功：" + value)
@@ -237,7 +238,7 @@ export struct PreferencesPage {
                 if (btn === undefined) {
                   throw new Error("未找到key")
                 }
-                return ResourceUtils.toString(this.getUIContext().getHostContext(), btn.text)
+                return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
               })
               .then((key) => {
                 this.addLog(key + " 查询结果：" + PreferencesUtils.getInstance().hasSync(key))
@@ -274,7 +275,7 @@ export struct PreferencesPage {
                 if (btn === undefined) {
                   throw new Error("未找到key")
                 }
-                return ResourceUtils.toString(this.getUIContext().getHostContext(), btn.text)
+                return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
               })
               .then((key) => {
                 PreferencesUtils.getInstance().deleteSync(key)

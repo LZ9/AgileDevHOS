@@ -20,10 +20,10 @@ export struct ComponentV2Page {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
+    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
       HMRouterMgr.pop()
     }
-    this.vm.titleBarViewVm.titleVm.title = $r('app.string.component_v2_title')
   }
 
   onDidBuild(): void {

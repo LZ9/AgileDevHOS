@@ -24,7 +24,7 @@ export class RouterUtils {
    */
   public static replaceUrl(context: UIContext, path: Resource | string, mode?: router.RouterMode, params?: Object): Promise<void> {
     if (typeof path !== 'string') {
-      path = ResourceUtils.toString(context.getHostContext(), path)
+      path = ResourceUtils.getString(context.getHostContext(), path)
     }
     if (mode !== undefined) {
       return context.getRouter().replaceUrl({ url: path, params: params }, mode)
@@ -54,7 +54,7 @@ export class RouterUtils {
    */
   public static pushUrl(context: UIContext, path: Resource | string, mode?: router.RouterMode, params?: Object): Promise<void> {
     if (typeof path !== 'string') {
-      path = ResourceUtils.toString(context.getHostContext(), path)
+      path = ResourceUtils.getString(context.getHostContext(), path)
     }
     if (mode !== undefined) {
       return context.getRouter().pushUrl({ url: path, params: params }, mode)
@@ -91,7 +91,7 @@ export class RouterUtils {
    */
   public static backPath(context: UIContext, path: Resource | string, params?: Object) {
     if (typeof path !== 'string') {
-      path = ResourceUtils.toString(context.getHostContext(), path)
+      path = ResourceUtils.getString(context.getHostContext(), path)
     }
     context.getRouter().back({ url: path, params: params })
   }
@@ -146,7 +146,7 @@ export class RouterUtils {
    */
   public static getStateByUrl(context: UIContext, path: Resource | string): Array<router.RouterState> {
     if (typeof path !== 'string') {
-      path = ResourceUtils.toString(context.getHostContext(), path)
+      path = ResourceUtils.getString(context.getHostContext(), path)
     }
     return context.getRouter().getStateByUrl(path)
   }
@@ -158,7 +158,7 @@ export class RouterUtils {
    */
   public static showAlertBeforeBackPage(context: UIContext, message: Resource | string) {
     if (typeof message !== 'string') {
-      message = ResourceUtils.toString(context.getHostContext(), message)
+      message = ResourceUtils.getString(context.getHostContext(), message)
     }
     context.getRouter().showAlertBeforeBackPage({ message: message })
   }

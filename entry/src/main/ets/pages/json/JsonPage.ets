@@ -1,5 +1,5 @@
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
-import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils, KVBean } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
 import { RouterGuide } from '../../config/RouterGuide'
@@ -20,10 +20,10 @@ export struct JsonPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
+    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
     this.vm.titleBarViewVm.backImgVm.onClick = () => {
       HMRouterMgr.pop()
     }
-    this.vm.titleBarViewVm.titleVm.title = $r('app.string.json_title')
   }
 
   onDidBuild(): void {
