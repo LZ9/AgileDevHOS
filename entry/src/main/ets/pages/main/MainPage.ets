@@ -57,12 +57,11 @@ export struct MainPage {
 
     const data = [
       new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.json_title')), "J", RouterGuide.JsonPage),
-      new MainBean("Preferences测试类", "P", RouterGuide.PreferencesPage),
-      new MainBean("Mvvm测试类", "M", RouterGuide.MvvmPage),
-      new MainBean("ComponentV2测试类", "C", RouterGuide.ComponentV2Page),
-      new MainBean("Promise测试类", "P", RouterGuide.PromisePage)
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_title')), "P", RouterGuide.PreferencesPage),
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.mvvm_title')), "M", RouterGuide.MvvmPage),
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.component_v2_title')), "C", RouterGuide.ComponentV2Page),
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.promise_title')), "P", RouterGuide.PromisePage)
     ]
-
     this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
   }
 

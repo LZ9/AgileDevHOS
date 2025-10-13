@@ -1,6 +1,5 @@
-import { HMDefaultGlobalAnimator, HMNavigation } from "@hadss/hmrouter"
+import { HMDefaultGlobalAnimator, HMNavigation, IHMAnimator } from "@hadss/hmrouter"
 import { AttributeUpdater } from "@kit.ArkUI"
-import { Constants } from "../../config/Constants"
 import { RouterGuide } from "../../config/RouterGuide"
 
 /**
@@ -18,7 +17,7 @@ struct IndexPage {
         navigationId: 'mainNavigationId',
         homePageUrl: RouterGuide.SplashPage,
         options: {
-          standardAnimator: HMDefaultGlobalAnimator.STANDARD_ANIMATOR,
+          standardAnimator: PageAnimation,
           dialogAnimator: HMDefaultGlobalAnimator.DIALOG_ANIMATOR,
           modifier: this.modifier
         }
@@ -34,3 +33,8 @@ class NavModifier extends AttributeUpdater<NavigationAttribute> {
     instance.hideNavBar(true)
   }
 }
+
+/** 默认页面跳转动画 */
+export const PageAnimation: IHMAnimator.Effect = new IHMAnimator.Effect({
+  direction: IHMAnimator.Direction.RIGHT_TO_LEFT,
+})
