@@ -7,7 +7,7 @@ import { Groupable, RandomUtils, ResourceUtils } from "@lodz/pandora"
 @ObservedV2
 export class MainBean implements Groupable {
   /** 标题名称 */
-  private titleName: string
+  private titleName: string | Resource
   /** 页面路径 */
   private page: string
   /** 索引文字 */
@@ -16,7 +16,7 @@ export class MainBean implements Groupable {
   @Trace
   public id: string = ""
 
-  constructor(titleName: string, indexText: string, page: string) {
+  constructor(titleName: string | Resource, indexText: string, page: string) {
     this.id = RandomUtils.getUUID()
     this.titleName = titleName
     this.indexText = indexText
@@ -28,8 +28,11 @@ export class MainBean implements Groupable {
   }
 
   /** 获取标题名称 */
-  public getTitleName(): string {
-    return this.titleName
+  public getTitleName(context: Context | undefined): string {
+    if (typeof this.titleName === "string") {
+      return this.titleName
+    }
+    return ResourceUtils.getString(context, this.titleName)
   }
 
   /** 获取索引文字 */

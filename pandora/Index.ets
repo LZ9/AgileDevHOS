@@ -9,6 +9,10 @@ export { BaseContainer } from './src/main/ets/base/container/BaseContainer';
 
 export { BaseContainerVm } from './src/main/ets/base/container/BaseContainerVm';
 
+export { BaseRefreshContainer } from './src/main/ets/base/refresh/BaseRefreshContainer';
+
+export { BaseRefreshContainerVm } from './src/main/ets/base/refresh/BaseRefreshContainerVm';
+
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 

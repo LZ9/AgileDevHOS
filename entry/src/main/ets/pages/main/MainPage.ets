@@ -56,12 +56,12 @@ export struct MainPage {
     this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
     const data = [
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.json_title')), "J", RouterGuide.JsonPage),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_title')), "P", RouterGuide.PreferencesPage),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.mvvm_title')), "M", RouterGuide.MvvmPage),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.component_v2_title')), "C", RouterGuide.ComponentV2Page),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.promise_title')), "P", RouterGuide.PromisePage),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.refresh_load_title')), "S", RouterGuide.RefreshLoadPage)
+      new MainBean($r('app.string.json_title'), "J", RouterGuide.JsonPage),
+      new MainBean($r('app.string.preferences_title'), "P", RouterGuide.PreferencesPage),
+      new MainBean($r('app.string.mvvm_title'), "M", RouterGuide.MvvmPage),
+      new MainBean($r('app.string.component_v2_title'), "C", RouterGuide.ComponentV2Page),
+      new MainBean($r('app.string.promise_title'), "P", RouterGuide.PromisePage),
+      new MainBean($r('app.string.refresh_load_title'), "S", RouterGuide.RefreshLoadPage)
     ]
     this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
   }
@@ -121,14 +121,14 @@ export struct MainPage {
           ListItemGroup({ header: this.itemHeader(bean) }) {
             ForEach(bean.list, (item: MainBean) => {
               ListItem() {
-                Text(String.fromCodePoint(this.getRandomEmoji()) + "   " + item.getTitleName())
+                Text(String.fromCodePoint(this.getRandomEmoji()) + "   " + item.getTitleName(this.getUIContext().getHostContext()))
                   .width('100%')
                   .fontSize(16)
                   .fontColor(this.getRandomColor())
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    HMRouterMgr.push({ pageUrl: item.getPage(), param: item.getTitleName() })
+                    HMRouterMgr.push({ pageUrl: item.getPage(), param: item.getTitleName(this.getUIContext().getHostContext()) })
                   })
               }
             }, (bean: MainBean) => bean.id)
