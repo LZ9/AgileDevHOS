@@ -60,7 +60,8 @@ export struct MainPage {
       new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_title')), "P", RouterGuide.PreferencesPage),
       new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.mvvm_title')), "M", RouterGuide.MvvmPage),
       new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.component_v2_title')), "C", RouterGuide.ComponentV2Page),
-      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.promise_title')), "P", RouterGuide.PromisePage)
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.promise_title')), "P", RouterGuide.PromisePage),
+      new MainBean(ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.refresh_load_title')), "S", RouterGuide.RefreshLoadPage)
     ]
     this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
   }

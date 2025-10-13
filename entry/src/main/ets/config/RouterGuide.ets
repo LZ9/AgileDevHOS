@@ -17,4 +17,7 @@ export class RouterGuide {
   public static readonly PreferencesPage = 'PreferencesPage'
   /** Promise测试类 */
   public static readonly PromisePage = 'PromisePage'
+  /** 刷新/加载更多测试类 */
+  public static readonly RefreshLoadPage = 'RefreshLoadPage'
+
 }

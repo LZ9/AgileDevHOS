@@ -191,6 +191,10 @@
     {
       "name": "promise_request_post",
       "value": "post接口数据"
+    },
+    {
+      "name": "refresh_load_title",
+      "value": "刷新/加载更多测试类"
     }
   ]
 }
