@@ -1,6 +1,6 @@
 import { rcp } from "@kit.RemoteCommunicationKit"
 import { JsonUtils } from "@lodz/pandora"
-import { Constants } from "../../config/Constants"
+import { Constants } from "../config/Constants"
 import { RequestInterceptor } from "./RequestInterceptor"
 
 /**
@@ -30,9 +30,9 @@ export class RcpUtils {
         transfer: {
           autoRedirect: true,
           timeout: {
-            connectMs: 30000, //连接超时时间
-            transferMs: 30000, //数据传输超时时间
-            inactivityMs: 30000//无响应超时时间
+            connectMs: 120000, //连接超时时间
+            transferMs: 120000, //数据传输超时时间
+            inactivityMs: 120000//无响应超时时间
           },
           assumesHTTP3Capable: true,
           pathPreference: "auto",
@@ -40,9 +40,6 @@ export class RcpUtils {
           maxAutoRedirects: 50,
           pausePolicy: {}
         }
-      },
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
       },
       cookies: {},
       sessionListener: {},
@@ -61,6 +58,7 @@ export class RcpUtils {
     this.rcpSession = session
   }
 
+  /** 释放资源 */
   public release() {
     this.rcpSession.close()
   }
@@ -68,29 +66,48 @@ export class RcpUtils {
   /**
    * get请求
    * @param url 请求地址
+   * @param headers 请求头
    */
-  public get(url: string): Promise<rcp.Response> {
-    return this.fetch(new rcp.Request(url, "GET"))
+  public get(url: string, headers?: Record<string, string>): Promise<rcp.Response> {
+    const request = new rcp.Request(url, "GET")
+    request.headers = headers
+    return this.fetch(request)
   }
 
-  public getJsonBean<T>(url: string): Promise<T> {
-    return this.fetchJsonBean(new rcp.Request(url, "GET"))
+  /**
+   * get请求
+   * @param url 请求地址
+   * @param headers 请求头
+   */
+  public getJsonBean<T>(url: string, headers?: Record<string, string>): Promise<T> {
+    const request = new rcp.Request(url, "GET")
+    request.headers = headers
+    return this.fetchJsonBean(request)
   }
 
   /**
    * post请求
    * @param url 请求地址
    * @param content 请求内容
+   * @param headers 请求头
    */
-  public post(url: string, content?: rcp.RequestContent): Promise<rcp.Response> {
+  public post(url: string, content?: rcp.RequestContent, headers?: Record<string, string>): Promise<rcp.Response> {
     const request = new rcp.Request(url, "POST")
     request.content = content
+    request.headers = headers
     return this.fetch(request)
   }
 
-  public postJsonBean<T>(url: string, content?: rcp.RequestContent): Promise<T> {
+  /**
+   * post请求
+   * @param url 请求地址
+   * @param content 请求内容
+   * @param headers 请求头
+   */
+  public postJsonBean<T>(url: string, content?: rcp.RequestContent, headers?: Record<string, string>): Promise<T> {
     const request = new rcp.Request(url, "POST")
     request.content = content
+    request.headers = headers
     return this.fetchJsonBean(request)
   }
 
@@ -113,6 +130,10 @@ export class RcpUtils {
       })
   }
 
+  /**
+   * 数据请求
+   * @param request 请求对象
+   */
   public fetch(request: rcp.Request): Promise<rcp.Response> {
     return this.rcpSession.fetch(request)
       .then((resp: rcp.Response) => {

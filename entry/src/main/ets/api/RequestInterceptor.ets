@@ -1,6 +1,6 @@
 import { rcp } from "@kit.RemoteCommunicationKit";
-import { JsonUtils, PrintLog } from "@lodz/pandora";
-import { Constants } from "../../config/Constants";
+import { AppUtils, JsonUtils, PrintLog } from "@lodz/pandora";
+import { Constants } from "../config/Constants";
 
 /**
  * 请求拦截器
@@ -9,12 +9,31 @@ import { Constants } from "../../config/Constants";
 export class RequestInterceptor implements rcp.Interceptor {
   intercept(context: rcp.RequestContext, next: rcp.RequestHandler): Promise<rcp.Response> {
     const request = context.request;
+    request.headers = this.assembleHeaders(request.headers)
     this.logRequest(request)
     return next.handle(context)
       .then(response => {
         this.logResponse(response)
         return response
       })
+  }
+
+  /** 组装头信息 */
+  private assembleHeaders(oldHeaders?: rcp.RequestHeaders): Record<string, string> {
+    let headers: Record<string, string> = {}
+    headers['Content-Type'] = 'application/json'
+    headers['versionCode'] = AppUtils.getVersionCode().toString() //版本号
+    headers['versionName'] = AppUtils.getVersionName().toString() //版本名称
+
+    if (oldHeaders !== undefined) {
+      Object.keys(oldHeaders).forEach((key: string) => {
+        const value = oldHeaders[key]
+        if (typeof value === "string") {
+          headers[key] = value
+        }
+      })
+    }
+    return headers
   }
 
   /**

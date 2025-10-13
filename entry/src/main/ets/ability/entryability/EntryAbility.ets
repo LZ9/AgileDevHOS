@@ -1,10 +1,10 @@
 import { BaseAbility, PreferencesUtils } from '@lodz/pandora'
 import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/container/BaseContainerScopeConfig'
 import { Constants } from '../../config/Constants'
-import { RcpUtils } from '../../tools/api/RcpUtils'
 import { FileManager } from '../../tools/FileManager'
 import { AbilityConstant, Want } from '@kit.AbilityKit'
 import { HMRouterMgr } from '@hadss/hmrouter'
+import { RcpUtils } from '../../api/RcpUtils'
 
 export default class EntryAbility extends BaseAbility {
   protected startCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {

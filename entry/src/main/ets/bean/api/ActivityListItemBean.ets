@@ -2,11 +2,11 @@
  * 信息数据实体
  * Created by zhouL on 2025/8/11.
  */
-export class InfoItemBean {
+export class ActivityListItemBean {
   /** 活动名称 */
-  public activityName: string = ``
+  public activityName?: string
   /** 主题内容 */
-  public theme: string = ``
+  public theme?: string
   /** 简介图片 */
-  public indexNavPic: string = ``
+  public indexNavPic?: string
 }

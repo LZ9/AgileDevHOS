@@ -1,10 +1,10 @@
 import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
-import { ApiService } from '../../api/ApiService'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
 import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 import { RouterGuide } from '../../config/RouterGuide'
+import { ApiManager } from '../../api/ApiManager'
 
 /**
  * mvvm用例页面
@@ -39,7 +39,7 @@ export struct MvvmPage {
   /** 请求代办列表 */
   private requestTodoList() {
     PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
-      .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext()))
+      .then(() => ApiManager.create().getTodoList(this.getUIContext().getHostContext()))
       .subscribe({
         onSubscribe: () => {
           this.vm.showStatusLoading()

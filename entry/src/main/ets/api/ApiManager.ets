@@ -4,20 +4,23 @@ import { TodoBean } from "../bean/mvvm/TodoBean";
 import rcp from "@hms.collaboration.rcp";
 import { FileManager } from "../tools/FileManager";
 import { fileIo } from "@kit.CoreFileKit";
-import { InfoBean } from "../bean/api/InfoBean";
+import { ActivityListBean } from "../bean/api/ActivityListBean";
 import { ResponseData } from "../bean/api/ResponseData";
-import { RcpUtils } from "../tools/api/RcpUtils";
+import { RcpUtils } from "./RcpUtils";
+import { ActivityRequestBean } from "../bean/api/ActivityRequestBean";
+import { ApiName } from "./ApiName";
 
 /**
- * 接口数据服务
- * Created by zhouL on 2025/7/29.
+ * 接口管理类
+ * Created by zhouL on 2025/10/13.
  */
-export class ApiService {
+export class ApiManager {
   private constructor() {
   }
 
-  public static create(): ApiService {
-    return new ApiService();
+  /** 创建接口管理对象 */
+  public static create(): ApiManager {
+    return new ApiManager()
   }
 
   /**
@@ -51,7 +54,8 @@ export class ApiService {
 
   /** 获取图片 */
   public getImg(): Promise<string> {
-    const imgUrl = `https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/shouye/2025-07-10/954-kaifazheshequ-0805.jpeg`
+    const imgUrl =
+      `https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/shouye/2025-07-10/954-kaifazheshequ-0805.jpeg`
     return RcpUtils.getInstance().get(imgUrl)
       .then((response: rcp.Response) => {
         const body = response.body
@@ -65,22 +69,15 @@ export class ApiService {
   }
 
   /** 获取图片 */
-  public postData(): Promise<ResponseData<InfoBean>> {
-    const listUrl: string = 'activity/terminalActivities/list';
-    let requestContent: rcp.RequestContent = {
-      'status': '1',
-      'belong': '1',
-      'language': 'cn',
-      'needTop': 1,
-      'displayChannel': [1, 3],
-      'count': 4,
-      'pagestart': 1,
-      'type': '1,4,5,6'
-    }
-    return RcpUtils.getInstance().postJsonBean<ResponseData<InfoBean>>(listUrl, requestContent)
-      .then((response: ResponseData<InfoBean>) => {
+  public postData(pageNo:number): Promise<ResponseData<ActivityListBean>> {
+    const bean = new ActivityRequestBean()
+    bean.pagestart =pageNo
+
+    const apiName = ApiName.getActivityList
+    const content: rcp.RequestContent = JsonUtils.beanToJson(bean)
+    return RcpUtils.getInstance().postJsonBean<ResponseData<ActivityListBean>>(apiName, content)
+      .then((response: ResponseData<ActivityListBean>) => {
         return ResponseData.copy(response)
       })
   }
-
 }

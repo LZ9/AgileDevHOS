@@ -10,8 +10,9 @@ import {
   PromiseAgent,
   PromptUtils
 } from '@lodz/pandora'
-import { ApiService } from '../../api/ApiService'
-import { InfoBean } from '../../bean/api/InfoBean'
+import { ApiManager } from '../../api/ApiManager'
+import { ApiName } from '../../api/ApiName'
+import { ActivityListBean } from '../../bean/api/ActivityListBean'
 import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
@@ -58,7 +59,7 @@ export struct PromisePage {
   private requestNormal() {
     this.vm.showStatusLoading()
     this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
-      .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
+      .then(() => ApiManager.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
       .subscribe({
         onSubscribe: () => {
           this.vm.showStatusLoading()
@@ -77,7 +78,7 @@ export struct PromisePage {
   /** 请求代办列表（加载框） */
   private requestProgress() {
     this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
-      .then(() => ApiService.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
+      .then(() => ApiManager.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
       .subscribePgDef(this.getUIContext(),
         {
           onNext: (responseBean: ResponseBean<Array<TodoBean>>) => {
@@ -93,7 +94,7 @@ export struct PromisePage {
   /** 使用get请求获取图片并保存到手机目录 */
   private requestImg(){
     PromiseAgent.create<string>()
-      .then(() => ApiService.create().getImg())
+      .then(() => ApiManager.create().getImg())
       .subscribePgDef(this.getUIContext(), {
         onNext: (data: string) => {
           this.imgUri = data
@@ -106,10 +107,10 @@ export struct PromisePage {
 
   /** 使用post请求列表数据 */
   private requestInfoList(){
-    PromiseAgent.create<ResponseData<InfoBean>>()
-      .then(() => ApiService.create().postData())
+    PromiseAgent.create<ResponseData<ActivityListBean>>()
+      .then(() => ApiManager.create().postData(1))
       .subscribePgDef(this.getUIContext(), {
-        onNext: (response: ResponseData<InfoBean>) => {
+        onNext: (response: ResponseData<ActivityListBean>) => {
           const data = response.value
           if (data === undefined || data === null) {
             this.addLog("获取数据结果是空")
@@ -121,7 +122,7 @@ export struct PromisePage {
             this.addLog(JsonUtils.beanToJson(item))
           }
         },
-        onError: (e: DataError<ResponseData<InfoBean>>) => {
+        onError: (e: DataError<ResponseData<ActivityListBean>>) => {
           PromptUtils.toastShort(this.getUIContext(), e.message)
         }
       })
