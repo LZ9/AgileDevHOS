@@ -13,6 +13,8 @@ export { BaseRefreshContainer } from './src/main/ets/base/refresh/BaseRefreshCon
 
 export { BaseRefreshContainerVm } from './src/main/ets/base/refresh/BaseRefreshContainerVm';
 
+export { BaseRefreshHeaderView } from './src/main/ets/base/refresh/BaseRefreshHeaderView';
+
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 

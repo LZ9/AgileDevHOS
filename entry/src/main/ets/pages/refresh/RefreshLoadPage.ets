@@ -1,5 +1,5 @@
 import { HMRouter, HMRouterMgr } from "@hadss/hmrouter";
-import { BaseRefreshContainer, BaseRefreshContainerVm, RandomUtils } from "@lodz/pandora";
+import { BaseRefreshContainer, BaseRefreshContainerVm, BaseRefreshHeaderView, RandomUtils } from "@lodz/pandora";
 import { RouterGuide } from "../../config/RouterGuide";
 
 /**
@@ -10,7 +10,7 @@ import { RouterGuide } from "../../config/RouterGuide";
 @HMRouter({ pageUrl: RouterGuide.RefreshLoadPage })
 export struct RefreshLoadPage {
   @Local vm: BaseRefreshContainerVm = new BaseRefreshContainerVm()
-  @Local arr: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  @Local arr: Array<number> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   @Local isLoading: boolean = false
   /** 下拉偏移量 */
   @Local pullDownOffset: number = 0
@@ -106,25 +106,12 @@ export struct RefreshLoadPage {
 
   @Builder
   customRefreshComponent() {
-    Stack() {
-      Row() {
-        LoadingProgress()
-          .height(32)
-          .color($r('app.color.color_00A0E9'))
-          .opacity(this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset)
-
-        Text("正在刷新...")
-          .fontSize(14)
-          .fontColor($r('app.color.color_00A0E9'))
-          .margin({ left: 10 })
-          .opacity(this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset)
-      }
-      .alignItems(VerticalAlign.Center)
-    }
-    .align(Alignment.Center)
-    .clip(true)
-    // 设置最小高度约束保证自定义组件高度随刷新区域高度变化时自定义组件高度不会低于minHeight。
-    .constraintSize({ minHeight: 32 })
-    .width("100%")
+    BaseRefreshHeaderView({
+      lpColor: $r('app.color.color_00A0E9'),
+      lpOpacity: this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset,
+      textContent: "刷新中...",
+      textColor: $r('app.color.color_00A0E9'),
+      textOpacity: this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset
+    })
   }
 }
