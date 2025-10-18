@@ -22,6 +22,17 @@ export class StringUtils {
   }
 
   /**
+   * 对字符串进行URI编码
+   * @param str 字符串
+   */
+  public static encodeURIComponent(str: string | undefined | null): string {
+    if (str === undefined || str === null || str.length === 0) {
+      return ""
+    }
+    return encodeURIComponent(str)
+  }
+
+  /**
    * Uint8Array转字符串
    * @param src 数据源
    * @param encoding 编码，默认utf-8
@@ -54,7 +65,13 @@ export class StringUtils {
    * @param first 字符串
    * @param second 字符串
    */
-  public static equalsIgnoreCase(first: string, second: string): boolean {
+  public static equalsIgnoreCase(first: string | undefined | null, second: string | undefined | null): boolean {
+    if (first === undefined || first === null) {
+      return false
+    }
+    if (second === undefined || second === null) {
+      return false
+    }
     return first.toLowerCase() === second.toLowerCase()
   }
 

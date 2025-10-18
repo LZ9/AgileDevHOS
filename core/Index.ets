@@ -61,5 +61,6 @@ export { GroupBean } from './src/main/ets/array/GroupBean';
 // 分组接口
 export { Groupable } from './src/main/ets/array/Groupable';
 
-
+// 数字格式化工具类
+export { NumberFormatUtils } from './src/main/ets/utils/NumberFormatUtils';
 
