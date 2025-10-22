@@ -19,6 +19,12 @@ export struct BaseRefreshContainer {
   /** 自定义拖拽动画布局 */
   @BuilderParam public refreshHeaderLayout?: () => CustomBuilder
 
+  aboutToAppear(): void {
+    this.vm.loadMoreAgent.setOnLoadingStatusChangeListener((status) => {
+      this.vm.loadingStatus = status
+    })
+  }
+
   build() {
     Column() {
       TitleBarView({ vm: this.vm.titleBarViewVm, expandLayout: this.titleBarExpandLayout })

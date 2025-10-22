@@ -29,12 +29,8 @@ export struct RefreshLoadPage {
   @Local vm: BaseRefreshContainerVm = new BaseRefreshContainerVm()
   /** 活动列表 */
   @Local list: Array<ActivityListItemBean> = []
-  /** 加载更多状态 */
-  @Local loadingStatus: number = LoadMoreAgent.LOAD_STATUS_READY
   /** 下拉偏移量 */
   @Local pullDownOffset: number = 0
-  /** 加载更多代理 */
-  @Local loadMoreAgent: LoadMoreAgent = new LoadMoreAgent()
   /** 接口任务 */
   private disposable?: Disposable
 
@@ -45,6 +41,7 @@ export struct RefreshLoadPage {
       HMRouterMgr.pop()
     }
 
+    // 点击加载失败页重新加载
     this.vm.onReloadClick = () => {
       this.vm.showStatusLoading()
       this.requestFirstData()
@@ -62,12 +59,8 @@ export struct RefreshLoadPage {
       this.requestFirstData()
     }
 
-    this.loadMoreAgent.setOnLoadingStatusChangeListener((status) => {
-      PrintLog.d(Constants.Log.TAG, `加载状态 : ${status}`)
-      this.loadingStatus = status
-    })
-
-    this.loadMoreAgent.setOnLoadMoreListener((nextPage, pageSize) => {
+    // 加载更多
+    this.vm.loadMoreAgent.setOnLoadMoreListener((nextPage, pageSize) => {
       this.requestLoadMoreData(nextPage)
     })
   }
@@ -95,7 +88,7 @@ export struct RefreshLoadPage {
           return
         }
         this.list = list
-        this.loadMoreAgent.config(this.list.length, responseBean.value?.pageInfo?.totalRecords, responseBean.value?.pageInfo?.perPageRecords)
+        this.vm.loadMoreAgent.config(this.list.length, responseBean.value?.pageInfo?.totalRecords, responseBean.value?.pageInfo?.perPageRecords)
         this.vm.showStatusCompleted()
       },
       onError: (e: DataError<ResponseData<ActivityListBean>>) => {
@@ -114,20 +107,20 @@ export struct RefreshLoadPage {
     this.requestData(pageNo, {
       onNext: (responseBean: ResponseData<ActivityListBean>) => {
         if (responseBean.value === undefined || responseBean.value === null) {
-          this.loadMoreAgent.loadComplete()
+          this.vm.loadMoreAgent.loadComplete()
           return
         }
         const list = responseBean.value.list ?? []
         if (list.length === 0) {
-          this.loadMoreAgent.loadComplete()
+          this.vm.loadMoreAgent.loadComplete()
           return
         }
         this.list = this.list.concat(list)
-        this.loadMoreAgent.loadMoreSuccess(this.list.length)
+        this.vm.loadMoreAgent.loadMoreSuccess(this.list.length)
       },
       onError: (e: DataError<ResponseData<ActivityListBean>>) => {
         PromptUtils.toastShort(this.getUIContext(), e.message)
-        this.loadMoreAgent.loadMoreFail()
+        this.vm.loadMoreAgent.loadMoreFail()
       }
     })
   }
@@ -199,21 +192,21 @@ export struct RefreshLoadPage {
       ListItem() {
         BaseLoadMoreFooterView({
           lpColor: $r('app.color.color_00A0E9'),
-          lpVisibility: this.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING ? Visibility.Visible : Visibility.None,
-          textContent: this.getLoadMoreTips(this.loadingStatus),
-          textColor: this.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL ? $r('app.color.color_EA413C') : $r('app.color.color_00A0E9')
+          lpVisibility: this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING ? Visibility.Visible : Visibility.None,
+          textContent: this.getLoadMoreTips(this.vm.loadingStatus),
+          textColor: this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL ? $r('app.color.color_EA413C') : $r('app.color.color_00A0E9')
         })
-          .visibility(this.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY ? Visibility.None : Visibility.Visible)
+          .visibility(this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY ? Visibility.None : Visibility.Visible)
           .onClick(() => {
-            if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
-              this.loadMoreAgent.failReload()
+            if (this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
+              this.vm.loadMoreAgent.failReload()
             }
           })
       }
     }
     .width("100%")
     .height("100%")
-    .onScrollIndex(this.loadMoreAgent.scrollIndexListener)
+    .onScrollIndex(this.vm.loadMoreAgent.scrollIndexListener)
     .scrollBar(BarState.Off)
     // 开启边缘滑动效果。
     .edgeEffect(EdgeEffect.None)
