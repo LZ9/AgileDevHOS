@@ -10,6 +10,9 @@
         "targetSdkVersion": "5.1.0(18)",
         "compatibleSdkVersion": "5.0.0(12)",
         "runtimeOS": "HarmonyOS",
+        "output": {
+          "artifactName": "AgileDevHOS"
+        },
         "buildOption": {
           "strictMode": {
             "caseSensitiveCheck": true,

@@ -67,7 +67,6 @@ export class RcpUtils {
    * get请求
    * @param url 请求地址
    * @param headers 请求头
-   * @throws 请求异常
    */
   public get(url: string, headers?: Record<string, string>): Promise<rcp.Response> {
     const request = new rcp.Request(url, "GET")
@@ -79,7 +78,6 @@ export class RcpUtils {
    * get请求
    * @param url 请求地址
    * @param headers 请求头
-   * @throws 请求异常
    */
   public getJsonBean<T>(url: string, headers?: Record<string, string>): Promise<T> {
     const request = new rcp.Request(url, "GET")
@@ -92,7 +90,6 @@ export class RcpUtils {
    * @param url 请求地址
    * @param content 请求内容
    * @param headers 请求头
-   * @throws 请求异常
    */
   public post(url: string, content?: rcp.RequestContent, headers?: Record<string, string>): Promise<rcp.Response> {
     const request = new rcp.Request(url, "POST")
@@ -106,7 +103,6 @@ export class RcpUtils {
    * @param url 请求地址
    * @param content 请求内容
    * @param headers 请求头
-   * @throws 请求异常
    */
   public postJsonBean<T>(url: string, content?: rcp.RequestContent, headers?: Record<string, string>): Promise<T> {
     const request = new rcp.Request(url, "POST")
@@ -118,7 +114,6 @@ export class RcpUtils {
   /**
    * 数据请求
    * @param request 请求对象
-   * @throws 请求异常
    */
   public fetchJsonBean<T>(request: rcp.Request): Promise<T> {
     return this.fetch(request)
@@ -138,7 +133,6 @@ export class RcpUtils {
   /**
    * 数据请求
    * @param request 请求对象
-   * @throws 请求异常
    */
   public fetch(request: rcp.Request): Promise<rcp.Response> {
     return this.rcpSession.fetch(request)

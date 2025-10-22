@@ -1,14 +1,14 @@
 /**
- * 刷新顶部布局基础类
+ * 顶部刷新提示布局基础类
  * Created by zhouL on 2025/10/14.
  */
 @ComponentV2
 export struct BaseRefreshHeaderView {
-  /**  */
+  /** 加载图标颜色 */
   @Param lpColor: ResourceColor = Color.Grey
-  /**  */
+  /** 加载图标透明度 */
   @Param lpOpacity: number | Resource = 1
-  /** 加载图标 */
+  /** 加载图标高度 */
   @Param lpHeight: Length = 32
 
   /** 文字内容 */

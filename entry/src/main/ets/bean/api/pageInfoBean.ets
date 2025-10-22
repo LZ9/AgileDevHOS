@@ -4,9 +4,9 @@
  */
 export class pageInfoBean {
   /** 当前页 */
-  public currentPage = 0
+  public currentPage ?: number
   /** 每页请求的条数 */
-  public perPageRecords = 0
+  public perPageRecords ?: number
   /** 总条数 */
-  public totalRecords = 0
+  public totalRecords ?: number
 }

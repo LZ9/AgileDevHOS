@@ -108,7 +108,7 @@ export struct PromisePage {
   /** 使用post请求列表数据 */
   private requestInfoList(){
     PromiseAgent.create<ResponseData<ActivityListBean>>()
-      .then(() => ApiManager.create().postData(1))
+      .then(() => ApiManager.create().getActivityList(1))
       .subscribePgDef(this.getUIContext(), {
         onNext: (response: ResponseData<ActivityListBean>) => {
           const data = response.value

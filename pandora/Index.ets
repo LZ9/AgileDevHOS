@@ -15,6 +15,8 @@ export { BaseRefreshContainerVm } from './src/main/ets/base/refresh/BaseRefreshC
 
 export { BaseRefreshHeaderView } from './src/main/ets/base/refresh/BaseRefreshHeaderView';
 
+export { BaseLoadMoreFooterView } from './src/main/ets/base/refresh/BaseLoadMoreFooterView';
+
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 
@@ -56,3 +58,5 @@ export { Disposable } from './src/main/ets/utils/promise/Disposable';
 export { ProgressObserver } from './src/main/ets/utils/promise/ProgressObserver';
 
 export { KVBean } from './src/main/ets/bean/KVBean';
+
+export { LoadMoreAgent } from './src/main/ets/utils/loadmore/LoadMoreAgent';

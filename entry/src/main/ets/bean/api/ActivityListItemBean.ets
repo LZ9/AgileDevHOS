@@ -3,6 +3,8 @@
  * Created by zhouL on 2025/8/11.
  */
 export class ActivityListItemBean {
+  /** 活动编号 */
+  public activityID?: string
   /** 活动名称 */
   public activityName?: string
   /** 主题内容 */

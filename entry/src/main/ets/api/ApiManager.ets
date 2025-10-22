@@ -68,10 +68,13 @@ export class ApiManager {
       })
   }
 
-  /** 获取图片 */
-  public postData(pageNo:number): Promise<ResponseData<ActivityListBean>> {
+  /**
+   * 获取活动列表
+   * @param pageNo 页码
+   */
+  public getActivityList(pageNo: number): Promise<ResponseData<ActivityListBean>> {
     const bean = new ActivityRequestBean()
-    bean.pagestart =pageNo
+    bean.pagestart = pageNo
 
     const apiName = ApiName.getActivityList
     const content: rcp.RequestContent = JsonUtils.beanToJson(bean)
