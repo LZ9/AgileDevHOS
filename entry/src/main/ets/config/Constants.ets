@@ -4,19 +4,6 @@
  */
 export namespace Constants {
 
-
-  /** 接口路径 */
-  export namespace ApiUrl {
-    /** 正式地址 */
-    const RELEASE = 'https://svc-drcn.developer.huawei.com/community/servlet/consumer/partnerActivityService/v1/developer/'
-
-    /** Mock地址 */
-    const TEST_MOCK = 'http://192.168.5.204:38080/app/mock/32/yszz/'
-
-    /** 基地址 */
-    export const BASE_URL = RELEASE
-  }
-
   /** 日志相关 */
   export namespace Log {
     /** 一般日志标签 */

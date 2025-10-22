@@ -16,6 +16,10 @@ export class RequestInterceptor implements rcp.Interceptor {
         this.logResponse(response)
         return response
       })
+      .catch((e: Error) => {
+        this.logError(e)
+        return Promise.reject(e)
+      })
   }
 
   /** 组装头信息 */
@@ -42,8 +46,9 @@ export class RequestInterceptor implements rcp.Interceptor {
    */
   private logRequest(request: rcp.Request) {
     const url = request.url.toString()
-    PrintLog.i(Constants.Log.TAG_API, `[${this.getApiName(url)}] ----> ${url}`)
-    PrintLog.i(Constants.Log.TAG_API, `[${this.getApiName(url)}] ----> ${JsonUtils.beanToJson(request.content)}`)
+    PrintLog.i(Constants.Log.TAG_API, `[${this.getApiName(url)}] url ----> ${url}`)
+    PrintLog.i(Constants.Log.TAG_API, `[${this.getApiName(url)}] headers ----> ${JsonUtils.beanToJson(request.headers)}`)
+    PrintLog.i(Constants.Log.TAG_API, `[${this.getApiName(url)}] params ----> ${JsonUtils.beanToJson(request.content)}`)
   }
 
   /**
@@ -56,7 +61,16 @@ export class RequestInterceptor implements rcp.Interceptor {
     if (result?.startsWith(`{`) || result?.startsWith(`[`)) {
       log = result
     }
-    PrintLog.d(Constants.Log.TAG_API, `[${this.getApiName(response.request.url.toString())}] <--- ${log}`)
+    PrintLog.d(Constants.Log.TAG_API, `[${this.getApiName(response.request.url.toString())}] headers <--- ${JsonUtils.beanToJson(response.headers)}`)
+    PrintLog.d(Constants.Log.TAG_API, `[${this.getApiName(response.request.url.toString())}] content <--- ${log}`)
+  }
+
+  /**
+   * 打印异常日志
+   * @param e 异常对象
+   */
+  private logError(e: Error) {
+    PrintLog.d(Constants.Log.TAG_API, `[] <--- ${JsonUtils.beanToJson(e)}`)
   }
 
   /**
