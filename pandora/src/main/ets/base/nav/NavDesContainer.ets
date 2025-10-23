@@ -15,6 +15,7 @@ export struct NavDesContainer {
       this.contentLayout?.()
     }
     .hideTitleBar(true)
+    .mode(this.vm.mode)
     .onReady((context: NavDestinationContext) => {
       this.vm.stack = context.pathStack
       this.vm.pathInfo = context.pathInfo

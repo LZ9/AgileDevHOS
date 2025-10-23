@@ -8,6 +8,8 @@ export class NavContainerVm {
   @Trace public stack: NavPathStack = new NavPathStack()
   /** 导航路径信息 */
   @Trace public pathInfo?: NavPathInfo
+  /** 导航页面模式 */
+  @Trace public mode: NavDestinationMode = NavDestinationMode.STANDARD
   /** 系统返回按钮拦截 */
   @Trace public onBackPressed?: () => boolean
   /** 系统返回按钮拦截 */
