@@ -6,7 +6,7 @@ import {
   BaseRefreshHeaderView,
   DataError,
   Disposable,
-  LoadMoreAgent,
+  LoadMoreStatus,
   Observer,
   PrintLog,
   PromiseAgent,
@@ -181,7 +181,7 @@ export struct RefreshLoadPage {
           onReloadClick: () => {
             this.vm.loadMoreAgent.failReload()
           }
-        }).visibility(this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY ? Visibility.None : Visibility.Visible)
+        }).visibility(this.vm.loadingStatus === LoadMoreStatus.Ready ? Visibility.None : Visibility.Visible)
       }
     }
     .width("100%")

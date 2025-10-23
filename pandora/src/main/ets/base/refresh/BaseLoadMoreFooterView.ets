@@ -1,4 +1,4 @@
-import { LoadMoreAgent } from "../../utils/loadmore/LoadMoreAgent"
+import { LoadMoreStatus } from "../../utils/loadmore/LoadMoreStatus"
 
 /**
  * 底部加载更多布局基础类
@@ -7,7 +7,7 @@ import { LoadMoreAgent } from "../../utils/loadmore/LoadMoreAgent"
 @ComponentV2
 export struct BaseLoadMoreFooterView {
   /** 加载状态 */
-  @Param public loadingStatus: number = LoadMoreAgent.LOAD_STATUS_READY
+  @Param public loadingStatus: LoadMoreStatus = LoadMoreStatus.Ready
   /** 加载图标颜色 */
   @Param public lpColor: ResourceColor = Color.Grey
   /** 加载图标高度 */
@@ -39,13 +39,13 @@ export struct BaseLoadMoreFooterView {
 
   /** 获取提示语内容 */
   private getTips(): string | Resource {
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING) {
+    if (this.loadingStatus === LoadMoreStatus.Loading) {
       return this.textLoadingContent
     }
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_COMPLETE) {
+    if (this.loadingStatus === LoadMoreStatus.Complete) {
       return this.textCompletedContent
     }
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
+    if (this.loadingStatus === LoadMoreStatus.Fail) {
       return this.textFailContent
     }
     return ""
@@ -53,13 +53,13 @@ export struct BaseLoadMoreFooterView {
 
   /** 获取提示语文字颜色 */
   private getTipsColor(): ResourceColor | undefined {
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING) {
+    if (this.loadingStatus === LoadMoreStatus.Loading) {
       return this.textLoadingColor
     }
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_COMPLETE) {
+    if (this.loadingStatus === LoadMoreStatus.Complete) {
       return this.textCompletedColor
     }
-    if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
+    if (this.loadingStatus === LoadMoreStatus.Fail) {
       return this.textFailColor
     }
     return undefined
@@ -70,7 +70,7 @@ export struct BaseLoadMoreFooterView {
     if (this.lpVisibility !== undefined) {
       return this.lpVisibility
     }
-    return this.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING ? Visibility.Visible : Visibility.None
+    return this.loadingStatus === LoadMoreStatus.Loading ? Visibility.Visible : Visibility.None
   }
 
   build() {
@@ -90,7 +90,7 @@ export struct BaseLoadMoreFooterView {
     .height(this.layoutHeight)
     .justifyContent(FlexAlign.Center)
     .onClick(() => {
-      if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
+      if (this.loadingStatus === LoadMoreStatus.Fail) {
         this.onReloadClick?.()
       }
     })

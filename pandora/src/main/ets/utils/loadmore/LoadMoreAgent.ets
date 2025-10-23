@@ -1,19 +1,13 @@
+import { LoadMoreStatus } from "./LoadMoreStatus"
+
 /**
  * 加载更多代理
  * Created by zhouL on 2025/10/14.
  */
 export class LoadMoreAgent {
-  /** 就绪 */
-  public static readonly LOAD_STATUS_READY = 0
-  /** 正在加载 */
-  public static readonly LOAD_STATUS_LOADING = 1
-  /** 全部加载完成 */
-  public static readonly LOAD_STATUS_COMPLETE = 2
-  /** 加载失败 */
-  public static readonly LOAD_STATUS_FAIL = 3
 
   /** 加载状态 */
-  private loadingStatus: number = LoadMoreAgent.LOAD_STATUS_READY
+  private loadingStatus: LoadMoreStatus = LoadMoreStatus.Ready
   /** 数据列表长度 */
   private listLength: number = 0
   /** 数据列表长度 */
@@ -26,7 +20,7 @@ export class LoadMoreAgent {
   private offset: number = 3
 
   /** 加载状态变化回调 */
-  private onLoadingStatusChange?: (status: number) => void
+  private onLoadingStatusChange?: (status: LoadMoreStatus) => void
   /** 加载更多回调 */
   private onLoadMore?: (nextPage: number, pageSize: number) => void
 
@@ -40,15 +34,15 @@ export class LoadMoreAgent {
     // 当滑动达到列表末尾时进行判断
     if (end >= this.listLength - this.offset) {
       // 就绪状态判断下一步是加载更多还是全部加载完成
-      if (this.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY) {
+      if (this.loadingStatus === LoadMoreStatus.Ready) {
         // 当前列表长度已经大于总条数时，则认为全部加载完成。
         if (this.listLength >= this.total) {
-          this.loadingStatus = LoadMoreAgent.LOAD_STATUS_COMPLETE
+          this.loadingStatus = LoadMoreStatus.Complete
           this.onLoadingStatusChange?.(this.loadingStatus)
           return
         }
         // 列表长度小于总条数时，则加载更多
-        this.loadingStatus = LoadMoreAgent.LOAD_STATUS_LOADING
+        this.loadingStatus = LoadMoreStatus.Loading
         this.pageNo++
         this.onLoadingStatusChange?.(this.loadingStatus)
         this.onLoadMore?.(this.pageNo, this.pageSize)
@@ -80,7 +74,7 @@ export class LoadMoreAgent {
       }
     }
     this.pageNo = 1
-    this.loadingStatus = LoadMoreAgent.LOAD_STATUS_READY
+    this.loadingStatus = LoadMoreStatus.Ready
     this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
@@ -88,7 +82,7 @@ export class LoadMoreAgent {
    * 设置加载状态变化监听器
    * @param listener 监听器，回调加载状态
    */
-  public setOnLoadingStatusChangeListener(listener: (status: number) => void) {
+  public setOnLoadingStatusChangeListener(listener: (status: LoadMoreStatus) => void) {
     this.onLoadingStatusChange = listener
   }
 
@@ -102,7 +96,7 @@ export class LoadMoreAgent {
 
   /** 设置加载完成 */
   public loadComplete() {
-    this.loadingStatus = LoadMoreAgent.LOAD_STATUS_COMPLETE
+    this.loadingStatus = LoadMoreStatus.Complete
     this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
@@ -111,20 +105,20 @@ export class LoadMoreAgent {
    * @param listLength 加载完成后的数据列表长度
    */
    public loadMoreSuccess(listLength: number) {
-    this.loadingStatus = LoadMoreAgent.LOAD_STATUS_READY
+    this.loadingStatus = LoadMoreStatus.Ready
     this.listLength = listLength
      this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /** 设置加载失败 */
   public loadMoreFail() {
-    this.loadingStatus = LoadMoreAgent.LOAD_STATUS_FAIL
+    this.loadingStatus = LoadMoreStatus.Fail
     this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /** 失败重载 */
   public failReload() {
-    this.loadingStatus = LoadMoreAgent.LOAD_STATUS_LOADING
+    this.loadingStatus = LoadMoreStatus.Loading
     this.onLoadingStatusChange?.(this.loadingStatus)
     this.onLoadMore?.(this.pageNo, this.pageSize)
   }

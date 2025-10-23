@@ -1,4 +1,5 @@
 import { LoadMoreAgent } from "../../utils/loadmore/LoadMoreAgent";
+import { LoadMoreStatus } from "../../utils/loadmore/LoadMoreStatus";
 import { BaseContainerVm } from "../container/BaseContainerVm";
 
 /**
@@ -31,7 +32,7 @@ export class BaseRefreshContainerVm extends BaseContainerVm {
   @Trace public onRefreshing?: () => void
 
   /** 加载更多状态 */
-  @Trace loadingStatus: number = LoadMoreAgent.LOAD_STATUS_READY
+  @Trace loadingStatus: LoadMoreStatus = LoadMoreStatus.Ready
   /** 加载更多代理 */
   @Trace loadMoreAgent: LoadMoreAgent = new LoadMoreAgent()
 

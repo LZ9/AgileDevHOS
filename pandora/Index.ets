@@ -60,3 +60,6 @@ export { ProgressObserver } from './src/main/ets/utils/promise/ProgressObserver'
 export { KVBean } from './src/main/ets/bean/KVBean';
 
 export { LoadMoreAgent } from './src/main/ets/utils/loadmore/LoadMoreAgent';
+
+export { LoadMoreStatus } from './src/main/ets/utils/loadmore/LoadMoreStatus';
+
