@@ -145,7 +145,7 @@ export struct RefreshLoadPage {
         },
         // 自定义下拉刷新组件，根据业务需求设置
         refreshHeaderLayout: () => {
-          this.customRefreshComponent()
+          this.refreshHeaderComponent()
         }
       })
     }
@@ -156,19 +156,7 @@ export struct RefreshLoadPage {
     List() {
       ForEach(this.list, (item: ActivityListItemBean, index) => {
         ListItem() {
-          Column() {
-            Text(`${index + 1}. ${item.activityName}`)
-              .width('100%')
-              .height(80)
-              .fontSize(16)
-              .textAlign(TextAlign.Center)
-              .backgroundColor(Color.White)
-
-            Divider()
-              .width("100%")
-              .height(1)
-              .color($r('app.color.color_757575'))
-          }
+          this.activityItemComponent(item, index)
         }
       })
       ListItem() {
@@ -181,7 +169,7 @@ export struct RefreshLoadPage {
           onReloadClick: () => {
             this.vm.loadMoreAgent.failReload()
           }
-        }).visibility(this.vm.loadingStatus === LoadMoreStatus.Ready ? Visibility.None : Visibility.Visible)
+        })
       }
     }
     .width("100%")
@@ -192,8 +180,9 @@ export struct RefreshLoadPage {
     .edgeEffect(EdgeEffect.None)
   }
 
+  // 刷新顶部布局
   @Builder
-  customRefreshComponent() {
+  private refreshHeaderComponent() {
     BaseRefreshHeaderView({
       lpColor: $r('app.color.color_00A0E9'),
       lpOpacity: this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset,
@@ -201,5 +190,44 @@ export struct RefreshLoadPage {
       textColor: $r('app.color.color_00A0E9'),
       textOpacity: this.pullDownOffset >= this.vm.refreshOffset ? 1 : this.pullDownOffset / this.vm.refreshOffset
     })
+  }
+
+  // 活动项布局
+  @Builder
+  private activityItemComponent(item: ActivityListItemBean, index: number) {
+    Column() {
+      Row() {
+        Image(item.indexNavPic)
+          .width(120)
+          .objectFit(ImageFit.Contain)
+
+        Column() {
+          Text(`${index + 1}. ${item.activityName}`)
+            .width("100%")
+            .fontSize(16)
+            .textAlign(TextAlign.Start)
+
+          Text(`${item.theme}`)
+            .width("100%")
+            .fontSize(14)
+            .fontColor($r('app.color.color_757575'))
+            .textAlign(TextAlign.Start)
+            .margin({ top: 8 })
+        }
+        .layoutWeight(1)
+        .margin({ left: 10 })
+
+      }
+      .width("100%")
+      .justifyContent(FlexAlign.Start)
+      .alignItems(VerticalAlign.Top)
+      .padding(10)
+
+      Divider()
+        .width("100%")
+        .height(1)
+        .color($r('app.color.color_757575'))
+    }
+    .width("100%")
   }
 }

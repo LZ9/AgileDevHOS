@@ -89,6 +89,7 @@ export struct BaseLoadMoreFooterView {
     .width("100%")
     .height(this.layoutHeight)
     .justifyContent(FlexAlign.Center)
+    .visibility(this.loadingStatus === LoadMoreStatus.Ready ? Visibility.None : Visibility.Visible)
     .onClick(() => {
       if (this.loadingStatus === LoadMoreStatus.Fail) {
         this.onReloadClick?.()
