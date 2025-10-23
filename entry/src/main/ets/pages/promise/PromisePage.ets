@@ -69,7 +69,7 @@ export struct PromisePage {
           this.vm.showStatusCompleted()
         },
         onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
-          PromptUtils.toastShort(this.getUIContext(), e.message)
+          PromptUtils.toastShort(this.getUIContext(), e.getTips())
           this.vm.showStatusError()
         }
       })
@@ -85,7 +85,7 @@ export struct PromisePage {
             this.addLog(JsonUtils.beanToJson(responseBean))
           },
           onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
-            PromptUtils.toastShort(this.getUIContext(), e.message)
+            PromptUtils.toastShort(this.getUIContext(), e.getTips())
           }
         }
       )
@@ -100,7 +100,7 @@ export struct PromisePage {
           this.imgUri = data
         },
         onError: (e: DataError<string>) => {
-          PromptUtils.toastShort(this.getUIContext(), e.message)
+          PromptUtils.toastShort(this.getUIContext(), e.getTips())
         }
       })
   }
@@ -123,7 +123,7 @@ export struct PromisePage {
           }
         },
         onError: (e: DataError<ResponseData<ActivityListBean>>) => {
-          PromptUtils.toastShort(this.getUIContext(), e.message)
+          PromptUtils.toastShort(this.getUIContext(), e.getTips())
         }
       })
   }

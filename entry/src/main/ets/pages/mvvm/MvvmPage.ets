@@ -49,7 +49,7 @@ export struct MvvmPage {
           this.vm.showStatusCompleted()
         },
         onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
-          PromptUtils.toastShort(this.getUIContext(), e.message)
+          PromptUtils.toastShort(this.getUIContext(), e.getTips())
           this.vm.showStatusError()
         }
       })

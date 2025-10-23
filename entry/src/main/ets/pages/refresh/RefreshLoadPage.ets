@@ -93,7 +93,7 @@ export struct RefreshLoadPage {
       },
       onError: (e: DataError<ResponseData<ActivityListBean>>) => {
         this.vm.finishRefresh()
-        PromptUtils.toastShort(this.getUIContext(), e.message)
+        PromptUtils.toastShort(this.getUIContext(), e.getTips())
         this.vm.showStatusError()
       }
     })
@@ -119,7 +119,7 @@ export struct RefreshLoadPage {
         this.vm.loadMoreAgent.loadMoreSuccess(this.list.length)
       },
       onError: (e: DataError<ResponseData<ActivityListBean>>) => {
-        PromptUtils.toastShort(this.getUIContext(), e.message)
+        PromptUtils.toastShort(this.getUIContext(), e.getTips())
         this.vm.loadMoreAgent.loadMoreFail()
       }
     })
