@@ -13,7 +13,7 @@ export class ResponseData<T> extends ResponseContract {
 
   public value?: T | null | undefined
 
-  public isSuccess(): boolean {
+  public valueSuccess(): boolean {
     return this.code === ResponseData.SUCCESS
   }
 
@@ -22,7 +22,7 @@ export class ResponseData<T> extends ResponseContract {
   }
 
   public valueCode(): number {
-    return this.isSuccess() ? 200 : 500
+    return this.valueSuccess() ? 200 : 500
   }
 
   public static copy<T>(response: ResponseData<T>): ResponseData<T> {

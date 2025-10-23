@@ -20,7 +20,7 @@ export class ResponseBean<T> extends ResponseContract {
   /** 分页数据对象 */
   public page?: PageBean | null | undefined
 
-  public isSuccess(): boolean {
+  public valueSuccess(): boolean {
     return this.code === ResponseBean.SUCCESS
   }
 

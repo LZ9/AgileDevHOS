@@ -43,9 +43,7 @@ export struct BaseContainer {
         })
 
       Stack() {
-        if (this.contentLayout) {
-          this.contentLayout()
-        }
+        this.contentLayout?.()
       }
       .width(`100%`)
       .layoutWeight(1)

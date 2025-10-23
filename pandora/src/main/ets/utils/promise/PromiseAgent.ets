@@ -13,7 +13,7 @@ import { StringUtils } from "@lodz/core_hos"
  * Promise扩展
  * Created by zhouL on 2025/7/29.
  */
-export class PromiseAgent<T extends Object> implements Disposable {
+export class PromiseAgent<T> implements Disposable {
   /** 外部Promise代码块 */
   private block?: (controller: Disposable) => Promise<T> | undefined
   /** 是否终止 */
@@ -23,7 +23,7 @@ export class PromiseAgent<T extends Object> implements Disposable {
   }
 
   /** 创建Promise代理 */
-  public static create<T extends Object>(t?: T): PromiseAgent<T> {
+  public static create<T>(): PromiseAgent<T> {
     return new PromiseAgent<T>()
   }
 
@@ -96,33 +96,23 @@ export class PromiseAgent<T extends Object> implements Disposable {
       }
       this.dispose() //如果用户关闭加载框则终止订阅
       dismissDialogAction.dismiss()
-      if (observer && observer.onPgCancel) {
-        observer.onPgCancel()
-      }
+      observer.onPgCancel?.()
     }
 
     return this.subscribe({
       onSubscribe: () => {
         context.getPromptAction().openCustomDialog(content, options)
-        if (observer && observer.onSubscribe) {
-          observer.onSubscribe()
-        }
+        observer.onSubscribe?.()
       },
       onNext: (data: T) => {
-        if (observer) {
-          observer.onNext(data)
-        }
+        observer.onNext?.(data)
       },
       onError: (e: DataError<T>) => {
-        if (observer) {
-          observer.onError(e)
-        }
+        observer.onError?.(e)
       },
       onFinally: () => {
         context.getPromptAction().closeCustomDialog(content)
-        if (observer && observer.onFinally) {
-          observer.onFinally()
-        }
+        observer.onFinally?.()
       }
     })
   }
@@ -134,9 +124,7 @@ export class PromiseAgent<T extends Object> implements Disposable {
   public subscribe(observer?: Observer<T>): Disposable {
     PromiseAgent.just<T>()
       .then((t) => {
-        if (observer && observer.onSubscribe) {
-          observer.onSubscribe() //订阅前回调
-        }
+        observer?.onSubscribe?.() //订阅前回调
         return t
       })
       .then((t) => {
@@ -150,51 +138,41 @@ export class PromiseAgent<T extends Object> implements Disposable {
           return
         }
         if (t === undefined) {
-          if (observer && observer.onError) {
-            observer.onError(new DataError<T>(0, t, "返回数据为undefined"))
-          }
+          observer?.onError(new DataError<T>(0, t, "返回数据为undefined"))
           return
         }
         if (t instanceof ResponseContract) {
-          if (!t.isSuccess()) { // 预判接口请求是否成功
-            if (observer && observer.onError) {
-              observer.onError(new DataError<T>(t.valueCode(), t, t.valueMsg()))
-            }
+          if (!t.valueSuccess()) { // 预判接口请求是否成功
+            observer?.onError(new DataError<T>(t.valueCode(), t, t.valueMsg()))
             return
           }
         }
-        if (observer) {
-          observer.onNext(t) // 数据返回成功回调
-        }
+        observer?.onNext(t) // 数据返回成功回调
       })
       .catch((e: Error) => {
         if (this.isDisposed()) {
           return
         }
-        if (observer && observer.onError) {
-          let code = 0
-          let msg = e.message
-          if (StringUtils.isEmpty(msg)) {
-            let be: BusinessError = e as BusinessError
-            code = be.code
-            if (typeof be.data === 'string') {
-              msg = be.data
-            } else {
-              msg = `操作失败`
-            }
-          }
-          let err = new DataError<T>(code, undefined, msg)
-          if (e instanceof DataError) {
-            err = e
-          }
-          observer.onError(err) // 订阅报错回调
-        }
+        observer?.onError(this.changeError(e)) // 订阅报错回调
       })
       .finally(() => {
-        if (observer && observer.onFinally) {
-          observer.onFinally() // 订阅结束回调
-        }
+        observer?.onFinally?.() // 订阅结束回调
       })
     return this
+  }
+
+  /** 将异常转为DataError */
+  private changeError(e: Error): DataError<T> {
+    if (e instanceof DataError) {
+      return e
+    }
+    let code = 0
+    let msg = e.message
+    if (StringUtils.isEmpty(msg)) {
+      const be: BusinessError = e as BusinessError
+      code = be.code
+      msg = typeof be.data === 'string' ? be.data : `操作失败`
+    }
+    return new DataError<T>(code, undefined, msg)
   }
 }

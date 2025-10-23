@@ -51,9 +51,7 @@ export struct TitleBarView {
 
         //拓展区域
         Row() {
-          if (this.expandLayout) {
-            this.expandLayout()
-          }
+          this.expandLayout?.()
         }
         .width(this.expandLayout !== undefined ? 'auto' : 50)
         .height('100%')

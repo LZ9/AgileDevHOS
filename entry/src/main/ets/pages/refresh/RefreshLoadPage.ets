@@ -136,24 +136,6 @@ export struct RefreshLoadPage {
       .subscribe(observer)
   }
 
-  /**
-   * 加载更多提示文案
-   * @param loadingStatus 加载状态
-   */
-  private getLoadMoreTips(loadingStatus: number): string  {
-    if (loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING) {
-      return "加载中..."
-    }
-    if (loadingStatus === LoadMoreAgent.LOAD_STATUS_COMPLETE) {
-      return "已全部加载完成"
-    }
-
-    if (loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
-      return "加载失败，请点击重试"
-    }
-    return ""
-  }
-
   build() {
     Stack() {
       BaseRefreshContainer({
@@ -191,17 +173,15 @@ export struct RefreshLoadPage {
       })
       ListItem() {
         BaseLoadMoreFooterView({
+          loadingStatus: this.vm.loadingStatus,
           lpColor: $r('app.color.color_00A0E9'),
-          lpVisibility: this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_LOADING ? Visibility.Visible : Visibility.None,
-          textContent: this.getLoadMoreTips(this.vm.loadingStatus),
-          textColor: this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL ? $r('app.color.color_EA413C') : $r('app.color.color_00A0E9')
-        })
-          .visibility(this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY ? Visibility.None : Visibility.Visible)
-          .onClick(() => {
-            if (this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_FAIL) {
-              this.vm.loadMoreAgent.failReload()
-            }
-          })
+          textLoadingColor: $r('app.color.color_00A0E9'),
+          textCompletedColor: $r('app.color.color_00A0E9'),
+          textFailColor: $r('app.color.color_EA413C'),
+          onReloadClick: () => {
+            this.vm.loadMoreAgent.failReload()
+          }
+        }).visibility(this.vm.loadingStatus === LoadMoreAgent.LOAD_STATUS_READY ? Visibility.None : Visibility.Visible)
       }
     }
     .width("100%")

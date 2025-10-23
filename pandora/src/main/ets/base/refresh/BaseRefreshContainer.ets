@@ -57,9 +57,7 @@ export struct BaseRefreshContainer {
         builder: this.refreshHeaderLayout ?? undefined,
         refreshingContent: this.vm.refreshingContent,
       }) {
-        if (this.contentLayout) {
-          this.contentLayout()
-        }
+        this.contentLayout?.()
       }
       .width(`100%`)
       .layoutWeight(1)

@@ -44,20 +44,14 @@ export class LoadMoreAgent {
         // 当前列表长度已经大于总条数时，则认为全部加载完成。
         if (this.listLength >= this.total) {
           this.loadingStatus = LoadMoreAgent.LOAD_STATUS_COMPLETE
-          if (this.onLoadingStatusChange) {
-            this.onLoadingStatusChange(this.loadingStatus)
-          }
+          this.onLoadingStatusChange?.(this.loadingStatus)
           return
         }
         // 列表长度小于总条数时，则加载更多
         this.loadingStatus = LoadMoreAgent.LOAD_STATUS_LOADING
         this.pageNo++
-        if (this.onLoadingStatusChange) {
-          this.onLoadingStatusChange(this.loadingStatus)
-        }
-        if (this.onLoadMore) {
-          this.onLoadMore(this.pageNo, this.pageSize)
-        }
+        this.onLoadingStatusChange?.(this.loadingStatus)
+        this.onLoadMore?.(this.pageNo, this.pageSize)
         return
       }
     }
@@ -87,9 +81,7 @@ export class LoadMoreAgent {
     }
     this.pageNo = 1
     this.loadingStatus = LoadMoreAgent.LOAD_STATUS_READY
-    if (this.onLoadingStatusChange) {
-      this.onLoadingStatusChange(this.loadingStatus)
-    }
+    this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /**
@@ -111,9 +103,7 @@ export class LoadMoreAgent {
   /** 设置加载完成 */
   public loadComplete() {
     this.loadingStatus = LoadMoreAgent.LOAD_STATUS_COMPLETE
-    if (this.onLoadingStatusChange) {
-      this.onLoadingStatusChange(this.loadingStatus)
-    }
+    this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /**
@@ -123,28 +113,20 @@ export class LoadMoreAgent {
    public loadMoreSuccess(listLength: number) {
     this.loadingStatus = LoadMoreAgent.LOAD_STATUS_READY
     this.listLength = listLength
-     if (this.onLoadingStatusChange) {
-       this.onLoadingStatusChange(this.loadingStatus)
-     }
+     this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /** 设置加载失败 */
   public loadMoreFail() {
     this.loadingStatus = LoadMoreAgent.LOAD_STATUS_FAIL
-    if (this.onLoadingStatusChange) {
-      this.onLoadingStatusChange(this.loadingStatus)
-    }
+    this.onLoadingStatusChange?.(this.loadingStatus)
   }
 
   /** 失败重载 */
   public failReload() {
     this.loadingStatus = LoadMoreAgent.LOAD_STATUS_LOADING
-    if (this.onLoadingStatusChange) {
-      this.onLoadingStatusChange(this.loadingStatus)
-    }
-    if (this.onLoadMore) {
-      this.onLoadMore(this.pageNo, this.pageSize)
-    }
+    this.onLoadingStatusChange?.(this.loadingStatus)
+    this.onLoadMore?.(this.pageNo, this.pageSize)
   }
 
   /** 获取加载状态 */

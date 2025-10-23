@@ -4,7 +4,7 @@
  */
 export abstract class ResponseContract {
   /** 数据是否返回成功 */
-  public abstract isSuccess(): boolean
+  public abstract valueSuccess(): boolean
 
   /** 获取提示语信息 */
   public abstract valueMsg(): string
