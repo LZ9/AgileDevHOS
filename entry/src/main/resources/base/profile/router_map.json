@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "SplashPage",
+      "pageSourceFile": "src/main/ets/pages/splash/SplashPage.ets",
+      "buildFunction": "SplashPageBuilder"
+    },
+    {
+      "name": "MainPage",
+      "pageSourceFile": "src/main/ets/pages/main/MainPage.ets",
+      "buildFunction": "MainPageBuilder"
+    },
+    {
+      "name": "ComponentV2Page",
+      "pageSourceFile": "src/main/ets/pages/componentV2/ComponentV2Page.ets",
+      "buildFunction": "ComponentV2PageBuilder"
+    },
+    {
+      "name": "JsonPage",
+      "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
+      "buildFunction": "JsonPageBuilder"
+    },
+    {
+      "name": "MvvmPage",
+      "pageSourceFile": "src/main/ets/pages/mvvm/MvvmPage.ets",
+      "buildFunction": "MvvmPageBuilder"
+    },
+    {
+      "name": "PreferencesPage",
+      "pageSourceFile": "src/main/ets/pages/preferences/PreferencesPage.ets",
+      "buildFunction": "PreferencesPageBuilder"
+    },
+    {
+      "name": "PromisePage",
+      "pageSourceFile": "src/main/ets/pages/promise/PromisePage.ets",
+      "buildFunction": "PromisePageBuilder"
+    },
+    {
+      "name": "RefreshLoadPage",
+      "pageSourceFile": "src/main/ets/pages/refresh/RefreshLoadPage.ets",
+      "buildFunction": "RefreshLoadPageBuilder"
+    }
+  ]
+}

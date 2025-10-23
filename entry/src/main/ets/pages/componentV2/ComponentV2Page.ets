@@ -3,15 +3,17 @@ import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
 import { UIUtils } from '@kit.ArkUI'
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
-import { RouterGuide } from '../../config/RouterGuide'
+
+@Builder
+export function ComponentV2PageBuilder() {
+  ComponentV2Page()
+}
 
 /**
  * ComponentV2装饰器用例
  * Created by zhouL on 2025/7/30.
  */
 @ComponentV2
-@HMRouter({ pageUrl: RouterGuide.ComponentV2Page })
 export struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
 
@@ -20,14 +22,13 @@ export struct ComponentV2Page {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
+      this.vm.showStatusCompleted()
     }
-  }
-
-  onDidBuild(): void {
-    this.vm.showStatusCompleted()
   }
 
   /** 更新计数器事件函数 */
@@ -40,14 +41,14 @@ export struct ComponentV2Page {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         }
       })
     }
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     Scroll() {
       Column() {
         Row() {

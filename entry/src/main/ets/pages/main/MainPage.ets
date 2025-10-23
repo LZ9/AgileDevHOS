@@ -1,4 +1,3 @@
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 import {
   StatusBarUtils,
   BaseContainer,
@@ -6,11 +5,16 @@ import {
   GroupBean,
   ArrayUtils,
   RandomUtils,
-  KVBean,
-  ResourceUtils
+  PromptUtils,
+  RouterUtils,
 } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 import { RouterGuide } from '../../config/RouterGuide'
+
+@Builder
+export function MainPageBuilder() {
+  MainPage()
+}
 
 /**
  * 主页
@@ -18,7 +22,6 @@ import { RouterGuide } from '../../config/RouterGuide'
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: RouterGuide.MainPage, lifecycle: 'AppLifecycle' })
 export struct MainPage {
   /** 索引字符数组 */
   private static readonly INDEX_ARRAY: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
@@ -44,26 +47,38 @@ export struct MainPage {
   private scroller: ListScroller = new ListScroller()
   /** 列表位置 */
   @Local private listPosition: number = 0
+  /** 上一次点击返回退出的时间 */
+  private lastExitTime = 0
   /** 索引栏位置 */
   private alphabetIndexerPosition: number = -1
 
   aboutToAppear(): void {
     //设置状态栏颜色
     StatusBarUtils.setColor(this.getUIContext().getHostContext(), $r('app.color.color_00A0E9'), Color.White)
-
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.backImgVm.visibility = Visibility.Hidden
-    this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
+    this.vm.navVm.onBackPressed = () => {
+      const time = new Date().getTime()
+      if (time - this.lastExitTime > 1000) {
+        this.lastExitTime = time
+        PromptUtils.toastShort(this.getUIContext(), '再次返回退出应用')
+        return true
+      }
+      return false
+    }
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.backImgVm.visibility = Visibility.Hidden
+      this.vm.titleBarViewVm.titleVm.title = $r('app.string.main_title')
 
-    const data = [
-      new MainBean($r('app.string.json_title'), "J", RouterGuide.JsonPage),
-      new MainBean($r('app.string.preferences_title'), "P", RouterGuide.PreferencesPage),
-      new MainBean($r('app.string.mvvm_title'), "M", RouterGuide.MvvmPage),
-      new MainBean($r('app.string.component_v2_title'), "C", RouterGuide.ComponentV2Page),
-      new MainBean($r('app.string.promise_title'), "P", RouterGuide.PromisePage),
-      new MainBean($r('app.string.refresh_load_title'), "S", RouterGuide.RefreshLoadPage)
-    ]
-    this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
+      const data = [
+        new MainBean($r('app.string.json_title'), "J", RouterGuide.JsonPage),
+        new MainBean($r('app.string.preferences_title'), "P", RouterGuide.PreferencesPage),
+        new MainBean($r('app.string.mvvm_title'), "M", RouterGuide.MvvmPage),
+        new MainBean($r('app.string.component_v2_title'), "C", RouterGuide.ComponentV2Page),
+        new MainBean($r('app.string.promise_title'), "P", RouterGuide.PromisePage),
+        new MainBean($r('app.string.refresh_load_title'), "S", RouterGuide.RefreshLoadPage)
+      ]
+      this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
+    }
   }
 
   onDidBuild(): void {
@@ -85,17 +100,17 @@ export struct MainPage {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         },
         titleBarExpandLayout: () => {
-          this.expandLayout()
+          this.expandComponent()
         }
       })
     }
   }
 
   @Builder
-  expandLayout() {
+  expandComponent() {
     Text($r('app.string.main_change_mood'))
       .height(`100%`)
       .fontSize(14)
@@ -112,7 +127,7 @@ export struct MainPage {
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     // 列表和索引栏
     Stack() {
       // 列表
@@ -128,7 +143,7 @@ export struct MainPage {
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    HMRouterMgr.push({ pageUrl: item.getPage(), param: item.getTitleName(this.getUIContext().getHostContext()) })
+                    this.vm.navVm.stack.pushPathByName(item.getPage(), item.getTitleName(this.getUIContext().getHostContext()))
                   })
               }
             }, (bean: MainBean) => bean.id)

@@ -4,6 +4,7 @@ import { LoadingViewVm } from "../../components/state/loading/LoadingViewVm"
 import { NoDataViewVm } from "../../components/state/nodata/NoDataViewVm"
 import { TitleBarViewVm } from "../../components/titlebar/TitleBarViewVm"
 import { PandoraConstants } from "../../config/PandoraConstants"
+import { NavContainerVm } from "../nav/NavContainerVm"
 import { BaseContainerScopeConfig } from "./BaseContainerScopeConfig"
 
 /**
@@ -12,6 +13,8 @@ import { BaseContainerScopeConfig } from "./BaseContainerScopeConfig"
  */
 @ObservedV2
 export class BaseContainerVm {
+  /** 导航属性 */
+  @Trace public navVm: NavContainerVm = new NavContainerVm()
   /** 标题栏属性 */
   @Trace public titleBarViewVm: TitleBarViewVm = new TitleBarViewVm()
   /** 加载页属性 */

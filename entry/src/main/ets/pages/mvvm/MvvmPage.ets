@@ -2,16 +2,17 @@ import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils } 
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
-import { RouterGuide } from '../../config/RouterGuide'
 import { ApiManager } from '../../api/ApiManager'
 
+@Builder
+export function MvvmPageBuilder() {
+  MvvmPage()
+}
 /**
  * mvvm用例页面
  * Created by zhouL on 2025/7/23.
  */
 @ComponentV2
-@HMRouter({ pageUrl: RouterGuide.MvvmPage })
 export struct MvvmPage {
   /** 基类属性 */
   @Local public vm: BaseContainerVm = new BaseContainerVm()
@@ -22,18 +23,17 @@ export struct MvvmPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
-    }
-    this.vm.onReloadClick = () => {
-      this.vm.showStatusLoading()
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
+      this.vm.onReloadClick = () => {
+        this.vm.showStatusLoading()
+        this.requestTodoList()
+      }
       this.requestTodoList()
-     }
-  }
-
-  onDidBuild(): void {
-    this.requestTodoList()
+    }
   }
 
   /** 请求代办列表 */
@@ -60,17 +60,17 @@ export struct MvvmPage {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         },
         titleBarExpandLayout: () => {
-          this.expandLayout()
+          this.expandComponent()
         }
       })
     }
   }
 
   @Builder
-  expandLayout() {
+  expandComponent() {
     Button(this.isAllFinish ? "取消全选" : "全选", { type: ButtonType.Capsule })
       .width(80)
       .height(30)
@@ -85,7 +85,7 @@ export struct MvvmPage {
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     // 列表
     List() {
       ForEach(this.todoList, (item: TodoBean) => {

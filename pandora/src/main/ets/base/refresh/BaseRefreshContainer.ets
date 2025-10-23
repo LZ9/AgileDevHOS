@@ -2,6 +2,7 @@ import { ErrorView } from "../../components/state/error/ErrorView"
 import { LoadingView } from "../../components/state/loading/LoadingView"
 import { NoDataView } from "../../components/state/nodata/NoDataView"
 import { TitleBarView } from "../../components/titlebar/TitleBarView"
+import { NavDesContainer } from "../nav/NavDesContainer"
 import { BaseRefreshContainerVm } from "./BaseRefreshContainerVm"
 
 /**
@@ -26,6 +27,18 @@ export struct BaseRefreshContainer {
   }
 
   build() {
+    NavDesContainer({
+      vm: this.vm.navVm,
+      contentLayout: () => {
+        this.contentComponent()
+      }
+    })
+      .width(`100%`)
+      .height(`100%`)
+  }
+
+  @Builder
+  private contentComponent() {
     Column() {
       TitleBarView({ vm: this.vm.titleBarViewVm, expandLayout: this.titleBarExpandLayout })
         .visibility(this.vm.isShowTitleBar ? Visibility.Visible : Visibility.None)

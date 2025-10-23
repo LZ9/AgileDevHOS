@@ -3,7 +3,6 @@ import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/contai
 import { Constants } from '../../config/Constants'
 import { FileManager } from '../../tools/FileManager'
 import { AbilityConstant, Want } from '@kit.AbilityKit'
-import { HMRouterMgr } from '@hadss/hmrouter'
 import { RcpUtils } from '../../api/RcpUtils'
 
 export default class EntryAbility extends BaseAbility {
@@ -11,8 +10,6 @@ export default class EntryAbility extends BaseAbility {
     PreferencesUtils.getInstance().init(this.context)
     PreferencesUtils.getInstance().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
     FileManager.getInstance().init(this.context)
-    HMRouterMgr.openLog('DEBUG')
-    HMRouterMgr.init({ context: this.context })
   }
 
   protected getLayoutPath(): string {

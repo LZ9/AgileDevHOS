@@ -1,16 +1,18 @@
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
-import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils, KVBean } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
-import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
+
+@Builder
+export function JsonPageBuilder() {
+  JsonPage()
+}
 
 /**
  * Json转换测试
  * Created by zhouL on 2025/7/19.
  */
 @ComponentV2
-@HMRouter({ pageUrl: RouterGuide.JsonPage })
 export struct JsonPage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */
@@ -20,14 +22,13 @@ export struct JsonPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
+      this.vm.showStatusCompleted()
     }
-  }
-
-  onDidBuild(): void {
-    this.vm.showStatusCompleted()
   }
 
   build() {
@@ -35,14 +36,14 @@ export struct JsonPage {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         }
       })
     }
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     Column() {
       Text(`原始Json字符串：${JsonPage.JSON_STRING}`)
         .fontSize(14)

@@ -1,6 +1,5 @@
-import { HMDefaultGlobalAnimator, HMNavigation, IHMAnimator } from "@hadss/hmrouter"
-import { AttributeUpdater } from "@kit.ArkUI"
-import { RouterGuide } from "../../config/RouterGuide"
+import { NavContainer } from '@lodz/pandora'
+import { RouterGuide } from '../../config/RouterGuide'
 
 /**
  * 根页面
@@ -9,32 +8,9 @@ import { RouterGuide } from "../../config/RouterGuide"
 @Entry
 @ComponentV2
 struct IndexPage {
-  modifier: NavModifier = new NavModifier()
-
   build() {
-    Column() {
-      HMNavigation({
-        navigationId: 'mainNavigationId',
-        homePageUrl: RouterGuide.SplashPage,
-        options: {
-          standardAnimator: PageAnimation,
-          dialogAnimator: HMDefaultGlobalAnimator.DIALOG_ANIMATOR,
-          modifier: this.modifier
-        }
-      })
+    Stack() {
+      NavContainer({ pathName: RouterGuide.SplashPage })
     }
-    .height('100%')
-    .width('100%')
   }
 }
-
-class NavModifier extends AttributeUpdater<NavigationAttribute> {
-  initializeModifier(instance: NavigationAttribute): void {
-    instance.hideNavBar(true)
-  }
-}
-
-/** 默认页面跳转动画 */
-export const PageAnimation: IHMAnimator.Effect = new IHMAnimator.Effect({
-  direction: IHMAnimator.Direction.RIGHT_TO_LEFT,
-})

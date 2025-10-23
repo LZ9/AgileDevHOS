@@ -1,6 +1,16 @@
-import { PermissionGrantUtils, PermissionResult, PromptUtils } from '@lodz/pandora'
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
-import { RouterGuide } from '../../config/RouterGuide';
+import {
+  NavContainerVm,
+  NavDesContainer,
+  PermissionGrantUtils,
+  PermissionResult,
+  PromptUtils
+} from '@lodz/pandora'
+import { RouterGuide } from '../../config/RouterGuide'
+
+@Builder
+export function SplashPageBuilder() {
+  SplashPage()
+}
 
 /**
  * 启动页
@@ -8,25 +18,8 @@ import { RouterGuide } from '../../config/RouterGuide';
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: RouterGuide.SplashPage })
 export struct SplashPage {
-  build() {
-    Stack() {
-      Image($r(`app.media.bg_splash`))
-        .width('100%')
-        .height('100%')
-        .objectFit(ImageFit.Cover)
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]) // 设置图片覆盖顶部状态栏和底部导航栏
-
-      Text($r(`app.string.splash_title`))
-        .fontSize(24)
-        .fontColor(Color.White)
-        .margin({ top: 100 })
-    }
-    .width('100%')
-    .height('100%')
-    .alignContent(Alignment.Top) // 设置内容垂直顶部对齐
-  }
+  @Local private vm: NavContainerVm = new NavContainerVm()
 
   aboutToAppear(): void {
     PermissionGrantUtils.auto(this.getUIContext().getHostContext(),
@@ -43,7 +36,35 @@ export struct SplashPage {
 
   private goMain() {
     setTimeout(() => {
-      HMRouterMgr.replace({ pageUrl: RouterGuide.MainPage, animator : false })
+      this.vm.stack.replacePathByName(RouterGuide.MainPage, undefined, false)
     }, 1000) // 1秒后跳转
+  }
+
+  build() {
+    NavDesContainer({
+      vm: this.vm,
+      contentLayout: () => {
+        this.contentComponent()
+      }
+    })
+  }
+
+  @Builder
+  contentComponent() {
+    Stack() {
+      Image($r(`app.media.bg_splash`))
+        .width('100%')
+        .height('100%')
+        .objectFit(ImageFit.Cover)
+        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]) // 设置图片覆盖顶部状态栏和底部导航栏
+
+      Text($r(`app.string.splash_title`))
+        .fontSize(24)
+        .fontColor(Color.White)
+        .margin({ top: 100 })
+    }
+    .width('100%')
+    .height('100%')
+    .alignContent(Alignment.Top) // 设置内容垂直顶部对齐
   }
 }

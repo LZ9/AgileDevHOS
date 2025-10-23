@@ -11,8 +11,11 @@ import {
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter';
-import { RouterGuide } from '../../config/RouterGuide';
+
+@Builder
+export function PreferencesPageBuilder() {
+  PreferencesPage()
+}
 
 /**
  * Preferences测试类
@@ -20,7 +23,6 @@ import { RouterGuide } from '../../config/RouterGuide';
  */
 @ComponentV2
 @Preview({ deviceType: "phone" })
-@HMRouter({ pageUrl: RouterGuide.PreferencesPage })
 export struct PreferencesPage {
   /** 日志列表 */
   @Local private logList: Array<string> = []
@@ -31,15 +33,13 @@ export struct PreferencesPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
+      this.vm.showStatusCompleted()
     }
-
-  }
-
-  onDidBuild(): void {
-    this.vm.showStatusCompleted()
   }
 
   build() {
@@ -47,14 +47,14 @@ export struct PreferencesPage {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         }
       })
     }
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     Column() {
       LogListView({ logList: this.logList })
         .layoutWeight(1)

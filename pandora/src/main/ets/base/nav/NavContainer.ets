@@ -1,0 +1,26 @@
+import { NavContainerVm } from "./NavContainerVm"
+
+/**
+ * Navigation容器
+ * Created by zhouL on 2025/10/23.
+ */
+@ComponentV2
+export struct NavContainer {
+  @Param public vm: NavContainerVm = new NavContainerVm()
+  /** 启动页名称 */
+  @Param @Require pathName: string
+  /** 启动参数 */
+  @Param params ?: object = undefined
+  /** 是否展示动画 */
+  @Param animated: boolean = false
+
+  build() {
+    Navigation(this.vm.stack) {}
+    .height('100%')
+    .width('100%')
+    .hideNavBar(true)
+    .onAppear(() => {
+      this.vm.stack.replacePathByName(this.pathName, this.params, this.animated)
+    })
+  }
+}

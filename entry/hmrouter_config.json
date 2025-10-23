@@ -1,7 +1,0 @@
-{
-  "scanDir": [
-    "src/main/ets"
-  ],
-  "saveGeneratedFile": false,
-  "desc_url":"https://gitcode.com/openharmony-sig/ohrouter/blob/master/docs/PluginConfig.md#配置文件详解"
-}

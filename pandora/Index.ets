@@ -3,6 +3,12 @@ export * from '@lodz/core_hos';
 export { PandoraConstants } from './src/main/ets/config/PandoraConstants';
 
 //---------------- 基类 -----------------
+export { NavContainer } from './src/main/ets/base/nav/NavContainer';
+
+export { NavDesContainer } from './src/main/ets/base/nav/NavDesContainer';
+
+export { NavContainerVm } from './src/main/ets/base/nav/NavContainerVm';
+
 export { BaseAbility } from './src/main/ets/base/ability/BaseAbility';
 
 export { BaseContainer } from './src/main/ets/base/container/BaseContainer';

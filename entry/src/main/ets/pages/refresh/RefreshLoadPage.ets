@@ -1,4 +1,3 @@
-import { HMRouter, HMRouterMgr } from "@hadss/hmrouter";
 import {
   BaseLoadMoreFooterView,
   BaseRefreshContainer,
@@ -6,7 +5,6 @@ import {
   BaseRefreshHeaderView,
   DataError,
   Disposable,
-  LoadMoreStatus,
   Observer,
   PrintLog,
   PromiseAgent,
@@ -17,14 +15,17 @@ import { ActivityListBean } from "../../bean/api/ActivityListBean";
 import { ActivityListItemBean } from "../../bean/api/ActivityListItemBean";
 import { ResponseData } from "../../bean/api/ResponseData";
 import { Constants } from "../../config/Constants";
-import { RouterGuide } from "../../config/RouterGuide";
+
+@Builder
+export function RefreshLoadPageBuilder() {
+  RefreshLoadPage()
+}
 
 /**
  * 刷新/加载更多测试类
  * Created by zhouL on 2025/10/13.
  */
 @ComponentV2
-@HMRouter({ pageUrl: RouterGuide.RefreshLoadPage })
 export struct RefreshLoadPage {
   @Local vm: BaseRefreshContainerVm = new BaseRefreshContainerVm()
   /** 活动列表 */
@@ -36,37 +37,37 @@ export struct RefreshLoadPage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
-    }
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
 
-    // 点击加载失败页重新加载
-    this.vm.onReloadClick = () => {
-      this.vm.showStatusLoading()
+      // 点击加载失败页重新加载
+      this.vm.onReloadClick = () => {
+        this.vm.showStatusLoading()
+        this.requestFirstData()
+      }
+
+      // 监听下拉偏移量变化
+      this.vm.onOffsetChange = (offset: number) => {
+        this.pullDownOffset = offset
+      }
+
+      // 刷新回调
+      this.vm.onRefreshing = () => {
+        PrintLog.d(Constants.Log.TAG, `下拉刷新`)
+        this.disposable?.dispose()
+        this.requestFirstData()
+      }
+
+      // 加载更多
+      this.vm.loadMoreAgent.setOnLoadMoreListener((nextPage, pageSize) => {
+        this.requestLoadMoreData(nextPage)
+      })
+
       this.requestFirstData()
     }
-
-    // 监听下拉偏移量变化
-    this.vm.onOffsetChange = (offset: number) => {
-      this.pullDownOffset = offset
-    }
-
-    // 刷新回调
-    this.vm.onRefreshing = () => {
-      PrintLog.d(Constants.Log.TAG, `下拉刷新`)
-      this.disposable?.dispose()
-      this.requestFirstData()
-    }
-
-    // 加载更多
-    this.vm.loadMoreAgent.setOnLoadMoreListener((nextPage, pageSize) => {
-      this.requestLoadMoreData(nextPage)
-    })
-  }
-
-  onDidBuild(): void {
-    this.requestFirstData()
   }
 
   aboutToDisappear(): void {
@@ -141,7 +142,7 @@ export struct RefreshLoadPage {
       BaseRefreshContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         },
         // 自定义下拉刷新组件，根据业务需求设置
         refreshHeaderLayout: () => {
@@ -152,7 +153,7 @@ export struct RefreshLoadPage {
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     List() {
       ForEach(this.list, (item: ActivityListItemBean, index) => {
         ListItem() {

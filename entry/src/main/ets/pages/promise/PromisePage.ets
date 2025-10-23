@@ -1,4 +1,3 @@
-import { HMRouter, HMRouterMgr } from '@hadss/hmrouter'
 import {
   BaseContainer,
   BaseContainerVm,
@@ -11,20 +10,22 @@ import {
   PromptUtils
 } from '@lodz/pandora'
 import { ApiManager } from '../../api/ApiManager'
-import { ApiName } from '../../api/ApiName'
 import { ActivityListBean } from '../../bean/api/ActivityListBean'
 import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
-import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
+
+@Builder
+export function PromisePageBuilder() {
+  PromisePage()
+}
 
 /**
  * Promise测试类
  * Created by zhouL on 2025/8/6.
  */
 @ComponentV2
-@HMRouter({ pageUrl: RouterGuide.PromisePage })
 export struct PromisePage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 日志列表 */
@@ -38,17 +39,16 @@ export struct PromisePage {
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
-    this.vm.titleBarViewVm.titleVm.title = HMRouterMgr.getCurrentParam() as string
-    this.vm.titleBarViewVm.backImgVm.onClick = () => {
-      HMRouterMgr.pop()
+    this.vm.navVm.onAppear = () => {
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.backImgVm.onClick = () => {
+        this.vm.navVm.stack.pop()
+      }
+      this.vm.onReloadClick = () => {
+        this.requestNormal()
+      }
+      this.vm.showStatusCompleted()
     }
-    this.vm.onReloadClick = () => {
-      this.requestNormal()
-    }
-  }
-
-  onDidBuild(): void {
-    this.vm.showStatusCompleted()
   }
 
   aboutToDisappear(): void {
@@ -141,17 +141,17 @@ export struct PromisePage {
       BaseContainer({
         vm: this.vm,
         contentLayout: () => {
-          this.contentLayout()
+          this.contentComponent()
         },
         titleBarExpandLayout: () => {
-          this.expandLayout()
+          this.expandComponent()
         }
       })
     }
   }
 
   @Builder
-  expandLayout() {
+  expandComponent() {
     Text($r('app.string.promise_success_switch'))
       .height(`100%`)
       .fontSize(12)
@@ -168,7 +168,7 @@ export struct PromisePage {
   }
 
   @Builder
-  contentLayout() {
+  contentComponent() {
     Column() {
       LogListView({ logList: this.logList })
         .layoutWeight(1)
