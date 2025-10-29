@@ -1,6 +1,7 @@
 import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
+import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
 
 @Builder
@@ -14,16 +15,17 @@ export function JsonPageBuilder() {
  */
 @ComponentV2
 export struct JsonPage {
-  @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 默认Json字符串 */
   private static readonly JSON_STRING = '{"msg":"查询成功","code":200,"data":[{"id":1001,"name":"Jack","age":25,"city":"Shanghai"}]}'
+  /** 基类属性 */
+  @Local vm: BaseContainerVm = new BaseContainerVm()
   /** 日志列表 */
   @Local public logList: Array<string> = []
 
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
         this.vm.navVm.stack.pop()
       }

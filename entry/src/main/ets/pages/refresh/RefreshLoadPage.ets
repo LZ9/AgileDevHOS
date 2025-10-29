@@ -15,6 +15,7 @@ import { ActivityListBean } from "../../bean/api/ActivityListBean";
 import { ActivityListItemBean } from "../../bean/api/ActivityListItemBean";
 import { ResponseData } from "../../bean/api/ResponseData";
 import { Constants } from "../../config/Constants";
+import { RouterGuide } from "../../config/RouterGuide";
 
 @Builder
 export function RefreshLoadPageBuilder() {
@@ -38,7 +39,7 @@ export struct RefreshLoadPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.pathInfo?.param as string
+      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
         this.vm.navVm.stack.pop()
       }

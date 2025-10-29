@@ -19,4 +19,24 @@ export class RouterGuide {
   public static readonly PromisePage = 'PromisePage'
   /** 刷新/加载更多测试类 */
   public static readonly RefreshLoadPage = 'RefreshLoadPage'
+
+  /**
+   * 获取参数值
+   * @param key 键名称
+   * @param pathInfo 路由信息对象
+   */
+  public static getParamsValue<T>(key: string, pathInfo?: NavPathInfo): T | undefined {
+    if (pathInfo === undefined) {
+      return undefined
+    }
+    if (pathInfo.param === undefined || pathInfo.param === null) {
+      return undefined
+    }
+    const params = pathInfo.param as Record<string, object>
+    const value: object | undefined | null = params[key]
+    if (value === undefined || value === null) {
+      return undefined
+    }
+    return value as T
+  }
 }

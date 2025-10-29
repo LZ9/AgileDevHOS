@@ -6,7 +6,6 @@ import {
   ArrayUtils,
   RandomUtils,
   PromptUtils,
-  RouterUtils,
 } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 import { RouterGuide } from '../../config/RouterGuide'
@@ -143,7 +142,8 @@ export struct MainPage {
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    this.vm.navVm.stack.pushPathByName(item.getPage(), item.getTitleName(this.getUIContext().getHostContext()))
+                    const params: Record<string, Object> = { 'title': item.getTitleName(this.getUIContext().getHostContext()) }
+                    this.vm.navVm.stack.pushPathByName(item.getPage(), params)
                   })
               }
             }, (bean: MainBean) => bean.id)
