@@ -25,15 +25,16 @@ export class BaseContainerVm {
   @Trace public errorViewVm: ErrorViewVm = new ErrorViewVm()
   /** 点击错误页面重试监听器 */
   @Trace public onReloadClick?: (event: ClickEvent) => void
-  // 是否显示标题栏
+
+  /** 是否显示标题栏 */
   @Trace public isShowTitleBar: boolean = true
-  // 是否显示加载页
+  /** 是否显示加载页 */
   @Trace public isShowLoading: boolean = true
-  // 是否显示无数据页
+  /** 是否显示无数据页 */
   @Trace public isShowNoData: boolean = false
-  // 是否显示错误页
+  /** 是否显示错误页 */
   @Trace public isShowError: boolean = false
-  // 是否显示内容页
+  /** 是否显示内容页 */
   @Trace public isShowContent: boolean = false
 
   /** 显示加载页面 */

@@ -15,7 +15,7 @@ export struct BaseRefreshContainer {
   @Param public vm: BaseRefreshContainerVm = new BaseRefreshContainerVm()
   /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
-  /** 内容布局 */
+  /** 标题栏扩展布局 */
   @BuilderParam public titleBarExpandLayout?: () => void
   /** 自定义拖拽动画布局 */
   @BuilderParam public refreshHeaderLayout?: () => CustomBuilder
@@ -48,11 +48,6 @@ export struct BaseRefreshContainer {
         .layoutWeight(1)
         .visibility(this.vm.isShowLoading ? Visibility.Visible : Visibility.None)
 
-      NoDataView({ vm: this.vm.noDataViewVm })
-        .width(`100%`)
-        .layoutWeight(1)
-        .visibility(this.vm.isShowNoData ? Visibility.Visible : Visibility.None)
-
       ErrorView({ vm: this.vm.errorViewVm })
         .width(`100%`)
         .layoutWeight(1)
@@ -70,7 +65,18 @@ export struct BaseRefreshContainer {
         builder: this.refreshHeaderLayout ?? undefined,
         refreshingContent: this.vm.refreshingContent,
       }) {
-        this.contentLayout?.()
+        Stack() {
+          // 内容布局
+          Stack() { this.contentLayout?.() }
+          .visibility(this.vm.isShowContent ? Visibility.Visible : Visibility.None)
+
+          NoDataView({ vm: this.vm.noDataViewVm })
+            .width(`100%`)
+            .layoutWeight(1)
+            .visibility(this.vm.isShowNoData ? Visibility.Visible : Visibility.None)
+        }
+        .width(`100%`)
+        .height(`100%`)
       }
       .width(`100%`)
       .layoutWeight(1)
@@ -93,7 +99,7 @@ export struct BaseRefreshContainer {
           this.vm.onRefreshing()
         }
       })
-      .visibility(this.vm.isShowContent ? Visibility.Visible : Visibility.None)
+      .visibility(this.vm.isShowNoData || this.vm.isShowContent ? Visibility.Visible : Visibility.None)
     }
     .width(`100%`)
     .height(`100%`)

@@ -36,6 +36,7 @@ export class BaseRefreshContainerVm extends BaseContainerVm {
   /** 加载更多代理 */
   @Trace loadMoreAgent: LoadMoreAgent = new LoadMoreAgent()
 
+  /** 结束刷新 */
   public finishRefresh(){
     this.isRefreshing = false
   }

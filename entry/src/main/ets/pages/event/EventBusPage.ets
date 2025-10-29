@@ -2,7 +2,7 @@ import { BaseContainer, BaseContainerVm,
   CoreConstants,
   DateUtils,
   EventBus,
-  ResourceUtils, SelectorModifier } from "@lodz/pandora"
+  SelectorModifier } from "@lodz/pandora"
 import { Constants } from "../../config/Constants"
 import { RouterGuide } from "../../config/RouterGuide"
 import { LogListView } from "../../view/LogListView"

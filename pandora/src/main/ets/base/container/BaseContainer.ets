@@ -15,7 +15,7 @@ export struct BaseContainer {
   @Param public vm: BaseContainerVm = new BaseContainerVm()
   /** 内容布局 */
   @BuilderParam public contentLayout?: () => void
-  /** 内容布局 */
+  /** 标题栏扩展布局 */
   @BuilderParam public titleBarExpandLayout?: () => void
 
   build() {

@@ -23,6 +23,10 @@ export { BaseRefreshHeaderView } from './src/main/ets/base/refresh/BaseRefreshHe
 
 export { BaseLoadMoreFooterView } from './src/main/ets/base/refresh/BaseLoadMoreFooterView';
 
+export { BaseSandwichContainer } from './src/main/ets/base/sandwich/BaseSandwichContainer';
+
+export { BaseSandwichContainerVm } from './src/main/ets/base/sandwich/BaseSandwichContainerVm';
+
 //---------------- 控件 -----------------
 export { TitleBarView } from './src/main/ets/components/titlebar/TitleBarView';
 
