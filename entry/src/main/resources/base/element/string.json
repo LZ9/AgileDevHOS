@@ -195,6 +195,38 @@
     {
       "name": "refresh_load_title",
       "value": "刷新/加载更多测试类"
+    },
+    {
+      "name": "event_bus_title",
+      "value": "EventBus测试类"
+    },
+    {
+      "name": "event_bus_register",
+      "value": "订阅"
+    },
+    {
+      "name": "event_bus_register_once",
+      "value": "单次订阅"
+    },
+    {
+      "name": "event_bus_unregister",
+      "value": "取消订阅"
+    },
+    {
+      "name": "event_bus_post",
+      "value": "发送"
+    },
+    {
+      "name": "event_bus_clean_log",
+      "value": "清空日志"
+    },
+    {
+      "name": "event_bus_go_detail",
+      "value": "跳转详情"
+    },
+    {
+      "name": "event_bus_detail_title",
+      "value": "EventBus测试详情类"
     }
   ]
 }

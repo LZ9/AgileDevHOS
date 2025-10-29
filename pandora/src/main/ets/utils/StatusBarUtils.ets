@@ -14,7 +14,7 @@ export class StatusBarUtils {
   }
 
   /** 获取单例 */
-  public static getInstance(): StatusBarUtils {
+  public static get(): StatusBarUtils {
     if (!StatusBarUtils.instance) {
       StatusBarUtils.instance = new StatusBarUtils()
     }

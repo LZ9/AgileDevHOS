@@ -74,7 +74,8 @@ export struct MainPage {
         new MainBean($r('app.string.mvvm_title'), "M", RouterGuide.MvvmPage),
         new MainBean($r('app.string.component_v2_title'), "C", RouterGuide.ComponentV2Page),
         new MainBean($r('app.string.promise_title'), "P", RouterGuide.PromisePage),
-        new MainBean($r('app.string.refresh_load_title'), "S", RouterGuide.RefreshLoadPage)
+        new MainBean($r('app.string.refresh_load_title'), "S", RouterGuide.RefreshLoadPage),
+        new MainBean($r('app.string.event_bus_title'), "E", RouterGuide.EventBusPage)
       ]
       this.list = ArrayUtils.group(data, MainPage.INDEX_ARRAY)
     }

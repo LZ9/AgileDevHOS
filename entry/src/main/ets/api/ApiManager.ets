@@ -56,13 +56,13 @@ export class ApiManager {
   public getImg(): Promise<string> {
     const imgUrl =
       `https://developer.huawei.com/allianceCmsResource/resource/HUAWEI_Developer_VUE/images/shouye/2025-07-10/954-kaifazheshequ-0805.jpeg`
-    return RcpUtils.getInstance().get(imgUrl)
+    return RcpUtils.get().get(imgUrl)
       .then((response: rcp.Response) => {
         const body = response.body
         if (body === undefined) {
           throw new Error(`接口返回数据为空`)
         }
-        const filePath = FileManager.getInstance().getCacheFolderPath() + StringUtils.getFileNameByUrl(imgUrl)
+        const filePath = FileManager.get().getCacheFolderPath() + StringUtils.getFileNameByUrl(imgUrl)
         FileUtils.writeFile(filePath, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE, body)
         return FileUtils.getUri(filePath)
       })
@@ -78,7 +78,7 @@ export class ApiManager {
 
     const apiName = ApiName.getActivityList
     const content: rcp.RequestContent = JsonUtils.beanToJson(bean)
-    return RcpUtils.getInstance().postJsonBean<ResponseData<ActivityListBean>>(apiName, content)
+    return RcpUtils.get().postJsonBean<ResponseData<ActivityListBean>>(apiName, content)
       .then((response: ResponseData<ActivityListBean>) => {
         return ResponseData.copy(response)
       })

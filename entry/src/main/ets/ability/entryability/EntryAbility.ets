@@ -7,9 +7,9 @@ import { RcpUtils } from '../../api/RcpUtils'
 
 export default class EntryAbility extends BaseAbility {
   protected startCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    PreferencesUtils.getInstance().init(this.context)
-    PreferencesUtils.getInstance().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
-    FileManager.getInstance().init(this.context)
+    PreferencesUtils.get().init(this.context)
+    PreferencesUtils.get().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
+    FileManager.get().init(this.context)
   }
 
   protected getLayoutPath(): string {
@@ -27,6 +27,6 @@ export default class EntryAbility extends BaseAbility {
   }
 
   onDestroy() {
-    RcpUtils.getInstance().release()
+    RcpUtils.get().release()
   }
 }

@@ -21,4 +21,11 @@ export namespace Constants {
     export const USER_KEY = 'user_key'
   }
 
+  /** 事件总线ID */
+  export namespace EventId {
+    /** 普通事件 */
+    export const NORMAL_EVENT = 1
+    /** 单次事件 */
+    export const ONCE_EVENT = 2
+  }
 }

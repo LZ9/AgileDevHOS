@@ -64,3 +64,8 @@ export { Groupable } from './src/main/ets/array/Groupable';
 // 数字格式化工具类
 export { NumberFormatUtils } from './src/main/ets/utils/NumberFormatUtils';
 
+// 事件总线
+export { EventBus } from './src/main/ets/event/EventBus';
+
+// 按钮选择器样式
+export { SelectorModifier } from './src/main/ets/modifier/SelectorModifier';

@@ -19,6 +19,11 @@ export class RouterGuide {
   public static readonly PromisePage = 'PromisePage'
   /** 刷新/加载更多测试类 */
   public static readonly RefreshLoadPage = 'RefreshLoadPage'
+  /** EventBus测试类 */
+  public static readonly EventBusPage = 'EventBusPage'
+  /** EventBus测试详情类 */
+  public static readonly EventBusDetailPage = 'EventBusDetailPage'
+
 
   /**
    * 获取参数值

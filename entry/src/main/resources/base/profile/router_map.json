@@ -39,6 +39,16 @@
       "name": "RefreshLoadPage",
       "pageSourceFile": "src/main/ets/pages/refresh/RefreshLoadPage.ets",
       "buildFunction": "RefreshLoadPageBuilder"
+    },
+    {
+      "name": "EventBusPage",
+      "pageSourceFile": "src/main/ets/pages/event/EventBusPage.ets",
+      "buildFunction": "EventBusPageBuilder"
+    },
+    {
+      "name": "EventBusDetailPage",
+      "pageSourceFile": "src/main/ets/pages/event/EventBusDetailPage.ets",
+      "buildFunction": "EventBusDetailPageBuilder"
     }
   ]
 }

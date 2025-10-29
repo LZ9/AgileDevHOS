@@ -16,7 +16,7 @@ export class PreferencesUtils {
   }
 
   /** 获取单例 */
-  public static getInstance(): PreferencesUtils {
+  public static get(): PreferencesUtils {
     if (!PreferencesUtils.instance) {
       PreferencesUtils.instance = new PreferencesUtils()
     }

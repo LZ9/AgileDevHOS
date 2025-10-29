@@ -12,7 +12,7 @@ export class FileManager {
   }
 
   /** 获取单例 */
-  public static getInstance(): FileManager {
+  public static get(): FileManager {
     if (!FileManager.instance) {
       FileManager.instance = new FileManager()
     }

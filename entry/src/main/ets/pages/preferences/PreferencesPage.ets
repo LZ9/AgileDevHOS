@@ -112,7 +112,7 @@ export struct PreferencesPage {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
               return
             }
-            PreferencesUtils.getInstance().putSync(Constants.Preferences.USER_KEY, this.text)
+            PreferencesUtils.get().putSync(Constants.Preferences.USER_KEY, this.text)
             this.addLog("同步保存字符：" + this.text)
           })
 
@@ -123,7 +123,7 @@ export struct PreferencesPage {
           .margin({ left: 5, right: 5 })
           .onClick(() => {
             const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
-            const value = PreferencesUtils.getInstance().getSync(Constants.Preferences.USER_KEY, def)
+            const value = PreferencesUtils.get().getSync(Constants.Preferences.USER_KEY, def)
             this.addLog("同步读取字符：" + value)
           })
 
@@ -133,7 +133,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            this.addLog("同步获取全部数据：" + JSON.stringify(PreferencesUtils.getInstance().getAllSync()))
+            this.addLog("同步获取全部数据：" + JSON.stringify(PreferencesUtils.get().getAllSync()))
           })
       }
 
@@ -159,7 +159,7 @@ export struct PreferencesPage {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
               return
             }
-            PreferencesUtils.getInstance().put(Constants.Preferences.USER_KEY, this.text)
+            PreferencesUtils.get().put(Constants.Preferences.USER_KEY, this.text)
               .then(() => {
                 this.addLog("异步保存字符成功：" + this.text)
               })
@@ -175,7 +175,7 @@ export struct PreferencesPage {
           .margin({ left: 5, right: 5 })
           .onClick(() => {
             const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
-            PreferencesUtils.getInstance().get(Constants.Preferences.USER_KEY, def)
+            PreferencesUtils.get().get(Constants.Preferences.USER_KEY, def)
               .then((value) => {
                 this.addLog("异步读取字符成功：" + value)
               })
@@ -190,7 +190,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().getAll()
+            PreferencesUtils.get().getAll()
               .then((data) => {
                 this.addLog("同步获取全部数据成功：" + JSON.stringify(data))
               })
@@ -218,7 +218,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const keys = PreferencesUtils.getInstance().getAllKeysSync()
+            const keys = PreferencesUtils.get().getAllKeysSync()
             if (keys.length === 0) {
               PromptUtils.toastShort(this.getUIContext(), "无数据")
               return
@@ -242,7 +242,7 @@ export struct PreferencesPage {
                 return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
               })
               .then((key) => {
-                this.addLog(key + " 查询结果：" + PreferencesUtils.getInstance().hasSync(key))
+                this.addLog(key + " 查询结果：" + PreferencesUtils.get().hasSync(key))
               })
               .catch((e: Error) => {
                 this.addLog("查询失败：" + e.message)
@@ -255,7 +255,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const keys = PreferencesUtils.getInstance().getAllKeysSync()
+            const keys = PreferencesUtils.get().getAllKeysSync()
             if (keys.length === 0) {
               PromptUtils.toastShort(this.getUIContext(), "无数据")
               return
@@ -279,7 +279,7 @@ export struct PreferencesPage {
                 return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
               })
               .then((key) => {
-                PreferencesUtils.getInstance().deleteSync(key)
+                PreferencesUtils.get().deleteSync(key)
                 this.addLog(key + " 数据已删除")
               })
               .catch((e: Error) => {
@@ -293,7 +293,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().clear()
+            PreferencesUtils.get().clear()
               .then(() => {
                 this.addLog("清空完成")
               })
@@ -321,7 +321,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().onChange(this.mCallback)
+            PreferencesUtils.get().onChange(this.mCallback)
           })
 
         //关闭全量订阅
@@ -330,7 +330,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().offChange(this.mCallback)
+            PreferencesUtils.get().offChange(this.mCallback)
           })
       }
 
@@ -341,7 +341,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().onDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+            PreferencesUtils.get().onDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
           })
 
         //关闭精确订阅
@@ -350,7 +350,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.getInstance().offDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+            PreferencesUtils.get().offDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
           })
       }
       .margin({ top: 10 })

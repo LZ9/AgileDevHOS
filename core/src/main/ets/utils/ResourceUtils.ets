@@ -15,7 +15,7 @@ export class ResourceUtils {
       if (typeof res === 'string') {
         return res
       }
-      return context.resourceManager.getStringSync(res)
+      return context.resourceManager.getStringSync(res.id)
     }
     return "null"
   }

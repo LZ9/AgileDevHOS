@@ -12,7 +12,7 @@ export class RcpUtils {
   private static instance: RcpUtils | null = null
 
   /** 获取单例 */
-  public static getInstance(): RcpUtils {
+  public static get(): RcpUtils {
     if (!RcpUtils.instance) {
       RcpUtils.instance = new RcpUtils()
     }
