@@ -1,4 +1,4 @@
-import { DeviceUtils } from "@lodz/pandora";
+import { CoreConstants, DeviceUtils } from "@lodz/pandora";
 
 /**
  * 日志列表控件
@@ -29,8 +29,8 @@ export struct LogListView {
           }
         })
       }
-      .width('100%')
-      .height('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
+      .height(CoreConstants.LayoutParams.MATCH_PARENT)
       .alignListItem(ListItemAlign.Start)
     }
   }

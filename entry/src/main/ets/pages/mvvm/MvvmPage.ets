@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerVm, DataError, PromiseAgent, PromptUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, DataError, PromiseAgent, PromptUtils } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
@@ -95,8 +95,8 @@ export struct MvvmPage {
         }
       })
     }
-    .height('100%')
-    .width('100%')
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .alignListItem(ListItemAlign.Center)
   }
 

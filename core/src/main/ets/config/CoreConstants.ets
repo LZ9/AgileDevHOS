@@ -56,6 +56,12 @@ export namespace CoreConstants {
 
     /** 版本18 */
     export const VERSION_18 = 18
+
+    /** 版本19 */
+    export const VERSION_19 = 19
+
+    /** 版本20 */
+    export const VERSION_20 = 20
   }
 
   /** 日期格式 */
@@ -106,5 +112,11 @@ export namespace CoreConstants {
     export const TYPE_22 = "yyyy年MM月dd日 HH点mm分"
 
     export const TYPE_23 = "yyyy年MM月dd日 HH点mm分ss秒"
+  }
+
+  /** 布局参数 */
+  export namespace LayoutParams {
+    /** 100%充满 */
+    export const MATCH_PARENT = '100%'
   }
 }

@@ -1,3 +1,4 @@
+import { CoreConstants } from "@lodz/core_hos"
 import { TitleBarViewVm } from "./TitleBarViewVm"
 
 /**
@@ -22,7 +23,7 @@ export struct TitleBarView {
             .objectFit(this.vm.backImgVm.objectFit ?? ImageFit.Auto)
         }
         .width(50)
-        .height('100%')
+        .height(CoreConstants.LayoutParams.MATCH_PARENT)
         .visibility(this.vm.backImgVm.visibility ?? Visibility.Visible)
         .alignRules({
           left: { anchor: "__container__", align: HorizontalAlign.Start },
@@ -54,24 +55,24 @@ export struct TitleBarView {
           this.expandLayout?.()
         }
         .width(this.expandLayout !== undefined ? 'auto' : 50)
-        .height('100%')
+        .height(CoreConstants.LayoutParams.MATCH_PARENT)
         .id("expand")
         .alignRules({
           right: { anchor: "__container__", align: HorizontalAlign.End },
           center: { anchor: "__container__", align: VerticalAlign.Center }
         })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .height(56)
       .backgroundColor(this.vm.titleVm.backgroundColor ?? Color.Grey)
 
       // 分割线
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(this.vm.dividingVm.color ?? Color.Black)
         .visibility(this.vm.dividingVm.visibility ?? Visibility.None)
     }
-    .width('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 }

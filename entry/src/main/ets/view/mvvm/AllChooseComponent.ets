@@ -1,3 +1,4 @@
+import { CoreConstants } from "@lodz/pandora";
 import TodoListViewModel from "../../vm/mvvm/TodoListViewModel";
 
 /**
@@ -21,7 +22,7 @@ export struct AllChooseComponent {
         .backgroundColor('#f7f6cc74')
     }
     .padding({ left: this.thingsViewModel.isChoosen ? 15 : 0 })
-    .width('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .margin({ top: 10, bottom: 10 })
   }
 }

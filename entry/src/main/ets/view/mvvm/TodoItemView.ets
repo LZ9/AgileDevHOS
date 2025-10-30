@@ -1,3 +1,4 @@
+import { CoreConstants } from '@lodz/pandora'
 import { TodoBean } from '../../bean/mvvm/TodoBean'
 
 /**
@@ -17,7 +18,7 @@ export struct TodoItemView {
           this.todoBean.isFinish = !this.todoBean.isFinish
         })
       Text(this.todoBean.title)
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(20)
         .textAlign(TextAlign.Start)
         .padding(10)

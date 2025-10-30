@@ -1,14 +1,14 @@
 import { BaseAbility, PreferencesUtils } from '@lodz/pandora'
 import { BaseContainerScopeConfig } from '@lodz/pandora/src/main/ets/base/container/BaseContainerScopeConfig'
-import { Constants } from '../../config/Constants'
 import { FileManager } from '../../tools/FileManager'
 import { AbilityConstant, Want } from '@kit.AbilityKit'
 import { RcpUtils } from '../../api/RcpUtils'
+import { CacheManager } from '../../tools/CacheManager'
 
 export default class EntryAbility extends BaseAbility {
   protected startCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     PreferencesUtils.get().init(this.context)
-    PreferencesUtils.get().put(Constants.Preferences.GITHUB_KEY, "https://github.com/LZ9/AgileDevHOS")
+    CacheManager.putGithubText("https://github.com/LZ9/AgileDevHOS")
     FileManager.get().init(this.context)
   }
 

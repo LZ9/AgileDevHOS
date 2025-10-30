@@ -54,7 +54,7 @@ export struct JsonPage {
         .margin(10)
 
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(Color.Grey)
 
@@ -62,12 +62,12 @@ export struct JsonPage {
         .layoutWeight(1)
 
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(Color.Grey)
 
       Text($r('app.string.json_json_to_bean'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -110,7 +110,7 @@ export struct JsonPage {
       }
 
       Text($r('app.string.json_bean_to_json'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -166,7 +166,7 @@ export struct JsonPage {
       .margin({ top: 5 })
 
       Text($r('app.string.json_other'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -211,8 +211,8 @@ export struct JsonPage {
       }
 
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 
   /** 创建响应对象 */

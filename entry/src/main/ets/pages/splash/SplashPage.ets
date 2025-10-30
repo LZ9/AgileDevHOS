@@ -1,4 +1,5 @@
 import {
+  CoreConstants,
   NavContainerVm,
   NavDesContainer,
   PermissionGrantUtils,
@@ -53,8 +54,8 @@ export struct SplashPage {
   contentComponent() {
     Stack() {
       Image($r(`app.media.bg_splash`))
-        .width('100%')
-        .height('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
+        .height(CoreConstants.LayoutParams.MATCH_PARENT)
         .objectFit(ImageFit.Cover)
         .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]) // 设置图片覆盖顶部状态栏和底部导航栏
 
@@ -63,8 +64,8 @@ export struct SplashPage {
         .fontColor(Color.White)
         .margin({ top: 100 })
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .alignContent(Alignment.Top) // 设置内容垂直顶部对齐
   }
 }

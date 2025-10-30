@@ -1,3 +1,4 @@
+import { CoreConstants } from "@lodz/core_hos"
 import { NavContainerVm } from "./NavContainerVm"
 
 /**
@@ -16,8 +17,8 @@ export struct NavContainer {
 
   build() {
     Navigation(this.vm.stack) {}
-    .height('100%')
-    .width('100%')
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .hideNavBar(true)
     .onAppear(() => {
       this.vm.stack.replacePathByName(this.pathName, this.params, this.animated)

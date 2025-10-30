@@ -175,14 +175,14 @@ export struct PromisePage {
         .layoutWeight(1)
 
       Image(this.imgUri)
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(150)
         .objectFit(ImageFit.Contain)
         .margin({ top: 5, bottom: 5 })
         .visibility(this.imgUri !== undefined ? Visibility.Visible : Visibility.None)
 
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(Color.Grey)
 
@@ -203,7 +203,7 @@ export struct PromisePage {
             this.requestProgress()
           })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .margin({ top: 5, bottom: 5 })
 
       Row() {
@@ -223,10 +223,10 @@ export struct PromisePage {
             this.requestInfoList()
           })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .margin({ top: 5, bottom: 5 })
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 }

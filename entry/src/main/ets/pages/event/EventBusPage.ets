@@ -101,7 +101,7 @@ export struct EventBusPage {
         .layoutWeight(1)
 
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(Color.Grey)
 
@@ -128,7 +128,7 @@ export struct EventBusPage {
             this.registerEventOnce()
           })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .padding({
         left: 10,
         right: 10,
@@ -159,7 +159,7 @@ export struct EventBusPage {
             this.sendEvent()
           })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .padding({
         left: 10,
         right: 10,
@@ -190,7 +190,7 @@ export struct EventBusPage {
             this.logList = []
           })
       }
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .padding({
         left: 10,
         right: 10,
@@ -200,7 +200,7 @@ export struct EventBusPage {
 
 
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 }

@@ -1,4 +1,4 @@
-import { BaseContainer, BaseContainerVm, JsonUtils, PrintLog, RandomUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, PrintLog, RandomUtils } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
@@ -62,7 +62,7 @@ export struct ComponentV2Page {
           Text(`父组件count的值 : ${this.count}`)
             .margin({ left: 10, right: 10 })
         }
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
 
 
         ChildMakeObserved()
@@ -220,7 +220,7 @@ export struct ChildProvider {
       Text(`------------- @Provider --------------`)
     }
     .margin(10)
-    .width('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(400)
     .backgroundColor(Color.Pink)
   }

@@ -1,3 +1,4 @@
+import { CoreConstants } from "@lodz/core_hos"
 import { ErrorViewVm } from "./ErrorViewVm"
 
 /**
@@ -24,8 +25,8 @@ export struct ErrorView {
         .visibility(this.vm.textVm.visibility ?? Visibility.Visible)
         .margin(10)
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .backgroundColor(this.vm.textVm.backgroundColor ?? Color.White)
     .justifyContent(FlexAlign.Center) // 垂直居中
     .alignItems(HorizontalAlign.Center) // 水平居中

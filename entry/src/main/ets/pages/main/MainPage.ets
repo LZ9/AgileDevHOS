@@ -6,6 +6,7 @@ import {
   ArrayUtils,
   RandomUtils,
   PromptUtils,
+  CoreConstants,
 } from '@lodz/pandora'
 import { MainBean } from '../../bean/main/MainBean'
 import { RouterGuide } from '../../config/RouterGuide'
@@ -137,7 +138,7 @@ export struct MainPage {
             ForEach(bean.list, (item: MainBean) => {
               ListItem() {
                 Text(String.fromCodePoint(this.getRandomEmoji()) + "   " + item.getTitleName(this.getUIContext().getHostContext()))
-                  .width('100%')
+                  .width(CoreConstants.LayoutParams.MATCH_PARENT)
                   .fontSize(16)
                   .fontColor(this.getRandomColor())
                   .backgroundColor(Color.White)
@@ -152,8 +153,8 @@ export struct MainPage {
           .divider({ strokeWidth: 1, color: $r('app.color.color_EEEEEE') })
         })
       }
-      .height('100%')
-      .width('100%')
+      .height(CoreConstants.LayoutParams.MATCH_PARENT)
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .sticky(StickyStyle.Header)
       .scrollBar(BarState.Off)
       .onScrollStop(() => {
@@ -185,7 +186,7 @@ export struct MainPage {
           this.scroller.scrollToIndex(index, true, ScrollAlign.START)
         })
     }
-    .width('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .layoutWeight(1)
     .alignContent(Alignment.End)
   }
@@ -193,7 +194,7 @@ export struct MainPage {
   @Builder
   private itemHeader(bean: GroupBean<MainBean>) {
     Text(bean.indexStr)
-      .width('100%')
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .fontSize(16)
       .fontColor($r('app.color.color_00A0E9'))
       .fontWeight(FontWeight.Bold)

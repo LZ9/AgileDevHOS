@@ -1,8 +1,11 @@
-import { BaseContainer, BaseContainerVm, EventBus, PreferencesUtils,
+import { BaseContainer, BaseContainerVm,
+  CoreConstants,
+  EventBus,
   PromptUtils,
   SelectorModifier } from "@lodz/pandora"
 import { TestEvent } from "../../bean/event/TestEvent"
 import { Constants } from "../../config/Constants"
+import { CacheManager } from "../../tools/CacheManager"
 
 @Builder
 export function EventBusDetailPageBuilder() {
@@ -32,8 +35,7 @@ export struct EventBusDetailPage {
 
   /** 发送事件 */
   private sendEvent() {
-    const value = PreferencesUtils.get().getSync(Constants.Preferences.GITHUB_KEY, "")
-    const event = new TestEvent(`来自EventBusDetailPage的事件信息：${value}`)
+    const event = new TestEvent(`来自EventBusDetailPage的事件信息：${CacheManager.getGithubText()}`)
     EventBus.post(Constants.EventId.NORMAL_EVENT, event)
     PromptUtils.toastShort(this.getUIContext(), "已发送")
   }
@@ -62,8 +64,8 @@ export struct EventBusDetailPage {
           this.sendEvent()
         })
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .padding(10)
     .alignItems(VerticalAlign.Top)
   }

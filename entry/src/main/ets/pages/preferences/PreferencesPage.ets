@@ -6,12 +6,14 @@ import {
   PreferencesUtils,
   PromptUtils,
   ResourceUtils,
+  SelectorModifier,
   StringUtils,
 } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';
 import { RouterGuide } from '../../config/RouterGuide';
+import { CacheManager } from '../../tools/CacheManager';
 
 @Builder
 export function PreferencesPageBuilder() {
@@ -28,7 +30,7 @@ export struct PreferencesPage {
   /** 日志列表 */
   @Local private logList: Array<string> = []
   /** 缓存内容 */
-  private text: string = ""
+  @Local private text: string = ""
   /** 基类属性 */
   @Local vm: BaseContainerVm = new BaseContainerVm()
 
@@ -61,7 +63,7 @@ export struct PreferencesPage {
         .layoutWeight(1)
 
       Line()
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
         .backgroundColor(Color.Grey)
 
@@ -71,27 +73,28 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 10 })
 
-        TextInput({ placeholder: $r('app.string.preferences_input_hint'), })
+        TextInput({ text: $$this.text, placeholder: $r('app.string.preferences_input_hint'), })
           .type(InputType.Normal)
           .placeholderFont({ size: 14 })
           .margin({ left: 10, right: 10 })
           .layoutWeight(1)
-          .onChange((value) => {
-            this.text = value
-          })
 
         //清空日志
-        Button($r('app.string.preferences_clear_log'))
-          .padding({ left: 10, right: 10 })
+        Button($r('app.string.preferences_clear_log'), { type: ButtonType.Normal, stateEffect: true })
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
+          .margin({ right: 10 })
           .onClick(() => {
             this.logList = []
           })
       }
+      .height(CoreConstants.LayoutParams.MATCH_PARENT)
       .margin({ top: 10 })
 
       Text($r('app.string.preferences_sync'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -112,7 +115,7 @@ export struct PreferencesPage {
               PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
               return
             }
-            PreferencesUtils.get().putSync(Constants.Preferences.USER_KEY, this.text)
+            CacheManager.putUserText(this.text)
             this.addLog("同步保存字符：" + this.text)
           })
 
@@ -123,7 +126,7 @@ export struct PreferencesPage {
           .margin({ left: 5, right: 5 })
           .onClick(() => {
             const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
-            const value = PreferencesUtils.get().getSync(Constants.Preferences.USER_KEY, def)
+            const value = CacheManager.getUserText(def)
             this.addLog("同步读取字符：" + value)
           })
 
@@ -138,7 +141,7 @@ export struct PreferencesPage {
       }
 
       Text($r('app.string.preferences_async'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -174,7 +177,8 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
+            const def =
+              ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
             PreferencesUtils.get().get(Constants.Preferences.USER_KEY, def)
               .then((value) => {
                 this.addLog("异步读取字符成功：" + value)
@@ -201,7 +205,7 @@ export struct PreferencesPage {
       }
 
       Text($r('app.string.preferences_other'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -304,7 +308,7 @@ export struct PreferencesPage {
       }
 
       Text($r('app.string.preferences_subscribe'))
-        .width('100%')
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontSize(14)
         .textAlign(TextAlign.Start)
         .padding({
@@ -356,8 +360,8 @@ export struct PreferencesPage {
       .margin({ top: 10 })
 
     }
-    .width('100%')
-    .height('100%')
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 
   /** 数据变动key值回调 */
