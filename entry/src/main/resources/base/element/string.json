@@ -41,24 +41,16 @@
       "value": "请输入要保存的文字"
     },
     {
+      "name": "preferences_no_data",
+      "value": "无数据"
+    },
+    {
       "name": "preferences_clear_log",
       "value": "清空日志"
     },
     {
       "name": "preferences_save_title",
       "value": "保存信息"
-    },
-    {
-      "name": "preferences_sync",
-      "value": "同步"
-    },
-    {
-      "name": "preferences_async",
-      "value": "异步"
-    },
-    {
-      "name": "preferences_other",
-      "value": "其他"
     },
     {
       "name": "preferences_subscribe",
@@ -103,10 +95,6 @@
     {
       "name": "preferences_data_change_off",
       "value": "关闭精确订阅"
-    },
-    {
-      "name": "preferences_text_def",
-      "value": "你未保存文字，我是默认值"
     },
     {
       "name": "json_title",

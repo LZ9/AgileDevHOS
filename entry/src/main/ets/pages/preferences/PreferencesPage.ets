@@ -3,6 +3,7 @@ import {
   BaseContainerVm,
   CoreConstants,
   DateUtils,
+  JsonUtils,
   PreferencesUtils,
   PromptUtils,
   ResourceUtils,
@@ -43,6 +44,120 @@ export struct PreferencesPage {
       }
       this.vm.showStatusCompleted()
     }
+  }
+
+  /** 保存文字 */
+  private saveText() {
+    if (StringUtils.isEmpty(this.text)) {
+      PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
+      return
+    }
+    CacheManager.putUserText(this.text)
+    this.addLog("保存文字：" + this.text)
+  }
+
+  /** 读取文字 */
+  private readText() {
+    const value = CacheManager.getUserText()
+    this.addLog("读取文字：" + value)
+  }
+
+  /** 读取文字 */
+  private readAll() {
+    this.addLog("获取全部缓存数据：" + JsonUtils.beanToJson(PreferencesUtils.get().getAllSync()))
+  }
+
+  /** 是否有数据 */
+  private hasText() {
+    const keys = PreferencesUtils.get().getAllKeysSync()
+    if (keys.length === 0) {
+      PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_no_data'))
+      return
+    }
+    let buttons: CoreConstants.Prompt.MenuBtn = [{
+      text: "error_key",
+      color: $r('app.color.color_757575')
+    }]
+    keys.forEach((key) => {
+      buttons.push({
+        text: key,
+        color: $r('app.color.color_757575')
+      })
+    })
+    PromptUtils.menu(this.getUIContext(), buttons, "选择要查看的key")
+      .then((result) => {
+        let btn = buttons[result.index]
+        if (btn === undefined) {
+          throw new Error("未找到key")
+        }
+        return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
+      })
+      .then((key) => {
+        this.addLog(key + " 查询结果：" + PreferencesUtils.get().hasSync(key))
+      })
+      .catch((e: Error) => {
+        this.addLog("查询失败：" + e.message)
+      })
+  }
+
+  /** 删除数据 */
+  private deleteText() {
+    const keys = PreferencesUtils.get().getAllKeysSync()
+    if (keys.length === 0) {
+      PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_no_data'))
+      return
+    }
+    let buttons: CoreConstants.Prompt.MenuBtn = [{
+      text: keys.shift() ?? "",
+      color: $r('app.color.color_757575')
+    }]
+    keys.forEach((key) => {
+      buttons.push({
+        text: key,
+        color: $r('app.color.color_757575')
+      })
+    })
+    PromptUtils.menu(this.getUIContext(), buttons, "选择要删除数据的key")
+      .then((result) => {
+        let btn = buttons[result.index]
+        if (btn === undefined) {
+          throw new Error("未找到key")
+        }
+        return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
+      })
+      .then((key) => {
+        PreferencesUtils.get().deleteSync(key)
+        this.addLog(key + " 数据已删除")
+      })
+      .catch((e: Error) => {
+        this.addLog("查询失败：" + e.message)
+      })
+  }
+
+
+  private cleanLog() {
+    this.logList = []
+  }
+
+
+  /** 数据变动key值回调 */
+  private mCallback: Callback<string> = (key: string) => {
+    this.addLog(key + " 数据变动")
+  }
+
+  /** 数据变动回调 */
+  private mDataCallback: Callback<Record<string, preferences.ValueType>> =
+    (data: Record<string, preferences.ValueType>) => {
+      const key = Object.keys(data)
+      this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
+    }
+
+  /**
+   * 打印日志
+   * @param text 日志
+   */
+  public addLog(text: string) {
+    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " ---> " + text)
   }
 
   build() {
@@ -87,208 +202,74 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ right: 10 })
           .onClick(() => {
-            this.logList = []
+            this.cleanLog()
           })
       }
-      .height(CoreConstants.LayoutParams.MATCH_PARENT)
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .margin({ top: 10 })
-
-      Text($r('app.string.preferences_sync'))
-        .width(CoreConstants.LayoutParams.MATCH_PARENT)
-        .fontSize(14)
-        .textAlign(TextAlign.Start)
-        .padding({
-          left: 10,
-          right: 10,
-          top: 5,
-          bottom: 5
-        })
 
       Row() {
         //同步保存
-        Button($r('app.string.preferences_save'))
+        Button($r('app.string.preferences_save'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
           .onClick(() => {
-            if (StringUtils.isEmpty(this.text)) {
-              PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
-              return
-            }
-            CacheManager.putUserText(this.text)
-            this.addLog("同步保存字符：" + this.text)
+            this.saveText()
           })
 
         //同步读取
-        Button($r('app.string.preferences_read'))
+        Button($r('app.string.preferences_read'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ left: 10, right: 10 })
           .onClick(() => {
-            const def = ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
-            const value = CacheManager.getUserText(def)
-            this.addLog("同步读取字符：" + value)
+            this.readText()
           })
 
         //同步获取全部
-        Button($r('app.string.preferences_get_all'))
+        Button($r('app.string.preferences_get_all'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
           .onClick(() => {
-            this.addLog("同步获取全部数据：" + JSON.stringify(PreferencesUtils.get().getAllSync()))
+            this.readAll()
           })
+
       }
-
-      Text($r('app.string.preferences_async'))
-        .width(CoreConstants.LayoutParams.MATCH_PARENT)
-        .fontSize(14)
-        .textAlign(TextAlign.Start)
-        .padding({
-          left: 10,
-          right: 10,
-          top: 5,
-          bottom: 5
-        })
-
-      Row() {
-        //异步保存
-        Button($r('app.string.preferences_save'))
-          .layoutWeight(1)
-          .fontSize(14)
-          .margin({ left: 5, right: 5 })
-          .onClick(() => {
-            if (StringUtils.isEmpty(this.text)) {
-              PromptUtils.toastShort(this.getUIContext(), $r('app.string.preferences_input_hint'))
-              return
-            }
-            PreferencesUtils.get().put(Constants.Preferences.USER_KEY, this.text)
-              .then(() => {
-                this.addLog("异步保存字符成功：" + this.text)
-              })
-              .catch((e: Error) => {
-                this.addLog("异步保存字符失败：" + e.message)
-              })
-          })
-
-        //异步读取
-        Button($r('app.string.preferences_read'))
-          .layoutWeight(1)
-          .fontSize(14)
-          .margin({ left: 5, right: 5 })
-          .onClick(() => {
-            const def =
-              ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.preferences_text_def'))
-            PreferencesUtils.get().get(Constants.Preferences.USER_KEY, def)
-              .then((value) => {
-                this.addLog("异步读取字符成功：" + value)
-              })
-              .catch((e: Error) => {
-                this.addLog("异步读取字符失败：" + e.message)
-              })
-          })
-
-        //异步获取全部
-        Button($r('app.string.preferences_get_all'))
-          .layoutWeight(1)
-          .fontSize(14)
-          .margin({ left: 5, right: 5 })
-          .onClick(() => {
-            PreferencesUtils.get().getAll()
-              .then((data) => {
-                this.addLog("同步获取全部数据成功：" + JSON.stringify(data))
-              })
-              .catch((e: Error) => {
-                this.addLog("异步获取全部数据失败：" + e.message)
-              })
-          })
-      }
-
-      Text($r('app.string.preferences_other'))
-        .width(CoreConstants.LayoutParams.MATCH_PARENT)
-        .fontSize(14)
-        .textAlign(TextAlign.Start)
-        .padding({
-          left: 10,
-          right: 10,
-          top: 5,
-          bottom: 5
-        })
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
+      .margin({ top: 10 })
+      .padding({ left: 10, right: 10 })
 
       Row() {
         //是否有数据
-        Button($r('app.string.preferences_has'))
+        Button($r('app.string.preferences_has'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
           .onClick(() => {
-            const keys = PreferencesUtils.get().getAllKeysSync()
-            if (keys.length === 0) {
-              PromptUtils.toastShort(this.getUIContext(), "无数据")
-              return
-            }
-            let buttons: CoreConstants.Prompt.MenuBtn = [{
-              text: "error_key",
-              color: '#666666'
-            }]
-            keys.forEach((key) => {
-              buttons.push({
-                text: key,
-                color: '#666666'
-              })
-            })
-            PromptUtils.menu(this.getUIContext(), buttons, "选择要查看的key")
-              .then((result) => {
-                let btn = buttons[result.index]
-                if (btn === undefined) {
-                  throw new Error("未找到key")
-                }
-                return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
-              })
-              .then((key) => {
-                this.addLog(key + " 查询结果：" + PreferencesUtils.get().hasSync(key))
-              })
-              .catch((e: Error) => {
-                this.addLog("查询失败：" + e.message)
-              })
+            this.hasText()
           })
 
         //删除数据
-        Button($r('app.string.preferences_delete'))
+        Button($r('app.string.preferences_delete'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ left: 10, right: 10 })
           .onClick(() => {
-            const keys = PreferencesUtils.get().getAllKeysSync()
-            if (keys.length === 0) {
-              PromptUtils.toastShort(this.getUIContext(), "无数据")
-              return
-            }
-            let buttons: CoreConstants.Prompt.MenuBtn = [{
-              text: keys.shift() ?? "",
-              color: '#666666'
-            }]
-            keys.forEach((key) => {
-              buttons.push({
-                text: key,
-                color: '#666666'
-              })
-            })
-            PromptUtils.menu(this.getUIContext(), buttons, "选择要删除数据的key")
-              .then((result) => {
-                let btn = buttons[result.index]
-                if (btn === undefined) {
-                  throw new Error("未找到key")
-                }
-                return ResourceUtils.getString(this.getUIContext().getHostContext(), btn.text)
-              })
-              .then((key) => {
-                PreferencesUtils.get().deleteSync(key)
-                this.addLog(key + " 数据已删除")
-              })
-              .catch((e: Error) => {
-                this.addLog("查询失败：" + e.message)
-              })
+            this.deleteText()
           })
 
         //清空所有
@@ -297,13 +278,7 @@ export struct PreferencesPage {
           .fontSize(14)
           .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.get().clear()
-              .then(() => {
-                this.addLog("清空完成")
-              })
-              .catch((e: Error) => {
-                this.addLog("清空失败：" + e.message)
-              })
+            PreferencesUtils.get().clearSync()
           })
       }
 
@@ -364,22 +339,4 @@ export struct PreferencesPage {
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 
-  /** 数据变动key值回调 */
-  private mCallback: Callback<string> = (key: string) => {
-    this.addLog(key + " 数据变动")
-  }
-  /** 数据变动回调 */
-  private mDataCallback: Callback<Record<string, preferences.ValueType>> =
-    (data: Record<string, preferences.ValueType>) => {
-      const key = Object.keys(data)
-      this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
-    }
-
-  /**
-   * 打印日志
-   * @param text 日志
-   */
-  public addLog(text: string) {
-    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " ---> " + text)
-  }
 }

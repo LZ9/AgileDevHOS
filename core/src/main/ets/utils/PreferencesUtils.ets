@@ -7,10 +7,8 @@ import { CoreConstants } from "../config/CoreConstants"
  * Created by zhouL on 2025/7/14.
  */
 export class PreferencesUtils {
-  /** 存储文件名 */
-  static readonly PREFERENCE_NAME: string = 'pr_data'
   /** 单例对象 */
-  private static instance: PreferencesUtils | null = null
+  private static instance: PreferencesUtils
 
   private constructor() {
   }
@@ -23,8 +21,11 @@ export class PreferencesUtils {
     return PreferencesUtils.instance
   }
 
+  /** 存储文件名 */
+  private static readonly PREFERENCE_NAME: string = 'pr_data'
+
   /** Preferences对象 */
-  private preferences: preferences.Preferences | null = null
+  private preferences?: preferences.Preferences
 
   /**
    * 初始化
@@ -32,9 +33,13 @@ export class PreferencesUtils {
    * @param preferenceName 存储文件名
    */
   public init(context: Context | undefined | null, preferenceName: string = PreferencesUtils.PREFERENCE_NAME) {
-    if (this.preferences === null) {
-      this.preferences = preferences.getPreferencesSync(context, { name: preferenceName })
+    if (this.preferences !== undefined) {
+      return
     }
+    if (context === undefined || context === null) {
+      return
+    }
+    this.preferences = preferences.getPreferencesSync(context, { name: preferenceName })
   }
 
   /**
@@ -67,7 +72,7 @@ export class PreferencesUtils {
    */
   public put(key: string, value: preferences.ValueType): Promise<void> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
     return p.put(key, value).then(() => p.flush())
@@ -79,7 +84,10 @@ export class PreferencesUtils {
    * @param defValue 默认值
    */
   public getSync<T extends preferences.ValueType>(key: string, defValue: T): T {
-    return (this.preferences?.getSync(key, defValue) ?? defValue).valueOf() as T
+    if (this.preferences === undefined) {
+      return defValue
+    }
+    return this.preferences?.getSync(key, defValue).valueOf() as T
   }
 
   /**
@@ -89,55 +97,38 @@ export class PreferencesUtils {
    */
   public get<T extends preferences.ValueType>(key: string, defValue: T): Promise<T> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
-    return p.get(key, defValue)
-      .then(value => {
-        return value as T
-      })
+    return p.get(key, defValue).then(value => { return value as T })
   }
 
-  /**
-   * 获取全部数据
-   */
-  public getAllSync(): Object {
-    return this.preferences?.getAllSync() ?? new Object()
+  /** 获取全部数据 */
+  public getAllSync(): Object | null{
+    return this.preferences?.getAllSync() ?? null
   }
 
-  /**
-   * 异步获取全部数据
-   */
+  /** 异步获取全部数据 */
   public getAll(): Promise<Object> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
     return p.getAll()
   }
 
-  /**
-   * 获取全部数据的Key
-   */
+  /** 获取全部数据的Key */
   public getAllKeysSync(): string[] {
-    const p = this.preferences
-    if (p === null) {
-      return []
-    }
-    return Object.keys(p.getAllSync())
+    return Object.keys(this.preferences?.getAllSync() ?? [])
   }
 
-  /**
-   * 异步获取全部数据的Key
-   */
+  /** 异步获取全部数据的Key */
   public getAllKeys(): Promise<string[]> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
-    return p.getAll().then(value => {
-      return Object.keys(value)
-    })
+    return p.getAll().then(value => { return Object.keys(value) })
   }
 
   /**
@@ -154,7 +145,7 @@ export class PreferencesUtils {
    */
   public has(key: string): Promise<boolean> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
     return p.has(key)
@@ -174,28 +165,29 @@ export class PreferencesUtils {
    */
   public delete(key: string): Promise<void> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
     return p.delete(key)
   }
 
-  /**
-   * 清除数据
-   */
+  /** 清除数据 */
   public clearSync() {
     this.preferences?.clearSync()
+    if (deviceInfo.sdkApiVersion >= CoreConstants.SdkApiVersion.VERSION_14) {
+      this.preferences?.flushSync()
+    } else {
+      this.preferences?.flush()
+    }
   }
 
-  /**
-   * 异步清除数据
-   */
+  /** 异步清除数据 */
   public clear(): Promise<void> {
     const p = this.preferences
-    if (p === null) {
+    if (p === undefined) {
       return Promise.reject(new Error("未初始化"))
     }
-    return p.clear()
+    return p.clear().then(() => p.flush())
   }
 
   /**
