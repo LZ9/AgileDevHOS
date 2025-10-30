@@ -34,7 +34,7 @@ export struct EventBusDetailPage {
   private sendEvent() {
     const value = PreferencesUtils.get().getSync(Constants.Preferences.GITHUB_KEY, "")
     const event = new TestEvent(`来自EventBusDetailPage的事件信息：${value}`)
-    EventBus.get().post(Constants.EventId.NORMAL_EVENT, event)
+    EventBus.post(Constants.EventId.NORMAL_EVENT, event)
     PromptUtils.toastShort(this.getUIContext(), "已发送")
   }
 
@@ -63,5 +63,8 @@ export struct EventBusDetailPage {
         })
     }
     .width('100%')
+    .height('100%')
+    .padding(10)
+    .alignItems(VerticalAlign.Top)
   }
 }

@@ -42,7 +42,7 @@ export struct EventBusPage {
 
   /** 订阅事件 */
   private registerEvent(){
-    EventBus.get().register(Constants.EventId.NORMAL_EVENT, (event: emitter.EventData) => {
+    EventBus.register(Constants.EventId.NORMAL_EVENT, (event: emitter.EventData) => {
       const data = event.data as TestEvent
       const date = data.date === undefined ? "" : `  ${DateUtils.getFormatString(CoreConstants.DateFormat.TYPE_17, data.date)}`
       this.addLog(data.content + date)
@@ -51,7 +51,7 @@ export struct EventBusPage {
 
   /** 订阅单次事件 */
   private registerEventOnce(){
-    EventBus.get().registerOnce(Constants.EventId.ONCE_EVENT, (event: emitter.EventData) => {
+    EventBus.registerOnce(Constants.EventId.ONCE_EVENT, (event: emitter.EventData) => {
       const data = event.data as TestEvent
       const date = data.date === undefined ? "" : `  ${DateUtils.getFormatString(CoreConstants.DateFormat.TYPE_17, data.date)}`
       this.addLog(data.content + date)
@@ -60,14 +60,14 @@ export struct EventBusPage {
 
   /** 取消订阅 */
   private unregisterEvent() {
-    EventBus.get().unregister(Constants.EventId.NORMAL_EVENT)
-    EventBus.get().unregister(Constants.EventId.ONCE_EVENT)
+    EventBus.unregister(Constants.EventId.NORMAL_EVENT)
+    EventBus.unregister(Constants.EventId.ONCE_EVENT)
   }
 
   /** 发送事件 */
   private sendEvent() {
-    EventBus.get().post(Constants.EventId.NORMAL_EVENT, new TestEvent("普通event", new Date()))
-    EventBus.get().post(Constants.EventId.ONCE_EVENT, new TestEvent("单次event", new Date()))
+    EventBus.post(Constants.EventId.NORMAL_EVENT, new TestEvent("普通event", new Date()))
+    EventBus.post(Constants.EventId.ONCE_EVENT, new TestEvent("单次event", new Date()))
   }
 
   /** 跳转详情页 */

@@ -5,21 +5,13 @@ import emitter from "@ohos.events.emitter"
  * Created by zhouL on 2025/10/29.
  */
 export class EventBus {
-
-  private constructor() {
-  }
-
-  public static get(): EventBus {
-    return new EventBus()
-  }
-
   /**
    * 订阅事件
    * @param id 事件编号
    * @param callback 订阅回调
    * @param priority 优先级，默认emitter.EventPriority.IMMEDIATE
    */
-  public register(id: number, callback: (event: emitter.EventData) => void, priority?: emitter.EventPriority) {
+  public static register(id: number, callback: (event: emitter.EventData) => void, priority?: emitter.EventPriority) {
     emitter.on({
       eventId: id,
       priority: priority ?? emitter.EventPriority.IMMEDIATE
@@ -32,7 +24,8 @@ export class EventBus {
    * @param callback 订阅回调
    * @param priority 优先级，默认emitter.EventPriority.IMMEDIATE
    */
-  public registerOnce(id: number, callback: (event: emitter.EventData) => void, priority?: emitter.EventPriority) {
+  public static registerOnce(id: number, callback: (event: emitter.EventData) => void,
+    priority?: emitter.EventPriority) {
     emitter.once({
       eventId: id,
       priority: priority ?? emitter.EventPriority.IMMEDIATE
@@ -43,7 +36,7 @@ export class EventBus {
    * 取消事件订阅
    * @param id 事件编号
    */
-  public unregister(id: number) {
+  public static unregister(id: number) {
     emitter.off(id)
   }
 
@@ -53,7 +46,7 @@ export class EventBus {
    * @param data  数据
    * @param priority 优先级，默认emitter.EventPriority.IMMEDIATE
    */
-  public post(id: number, data?: Object, priority?: emitter.EventPriority) {
+  public static post(id: number, data?: Object, priority?: emitter.EventPriority) {
     emitter.emit(
       {
         eventId: id,
@@ -68,7 +61,7 @@ export class EventBus {
    * 获取指定事件的订阅数
    * @param id 事件编号
    */
-  public getListenerCount(id: number): number {
+  public static getListenerCount(id: number): number {
     return emitter.getListenerCount(id)
   }
 }
