@@ -3,7 +3,6 @@ import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { TodoItemView } from '../../view/mvvm/TodoItemView'
 import { ApiManager } from '../../api/ApiManager'
-import { RouterGuide } from '../../config/RouterGuide'
 
 @Builder
 export function MvvmPageBuilder() {
@@ -25,9 +24,9 @@ export struct MvvmPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>("title")
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
-        this.vm.navVm.stack.pop()
+        this.vm.navVm.back()
       }
       this.vm.onReloadClick = () => {
         this.vm.showStatusLoading()

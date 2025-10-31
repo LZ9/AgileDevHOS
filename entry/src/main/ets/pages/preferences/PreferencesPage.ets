@@ -13,7 +13,6 @@ import {
 import { Constants } from '../../config/Constants'
 import { preferences } from '@kit.ArkData';
 import { LogListView } from '../../view/LogListView';
-import { RouterGuide } from '../../config/RouterGuide';
 import { CacheManager } from '../../tools/CacheManager';
 
 @Builder
@@ -38,12 +37,17 @@ export struct PreferencesPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>("title")
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
-        this.vm.navVm.stack.pop()
+        this.vm.navVm.back()
       }
       this.vm.showStatusCompleted()
     }
+  }
+
+  /** 清空日志 */
+  private cleanLog() {
+    this.logList = []
   }
 
   /** 保存文字 */
@@ -134,19 +138,38 @@ export struct PreferencesPage {
       })
   }
 
-
-  private cleanLog() {
-    this.logList = []
+  /** 清空所有数据 */
+  private clearAll() {
+    PreferencesUtils.get().clearSync()
   }
 
+  /** 开启全量订阅 */
+  private onChange() {
+    PreferencesUtils.get().onChange(this.onChangeCallback)
+  }
+
+  /** 关闭全量订阅 */
+  private offChange() {
+    PreferencesUtils.get().offChange(this.onChangeCallback)
+  }
 
   /** 数据变动key值回调 */
-  private mCallback: Callback<string> = (key: string) => {
+  private onChangeCallback: Callback<string> = (key: string) => {
     this.addLog(key + " 数据变动")
   }
 
+  /** 开启精确订阅 */
+  private onDataChange() {
+    PreferencesUtils.get().onDataChange(Constants.Preferences.USER_KEY, this.onDataChangeCallback)
+  }
+
+  /** 关闭精确订阅 */
+  private offDataChange() {
+    PreferencesUtils.get().offDataChange(Constants.Preferences.USER_KEY, this.onDataChangeCallback)
+  }
+
   /** 数据变动回调 */
-  private mDataCallback: Callback<Record<string, preferences.ValueType>> =
+  private onDataChangeCallback: Callback<Record<string, preferences.ValueType>> =
     (data: Record<string, preferences.ValueType>) => {
       const key = Object.keys(data)
       this.addLog(key[0] + " 数据变动，变动值为：" + data[key[0]])
@@ -273,70 +296,84 @@ export struct PreferencesPage {
           })
 
         //清空所有
-        Button($r('app.string.preferences_clean'))
+        Button($r('app.string.preferences_clean'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
           .onClick(() => {
-            PreferencesUtils.get().clearSync()
+            this.clearAll()
           })
       }
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
+      .margin({ top: 10 })
+      .padding({ left: 10, right: 10 })
 
-      Text($r('app.string.preferences_subscribe'))
-        .width(CoreConstants.LayoutParams.MATCH_PARENT)
-        .fontSize(14)
-        .textAlign(TextAlign.Start)
-        .padding({
-          left: 10,
-          right: 10,
-          top: 5,
-          bottom: 5
-        })
+
 
       Row() {
         //开启全量订阅
-        Button($r('app.string.preferences_change_on'))
+        Button($r('app.string.preferences_change_on'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ right: 10 })
           .onClick(() => {
-            PreferencesUtils.get().onChange(this.mCallback)
+            this.onChange()
           })
 
         //关闭全量订阅
-        Button($r('app.string.preferences_change_off'))
+        Button($r('app.string.preferences_change_off'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ left: 10 })
           .onClick(() => {
-            PreferencesUtils.get().offChange(this.mCallback)
+            this.offChange()
           })
       }
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
+      .margin({ top: 10 })
+      .padding({ left: 10, right: 10 })
 
       Row() {
         //开启精确订阅
-        Button($r('app.string.preferences_data_change_on'))
+        Button($r('app.string.preferences_data_change_on'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ right: 10 })
           .onClick(() => {
-            PreferencesUtils.get().onDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+            this.onDataChange()
           })
 
         //关闭精确订阅
-        Button($r('app.string.preferences_data_change_off'))
+        Button($r('app.string.preferences_data_change_off'), { type: ButtonType.Normal, stateEffect: true })
           .layoutWeight(1)
+          .borderRadius(8)
+          .fontColor(Color.White)
+          .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
           .fontSize(14)
-          .margin({ left: 5, right: 5 })
+          .margin({ left: 10 })
           .onClick(() => {
-            PreferencesUtils.get().offDataChange(Constants.Preferences.USER_KEY, this.mDataCallback)
+            this.offDataChange()
           })
       }
+      .width(CoreConstants.LayoutParams.MATCH_PARENT)
       .margin({ top: 10 })
+      .padding({ left: 10, right: 10 })
 
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
+
 
 }

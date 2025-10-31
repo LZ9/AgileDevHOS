@@ -39,9 +39,9 @@ export struct RefreshLoadPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>("title")
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
-        this.vm.navVm.stack.pop()
+        this.vm.navVm.back()
       }
 
       // 点击加载失败页重新加载

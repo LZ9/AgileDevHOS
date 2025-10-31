@@ -35,9 +35,10 @@ export struct SplashPage {
       })
   }
 
+  /** 跳转主页 */
   private goMain() {
     setTimeout(() => {
-      this.vm.stack.replacePathByName(RouterGuide.MainPage, undefined, false)
+      this.vm.replacePath(RouterGuide.MainPage, false)
     }, 1000) // 1秒后跳转
   }
 

@@ -1,4 +1,4 @@
-import { NavContainer } from '@lodz/pandora'
+import { CoreConstants, NavContainer } from '@lodz/pandora'
 import { RouterGuide } from '../../config/RouterGuide'
 
 /**
@@ -11,6 +11,10 @@ struct IndexPage {
   build() {
     Stack() {
       NavContainer({ pathName: RouterGuide.SplashPage })
+        .width(CoreConstants.LayoutParams.MATCH_PARENT)
+        .height(CoreConstants.LayoutParams.MATCH_PARENT)
     }
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
   }
 }

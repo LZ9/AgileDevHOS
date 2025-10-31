@@ -27,7 +27,7 @@ export struct EventBusDetailPage {
     this.vm.navVm.onAppear = () => {
       this.vm.titleBarViewVm.titleVm.title = $r('app.string.event_bus_detail_title')
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
-        this.vm.navVm.stack.pop()
+        this.vm.navVm.back()
       }
       this.vm.showStatusCompleted()
     }

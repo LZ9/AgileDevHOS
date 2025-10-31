@@ -11,17 +11,18 @@ export struct NavContainer {
   /** 启动页名称 */
   @Param @Require pathName: string
   /** 启动参数 */
-  @Param params ?: object = undefined
+  @Param params ?: string | number | boolean | Record<string, object> = undefined
   /** 是否展示动画 */
   @Param animated: boolean = false
 
   build() {
-    Navigation(this.vm.stack) {}
+    Navigation(this.vm.stack) {
+    }
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .hideNavBar(true)
     .onAppear(() => {
-      this.vm.stack.replacePathByName(this.pathName, this.params, this.animated)
+      this.vm.replacePathOpt(this.pathName, this.params, this.animated)
     })
   }
 }

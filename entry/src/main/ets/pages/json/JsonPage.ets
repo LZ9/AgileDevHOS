@@ -1,7 +1,6 @@
 import { BaseContainer, BaseContainerVm, CoreConstants, DateUtils, JsonUtils } from '@lodz/pandora'
 import { ResponseBean } from '../../bean/base/ResponseBean'
 import { StudentBean } from '../../bean/json/StudentBean'
-import { RouterGuide } from '../../config/RouterGuide'
 import { LogListView } from '../../view/LogListView'
 
 @Builder
@@ -25,9 +24,9 @@ export struct JsonPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = RouterGuide.getParamsValue<string>("title", this.vm.navVm.pathInfo)
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>("title")
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
-        this.vm.navVm.stack.pop()
+        this.vm.navVm.back()
       }
       this.vm.showStatusCompleted()
     }

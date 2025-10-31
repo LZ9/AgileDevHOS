@@ -145,7 +145,7 @@ export struct MainPage {
                   .padding(10)
                   .onClick(() => {
                     const params: Record<string, Object> = { 'title': item.getTitleName(this.getUIContext().getHostContext()) }
-                    this.vm.navVm.stack.pushPathByName(item.getPage(), params)
+                    this.vm.navVm.pushPathOpt(item.getPage(), params)
                   })
               }
             }, (bean: MainBean) => bean.id)

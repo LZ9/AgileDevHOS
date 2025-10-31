@@ -118,5 +118,7 @@ export namespace CoreConstants {
   export namespace LayoutParams {
     /** 100%充满 */
     export const MATCH_PARENT = '100%'
+    /** 50%充满 */
+    export const HALF_PARENT = '50%'
   }
 }
