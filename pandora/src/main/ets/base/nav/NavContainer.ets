@@ -13,7 +13,7 @@ export struct NavContainer {
   /** 启动参数 */
   @Param params ?: string | number | boolean | Record<string, object> = undefined
   /** 是否展示动画 */
-  @Param animated: boolean = false
+  @Param animated?: boolean = undefined
 
   build() {
     Navigation(this.vm.stack) {

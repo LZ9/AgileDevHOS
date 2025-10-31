@@ -38,7 +38,7 @@ export struct SplashPage {
   /** 跳转主页 */
   private goMain() {
     setTimeout(() => {
-      this.vm.replacePath(RouterGuide.MainPage, false)
+      this.vm.replacePath(RouterGuide.MainPage)
     }, 1000) // 1秒后跳转
   }
 
