@@ -12,9 +12,39 @@ export class JsonUtils {
    * @param options 解析选项
    * @returns
    */
-  public static jsonToBean<T>(json: string, reviver?: JSON.Transformer, options?: JSON.ParseOptions): T | null {
+  public static jsonToBean<T>(json: string | undefined | null, reviver?: JSON.Transformer, options?: JSON.ParseOptions): T | null {
+    if (json === undefined || json === null || json.length === 0) {
+      return null
+    }
     const bean = JSON.parse(json, reviver, options)
     return bean !== null ? bean as T : null
+  }
+
+  /**
+   * 对象转json进行字段筛选
+   * @param bean 对象
+   * @param filter 筛选字段，例如：["msg", "code"]
+   */
+  public static beanToJsonFilter(bean: Object | undefined | null, filter: (number | string)[] | null): string {
+    return JsonUtils.beanToJson(bean, filter)
+  }
+
+  /**
+   * 对象转json进行数据转换
+   * @param bean 对象
+   * @param transformer 转换器
+   */
+  public static beanToJsonTransformer(bean: Object | undefined | null, transformer: JSON.Transformer): string {
+    return JsonUtils.beanToJson(bean, undefined, transformer)
+  }
+
+  /**
+   * 对象转json进行格式化
+   * @param bean 对象
+   * @param space 格式化空格，例如：'  '
+   */
+  public static beanToJsonForm(bean: Object | undefined | null, space: string | number): string {
+    return JsonUtils.beanToJson(bean, undefined, undefined, space)
   }
 
   /**
@@ -42,7 +72,10 @@ export class JsonUtils {
    * @param bean 对象
    * @param property 字段名称
    */
-  public static has(bean: object, property: string): boolean {
+  public static has(bean: object | undefined | null, property: string): boolean {
+    if (bean === undefined || bean === null) {
+      return false
+    }
     return JSON.has(bean, property)
   }
 
@@ -51,7 +84,10 @@ export class JsonUtils {
    * @param bean 对象
    * @param property 字段名称
    */
-  public static remove(bean: object, property: string) {
+  public static remove(bean: object | undefined | null, property: string) {
+    if (bean === undefined || bean === null) {
+      return
+    }
     JSON.remove(bean, property)
   }
 

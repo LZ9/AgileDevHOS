@@ -50,7 +50,7 @@ export class ResponseBean<T> extends ResponseContract {
    * @param data 数据
    * @param msg 提示信息
    */
-  public static createSuccess<T>(data?: T, msg: string = "成功"): ResponseBean<T> {
+  public static createSuccess<T>(data?: T, msg: string = "调用成功"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
     responseBean.code = ResponseBean.SUCCESS
     responseBean.msg = msg
@@ -62,7 +62,7 @@ export class ResponseBean<T> extends ResponseContract {
    * 创建返回失败的数据实体
    * @param msg 提示信息
    */
-  public static createFail<T>(msg: string = "失败"): ResponseBean<T> {
+  public static createFail<T>(msg: string = "调用失败"): ResponseBean<T> {
     const responseBean = new ResponseBean<T>()
     responseBean.code = ResponseBean.Fail
     responseBean.msg = msg

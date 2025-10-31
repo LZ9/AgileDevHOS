@@ -133,7 +133,7 @@ export struct PromisePage {
    * @param text 日志
    */
   public addLog(text: string) {
-    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " ---> " + text)
+    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_8) + " ---> " + text)
   }
 
   build() {
@@ -161,7 +161,7 @@ export struct PromisePage {
 
     Toggle({ type: ToggleType.Switch, isOn: true })
       .selectedColor($r('app.color.color_007DFF'))
-      .switchPointColor($r('app.color.color_FFFFFF'))
+      .switchPointColor(Color.White)
       .onChange((isOn: boolean) => {
         this.isRequestSuccess = isOn
       })
@@ -183,7 +183,7 @@ export struct PromisePage {
       Line()
         .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
-        .backgroundColor(Color.Grey)
+        .backgroundColor($r('app.color.color_D9D9D9'))
 
       Row() {
         Button($r('app.string.promise_request_normal'))

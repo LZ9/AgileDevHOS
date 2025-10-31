@@ -5,10 +5,6 @@
       "value": "#FFFFFF"
     },
     {
-      "name": "color_FFFFFF",
-      "value": "#FFFFFF"
-    },
-    {
       "name": "color_00A0E9",
       "value": "#00A0E9"
     },
@@ -55,6 +51,10 @@
     {
       "name": "color_464646",
       "value": "#464646"
+    },
+    {
+      "name": "color_D9D9D9",
+      "value": "#D9D9D9"
     }
   ]
 }

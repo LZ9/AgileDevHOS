@@ -178,7 +178,6 @@ export struct RefreshLoadPage {
     .height("100%")
     .onScrollIndex(this.vm.loadMoreAgent.scrollIndexListener)
     .scrollBar(BarState.Off)
-    // 开启边缘滑动效果。
     .edgeEffect(EdgeEffect.None)
   }
 

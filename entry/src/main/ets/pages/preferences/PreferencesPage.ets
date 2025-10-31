@@ -180,7 +180,7 @@ export struct PreferencesPage {
    * @param text 日志
    */
   public addLog(text: string) {
-    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_1) + " ---> " + text)
+    this.logList.push(DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_8) + " ---> " + text)
   }
 
   build() {
@@ -203,7 +203,7 @@ export struct PreferencesPage {
       Line()
         .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .height(1)
-        .backgroundColor(Color.Grey)
+        .backgroundColor($r('app.color.color_D9D9D9'))
 
       // 值输入框
       Row() {
