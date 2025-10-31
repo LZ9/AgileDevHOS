@@ -12,4 +12,13 @@ export class RecordData<V> {
     this.key = key
     this.value = value
   }
+
+  /**
+   * 创建键值对象
+   * @param key 键
+   * @param value 值
+   */
+  public static create<V>(key: string | number, value: V): RecordData<V> {
+    return new RecordData(key, value)
+  }
 }

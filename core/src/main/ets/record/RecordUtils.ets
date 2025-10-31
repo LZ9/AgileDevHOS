@@ -13,7 +13,7 @@ export class RecordUtils {
   public static transformData<V>(record: Record<string | number, V>): RecordData<V>[] {
     const data: RecordData<V>[] = []
     Object.keys(record).forEach((key: string | number) => {
-      data.push(new RecordData(key, record[key]))
+      data.push(RecordData.create<V>(key, record[key]))
     })
     return data
   }
