@@ -1,4 +1,6 @@
-import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, PrintLog, RandomUtils } from '@lodz/pandora'
+import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, PrintLog, RandomUtils,
+  ResourceUtils,
+  SelectorModifier } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
@@ -50,6 +52,31 @@ export struct ComponentV2Page {
 
   @Builder
   contentComponent() {
+    Column() {
+      Button($r('app.string.component_v2_local'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.component_v2_local')))
+        })
+    }
+    .width(CoreConstants.LayoutParams.MATCH_PARENT)
+    .height(CoreConstants.LayoutParams.MATCH_PARENT)
+    .padding(10)
+    .alignItems(HorizontalAlign.Start)
+
+
+
+
+
+
+
+
+
+
+
     Scroll() {
       Column() {
         Row() {
@@ -79,9 +106,10 @@ export struct ComponentV2Page {
         ChildOnce({ n: this.count })
         ChildParam({ n: this.count })
         ChildObserved()
-        ChildLocal()
+
       }
     }
+    .visibility(Visibility.None)
   }
 }
 
@@ -327,32 +355,6 @@ export struct ChildObserved {
         this.aar[1].name = `王五${RandomUtils.getInt(1, 10)}`
       })
       Text(`------------- @ObservedV2 --------------`)
-    }
-    .margin(10)
-  }
-}
-
-@ComponentV2
-export struct ChildLocal {
-  // 不允许外部传入参数
-  @Local aar: Array<UserType> = [
-    new UserType(0, "Beijing"),
-    new UserType(1, "Shanghai")
-  ]
-
-  build() {
-    Column() {
-      Text(`-------------- @Local ---------------`)
-      Text(`json : ${JsonUtils.beanToJson(this.aar)}`)//UI会跟着变化
-
-      ForEach(this.aar, (item: UserType) => {
-        Text(`${item.code} --- ${item.city}`)
-      })
-      Button("修改").onClick(() => {
-        this.aar[0].code = -1
-        this.aar[1] = new UserType(5, "Nanjing")
-      })
-      Text(`-------------- @Local ---------------`)
     }
     .margin(10)
   }

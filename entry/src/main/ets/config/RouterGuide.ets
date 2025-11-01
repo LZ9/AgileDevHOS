@@ -9,6 +9,8 @@ export class RouterGuide {
   public static readonly MainPage = 'MainPage'
   /** ComponentV2装饰器用例 */
   public static readonly ComponentV2Page = 'ComponentV2Page'
+  /** Local注解Demo类 */
+  public static readonly LocalDemoPage = 'LocalDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */

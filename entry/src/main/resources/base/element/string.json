@@ -141,6 +141,10 @@
       "value": "ComponentV2测试类"
     },
     {
+      "name": "component_v2_local",
+      "value": "@Local使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },
