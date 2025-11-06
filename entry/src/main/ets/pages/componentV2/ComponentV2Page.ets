@@ -39,11 +39,6 @@ export struct ComponentV2Page {
     }
   }
 
-  /** 更新计数器事件函数 */
-  private updateCountEvent(i: number) {
-    this.count = this.count + i
-  }
-
   build() {
     Stack() {
       BaseContainer({
@@ -102,7 +97,16 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ParamOnceDemoPage, $r('app.string.componentV2_param_once'))
         })
 
-
+      // @Param搭配@Event注解使用
+      Button($r('app.string.componentV2_param_event'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ParamEventDemoPage, $r('app.string.componentV2_param_event'))
+        })
 
 
     }
@@ -132,12 +136,6 @@ export struct ComponentV2Page {
         ChildMonitor()
         ChildComputed()
         ChildProvider()
-        ChildEvent({
-          n: this.count,
-          updateCountListener: (i: number) => {
-            this.updateCountEvent(i)
-          }
-        })
 
       }
     }
@@ -312,27 +310,6 @@ export struct ChildConsumer {
   }
 }
 
-@ComponentV2
-export struct ChildEvent {
-  @Param n: number = -1
-  //定义一个函数来通知外部操作父组件的数据变化，从而使子组件的数据可以被更新
-  @Event updateCountListener: (i: number) => void = () => {
-  }
-  // 随机数 1- 9
-  @Local i: number = RandomUtils.getInt(1, 10)
-
-  build() {
-    Column() {
-      Text(`------------- @Event --------------`)
-      Text(`子组件n的值 : ${this.n}`)
-      Button(`增加随机值 ${this.i}`).onClick(() => {
-        this.updateCountListener(this.i)
-      })
-      Text(`------------- @Event --------------`)
-    }
-    .margin(10)
-  }
-}
 
 
 

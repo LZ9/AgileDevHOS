@@ -19,8 +19,6 @@ export class UserTypeObserved {
 
   @Monitor(`id`,`name`)
   handle(monitor: IMonitor) {
-    if (this.onFieldChangedListener !== undefined) {
-      this.onFieldChangedListener(monitor)
-    }
+    this.onFieldChangedListener?.(monitor)
   }
 }

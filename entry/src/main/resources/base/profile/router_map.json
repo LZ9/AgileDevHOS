@@ -36,6 +36,11 @@
       "buildFunction": "ParamOnceDemoPageBuilder"
     },
     {
+      "name": "ParamEventDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/ParamEventDemoPage.ets",
+      "buildFunction": "ParamEventDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

@@ -157,6 +157,10 @@
       "value": "@Param搭配@Once注解使用"
     },
     {
+      "name": "componentV2_param_event",
+      "value": "@Param搭配@Event注解使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },

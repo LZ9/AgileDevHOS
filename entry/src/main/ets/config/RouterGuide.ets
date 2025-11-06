@@ -17,6 +17,8 @@ export class RouterGuide {
   public static readonly ParamRequireDemoPage = 'ParamRequireDemoPage'
   /** Param搭配Once注解Demo类 */
   public static readonly ParamOnceDemoPage = 'ParamOnceDemoPage'
+  /** Param搭配Event注解Demo类 */
+  public static readonly ParamEventDemoPage = 'ParamEventDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */
