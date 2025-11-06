@@ -41,6 +41,11 @@
       "buildFunction": "ParamEventDemoPageBuilder"
     },
     {
+      "name": "DoubleBindDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/DoubleBindDemoPage.ets",
+      "buildFunction": "DoubleBindDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

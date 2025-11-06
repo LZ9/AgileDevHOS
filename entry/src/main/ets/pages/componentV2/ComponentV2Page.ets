@@ -108,6 +108,16 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ParamEventDemoPage, $r('app.string.componentV2_param_event'))
         })
 
+      // 双向绑定使用
+      Button($r('app.string.componentV2_double_bind'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.DoubleBindDemoPage, $r('app.string.componentV2_double_bind'))
+        })
 
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
@@ -132,7 +142,7 @@ export struct ComponentV2Page {
 
 
         ChildMakeObserved()
-        ChildBind({ num: this.count!! }) //通过双感叹号实现自定义双向绑定
+
         ChildMonitor()
         ChildComputed()
         ChildProvider()
@@ -167,30 +177,7 @@ export struct ChildMakeObserved {
   }
 }
 
-@ComponentV2
-export struct ChildBind {
-  @Local msgSys: string = "系统控件双向绑定"
-  @Param num: number = 500
-  @Event $num: (value: number) => void = () => {
-  }
 
-  build() {
-    Column() {
-      Text(`------------- @Bind --------------`)
-      //系统组件自带的双向同步
-      Text(this.msgSys)
-      TextInput({ text: $$this.msgSys })
-
-      //实现自定义子组件的数据双向绑定
-      Text(this.num.toString())
-      Button("修改num").onClick(() => {
-        this.$num(this.num + 3)
-      })
-      Text(`------------- @Bind --------------`)
-    }
-    .margin(10)
-  }
-}
 
 @ComponentV2
 export struct ChildMonitor {
