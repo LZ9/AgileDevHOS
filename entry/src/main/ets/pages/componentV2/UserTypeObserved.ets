@@ -7,18 +7,20 @@ import { Constants } from "../../config/Constants";
  */
 @ObservedV2
 export class UserTypeObserved {
-  @Trace id: number
-  @Trace name: string
+  @Trace public id: number
+  @Trace public name: string
+  public onFieldChangedListener?: (monitor: IMonitor) => void
 
-  constructor(id: number, name: string) {
-    this.id = id;
-    this.name = name;
+  constructor(id: number, name: string, listener?: (monitor: IMonitor) => void) {
+    this.id = id
+    this.name = name
+    this.onFieldChangedListener = listener
   }
 
   @Monitor(`id`,`name`)
   handle(monitor: IMonitor) {
-    PrintLog.i(Constants.Log.TAG, "被修改的变量名称 : " + monitor.value()?.path)
-    PrintLog.i(Constants.Log.TAG, "被修改的变量之前的值 : " + monitor.value()?.before)
-    PrintLog.i(Constants.Log.TAG, "被修改的变量现在的值 : " + monitor.value()?.now)
+    if (this.onFieldChangedListener !== undefined) {
+      this.onFieldChangedListener(monitor)
+    }
   }
 }

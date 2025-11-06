@@ -21,6 +21,11 @@
       "buildFunction": "LocalDemoPageBuilder"
     },
     {
+      "name": "ObservedV2DemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/ObservedV2DemoPage.ets",
+      "buildFunction": "ObservedV2DemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

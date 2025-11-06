@@ -11,6 +11,8 @@ export class RouterGuide {
   public static readonly ComponentV2Page = 'ComponentV2Page'
   /** Local注解Demo类 */
   public static readonly LocalDemoPage = 'LocalDemoPage'
+  /** ObservedV2注解Demo类 */
+  public static readonly ObservedV2DemoPage = 'ObservedV2DemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */

@@ -49,38 +49,28 @@ export struct LocalDemoPage {
 @ComponentV2
 export struct ChildLocal {
   // 不允许外部传入参数
-  @Local aar: Array<UserType> = [
-    new UserType(0, "Beijing"),
-    new UserType(1, "Shanghai")
-  ]
+  @Local count: number = 1
 
   build() {
     Column() {
-      Text(`@Local aar: Array<UserType>`)
+      Text(`@Local count: number`)
         .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .fontColor($r('app.color.color_F0F0F0'))
         .backgroundColor(Color.Gray)
         .padding(10)
 
-      Text(`列表的json字符串：${JsonUtils.beanToJson(this.aar)}`)//UI会跟着变化
+      Text(`数字count：${this.count}`)//UI会跟着变化
         .width(CoreConstants.LayoutParams.MATCH_PARENT)
         .padding({ left: 10, right: 10 })
         .margin({ top: 20, bottom: 20 })
-
-      Text(`遍历列表：`)
-      ForEach(this.aar, (item: UserType) => {
-        Text(`code：${item.code} ； city：${item.city}`)
-      })
 
       Button('修改数据', { type: ButtonType.Normal, stateEffect: true })
         .borderRadius(8)
         .fontColor(Color.White)
         .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
         .fontSize(14)
-        .margin({ top: 20 })
         .onClick(() => {
-          this.aar[0].code = RandomUtils.getInt(10, 20)
-          this.aar[1] = new UserType(RandomUtils.getInt(20, 30), "Nanjing")
+          this.count++
         })
 
       Text(`修改数据UI会跟着变化`)

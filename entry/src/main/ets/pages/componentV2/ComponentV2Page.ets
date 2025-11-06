@@ -1,5 +1,12 @@
-import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, PrintLog, RandomUtils,
-  SelectorModifier } from '@lodz/pandora'
+import {
+  BaseContainer,
+  BaseContainerVm,
+  CoreConstants,
+  JsonUtils,
+  PrintLog,
+  RandomUtils,
+  SelectorModifier
+} from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
 import { UserTypeObserved } from './UserTypeObserved'
@@ -18,7 +25,6 @@ export function ComponentV2PageBuilder() {
 @ComponentV2
 export struct ComponentV2Page {
   @Local vm: BaseContainerVm = new BaseContainerVm()
-
   // 该变量要传递到子组件的子组件中（ChildConsumer）
   @Provider() count: number = 1
 
@@ -52,28 +58,29 @@ export struct ComponentV2Page {
   @Builder
   contentComponent() {
     Column() {
-      Button($r('app.string.component_v2_local'), { type: ButtonType.Normal, stateEffect: true })
+      Button($r('app.string.componentV2_local'), { type: ButtonType.Normal, stateEffect: true })
         .borderRadius(8)
         .fontColor(Color.White)
         .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
         .fontSize(14)
         .onClick(() => {
-          this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, $r('app.string.component_v2_local'))
+          this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, $r('app.string.componentV2_local'))
+        })
+
+      Button($r('app.string.componentV2_observedV2'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ObservedV2DemoPage, $r('app.string.componentV2_observedV2'))
         })
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .padding(10)
     .alignItems(HorizontalAlign.Start)
-
-
-
-
-
-
-
-
-
 
 
     Scroll() {
@@ -92,7 +99,7 @@ export struct ComponentV2Page {
 
 
         ChildMakeObserved()
-        ChildBind({num: this.count!!})//通过双感叹号实现自定义双向绑定
+        ChildBind({ num: this.count!! }) //通过双感叹号实现自定义双向绑定
         ChildMonitor()
         ChildComputed()
         ChildProvider()
@@ -104,7 +111,6 @@ export struct ComponentV2Page {
         })
         ChildOnce({ n: this.count })
         ChildParam({ n: this.count })
-        ChildObserved()
 
       }
     }
@@ -113,10 +119,8 @@ export struct ComponentV2Page {
 }
 
 
-
 @ComponentV2
 export struct ChildMakeObserved {
-
   @Local user: UserType = new UserType(1, "张三")
 
   build() {
@@ -124,7 +128,7 @@ export struct ChildMakeObserved {
       Text(`------------- @MakeObserved --------------`)
       Button("从服务端获取用户数据").onClick(() => {
         const result = `{"code":123,"city":"Chengdu"}`
-        this.user = UIUtils.makeObserved<UserType>(JsonUtils.jsonToBean(result))//会自动把对象转为可观测，不用再使用@ObservedV2和@Trace
+        this.user = UIUtils.makeObserved<UserType>(JsonUtils.jsonToBean(result)) //会自动把对象转为可观测，不用再使用@ObservedV2和@Trace
       })
       Text(`json : ${JsonUtils.beanToJson(this.user)}`)
       Text(`user.code : ${this.user.code}`)
@@ -142,14 +146,15 @@ export struct ChildMakeObserved {
 export struct ChildBind {
   @Local msgSys: string = "系统控件双向绑定"
   @Param num: number = 500
-  @Event $num: (value: number) => void = () => {}
+  @Event $num: (value: number) => void = () => {
+  }
 
   build() {
     Column() {
       Text(`------------- @Bind --------------`)
       //系统组件自带的双向同步
       Text(this.msgSys)
-      TextInput({text: $$this.msgSys})
+      TextInput({ text: $$this.msgSys })
 
       //实现自定义子组件的数据双向绑定
       Text(this.num.toString())
@@ -183,7 +188,7 @@ export struct ChildMonitor {
       Text(`count : ${this.count}`)
       Text(`foo : ${this.foo}`)
       Text(`user : ${this.user.id} , ${this.user.name}`)
-      Row(){
+      Row() {
         Button("修改count").onClick(() => {
           this.count++
         })
@@ -191,7 +196,8 @@ export struct ChildMonitor {
           this.foo = !this.foo
         })
       }
-      Row(){
+
+      Row() {
         Button("修改user.id").onClick(() => {
           this.user.id++
         })
@@ -199,6 +205,7 @@ export struct ChildMonitor {
           this.user.name = `李四${RandomUtils.getInt(1, 10)}`
         })
       }
+
       Text(`------------- @Computed --------------`)
     }
     .margin(10)
@@ -232,7 +239,6 @@ export struct ChildComputed {
 @ComponentV2
 export struct ChildProvider {
   @Local msg: string = "我是ChildProvider组件"
-
   // 自定义传入子组件的名称（需要和子组件内变量的名称一致）
   @Provider(`index`) num: number = 1
 
@@ -260,7 +266,6 @@ export struct ChildConsumer {
   @Consumer() count: number = 100
   @Consumer() index: number = -1
 
-
   build() {
     Column() {
       Text(`---------- @Consumer -----------`)
@@ -284,10 +289,10 @@ export struct ChildConsumer {
 export struct ChildEvent {
   @Param n: number = -1
   //定义一个函数来通知外部操作父组件的数据变化，从而使子组件的数据可以被更新
-  @Event updateCountListener: (i: number) => void = () => {}
-
+  @Event updateCountListener: (i: number) => void = () => {
+  }
   // 随机数 1- 9
-  @Local i : number = RandomUtils.getInt(1, 10)
+  @Local i: number = RandomUtils.getInt(1, 10)
 
   build() {
     Column() {
@@ -306,6 +311,7 @@ export struct ChildEvent {
 export struct ChildOnce {
   // 该字段只能被外部赋值1次，并且允许内部修改该字段的值，且修改后的数据不会同步回父组件
   @Param @Once n: number = -1
+
   build() {
     Column() {
       Text(`------------- @Once --------------`)
@@ -323,6 +329,7 @@ export struct ChildOnce {
 export struct ChildParam {
   // 只允许外部传入数据，内部不能进行修改
   @Param n: number = -1
+
   build() {
     Column() {
       Text(`------------- @Param --------------`)
@@ -333,28 +340,3 @@ export struct ChildParam {
   }
 }
 
-@ComponentV2
-export struct ChildObserved {
-  // 类里面使用@ObservedV2和@Trace注解可以监听字段数据变化
-  @Local aar: Array<UserTypeObserved> = [
-    new UserTypeObserved(1, "张三"),
-    new UserTypeObserved(2, "李四")
-  ]
-
-  build() {
-    Column() {
-      Text(`------------- @ObservedV2 --------------`)
-      Text(`json : ${JsonUtils.beanToJson(this.aar)}`)
-      ForEach(this.aar, (item: UserTypeObserved) => {
-        Text(`${item.id} --- ${item.name}`)
-      })
-
-      Button("修改").onClick(() => {
-        this.aar[0].id = RandomUtils.getInt(100, 501)
-        this.aar[1].name = `王五${RandomUtils.getInt(1, 10)}`
-      })
-      Text(`------------- @ObservedV2 --------------`)
-    }
-    .margin(10)
-  }
-}
