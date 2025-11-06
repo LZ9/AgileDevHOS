@@ -13,7 +13,6 @@ import { ApiManager } from '../../api/ApiManager'
 import { ActivityListBean } from '../../bean/api/ActivityListBean'
 import { ResponseData } from '../../bean/api/ResponseData'
 import { ResponseBean } from '../../bean/base/ResponseBean'
-import { TodoBean } from '../../bean/mvvm/TodoBean'
 import { LogListView } from '../../view/LogListView'
 
 @Builder
@@ -58,17 +57,17 @@ export struct PromisePage {
   /** 请求代办列表 */
   private requestNormal() {
     this.vm.showStatusLoading()
-    this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
-      .then(() => ApiManager.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
+    this.disposable = PromiseAgent.create<ResponseBean<string>>()
+      .then(() => ApiManager.create().getLocalResult(this.isRequestSuccess))
       .subscribe({
         onSubscribe: () => {
           this.vm.showStatusLoading()
         },
-        onNext: (responseBean: ResponseBean<Array<TodoBean>>) => {
+        onNext: (responseBean: ResponseBean<string>) => {
           this.addLog(JsonUtils.beanToJson(responseBean))
           this.vm.showStatusCompleted()
         },
-        onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
+        onError: (e: DataError<ResponseBean<string>>) => {
           PromptUtils.toastShort(this.getUIContext(), e.getTips())
           this.vm.showStatusError()
         }
@@ -77,14 +76,14 @@ export struct PromisePage {
 
   /** 请求代办列表（加载框） */
   private requestProgress() {
-    this.disposable = PromiseAgent.create<ResponseBean<Array<TodoBean>>>()
-      .then(() => ApiManager.create().getTodoList(this.getUIContext().getHostContext(), this.isRequestSuccess))
+    this.disposable = PromiseAgent.create<ResponseBean<string>>()
+      .then(() => ApiManager.create().getLocalResult(this.isRequestSuccess))
       .subscribePgDef(this.getUIContext(),
         {
-          onNext: (responseBean: ResponseBean<Array<TodoBean>>) => {
+          onNext: (responseBean: ResponseBean<string>) => {
             this.addLog(JsonUtils.beanToJson(responseBean))
           },
-          onError: (e: DataError<ResponseBean<Array<TodoBean>>>) => {
+          onError: (e: DataError<ResponseBean<string>>) => {
             PromptUtils.toastShort(this.getUIContext(), e.getTips())
           }
         }

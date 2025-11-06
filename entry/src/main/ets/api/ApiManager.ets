@@ -1,6 +1,5 @@
-import { FileUtils, JsonUtils, ResourceUtils, StringUtils } from "@lodz/pandora";
+import { CoreConstants, DateUtils, FileUtils, JsonUtils, StringUtils } from "@lodz/pandora";
 import { ResponseBean } from "../bean/base/ResponseBean";
-import { TodoBean } from "../bean/mvvm/TodoBean";
 import rcp from "@hms.collaboration.rcp";
 import { FileManager } from "../tools/FileManager";
 import { fileIo } from "@kit.CoreFileKit";
@@ -24,31 +23,18 @@ export class ApiManager {
   }
 
   /**
-   * 获取待办列表
-   * @param context 上下文
+   * 获取本地数据
    * @param isSuccess 是否成功返回数据
    */
-  public getTodoList(context: Context | undefined, isSuccess: boolean = true): Promise<ResponseBean<Array<TodoBean>>> {
-    return new Promise<ResponseBean<Array<TodoBean>>>((resolve, reject) => {
+  public getLocalResult(isSuccess: boolean = true): Promise<ResponseBean<string>> {
+    return new Promise<ResponseBean<string>>((resolve, reject) => {
       setTimeout(() => {
-        try {
-          const json = ResourceUtils.getRawFileContentStrSync(context, 'DefaultTodoTasks.json')
-          if (!isSuccess || json === null) {
-            reject(new Error("获取本地数据失败"))
-            return
-          }
-          const list = JsonUtils.jsonToBean<Array<TodoBean>>(json)
-          const responseBean = new ResponseBean<Array<TodoBean>>()
-          responseBean.code = list === null ? ResponseBean.Fail : ResponseBean.SUCCESS
-          responseBean.data = list
-          responseBean.msg = list === null ? "数据解析错误" : "获取成功"
-          resolve(responseBean)
-        } catch (e) {
-          if (e instanceof Error) {
-            reject(e)
-          }
-        }
-      }, 2000)
+        const responseBean = new ResponseBean<string>()
+        responseBean.code = isSuccess ? ResponseBean.SUCCESS : ResponseBean.Fail
+        responseBean.data = isSuccess ? DateUtils.getCurrentFormatString(CoreConstants.DateFormat.TYPE_10) : ""
+        responseBean.msg = isSuccess ? "获取成功" : "数据解析错误"
+        resolve(responseBean)
+      }, 1500)
     })
   }
 

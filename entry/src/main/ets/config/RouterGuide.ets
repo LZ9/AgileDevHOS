@@ -31,8 +31,6 @@ export class RouterGuide {
   public static readonly MakeObservedDemoPage = 'MakeObservedDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
-  /** mvvm用例页面 */
-  public static readonly MvvmPage = 'MvvmPage'
   /** Preferences测试类 */
   public static readonly PreferencesPage = 'PreferencesPage'
   /** Promise测试类 */

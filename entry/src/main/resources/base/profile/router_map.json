@@ -71,11 +71,6 @@
       "buildFunction": "JsonPageBuilder"
     },
     {
-      "name": "MvvmPage",
-      "pageSourceFile": "src/main/ets/pages/mvvm/MvvmPage.ets",
-      "buildFunction": "MvvmPageBuilder"
-    },
-    {
       "name": "PreferencesPage",
       "pageSourceFile": "src/main/ets/pages/preferences/PreferencesPage.ets",
       "buildFunction": "PreferencesPageBuilder"
