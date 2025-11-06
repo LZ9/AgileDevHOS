@@ -58,6 +58,8 @@ export struct ComponentV2Page {
   @Builder
   contentComponent() {
     Column() {
+
+      // @Local注解使用
       Button($r('app.string.componentV2_local'), { type: ButtonType.Normal, stateEffect: true })
         .borderRadius(8)
         .fontColor(Color.White)
@@ -67,6 +69,7 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, $r('app.string.componentV2_local'))
         })
 
+      // @ObservedV2注解使用
       Button($r('app.string.componentV2_observedV2'), { type: ButtonType.Normal, stateEffect: true })
         .borderRadius(8)
         .fontColor(Color.White)
@@ -76,6 +79,20 @@ export struct ComponentV2Page {
         .onClick(() => {
           this.vm.navVm.pushPathOpt(RouterGuide.ObservedV2DemoPage, $r('app.string.componentV2_observedV2'))
         })
+
+      // @Param注解使用
+      Button($r('app.string.componentV2_param'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ParamDemoPage, $r('app.string.componentV2_param'))
+        })
+
+
+
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
@@ -110,8 +127,6 @@ export struct ComponentV2Page {
           }
         })
         ChildOnce({ n: this.count })
-        ChildParam({ n: this.count })
-
       }
     }
     .visibility(Visibility.None)
@@ -325,18 +340,5 @@ export struct ChildOnce {
   }
 }
 
-@ComponentV2
-export struct ChildParam {
-  // 只允许外部传入数据，内部不能进行修改
-  @Param n: number = -1
 
-  build() {
-    Column() {
-      Text(`------------- @Param --------------`)
-      Text(`子组件n的值 : ${this.n}`)
-      Text(`------------- @Param --------------`)
-    }
-    .margin(10)
-  }
-}
 

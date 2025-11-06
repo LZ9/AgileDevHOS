@@ -26,6 +26,11 @@
       "buildFunction": "ObservedV2DemoPageBuilder"
     },
     {
+      "name": "ParamDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/ParamDemoPage.ets",
+      "buildFunction": "ParamDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

@@ -13,6 +13,8 @@ export class RouterGuide {
   public static readonly LocalDemoPage = 'LocalDemoPage'
   /** ObservedV2注解Demo类 */
   public static readonly ObservedV2DemoPage = 'ObservedV2DemoPage'
+  /** Param注解Demo类 */
+  public static readonly ParamDemoPage = 'ParamDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */

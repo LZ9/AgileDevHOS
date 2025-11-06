@@ -142,11 +142,15 @@
     },
     {
       "name": "componentV2_local",
-      "value": "@Local使用"
+      "value": "@Local注解使用"
     },
     {
       "name": "componentV2_observedV2",
-      "value": "@ObservedV2使用"
+      "value": "@ObservedV2注解使用"
+    },
+    {
+      "name": "componentV2_param",
+      "value": "@Param注解使用"
     },
     {
       "name": "promise_title",
