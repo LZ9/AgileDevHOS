@@ -27,6 +27,8 @@ export class RouterGuide {
   public static readonly ComputedDemoPage = 'ComputedDemoPage'
   /** Monitor注解Demo类 */
   public static readonly MonitorDemoPage = 'MonitorDemoPage'
+  /** 可观察对象转换Demo类 */
+  public static readonly MakeObservedDemoPage = 'MakeObservedDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */

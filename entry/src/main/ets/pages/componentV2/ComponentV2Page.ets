@@ -2,15 +2,8 @@ import {
   BaseContainer,
   BaseContainerVm,
   CoreConstants,
-  JsonUtils,
-  PrintLog,
-  RandomUtils,
   SelectorModifier
 } from '@lodz/pandora'
-import { Constants } from '../../config/Constants'
-import { UserType } from './UserType'
-import { UserTypeObserved } from './UserTypeObserved'
-import { UIUtils } from '@kit.ArkUI'
 import { RouterGuide } from '../../config/RouterGuide'
 
 @Builder
@@ -152,62 +145,24 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.MonitorDemoPage, $r('app.string.componentV2_monitor'))
         })
 
-
-
+      // 可观察对象转换使用
+      Button($r('app.string.componentV2_make_observed'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.MakeObservedDemoPage, $r('app.string.componentV2_make_observed'))
+        })
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
     .padding(10)
     .alignItems(HorizontalAlign.Start)
-
-
-    Scroll() {
-      Column() {
-        Row() {
-          Button("count增加")
-            .margin({ left: 10, right: 10 })
-            .onClick(() => {
-              this.count++
-            })
-
-          Text(`父组件count的值 : ${this.count}`)
-            .margin({ left: 10, right: 10 })
-        }
-        .width(CoreConstants.LayoutParams.MATCH_PARENT)
-
-
-        ChildMakeObserved()
-
-
-      }
-    }
-    .visibility(Visibility.None)
   }
 }
 
-
-@ComponentV2
-export struct ChildMakeObserved {
-  @Local user: UserType = new UserType(1, "张三")
-
-  build() {
-    Column() {
-      Text(`------------- @MakeObserved --------------`)
-      Button("从服务端获取用户数据").onClick(() => {
-        const result = `{"code":123,"city":"Chengdu"}`
-        this.user = UIUtils.makeObserved<UserType>(JsonUtils.jsonToBean(result)) //会自动把对象转为可观测，不用再使用@ObservedV2和@Trace
-      })
-      Text(`json : ${JsonUtils.beanToJson(this.user)}`)
-      Text(`user.code : ${this.user.code}`)
-      Text(`user.city : ${this.user.city}`)
-      Button("修改").onClick(() => {
-        this.user.code++
-      })
-      Text(`------------- @MakeObserved --------------`)
-    }
-    .margin(10)
-  }
-}
 
 
 

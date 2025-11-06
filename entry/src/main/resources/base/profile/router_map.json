@@ -61,6 +61,11 @@
       "buildFunction": "MonitorDemoPageBuilder"
     },
     {
+      "name": "MakeObservedDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/MakeObservedDemoPage.ets",
+      "buildFunction": "MakeObservedDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

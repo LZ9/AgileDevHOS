@@ -177,6 +177,10 @@
       "value": "@Monitor注解使用"
     },
     {
+      "name": "componentV2_make_observed",
+      "value": "可观察对象转换使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },
