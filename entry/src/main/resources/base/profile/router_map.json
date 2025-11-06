@@ -17,12 +17,12 @@
     },
     {
       "name": "LocalDemoPage",
-      "pageSourceFile": "src/main/ets/pages/componentV2/LocalDemoPage.ets",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/LocalDemoPage.ets",
       "buildFunction": "LocalDemoPageBuilder"
     },
     {
       "name": "ObservedV2DemoPage",
-      "pageSourceFile": "src/main/ets/pages/componentV2/ObservedV2DemoPage.ets",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/ObservedV2DemoPage.ets",
       "buildFunction": "ObservedV2DemoPageBuilder"
     },
     {

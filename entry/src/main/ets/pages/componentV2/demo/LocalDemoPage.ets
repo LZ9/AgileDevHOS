@@ -1,5 +1,4 @@
-import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, RandomUtils, SelectorModifier } from "@lodz/pandora"
-import { UserType } from "./UserType"
+import { BaseContainer, BaseContainerVm, CoreConstants,  SelectorModifier } from "@lodz/pandora"
 
 @Builder
 export function LocalDemoPageBuilder() {

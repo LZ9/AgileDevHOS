@@ -7,8 +7,8 @@ import {
   RandomUtils,
   SelectorModifier
 } from "@lodz/pandora"
-import { LogListView } from "../../view/LogListView"
-import { UserTypeObserved } from "./UserTypeObserved"
+import { LogListView } from "../../../view/LogListView"
+import { UserTypeObserved } from "../UserTypeObserved"
 
 @Builder
 export function ObservedV2DemoPageBuilder() {
