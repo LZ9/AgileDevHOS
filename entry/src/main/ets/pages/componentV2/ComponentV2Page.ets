@@ -130,6 +130,21 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ProviderDemoPage, $r('app.string.componentV2_provider'))
         })
 
+      // @Computed注解使用
+      Button($r('app.string.componentV2_computed'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ComputedDemoPage, $r('app.string.componentV2_computed'))
+        })
+
+
+
+
+
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
@@ -155,7 +170,6 @@ export struct ComponentV2Page {
         ChildMakeObserved()
 
         ChildMonitor()
-        ChildComputed()
 
       }
     }
@@ -228,30 +242,6 @@ export struct ChildMonitor {
         })
       }
 
-      Text(`------------- @Computed --------------`)
-    }
-    .margin(10)
-  }
-}
-
-@ComponentV2
-export struct ChildComputed {
-  @Local list: Array<number> = [100, 200, 300]
-
-  // 支持将计算结果缓存，如果结算结果有变化再更新缓存
-  @Computed
-  private get getSum(): number {
-    return this.list.reduce((acc, cur) => acc + cur, 0)
-  }
-
-  build() {
-    Column() {
-      Text(`------------- @Computed --------------`)
-      Text(JsonUtils.beanToJson(this.list))
-      Text(`本次购买的商品总价是 : ${this.getSum}`)
-      Button("添加列表数据").onClick(() => {
-        this.list.push(500)
-      })
       Text(`------------- @Computed --------------`)
     }
     .margin(10)

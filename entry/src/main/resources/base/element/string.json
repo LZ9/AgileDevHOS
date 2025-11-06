@@ -169,6 +169,10 @@
       "value": "@Provider注解使用"
     },
     {
+      "name": "componentV2_computed",
+      "value": "@Computed注解使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },
