@@ -91,6 +91,18 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ParamRequireDemoPage, $r('app.string.componentV2_param_require'))
         })
 
+      // @Param搭配@Once注解使
+      Button($r('app.string.componentV2_param_once'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ParamOnceDemoPage, $r('app.string.componentV2_param_once'))
+        })
+
+
 
 
     }
@@ -126,7 +138,7 @@ export struct ComponentV2Page {
             this.updateCountEvent(i)
           }
         })
-        ChildOnce({ n: this.count })
+
       }
     }
     .visibility(Visibility.None)
@@ -322,23 +334,7 @@ export struct ChildEvent {
   }
 }
 
-@ComponentV2
-export struct ChildOnce {
-  // 该字段只能被外部赋值1次，并且允许内部修改该字段的值，且修改后的数据不会同步回父组件
-  @Param @Once n: number = -1
 
-  build() {
-    Column() {
-      Text(`------------- @Once --------------`)
-      Text(`子组件n的值 : ${this.n}`)
-      Button("修改").onClick(() => {
-        this.n++
-      })
-      Text(`------------- @Once --------------`)
-    }
-    .margin(10)
-  }
-}
 
 
 
