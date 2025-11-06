@@ -1,16 +1,16 @@
 import { BaseContainer, BaseContainerVm, CoreConstants, SelectorModifier } from "@lodz/pandora"
 
 @Builder
-export function ParamDemoPageBuilder() {
-  ParamDemoPage()
+export function ParamRequireDemoPageBuilder() {
+  ParamRequireDemoPage()
 }
 
 /**
- * Param注解Demo类
+ * Param搭配Require注解Demo类
  * Created by zhouL on 2025/11/6.
  */
 @ComponentV2
-export struct ParamDemoPage {
+export struct ParamRequireDemoPage {
   @Local vm: BaseContainerVm = new BaseContainerVm()
   // 该变量要传递到子组件的子组件中（ChildConsumer）
   @Local count: number = 1
@@ -18,7 +18,7 @@ export struct ParamDemoPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue <string>()
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>()
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
         this.vm.navVm.back()
       }

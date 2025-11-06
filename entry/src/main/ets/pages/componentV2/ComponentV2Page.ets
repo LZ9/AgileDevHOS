@@ -80,15 +80,15 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ObservedV2DemoPage, $r('app.string.componentV2_observedV2'))
         })
 
-      // @Param注解使用
-      Button($r('app.string.componentV2_param'), { type: ButtonType.Normal, stateEffect: true })
+      // @Param搭配@Require注解使用
+      Button($r('app.string.componentV2_param_require'), { type: ButtonType.Normal, stateEffect: true })
         .borderRadius(8)
         .fontColor(Color.White)
         .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
         .fontSize(14)
         .margin({ top: 10 })
         .onClick(() => {
-          this.vm.navVm.pushPathOpt(RouterGuide.ParamDemoPage, $r('app.string.componentV2_param'))
+          this.vm.navVm.pushPathOpt(RouterGuide.ParamRequireDemoPage, $r('app.string.componentV2_param_require'))
         })
 
 

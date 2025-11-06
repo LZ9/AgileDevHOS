@@ -149,8 +149,8 @@
       "value": "@ObservedV2注解使用"
     },
     {
-      "name": "componentV2_param",
-      "value": "@Param注解使用"
+      "name": "componentV2_param_require",
+      "value": "@Param搭配@Require注解使用"
     },
     {
       "name": "promise_title",
