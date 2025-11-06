@@ -119,6 +119,17 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.DoubleBindDemoPage, $r('app.string.componentV2_double_bind'))
         })
 
+      // @Provider注解使用
+      Button($r('app.string.componentV2_provider'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.ProviderDemoPage, $r('app.string.componentV2_provider'))
+        })
+
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)
     .height(CoreConstants.LayoutParams.MATCH_PARENT)
@@ -145,7 +156,6 @@ export struct ComponentV2Page {
 
         ChildMonitor()
         ChildComputed()
-        ChildProvider()
 
       }
     }
@@ -248,54 +258,6 @@ export struct ChildComputed {
   }
 }
 
-@ComponentV2
-export struct ChildProvider {
-  @Local msg: string = "我是ChildProvider组件"
-  // 自定义传入子组件的名称（需要和子组件内变量的名称一致）
-  @Provider(`index`) num: number = 1
-
-  build() {
-    Column() {
-      Text(`------------- @Provider --------------`)
-      Text(this.msg)
-      ChildConsumer()
-      Button(`修改`).onClick(() => {
-        this.num++
-      })
-      Text(`------------- @Provider --------------`)
-    }
-    .margin(10)
-    .width(CoreConstants.LayoutParams.MATCH_PARENT)
-    .height(400)
-    .backgroundColor(Color.Pink)
-  }
-}
-
-@ComponentV2
-export struct ChildConsumer {
-  @Local msg: string = "我是ChildConsumer组件"
-  // 接收父组件的数据，并双向同步
-  @Consumer() count: number = 100
-  @Consumer() index: number = -1
-
-  build() {
-    Column() {
-      Text(`---------- @Consumer -----------`)
-      Text(this.msg)
-      Text(`最外层传入的count的值 ->  ${this.count}`)
-      Text(`ChildProvider传入的index的值 ->  ${this.index}`)
-      Button(`修改`).onClick(() => {
-        this.count--
-        this.index--
-      })
-      Text(`---------- @Consumer -----------`)
-    }
-    .margin(10)
-    .width(300)
-    .height(200)
-    .backgroundColor(Color.Green)
-  }
-}
 
 
 

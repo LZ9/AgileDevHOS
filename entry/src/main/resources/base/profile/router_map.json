@@ -46,6 +46,11 @@
       "buildFunction": "DoubleBindDemoPageBuilder"
     },
     {
+      "name": "ProviderDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/ProviderDemoPage.ets",
+      "buildFunction": "ProviderDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

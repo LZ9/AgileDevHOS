@@ -21,6 +21,8 @@ export class RouterGuide {
   public static readonly ParamEventDemoPage = 'ParamEventDemoPage'
   /** 双向绑定demo类 */
   public static readonly DoubleBindDemoPage = 'DoubleBindDemoPage'
+  /** Provider注解Demo类 */
+  public static readonly ProviderDemoPage = 'ProviderDemoPage'
   /** Json转换测试 */
   public static readonly JsonPage = 'JsonPage'
   /** mvvm用例页面 */

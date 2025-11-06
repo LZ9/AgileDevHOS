@@ -165,6 +165,10 @@
       "value": "双向绑定使用"
     },
     {
+      "name": "componentV2_provider",
+      "value": "@Provider注解使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },
