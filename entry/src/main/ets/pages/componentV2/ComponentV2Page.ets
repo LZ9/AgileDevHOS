@@ -141,7 +141,16 @@ export struct ComponentV2Page {
           this.vm.navVm.pushPathOpt(RouterGuide.ComputedDemoPage, $r('app.string.componentV2_computed'))
         })
 
-
+      // @Monitor注解使用
+      Button($r('app.string.componentV2_monitor'), { type: ButtonType.Normal, stateEffect: true })
+        .borderRadius(8)
+        .fontColor(Color.White)
+        .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
+        .fontSize(14)
+        .margin({ top: 10 })
+        .onClick(() => {
+          this.vm.navVm.pushPathOpt(RouterGuide.MonitorDemoPage, $r('app.string.componentV2_monitor'))
+        })
 
 
 
@@ -169,7 +178,6 @@ export struct ComponentV2Page {
 
         ChildMakeObserved()
 
-        ChildMonitor()
 
       }
     }
@@ -196,53 +204,6 @@ export struct ChildMakeObserved {
         this.user.code++
       })
       Text(`------------- @MakeObserved --------------`)
-    }
-    .margin(10)
-  }
-}
-
-
-
-@ComponentV2
-export struct ChildMonitor {
-  @Local count: number = 0
-  @Local foo: boolean = true
-  @Local user: UserTypeObserved = new UserTypeObserved(1, '张三')
-
-  //支持监听变量值的变化
-  @Monitor(`count`,`foo`,`user.id`,`user.name`)
-  handle(monitor: IMonitor) {
-    //被修改的变量名称
-    PrintLog.d(Constants.Log.TAG, "被修改的变量名称 : " + monitor.value()?.path)
-    PrintLog.d(Constants.Log.TAG, "被修改的变量之前的值 : " + monitor.value()?.before)
-    PrintLog.d(Constants.Log.TAG, "被修改的变量现在的值 : " + monitor.value()?.now)
-  }
-
-  build() {
-    Column() {
-      Text(`------------- @Computed --------------`)
-      Text(`count : ${this.count}`)
-      Text(`foo : ${this.foo}`)
-      Text(`user : ${this.user.id} , ${this.user.name}`)
-      Row() {
-        Button("修改count").onClick(() => {
-          this.count++
-        })
-        Button("修改foo").onClick(() => {
-          this.foo = !this.foo
-        })
-      }
-
-      Row() {
-        Button("修改user.id").onClick(() => {
-          this.user.id++
-        })
-        Button("修改user.name").onClick(() => {
-          this.user.name = `李四${RandomUtils.getInt(1, 10)}`
-        })
-      }
-
-      Text(`------------- @Computed --------------`)
     }
     .margin(10)
   }

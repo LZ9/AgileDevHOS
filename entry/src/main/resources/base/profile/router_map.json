@@ -56,6 +56,11 @@
       "buildFunction": "ComputedDemoPageBuilder"
     },
     {
+      "name": "MonitorDemoPage",
+      "pageSourceFile": "src/main/ets/pages/componentV2/demo/MonitorDemoPage.ets",
+      "buildFunction": "MonitorDemoPageBuilder"
+    },
+    {
       "name": "JsonPage",
       "pageSourceFile": "src/main/ets/pages/json/JsonPage.ets",
       "buildFunction": "JsonPageBuilder"

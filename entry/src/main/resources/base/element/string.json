@@ -173,6 +173,10 @@
       "value": "@Computed注解使用"
     },
     {
+      "name": "componentV2_monitor",
+      "value": "@Monitor注解使用"
+    },
+    {
       "name": "promise_title",
       "value": "Promise测试类"
     },
