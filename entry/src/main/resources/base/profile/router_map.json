@@ -94,6 +94,26 @@
       "name": "EventBusDetailPage",
       "pageSourceFile": "src/main/ets/pages/event/EventBusDetailPage.ets",
       "buildFunction": "EventBusDetailPageBuilder"
+    },
+    {
+      "name": "ContainerPage",
+      "pageSourceFile": "src/main/ets/pages/container/ContainerPage.ets",
+      "buildFunction": "ContainerPageBuilder"
+    },
+    {
+      "name": "BaseContainerPage",
+      "pageSourceFile": "src/main/ets/pages/container/BaseContainerPage.ets",
+      "buildFunction": "BaseContainerPageBuilder"
+    },
+    {
+      "name": "RefreshContainerPage",
+      "pageSourceFile": "src/main/ets/pages/container/RefreshContainerPage.ets",
+      "buildFunction": "RefreshContainerPageBuilder"
+    },
+    {
+      "name": "SandwichContainerPage",
+      "pageSourceFile": "src/main/ets/pages/container/SandwichContainerPage.ets",
+      "buildFunction": "SandwichContainerPageBuilder"
     }
   ]
 }

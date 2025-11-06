@@ -235,6 +235,22 @@
     {
       "name": "event_bus_detail_title",
       "value": "EventBus测试详情类"
+    },
+    {
+      "name": "container_page_title",
+      "value": "基类容器测试类"
+    },
+    {
+      "name": "container_page_base",
+      "value": "基础状态控件容器"
+    },
+    {
+      "name": "container_page_refresh",
+      "value": "基础状态和下拉刷新容器"
+    },
+    {
+      "name": "container_page_sandwich",
+      "value": "三明治容器（顶部、中部、底部）"
     }
   ]
 }

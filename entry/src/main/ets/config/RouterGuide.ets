@@ -41,4 +41,12 @@ export class RouterGuide {
   public static readonly EventBusPage = 'EventBusPage'
   /** EventBus测试详情类 */
   public static readonly EventBusDetailPage = 'EventBusDetailPage'
+  /** 基类容器测试类 */
+  public static readonly ContainerPage = 'ContainerPage'
+  /** 基础状态控件容器Demo类 */
+  public static readonly BaseContainerPage = 'BaseContainerPage'
+  /** 基础状态和下拉刷新容器Demo类 */
+  public static readonly RefreshContainerPage = 'RefreshContainerPage'
+  /** 基础状态控件、中部刷新控件和顶部/底部扩展容器Demo类 */
+  public static readonly SandwichContainerPage = 'SandwichContainerPage'
 }
