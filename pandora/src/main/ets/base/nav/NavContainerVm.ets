@@ -4,8 +4,6 @@
  */
 @ObservedV2
 export class NavContainerVm {
-  /** 默认的参数键名称 */
-  public static readonly DEFAULT_KEY: string = 'data'
   /** 导航路径 */
   @Trace public stack?: NavPathStack = new NavPathStack()
   /** 导航路径信息 */
@@ -50,15 +48,7 @@ export class NavContainerVm {
    * @param param 传递参数
    * @param animated 是否展示过度动画（默认true）
    */
-  public replacePathOpt(pathName: string, param?: string | number | boolean | Record<string, object>, animated?: boolean) {
-    if (param !== undefined) {
-      if (typeof param === 'string' || typeof param === 'number' || typeof param === 'boolean') {
-        let data: Record<string, Object> = {}
-        data[NavContainerVm.DEFAULT_KEY] = param
-        this.stack?.replacePathByName(pathName, data, animated ?? true)
-        return
-      }
-    }
+  public replacePathOpt(pathName: string, param?: Object, animated?: boolean) {
     this.stack?.replacePathByName(pathName, param, animated ?? true)
   }
 
@@ -79,15 +69,7 @@ export class NavContainerVm {
    * @param onPop 页面返回参数回调
    * @param animated 是否展示过度动画（默认true）
    */
-  public pushPathOpt(pathName: string, param?: string | number | boolean | Record<string, object>, onPop?: (popInfo: PopInfo) => void, animated?: boolean) {
-    if (param !== undefined) {
-      if (typeof param === 'string' || typeof param === 'number' || typeof param === 'boolean') {
-        let data: Record<string, Object> = {}
-        data[NavContainerVm.DEFAULT_KEY] = param
-        this.stack?.pushPathByName(pathName, data, onPop, animated ?? true)
-        return
-      }
-    }
+  public pushPathOpt(pathName: string, param?: Object, onPop?: (popInfo: PopInfo) => void, animated?: boolean) {
     this.stack?.pushPathByName(pathName, param, onPop, animated ?? true)
   }
 
@@ -95,18 +77,13 @@ export class NavContainerVm {
    * 获取参数值
    * @param key 键名称（默认值是‘data’）
    */
-  public getParamsValue<T>(key: string = NavContainerVm.DEFAULT_KEY): T | undefined {
+  public getParamsValue<T>(): T | undefined {
     if (this.pathInfo === undefined) {
       return undefined
     }
     if (this.pathInfo.param === undefined || this.pathInfo.param === null) {
       return undefined
     }
-    const params = this.pathInfo.param as Record<string, object>
-    const value: object | undefined | null = params[key]
-    if (value === undefined || value === null) {
-      return undefined
-    }
-    return value as T
+    return this.pathInfo.param as T
   }
 }

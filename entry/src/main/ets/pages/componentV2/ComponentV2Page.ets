@@ -1,5 +1,4 @@
 import { BaseContainer, BaseContainerVm, CoreConstants, JsonUtils, PrintLog, RandomUtils,
-  ResourceUtils,
   SelectorModifier } from '@lodz/pandora'
 import { Constants } from '../../config/Constants'
 import { UserType } from './UserType'
@@ -26,7 +25,7 @@ export struct ComponentV2Page {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>("title")
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>()
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
         this.vm.navVm.back()
       }
@@ -59,7 +58,7 @@ export struct ComponentV2Page {
         .attributeModifier(new SelectorModifier($r('app.color.color_00A0E9'), $r('app.color.color_007DFF')))
         .fontSize(14)
         .onClick(() => {
-          this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, ResourceUtils.getString(this.getUIContext().getHostContext(), $r('app.string.component_v2_local')))
+          this.vm.navVm.pushPathOpt(RouterGuide.LocalDemoPage, $r('app.string.component_v2_local'))
         })
     }
     .width(CoreConstants.LayoutParams.MATCH_PARENT)

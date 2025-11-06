@@ -144,8 +144,7 @@ export struct MainPage {
                   .backgroundColor(Color.White)
                   .padding(10)
                   .onClick(() => {
-                    const params: Record<string, Object> = { 'title': item.getTitleName(this.getUIContext().getHostContext()) }
-                    this.vm.navVm.pushPathOpt(item.getPage(), params)
+                    this.vm.navVm.pushPathOpt(item.getPage(), item.getTitleName(this.getUIContext().getHostContext()))
                   })
               }
             }, (bean: MainBean) => bean.id)

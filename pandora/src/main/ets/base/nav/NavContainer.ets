@@ -11,7 +11,7 @@ export struct NavContainer {
   /** 启动页名称 */
   @Param @Require pathName: string
   /** 启动参数 */
-  @Param params ?: string | number | boolean | Record<string, object> = undefined
+  @Param params ?: Object = undefined
   /** 是否展示动画 */
   @Param animated?: boolean = undefined
 

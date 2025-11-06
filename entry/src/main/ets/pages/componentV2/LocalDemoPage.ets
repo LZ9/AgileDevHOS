@@ -17,7 +17,7 @@ export struct LocalDemoPage {
   aboutToAppear(): void {
     this.vm.setScopeConfig()
     this.vm.navVm.onAppear = () => {
-      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<string>()
+      this.vm.titleBarViewVm.titleVm.title = this.vm.navVm.getParamsValue<Resource>()
       this.vm.titleBarViewVm.backImgVm.onClick = () => {
         this.vm.navVm.back()
       }
